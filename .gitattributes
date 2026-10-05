@@ -135,6 +135,12 @@ Packages/packages-lock.json linguist-generated
 *.tiff                  lfs
 *.webp                  lfs
 
+# Affinity design files
+*.af                    lfs
+*.afdesign              lfs
+*.afphoto               lfs
+*.afpub                 lfs
+
 # Compressed Archive
 *.7z                    lfs
 *.bz2                   lfs
