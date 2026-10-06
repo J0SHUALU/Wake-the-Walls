@@ -11,13 +11,12 @@ The reference photo is the tracking image, so its quality decides how well each 
 5. Take 3 or 4 shots and keep the sharpest one.
 6. Measure the painted area (width and height) and write it in [murals.md](murals.md).
 
-## Editing in Affinity Photo
+## Preparing the photo
 
-1. Fix the perspective (Perspective tool) so the mural edges are straight and square.
-2. Crop exactly to the painted area. The crop must match the area you measured.
-3. Do not change colours, add text or sharpen heavily. Tracking needs the real look of the wall.
-4. Export as JPEG, quality 90, longest side about 2048 px, named `muralN_reference.jpg`.
-5. Save to `Assets/Art/Murals/MuralN/`.
+1. Put the original photos in `Assets/images/` and push them. The team straightens, crops and exports them into `Assets/Art/Murals/MuralN/`.
+2. The perspective is corrected so the mural edges are straight and square, then the photo is cropped exactly to the painted area you measured.
+3. Colours are left as shot. No text, filters or heavy sharpening, because tracking needs the real look of the wall.
+4. The result is a JPEG, quality 90, longest side 2048 px, named `muralN_reference.jpg`.
 
 ## Checking trackability
 

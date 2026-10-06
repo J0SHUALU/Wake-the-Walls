@@ -15,12 +15,12 @@ All in `Assets/Art/Murals/MuralN/`, all the same canvas size as `muralN_referenc
 
 Keep it to 2 to 4 layers per mural. A few strong moving parts look better than many small ones, and it keeps the art workload realistic.
 
-## Affinity steps
+## Figma steps
 
-1. Open the reference photo. Duplicate the pixel layer for every element.
-2. On each duplicate, mask everything except the element, with a soft 1 to 2 px edge.
-3. On the background copy, remove the elements and paint the gaps in (Inpainting Brush, then touch up by hand in the mural's style).
-4. Export each layer as PNG with transparency, at the full canvas size, so positions stay correct.
+1. Make a frame the exact pixel size of `muralN_reference.jpg` and place the photo in it at 0, 0.
+2. For each element, duplicate the photo, draw the element's outline with the Pen tool and use it as a mask (select both, Use as mask). Name the group `muralN_L01_element`.
+3. Export each layer on its own as PNG at 1x with only that layer visible, so the transparent canvas keeps every element in its original position.
+4. The filled background (`muralN_bg_filled.png`) is made from the reference by painting over the cut-out areas. Figma has no inpainting, so cover each area with shapes in colours picked from the surrounding paint then add a layer blur so the patch blends into the wall.
 
 ## Manifest format
 
