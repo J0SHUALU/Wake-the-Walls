@@ -1,0 +1,40 @@
+{
+  "mural": "Mural1",
+  "canvasWidth": 1737,
+  "canvasHeight": 2048,
+  "background": "mural1_bg_filled",
+  "layers": [
+    {
+      "file": "mural1_L01_earring_left",
+      "element": "earring_left",
+      "depthMm": 2.0,
+      "order": 1,
+      "pivotX": 0.335,
+      "pivotY": 0.548
+    },
+    {
+      "file": "mural1_L02_earring_right",
+      "element": "earring_right",
+      "depthMm": 3.0,
+      "order": 2,
+      "pivotX": 0.659,
+      "pivotY": 0.557
+    },
+    {
+      "file": "mural1_L03_tree_right",
+      "element": "tree_right",
+      "depthMm": 4.0,
+      "order": 3,
+      "pivotX": 0.815,
+      "pivotY": 0.786
+    },
+    {
+      "file": "mural1_L04_tree_left",
+      "element": "tree_left",
+      "depthMm": 5.0,
+      "order": 4,
+      "pivotX": 0.15,
+      "pivotY": 0.508
+    }
+  ]
+}

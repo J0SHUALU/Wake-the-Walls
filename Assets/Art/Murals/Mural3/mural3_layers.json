@@ -1,0 +1,32 @@
+{
+  "mural": "Mural3",
+  "canvasWidth": 2048,
+  "canvasHeight": 1218,
+  "background": "mural3_bg_filled",
+  "layers": [
+    {
+      "file": "mural3_L01_plants_front",
+      "element": "plants_front",
+      "depthMm": 2.0,
+      "order": 1,
+      "pivotX": 0.655,
+      "pivotY": 0.023
+    },
+    {
+      "file": "mural3_L02_plants_left",
+      "element": "plants_left",
+      "depthMm": 3.5,
+      "order": 2,
+      "pivotX": 0.256,
+      "pivotY": 0.03
+    },
+    {
+      "file": "mural3_L03_cactus",
+      "element": "cactus",
+      "depthMm": 5.0,
+      "order": 3,
+      "pivotX": 0.095,
+      "pivotY": 0.117
+    }
+  ]
+}

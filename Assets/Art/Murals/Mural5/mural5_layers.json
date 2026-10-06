@@ -1,0 +1,32 @@
+{
+  "mural": "Mural5",
+  "canvasWidth": 2048,
+  "canvasHeight": 1155,
+  "background": "mural5_bg_filled",
+  "layers": [
+    {
+      "file": "mural5_L01_rings",
+      "element": "rings",
+      "depthMm": 2.0,
+      "order": 1,
+      "pivotX": 0.327,
+      "pivotY": 0.701
+    },
+    {
+      "file": "mural5_L02_bangles_raised",
+      "element": "bangles_raised",
+      "depthMm": 3.5,
+      "order": 2,
+      "pivotX": 0.713,
+      "pivotY": 0.274
+    },
+    {
+      "file": "mural5_L03_bangles_low",
+      "element": "bangles_low",
+      "depthMm": 5.0,
+      "order": 3,
+      "pivotX": 0.171,
+      "pivotY": 0.095
+    }
+  ]
+}

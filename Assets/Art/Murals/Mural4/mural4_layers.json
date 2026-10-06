@@ -1,0 +1,48 @@
+{
+  "mural": "Mural4",
+  "canvasWidth": 2048,
+  "canvasHeight": 1331,
+  "background": "mural4_bg_filled",
+  "layers": [
+    {
+      "file": "mural4_L01_portrait_crown",
+      "element": "portrait_crown",
+      "depthMm": 2.0,
+      "order": 1,
+      "pivotX": 0.627,
+      "pivotY": 0.777
+    },
+    {
+      "file": "mural4_L02_portrait_turban",
+      "element": "portrait_turban",
+      "depthMm": 2.8,
+      "order": 2,
+      "pivotX": 0.802,
+      "pivotY": 0.713
+    },
+    {
+      "file": "mural4_L03_portrait_beret",
+      "element": "portrait_beret",
+      "depthMm": 3.5,
+      "order": 3,
+      "pivotX": 0.777,
+      "pivotY": 0.497
+    },
+    {
+      "file": "mural4_L04_portrait_right",
+      "element": "portrait_right",
+      "depthMm": 4.2,
+      "order": 4,
+      "pivotX": 0.894,
+      "pivotY": 0.51
+    },
+    {
+      "file": "mural4_L05_portrait_cap",
+      "element": "portrait_cap",
+      "depthMm": 5.0,
+      "order": 5,
+      "pivotX": 0.818,
+      "pivotY": 0.242
+    }
+  ]
+}
