@@ -1,0 +1,32 @@
+{
+  "mural": "Mural2",
+  "canvasWidth": 2048,
+  "canvasHeight": 1938,
+  "background": "mural2_bg_filled",
+  "layers": [
+    {
+      "file": "mural2_L01_flower_crown",
+      "element": "flower_crown",
+      "depthMm": 2.0,
+      "order": 1,
+      "pivotX": 0.715,
+      "pivotY": 0.75
+    },
+    {
+      "file": "mural2_L02_flowers_left",
+      "element": "flowers_left",
+      "depthMm": 3.5,
+      "order": 2,
+      "pivotX": 0.498,
+      "pivotY": 0.287
+    },
+    {
+      "file": "mural2_L03_necklace",
+      "element": "necklace",
+      "depthMm": 5.0,
+      "order": 3,
+      "pivotX": 0.747,
+      "pivotY": 0.383
+    }
+  ]
+}
