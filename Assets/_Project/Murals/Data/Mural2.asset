@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d120ec87984dd08ab49e9d51a59edd, type: 3}
+  m_Name: Mural2
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MuralData
+  referenceImageName: Mural2
+  displayName: 
+  location: 
+  physicalSizeMeters: {x: 1, y: 0.94628906}
+  story: 
+  experiencePrefab: {fileID: 0}
+  palette: []
+  ambience: {fileID: 0}
