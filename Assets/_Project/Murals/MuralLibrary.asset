@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0886432f864f4a8197e976979a4cccd8, type: 3}
+  m_Name: MuralLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MuralLibrary
+  murals:
+  - {fileID: 11400000, guid: ab2dd6da4a6214da296d2b12ddb65660, type: 2}
+  - {fileID: 11400000, guid: 989cb33448e5a4763a34efd3e6ab5d97, type: 2}
+  - {fileID: 11400000, guid: 8382840decd6e45f798ca23917f7485e, type: 2}
+  - {fileID: 11400000, guid: 800e327560b714af8989d37605432911, type: 2}
+  - {fileID: 11400000, guid: 157dff570a06e4d5c9052edc3b2a4473, type: 2}
