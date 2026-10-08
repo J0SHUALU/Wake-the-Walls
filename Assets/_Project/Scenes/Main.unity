@@ -151,6 +151,55 @@ Transform:
   - {fileID: 1419562544}
   m_Father: {fileID: 1575097933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &704552464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 704552466}
+  - component: {fileID: 704552465}
+  m_Layer: 0
+  m_Name: TapInteractor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &704552465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704552464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a570dfd8bf8e647da93bb9bfca24f582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Interaction.TapInteractor
+  arCamera: {fileID: 1419562550}
+  maxDistance: 20
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!4 &704552466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704552464}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1371155722
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +680,8 @@ GameObject:
   - component: {fileID: 1575097933}
   - component: {fileID: 1575097932}
   - component: {fileID: 1575097929}
+  - component: {fileID: 1575097935}
+  - component: {fileID: 1575097934}
   m_Layer: 0
   m_Name: XR Origin (Mobile AR)
   m_TagString: Untagged
@@ -653,7 +704,7 @@ MonoBehaviour:
   <trackablesChanged>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  m_SerializedLibrary: {fileID: 0}
+  m_SerializedLibrary: {fileID: 11400000, guid: c3ee24bc573b742909c56c0efa60d662, type: 2}
   m_MaxNumberOfMovingImages: 0
   m_TrackedImagePrefab: {fileID: 0}
 --- !u!114 &1575097932
@@ -689,6 +740,34 @@ Transform:
   - {fileID: 416830421}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1575097934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575097928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7ee3742a69e4e83b911eec1dc6f21c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Tracking.MuralTrackingManager
+  imageManager: {fileID: 1575097929}
+  library: {fileID: 11400000, guid: c6fbeab177b3144b3adeb423d3353c46, type: 2}
+  lossHandler: {fileID: 1575097935}
+--- !u!114 &1575097935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575097928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6fb57aa2749b4cb1b2eb03280f282a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Tracking.TrackingLossHandler
+  gracePeriod: 0.75
 --- !u!1 &2114327480
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,3 +820,4 @@ SceneRoots:
   - {fileID: 1575097933}
   - {fileID: 1371155725}
   - {fileID: 2114327482}
+  - {fileID: 704552466}
