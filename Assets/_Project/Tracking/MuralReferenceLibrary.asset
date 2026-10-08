@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
+  m_Name: MuralReferenceLibrary
+  m_EditorClassIdentifier: Unity.XR.ARSubsystems::UnityEngine.XR.ARSubsystems.XRReferenceImageLibrary
+  m_GuidLow: 5419819653209779452
+  m_GuidHigh: 17802706669804516271
+  m_DataStore:
+    m_Storage: []
+  m_Images:
+  - m_SerializedGuid:
+      m_GuidLow: 5595425203148598698
+      m_GuidHigh: 12039259948970204854
+    m_SerializedTextureGuid:
+      m_GuidLow: 14190854322485359921
+      m_GuidHigh: 9507073270304232409
+    m_Size: {x: 1, y: 1.1790444}
+    m_SpecifySize: 1
+    m_Name: Mural1
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4613403941316066815
+      m_GuidHigh: 17955335284776130191
+    m_SerializedTextureGuid:
+      m_GuidLow: 7242941171848791846
+      m_GuidHigh: 12267186332732816459
+    m_Size: {x: 1, y: 0.94628906}
+    m_SpecifySize: 1
+    m_Name: Mural2
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5569276657421199770
+      m_GuidHigh: 5244527328696956854
+    m_SerializedTextureGuid:
+      m_GuidLow: 355856982699611225
+      m_GuidHigh: 15727674131037497018
+    m_Size: {x: 1, y: 0.59472656}
+    m_SpecifySize: 1
+    m_Name: Mural3
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5669458191266343677
+      m_GuidHigh: 3352627614930583215
+    m_SerializedTextureGuid:
+      m_GuidLow: 9564908109180123798
+      m_GuidHigh: 13890948668617874504
+    m_Size: {x: 1, y: 0.64990234}
+    m_SpecifySize: 1
+    m_Name: Mural4
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5249024363377945199
+      m_GuidHigh: 305587775835563648
+    m_SerializedTextureGuid:
+      m_GuidLow: 1473649373055035180
+      m_GuidHigh: 14792643141984988585
+    m_Size: {x: 1, y: 0.56396484}
+    m_SpecifySize: 1
+    m_Name: Mural5
+    m_Texture: {fileID: 0}
