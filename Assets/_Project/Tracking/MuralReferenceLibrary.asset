@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 14190854322485359921
       m_GuidHigh: 9507073270304232409
-    m_Size: {x: 1, y: 1.1790444}
+    m_Size: {x: 5.6, y: 6.603}
     m_SpecifySize: 1
     m_Name: Mural1
     m_Texture: {fileID: 0}
@@ -33,7 +33,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 7242941171848791846
       m_GuidHigh: 12267186332732816459
-    m_Size: {x: 1, y: 0.94628906}
+    m_Size: {x: 3.5, y: 3.312}
     m_SpecifySize: 1
     m_Name: Mural2
     m_Texture: {fileID: 0}
@@ -43,7 +43,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 355856982699611225
       m_GuidHigh: 15727674131037497018
-    m_Size: {x: 1, y: 0.59472656}
+    m_Size: {x: 3.9, y: 2.319}
     m_SpecifySize: 1
     m_Name: Mural3
     m_Texture: {fileID: 0}
@@ -53,7 +53,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 9564908109180123798
       m_GuidHigh: 13890948668617874504
-    m_Size: {x: 1, y: 0.64990234}
+    m_Size: {x: 5.4, y: 3.509}
     m_SpecifySize: 1
     m_Name: Mural4
     m_Texture: {fileID: 0}
@@ -63,7 +63,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 1473649373055035180
       m_GuidHigh: 14792643141984988585
-    m_Size: {x: 1, y: 0.56396484}
+    m_Size: {x: 6.4, y: 3.609}
     m_SpecifySize: 1
     m_Name: Mural5
     m_Texture: {fileID: 0}
