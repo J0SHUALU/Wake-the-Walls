@@ -18,5 +18,11 @@ MonoBehaviour:
   physicalSizeMeters: {x: 5.6, y: 6.603}
   story: 
   experiencePrefab: {fileID: 7023506433495526234, guid: 1b51feaf2d2c14cdc8427e81cb6f86c4, type: 3}
-  palette: []
+  palette:
+  - {r: 0.534, g: 0.422, b: 0.344, a: 1}
+  - {r: 0.718, g: 0.510, b: 0.382, a: 1}
+  - {r: 0.395, g: 0.315, b: 0.264, a: 1}
+  - {r: 0.607, g: 0.606, b: 0.535, a: 1}
+  - {r: 0.168, g: 0.165, b: 0.166, a: 1}
+  - {r: 0.788, g: 0.781, b: 0.731, a: 1}
   ambience: {fileID: 0}
