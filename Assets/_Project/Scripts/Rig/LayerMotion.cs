@@ -49,6 +49,9 @@ namespace WakeTheWalls.Rig
         /// <summary>How much of the motion is applied, 0 at rest to 1 full.</summary>
         public float Weight { get; private set; }
 
+        /// <summary>Extra rotation in degrees added on top of the sway, for gusts and pushes from interactions.</summary>
+        public float ExtraDegrees { get; set; }
+
         /// <summary>How far the layer is currently lifted off its resting depth, in metres.</summary>
         public float PeelDistance => Layer != null ? -Layer.transform.localPosition.z - Layer.RestDepth : 0f;
 
@@ -134,7 +137,7 @@ namespace WakeTheWalls.Rig
         {
             if (Layer.Pivot == null) return;
             const float TwoPi = Mathf.PI * 2f;
-            float angle = swayDegrees * Mathf.Sin(TwoPi * (swaySpeed * time + phase)) * Weight;
+            float angle = swayDegrees * Mathf.Sin(TwoPi * (swaySpeed * time + phase)) * Weight + ExtraDegrees;
             float lift = bobMeters * Mathf.Sin(TwoPi * (bobSpeed * time + phase + 0.25f)) * Weight;
             Layer.Pivot.localRotation = Quaternion.Euler(0f, 0f, angle);
             Layer.Pivot.localPosition = new Vector3(Layer.PivotLocal.x, Layer.PivotLocal.y + lift, Layer.Pivot.localPosition.z);
