@@ -1,0 +1,166 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4476261759526488710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2362153454468346374}
+  - component: {fileID: 9176392918783267882}
+  - component: {fileID: 5991014757022255182}
+  m_Layer: 0
+  m_Name: Rig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2362153454468346374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4476261759526488710}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1495974044928309784}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9176392918783267882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4476261759526488710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05652e801061146a593fac0a33de738c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayeredMuralRig
+  manifest: {fileID: 4900000, guid: daf3105744bb9454ebf67fad6d5b23e6, type: 3}
+  textures:
+  - {fileID: 2800000, guid: 67bc1b3fc027f4a8cae3e397ba8603db, type: 3}
+  - {fileID: 2800000, guid: 3020b9c3c0f33414b98c82612b8dc91c, type: 3}
+  - {fileID: 2800000, guid: a87fef5280d5e4dc48898d31d5bb8238, type: 3}
+  - {fileID: 2800000, guid: 3b5478fa30b1b47d8b425f415ead068a, type: 3}
+  - {fileID: 2800000, guid: b117dc0edf47b4a6abfc7bd0ccd27661, type: 3}
+  layerMaterial: {fileID: 2100000, guid: 8454737f7a4334f73a9f500fb604920c, type: 2}
+--- !u!114 &5991014757022255182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4476261759526488710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad44fc52f31e434c85c9b8bc1d2687a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerParallax
+  depthScale: 12
+  maxOffset: 0.04
+  followSpeed: 8
+  viewCamera: {fileID: 0}
+--- !u!1 &7756243726687083150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1495974044928309784}
+  - component: {fileID: 3694881344924154509}
+  - component: {fileID: 4686136062710758120}
+  m_Layer: 0
+  m_Name: Mural1Experience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1495974044928309784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756243726687083150}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2362153454468346374}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3694881344924154509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756243726687083150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f932080a99cd47ac81373a24742dc51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerMotionSet
+  entries:
+  - element: tree_left
+    swayDegrees: 1.5
+    swaySpeed: 0.18
+    bobMeters: 0.003
+    bobSpeed: 0.22
+    phase: 0
+  - element: tree_right
+    swayDegrees: 1.2
+    swaySpeed: 0.16
+    bobMeters: 0.003
+    bobSpeed: 0.2
+    phase: 0.4
+  - element: earring_left
+    swayDegrees: 4
+    swaySpeed: 0.35
+    bobMeters: 0.002
+    bobSpeed: 0.3
+    phase: 0.15
+  - element: earring_right
+    swayDegrees: 4
+    swaySpeed: 0.35
+    bobMeters: 0.002
+    bobSpeed: 0.3
+    phase: 0.65
+  stagger: 0.35
+--- !u!114 &4686136062710758120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756243726687083150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8beada9fbb1e454286e3fdba31b2919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Mural01Experience
+  rig: {fileID: 9176392918783267882}
+  motionSet: {fileID: 3694881344924154509}
+  parallax: {fileID: 5991014757022255182}
+  fadeDuration: 1.2
+  dustPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
+  dustSources:
+  - tree_left
+  - tree_right
+  dustOffset: {x: 0, y: 0.25, z: -0.02}
+  dustInterval: {x: 2.5, y: 5}
+  requiredInteractions: 2
