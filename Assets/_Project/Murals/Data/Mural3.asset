@@ -15,7 +15,7 @@ MonoBehaviour:
   referenceImageName: Mural3
   displayName: 
   location: 
-  physicalSizeMeters: {x: 1, y: 0.59472656}
+  physicalSizeMeters: {x: 3.9, y: 2.319}
   story: 
   experiencePrefab: {fileID: 0}
   palette: []
