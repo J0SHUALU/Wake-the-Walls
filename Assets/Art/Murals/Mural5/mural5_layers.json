@@ -26,8 +26,8 @@
       "element": "bangles_low",
       "depthMm": 5.0,
       "order": 3,
-      "pivotX": 0.111,
-      "pivotY": 0.091
+      "pivotX": 0.308,
+      "pivotY": 0.237
     },
     {
       "file": "mural5_L04_ring_1",
@@ -107,7 +107,7 @@
       "depthMm": 4.0,
       "order": 13,
       "pivotX": 0.874,
-      "pivotY": 0.624
+      "pivotY": 0.623
     },
     {
       "file": "mural5_L14_cube_4",
@@ -163,15 +163,15 @@
       "depthMm": 3.0,
       "order": 20,
       "pivotX": 0.04,
-      "pivotY": 0.611
+      "pivotY": 0.619
     },
     {
       "file": "mural5_L21_flower_4",
       "element": "flower_4",
       "depthMm": 3.0,
       "order": 21,
-      "pivotX": 0.043,
-      "pivotY": 0.548
+      "pivotX": 0.042,
+      "pivotY": 0.547
     },
     {
       "file": "mural5_L22_flower_5",
