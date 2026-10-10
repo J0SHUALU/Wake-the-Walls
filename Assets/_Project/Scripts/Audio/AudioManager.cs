@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using WakeTheWalls.Core;
@@ -18,6 +19,14 @@ namespace WakeTheWalls.Audio
         [Tooltip("Seconds to fade out when the mural is lost, and back in when it is found again.")]
         [SerializeField] float fadeDuration = 0.8f;
 
+        static bool muted;
+
+        /// <summary>True while all app sound is muted. The choice lasts for the session.</summary>
+        public static bool IsMuted => muted;
+
+        /// <summary>Raised with the new state whenever sound is muted or unmuted.</summary>
+        public static event Action<bool> MuteChanged;
+
         AudioSource[] sources;
         Coroutine[] fades;
         int active;
@@ -27,6 +36,7 @@ namespace WakeTheWalls.Audio
 
         void Awake()
         {
+            AudioListener.volume = muted ? 0f : 1f;
             sources = new[] { CreateSource("Ambience A"), CreateSource("Ambience B") };
             fades = new Coroutine[2];
         }
@@ -43,6 +53,26 @@ namespace WakeTheWalls.Audio
             GameEvents.MuralFound -= HandleMuralFound;
             GameEvents.MuralLost -= HandleMuralLost;
             GameEvents.StateChanged -= HandleStateChanged;
+        }
+
+        /// <summary>Mutes or unmutes every sound in the app, including the murals' own effects.</summary>
+        public static void SetMuted(bool value)
+        {
+            muted = value;
+            AudioListener.volume = muted ? 0f : 1f;
+            MuteChanged?.Invoke(muted);
+        }
+
+        /// <summary>Flips mute on or off. Wired to the HUD Sound button.</summary>
+        public void ToggleMute() => SetMuted(!muted);
+
+        // A fresh app launch always starts with sound on.
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetMute()
+        {
+            muted = false;
+            MuteChanged = null;
+            AudioListener.volume = 1f;
         }
 
         void HandleMuralFound(MuralData mural)
