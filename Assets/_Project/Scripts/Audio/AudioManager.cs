@@ -11,7 +11,7 @@ namespace WakeTheWalls.Audio
     /// fades out and pauses on MuralLost, and fades back in from the same spot when the mural is found again.
     /// Leaving the experience for Start or Scanning fades it out. Uses two looping sources for the crossfade.
     /// </summary>
-    public class AudioManager : MonoBehaviour
+    public partial class AudioManager : MonoBehaviour
     {
         [SerializeField, Range(0f, 1f)] float ambienceVolume = 0.7f;
         [Tooltip("Seconds to crossfade between two murals.")]
@@ -39,6 +39,7 @@ namespace WakeTheWalls.Audio
             AudioListener.volume = muted ? 0f : 1f;
             sources = new[] { CreateSource("Ambience A"), CreateSource("Ambience B") };
             fades = new Coroutine[2];
+            SetUpEffects();
         }
 
         void OnEnable()
@@ -46,6 +47,7 @@ namespace WakeTheWalls.Audio
             GameEvents.MuralFound += HandleMuralFound;
             GameEvents.MuralLost += HandleMuralLost;
             GameEvents.StateChanged += HandleStateChanged;
+            GameEvents.InteractableTapped += PlayTap;
         }
 
         void OnDisable()
@@ -53,6 +55,7 @@ namespace WakeTheWalls.Audio
             GameEvents.MuralFound -= HandleMuralFound;
             GameEvents.MuralLost -= HandleMuralLost;
             GameEvents.StateChanged -= HandleStateChanged;
+            GameEvents.InteractableTapped -= PlayTap;
         }
 
         /// <summary>Mutes or unmutes every sound in the app, including the murals' own effects.</summary>

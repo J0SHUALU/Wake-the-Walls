@@ -173,6 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553907f03c31b4740be98df6f809fd75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Audio.AudioManager
+  buttonClip: {fileID: 8300000, guid: 4d219e37c851a4aa9853a3816d9a245d, type: 3}
+  tapClip: {fileID: 8300000, guid: 621dc230551ce4263bb12195dcbae9bf, type: 3}
+  effectsVolume: 0.6
   ambienceVolume: 0.7
   crossfadeDuration: 1.5
   fadeDuration: 0.8
