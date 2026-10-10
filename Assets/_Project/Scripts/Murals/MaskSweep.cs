@@ -14,7 +14,7 @@ namespace WakeTheWalls.Murals
     /// <see cref="Play"/> from an interaction's Used event. Set <see cref="next"/> to chain a
     /// second glow that starts when this one has passed, for light that travels on into another detail.
     /// </remarks>
-    public class MaskGlow : MonoBehaviour
+    public class MaskSweep : MonoBehaviour
     {
         static readonly int MaskMap = Shader.PropertyToID("_MaskMap");
         static readonly int GlowColor = Shader.PropertyToID("_GlowColor");
@@ -25,7 +25,7 @@ namespace WakeTheWalls.Murals
         [SerializeField] LayeredMuralExperience experience;
         [Tooltip("Greyscale mask on the full mural canvas, white where the light shows (an M file from the art folder).")]
         [SerializeField] Texture mask;
-        [Tooltip("Material using the WakeTheWalls/MaskGlow shader.")]
+        [Tooltip("Material using the WakeTheWalls/MaskSweep shader.")]
         [SerializeField] Material glowMaterial;
         [SerializeField, ColorUsage(true, true)] Color colour = new Color(1f, 0.86f, 0.45f, 1f);
         [SerializeField, Range(0.01f, 0.3f)] float width = 0.06f;
@@ -39,7 +39,7 @@ namespace WakeTheWalls.Murals
 
         [Header("Chain")]
         [Tooltip("Optional glow that starts once this one has passed.")]
-        [SerializeField] MaskGlow next;
+        [SerializeField] MaskSweep next;
         [SerializeField, Min(0f)] float nextDelay;
 
         MeshRenderer glow;
@@ -102,14 +102,14 @@ namespace WakeTheWalls.Murals
         // A quad the size of the whole mural, a hair in front of the wall, drawn on top of every layer.
         void CreateGlow()
         {
-            material = new Material(glowMaterial) { name = "MaskGlow" };
+            material = new Material(glowMaterial) { name = "MaskSweep" };
             material.SetTexture(MaskMap, mask);
             material.SetColor(GlowColor, colour);
             material.SetFloat(Width, width);
             material.SetFloat(Angle, direction);
 
             Vector2 size = experience.Rig.MuralSize;
-            var go = new GameObject("MaskGlow " + mask.name);
+            var go = new GameObject("MaskSweep " + mask.name);
             go.transform.SetParent(transform, false);
             go.transform.localPosition = new Vector3(0f, 0f, -depthMm / 1000f);
             go.transform.localScale = new Vector3(size.x, size.y, 1f);

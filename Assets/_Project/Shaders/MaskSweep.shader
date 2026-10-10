@@ -6,7 +6,7 @@
 //   _Angle       direction the band travels, in degrees (0 left to right, -90 top to bottom)
 //   _Alpha       overall strength, used to fade the whole effect
 // Blends additively, so the paint underneath brightens instead of being covered.
-Shader "WakeTheWalls/MaskGlow"
+Shader "WakeTheWalls/MaskSweep"
 {
     Properties
     {
@@ -30,7 +30,7 @@ Shader "WakeTheWalls/MaskGlow"
 
         Pass
         {
-            Name "MaskGlow"
+            Name "MaskSweep"
             Tags { "LightMode" = "UniversalForward" }
 
             Blend SrcAlpha One

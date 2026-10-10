@@ -231,7 +231,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 5054015049802746257}
-        m_TargetAssemblyTypeName: WakeTheWalls.Murals.MaskGlow, Assembly-CSharp
+        m_TargetAssemblyTypeName: WakeTheWalls.Murals.MaskSweep, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d140b732c574f6989978b6f4bf1e5e0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MaskGlow
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MaskSweep
   experience: {fileID: 3392714048055523538}
   mask: {fileID: 2800000, guid: f41115dd013dd454e96b6683668a07c5, type: 3}
   glowMaterial: {fileID: 2100000, guid: cc2621d167f64a04a570c682f4eabccd, type: 2}
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d140b732c574f6989978b6f4bf1e5e0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MaskGlow
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MaskSweep
   experience: {fileID: 3392714048055523538}
   mask: {fileID: 2800000, guid: 3168233058c974851927a43d96e05c6e, type: 3}
   glowMaterial: {fileID: 2100000, guid: cc2621d167f64a04a570c682f4eabccd, type: 2}
