@@ -71,6 +71,11 @@ namespace WakeTheWalls.VFX
         public void FadeIntensity(float target, float seconds) =>
             Restart(ref intensityTween, Tween.Value(intensity, target, v => Set(IntensityId, intensity = v), seconds));
 
+        /// <summary>Keeps the steady glow breathing between two levels until another fade or a reset.</summary>
+        /// <param name="phase">0 to 1, so several glows can breathe out of step.</param>
+        public void Breathe(float low, float high, float seconds, float phase = 0f) =>
+            Restart(ref intensityTween, BreatheRoutine(low, high, Mathf.Max(0.1f, seconds), phase));
+
         /// <summary>Sends light outwards from a point (0 to 1 across the mural) until it has crossed the mural.</summary>
         public void Flow(Vector2 originOnMural, float seconds)
         {
@@ -96,6 +101,16 @@ namespace WakeTheWalls.VFX
             yield return Tween.Value(0f, 1.3f, v => Set(BandId, v), seconds, Tween.EaseInOutCubic);
             Set(BandId, -1f);
             flowTween = null;
+        }
+
+        IEnumerator BreatheRoutine(float low, float high, float seconds, float phase)
+        {
+            for (float t = phase * seconds; ; t += Time.deltaTime)
+            {
+                intensity = Mathf.Lerp(low, high, 0.5f - 0.5f * Mathf.Cos(t / seconds * Mathf.PI * 2f));
+                Set(IntensityId, intensity);
+                yield return null;
+            }
         }
 
         void Set(int id, float value)
