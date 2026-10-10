@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 1495974044928309784}
   - component: {fileID: 3694881344924154509}
   - component: {fileID: 4686136062710758120}
+  - component: {fileID: 7846288500644080684}
   m_Layer: 0
   m_Name: Mural1Experience
   m_TagString: Untagged
@@ -572,6 +573,7 @@ MonoBehaviour:
   dustOffset: {x: 0, y: 0.25, z: -0.02}
   dustInterval: {x: 2.5, y: 5}
   requiredInteractions: 2
+  blink: {fileID: 7846288500644080684}
 --- !u!1 &7969410916150858986
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,3 +693,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7846288500644080684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756243726687083150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26dd41e5e4424b1bbdb61ef0ee86b7f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerBlink
+  elements:
+  - lid_left
+  - lid_right
+  interval: {x: 3, y: 6}
+  closeSeconds: 0.12
+  holdSeconds: 0.06
+  openSeconds: 0.18
+  doubleBlinkChance: 0.2
