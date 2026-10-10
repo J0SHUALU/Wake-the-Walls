@@ -7,7 +7,7 @@ An AR app that finds five murals on the ALU campus with image tracking and bring
 | Member | Focus |
 |---|---|
 | Fawziyyah (group leader) | UI flow, interaction, audio, Murals 4 and 5 |
-| Joshua Moses | Art, mural layer cut-outs, UI design, design document |
+| Joshua | Art, mural layer cut-outs, UI design, design document |
 | Remy | Project setup, tracking, app flow, builds |
 | Donald | Layered mural rig, shaders, VFX, Murals 1 to 3 |
 
