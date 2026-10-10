@@ -1,0 +1,283 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3539078476090098888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 216386257510158029}
+  - component: {fileID: 5063530160395287390}
+  m_Layer: 0
+  m_Name: DesertFloor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &216386257510158029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3539078476090098888}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5277018419415650999}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5063530160395287390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3539078476090098888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174771d9b96d540cd987700efb10ef34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.DesertFloor
+  brushMaterial: {fileID: 2100000, guid: 8454737f7a4334f73a9f500fb604920c, type: 2}
+  colour: {r: 0.66, g: 0.56, b: 0.41, a: 1}
+  depth: 1.2
+  extraWidth: 0.2
+  spreadEnd: 0.2
+  spreadSeconds: 2.2
+--- !u!1 &3709727432664459341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5277018419415650999}
+  - component: {fileID: 5019603291741339809}
+  - component: {fileID: 6472504708273481242}
+  m_Layer: 0
+  m_Name: Mural3Experience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5277018419415650999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709727432664459341}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3940335374820154652}
+  - {fileID: 5418137673130784902}
+  - {fileID: 216386257510158029}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5019603291741339809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709727432664459341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f932080a99cd47ac81373a24742dc51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerMotionSet
+  entries:
+  - element: plants_front
+    swayDegrees: 1.5
+    swaySpeed: 0.3
+    bobMeters: 0.002
+    bobSpeed: 0.25
+    phase: 0
+  - element: plants_left
+    swayDegrees: 2
+    swaySpeed: 0.33
+    bobMeters: 0.002
+    bobSpeed: 0.25
+    phase: 0.35
+  - element: cactus
+    swayDegrees: 0.6
+    swaySpeed: 0.2
+    bobMeters: 0.001
+    bobSpeed: 0.2
+    phase: 0.7
+  stagger: 0.35
+--- !u!114 &6472504708273481242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709727432664459341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cad14cab62a74fdf93e3c7003108456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Mural03Experience
+  rig: {fileID: 3846306183703416836}
+  motionSet: {fileID: 5019603291741339809}
+  parallax: {fileID: 3493011875517048741}
+  fadeDuration: 1.2
+  dustPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
+  dustSources: []
+  dustOffset: {x: 0, y: 0.25, z: -0.02}
+  dustInterval: {x: 2.5, y: 5}
+  requiredInteractions: 2
+  sand: {fileID: 834643012120280551}
+  leanElements:
+  - plants_front
+  - plants_left
+  peelMeters: 0.05
+  leanDegrees: -3
+  floor: {fileID: 5063530160395287390}
+--- !u!1 &5458025786589550230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3940335374820154652}
+  - component: {fileID: 3846306183703416836}
+  - component: {fileID: 3493011875517048741}
+  m_Layer: 0
+  m_Name: Rig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3940335374820154652
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5458025786589550230}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5277018419415650999}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3846306183703416836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5458025786589550230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05652e801061146a593fac0a33de738c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayeredMuralRig
+  manifest: {fileID: 4900000, guid: 1a08ef4e93ee7491692bedc642bf9b7e, type: 3}
+  textures:
+  - {fileID: 2800000, guid: 80da75bd8144e4ffa8482ca2ef69de26, type: 3}
+  - {fileID: 2800000, guid: c28ef91457a0d421e8bdfbee1652c6db, type: 3}
+  - {fileID: 2800000, guid: 676142dc289fe4699acfc2a69b96738e, type: 3}
+  - {fileID: 2800000, guid: ce2ef61f965d34aed8d9e655f3af29d7, type: 3}
+  layerMaterial: {fileID: 2100000, guid: 8454737f7a4334f73a9f500fb604920c, type: 2}
+--- !u!114 &3493011875517048741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5458025786589550230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad44fc52f31e434c85c9b8bc1d2687a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerParallax
+  depthScale: 12
+  maxOffset: 0.04
+  followSpeed: 8
+  viewCamera: {fileID: 0}
+--- !u!1001 &7116422407477849034
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5277018419415650999}
+    m_Modifications:
+    - target: {fileID: 2008637788576753771, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+      propertyPath: m_Name
+      value: SandDrift
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+--- !u!198 &834643012120280551 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7590715038129198637, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+  m_PrefabInstance: {fileID: 7116422407477849034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5418137673130784902 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
+  m_PrefabInstance: {fileID: 7116422407477849034}
+  m_PrefabAsset: {fileID: 0}
