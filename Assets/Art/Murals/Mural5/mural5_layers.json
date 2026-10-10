@@ -3,16 +3,7 @@
   "canvasWidth": 2048,
   "canvasHeight": 1155,
   "background": "mural5_bg_filled",
-  "notes": "The ring_1 to ring_5 layers (L04 to L08) together replace L01 rings. Do not show L01 together with them until Donald confirms the swap; until then show either L01 alone or the ring_N layers alone.",
   "layers": [
-    {
-      "file": "mural5_L01_rings",
-      "element": "rings",
-      "depthMm": 2.0,
-      "order": 1,
-      "pivotX": 0.327,
-      "pivotY": 0.701
-    },
     {
       "file": "mural5_L02_bangles_raised",
       "element": "bangles_raised",
