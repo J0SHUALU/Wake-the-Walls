@@ -8,7 +8,7 @@
       "file": "mural2_L01_flower_crown",
       "element": "flower_crown",
       "depthMm": 2.0,
-      "order": 1,
+      "order": 3,
       "pivotX": 0.715,
       "pivotY": 0.75
     },
@@ -16,7 +16,7 @@
       "file": "mural2_L02_flowers_left",
       "element": "flowers_left",
       "depthMm": 3.5,
-      "order": 2,
+      "order": 10,
       "pivotX": 0.498,
       "pivotY": 0.287
     },
@@ -24,9 +24,89 @@
       "file": "mural2_L03_necklace",
       "element": "necklace",
       "depthMm": 5.0,
-      "order": 3,
+      "order": 13,
       "pivotX": 0.747,
       "pivotY": 0.383
+    },
+    {
+      "file": "mural2_L04_bloom_purple",
+      "element": "bloom_purple",
+      "depthMm": 2.5,
+      "order": 4,
+      "pivotX": 0.7574,
+      "pivotY": 0.7526
+    },
+    {
+      "file": "mural2_L05_bloom_red",
+      "element": "bloom_red",
+      "depthMm": 2.5,
+      "order": 5,
+      "pivotX": 0.7146,
+      "pivotY": 0.7591
+    },
+    {
+      "file": "mural2_L06_bloom_yellow",
+      "element": "bloom_yellow",
+      "depthMm": 2.5,
+      "order": 6,
+      "pivotX": 0.6625,
+      "pivotY": 0.7778
+    },
+    {
+      "file": "mural2_L07_bloom_teal",
+      "element": "bloom_teal",
+      "depthMm": 2.5,
+      "order": 7,
+      "pivotX": 0.6239,
+      "pivotY": 0.7401
+    },
+    {
+      "file": "mural2_L08_bloom_pink",
+      "element": "bloom_pink",
+      "depthMm": 2.5,
+      "order": 8,
+      "pivotX": 0.8106,
+      "pivotY": 0.7484
+    },
+    {
+      "file": "mural2_L09_hand_left",
+      "element": "hand_left",
+      "depthMm": 4.0,
+      "order": 11,
+      "pivotX": 0.4673,
+      "pivotY": 0.3906
+    },
+    {
+      "file": "mural2_L10_hand_right",
+      "element": "hand_right",
+      "depthMm": 4.0,
+      "order": 12,
+      "pivotX": 0.9658,
+      "pivotY": 0.437
+    },
+    {
+      "file": "mural2_L11_vine_right",
+      "element": "vine_right",
+      "depthMm": 3.0,
+      "order": 9,
+      "pivotX": 0.8458,
+      "pivotY": 0.1899
+    },
+    {
+      "file": "mural2_L12_orbs",
+      "element": "orbs",
+      "depthMm": 2.0,
+      "order": 2,
+      "pivotX": 0.5578,
+      "pivotY": 0.7868
+    },
+    {
+      "file": "mural2_L13_sunset_tree",
+      "element": "sunset_tree",
+      "depthMm": 2.0,
+      "order": 1,
+      "pivotX": 0.5918,
+      "pivotY": 0.1801
     }
   ]
 }
