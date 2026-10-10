@@ -43,6 +43,14 @@
       "order": 5,
       "pivotX": 0.818,
       "pivotY": 0.242
+    },
+    {
+      "file": "mural4_L06_reeds",
+      "element": "reeds",
+      "depthMm": 3.0,
+      "order": 6,
+      "pivotX": 0.664,
+      "pivotY": 0.053
     }
   ]
 }
