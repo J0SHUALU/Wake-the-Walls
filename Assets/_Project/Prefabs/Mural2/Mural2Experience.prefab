@@ -391,6 +391,36 @@ MonoBehaviour:
     bobMeters: 0.0015
     bobSpeed: 0.18
     phase: 0.8
+  - element: hand_left
+    swayDegrees: 1.2
+    swaySpeed: 0.2
+    bobMeters: 0.002
+    bobSpeed: 0.22
+    phase: 0.2
+  - element: hand_right
+    swayDegrees: 1.2
+    swaySpeed: 0.21
+    bobMeters: 0.002
+    bobSpeed: 0.22
+    phase: 0.65
+  - element: vine_right
+    swayDegrees: 1.5
+    swaySpeed: 0.18
+    bobMeters: 0.002
+    bobSpeed: 0.2
+    phase: 0.35
+  - element: orbs
+    swayDegrees: 0
+    swaySpeed: 0.1
+    bobMeters: 0.006
+    bobSpeed: 0.25
+    phase: 0.9
+  - element: sunset_tree
+    swayDegrees: 1.2
+    swaySpeed: 0.17
+    bobMeters: 0.002
+    bobSpeed: 0.2
+    phase: 0.45
   stagger: 0.35
 --- !u!114 &3392714048055523538
 MonoBehaviour:
