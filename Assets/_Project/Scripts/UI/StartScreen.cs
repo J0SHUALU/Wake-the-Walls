@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -51,8 +50,7 @@ namespace WakeTheWalls.UI
             int muralCount = library != null ? library.Murals.Count : 0;
             if (tagLabel != null) tagLabel.text = string.Format(tagFormat, muralCount);
 
-            // No murals are woken yet on this screen until session progress is added.
-            if (stamps != null) stamps.Show(Array.Empty<MuralData>());
+            if (stamps != null) stamps.Show(SessionProgress.Woken);
         }
     }
 }

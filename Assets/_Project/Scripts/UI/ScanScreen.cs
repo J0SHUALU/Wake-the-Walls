@@ -53,8 +53,7 @@ namespace WakeTheWalls.UI
         protected override void OnShowing()
         {
             int total = library != null ? library.Murals.Count : 0;
-            // Woken murals are counted once session progress is added with the completion screen.
-            if (countLabel != null) countLabel.text = string.Format(countFormat, 0, total);
+            if (countLabel != null) countLabel.text = string.Format(countFormat, SessionProgress.Count, total);
 
             if (hint != null) hint.alpha = 0f;
             StopHint();
