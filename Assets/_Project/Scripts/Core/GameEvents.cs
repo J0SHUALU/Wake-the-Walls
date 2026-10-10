@@ -25,6 +25,9 @@ namespace WakeTheWalls.Core
         /// <summary>Raised by the UI when the user asks to restart the current mural.</summary>
         public static event Action ResetRequested;
 
+        /// <summary>Raised when part of a mural is tapped to ask for its info, with a topic id from that tap.</summary>
+        public static event Action<string> InfoRequested;
+
         /// <summary>Raised whenever the user taps something tappable in AR, for example to play a tap sound.</summary>
         public static event Action InteractableTapped;
 
@@ -43,6 +46,9 @@ namespace WakeTheWalls.Core
         /// <summary>Asks the active mural to restart.</summary>
         public static void RaiseResetRequested() => ResetRequested?.Invoke();
 
+        /// <summary>Asks the UI to open the info for the current mural.</summary>
+        public static void RaiseInfoRequested(string topic) => InfoRequested?.Invoke(topic);
+
         /// <summary>Announces that something in AR was tapped.</summary>
         public static void RaiseInteractableTapped() => InteractableTapped?.Invoke();
 
@@ -55,6 +61,7 @@ namespace WakeTheWalls.Core
             MuralLost = null;
             MuralCompleted = null;
             ResetRequested = null;
+            InfoRequested = null;
             InteractableTapped = null;
         }
     }

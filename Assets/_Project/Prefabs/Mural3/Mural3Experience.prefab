@@ -93,14 +93,16 @@ MonoBehaviour:
     width: 0.29
     height: 0.23
   elements:
-  - plants_front
+  - agave_big
+  - agave_right
   - plants_left
   - cactus
+  - cactus_small
   swingDegrees: 6
   swingFrequency: 0.9
   settleSeconds: 2.5
   burstPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  burstFrom: plants_front
+  burstFrom: agave_big
   burstOffset: {x: -0.3, y: 0.12, z: -0.08}
   sound: {fileID: 0}
   interactionId: gust
@@ -212,14 +214,16 @@ MonoBehaviour:
     width: 0.39
     height: 0.34
   elements:
-  - plants_front
+  - agave_big
+  - agave_right
   - plants_left
   - cactus
+  - cactus_small
   swingDegrees: 6
   swingFrequency: 0.9
   settleSeconds: 2.5
   burstPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  burstFrom: plants_front
+  burstFrom: agave_big
   burstOffset: {x: -0.3, y: 0.12, z: -0.08}
   sound: {fileID: 0}
   interactionId: gust
@@ -341,12 +345,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerMotionSet
   entries:
-  - element: plants_front
+  - element: agave_big
     swayDegrees: 1.5
     swaySpeed: 0.3
     bobMeters: 0.002
     bobSpeed: 0.25
     phase: 0
+  - element: agave_right
+    swayDegrees: 1.5
+    swaySpeed: 0.34
+    bobMeters: 0.002
+    bobSpeed: 0.25
+    phase: 0.6
   - element: plants_left
     swayDegrees: 2
     swaySpeed: 0.33
@@ -359,6 +369,18 @@ MonoBehaviour:
     bobMeters: 0.001
     bobSpeed: 0.2
     phase: 0.7
+  - element: cactus_small
+    swayDegrees: 0.8
+    swaySpeed: 0.22
+    bobMeters: 0.001
+    bobSpeed: 0.2
+    phase: 0.3
+  - element: clouds
+    swayDegrees: 0
+    swaySpeed: 0.1
+    bobMeters: 0.002
+    bobSpeed: 0.12
+    phase: 0.5
   stagger: 0.35
 --- !u!114 &6472504708273481242
 MonoBehaviour:
@@ -383,10 +405,15 @@ MonoBehaviour:
   requiredInteractions: 2
   sand: {fileID: 834643012120280551}
   leanElements:
-  - plants_front
+  - agave_big
+  - agave_right
   - plants_left
   peelMeters: 0.05
   leanDegrees: -3
+  driftElements:
+  - clouds
+  driftMeters: 0.12
+  driftSpeed: 0.03
   floor: {fileID: 5063530160395287390}
 --- !u!1 &5016926912329368167
 GameObject:
@@ -481,14 +508,16 @@ MonoBehaviour:
     width: 0.13
     height: 0.45
   elements:
-  - plants_front
+  - agave_big
+  - agave_right
   - plants_left
   - cactus
+  - cactus_small
   swingDegrees: 6
   swingFrequency: 0.9
   settleSeconds: 2.5
   burstPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  burstFrom: plants_front
+  burstFrom: agave_big
   burstOffset: {x: -0.3, y: 0.12, z: -0.08}
   sound: {fileID: 0}
   interactionId: gust
@@ -555,9 +584,14 @@ MonoBehaviour:
   manifest: {fileID: 4900000, guid: 1a08ef4e93ee7491692bedc642bf9b7e, type: 3}
   textures:
   - {fileID: 2800000, guid: 80da75bd8144e4ffa8482ca2ef69de26, type: 3}
-  - {fileID: 2800000, guid: c28ef91457a0d421e8bdfbee1652c6db, type: 3}
+  - {fileID: 2800000, guid: adfdf01cc629c4676b79addeab422bf6, type: 3}
+  - {fileID: 2800000, guid: 3827be949c28e442787cba809513eb4e, type: 3}
   - {fileID: 2800000, guid: 676142dc289fe4699acfc2a69b96738e, type: 3}
   - {fileID: 2800000, guid: ce2ef61f965d34aed8d9e655f3af29d7, type: 3}
+  - {fileID: 2800000, guid: 710fb513bf7174ea595fb5e17b842276, type: 3}
+  - {fileID: 2800000, guid: bc2092b82648449ed80c3afe520aee23, type: 3}
+  - {fileID: 2800000, guid: 42511bd5c53484c6c943afef6c96e1aa, type: 3}
+  - {fileID: 2800000, guid: 4fa5bb2f34eed409e8016680ebe543e2, type: 3}
   layerMaterial: {fileID: 2100000, guid: 8454737f7a4334f73a9f500fb604920c, type: 2}
 --- !u!114 &3493011875517048741
 MonoBehaviour:

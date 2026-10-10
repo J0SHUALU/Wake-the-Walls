@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using WakeTheWalls.Core;
 using WakeTheWalls.Interaction;
 using WakeTheWalls.VFX;
 
@@ -7,8 +8,9 @@ namespace WakeTheWalls.Murals
 {
     /// <summary>
     /// A tap area over part of a mural that asks for an info panel about it, for example a building.
-    /// It shows a small burst of light so the tap is visibly answered, and raises <see cref="InfoRequested"/>
-    /// with a topic id. Hook the info hotspot to that event; this script holds no facts itself.
+    /// It shows a small burst of light so the tap is visibly answered, then raises <see cref="InfoRequested"/>
+    /// and <see cref="GameEvents.InfoRequested"/> with a topic id, so the UI's info panel can open.
+    /// This script holds no facts itself.
     /// </summary>
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
     public class InfoTapInteraction : MonoBehaviour
@@ -52,6 +54,7 @@ namespace WakeTheWalls.Murals
             }
             if (sound != null) AudioSource.PlayClipAtPoint(sound, transform.position);
             infoRequested.Invoke(topic);
+            GameEvents.RaiseInfoRequested(topic);
             used.Invoke(interactionId);
         }
     }

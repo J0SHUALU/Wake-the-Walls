@@ -3,16 +3,7 @@
   "canvasWidth": 2048,
   "canvasHeight": 1218,
   "background": "mural3_bg_filled",
-  "notes": "L07 agave_big and L08 agave_right together replace L01 plants_front. L01 is kept unchanged in this file and on disk until Donald confirms the swap; until then do not enable L01 together with L07 and L08, because they duplicate the same plants. When the swap is confirmed, delete the L01 entry and mural3_L01_plants_front.png.",
   "layers": [
-    {
-      "file": "mural3_L01_plants_front",
-      "element": "plants_front",
-      "depthMm": 5.0,
-      "order": 8,
-      "pivotX": 0.655,
-      "pivotY": 0.023
-    },
     {
       "file": "mural3_L02_plants_left",
       "element": "plants_left",
