@@ -15,8 +15,14 @@ MonoBehaviour:
   referenceImageName: Mural3
   displayName: 
   location: 
-  physicalSizeMeters: {x: 1, y: 0.59472656}
+  physicalSizeMeters: {x: 3.9, y: 2.319}
   story: 
-  experiencePrefab: {fileID: 0}
-  palette: []
+  experiencePrefab: {fileID: 6472504708273481242, guid: 4438b41e2e44241138ba452425915728, type: 3}
+  palette:
+  - {r: 0.308, g: 0.293, b: 0.265, a: 1}
+  - {r: 0.485, g: 0.419, b: 0.387, a: 1}
+  - {r: 0.134, g: 0.134, b: 0.118, a: 1}
+  - {r: 0.618, g: 0.774, b: 0.763, a: 1}
+  - {r: 0.803, g: 0.886, b: 0.856, a: 1}
+  - {r: 0.662, g: 0.591, b: 0.514, a: 1}
   ambience: {fileID: 0}
