@@ -48,16 +48,21 @@ namespace WakeTheWalls.UI
         void OnEnable()
         {
             GameEvents.MuralFound += HandleMuralFound;
+            GameEvents.MuralLost += HandleMuralLost;
             GameEvents.StateChanged += HandleStateChanged;
         }
 
         void OnDisable()
         {
             GameEvents.MuralFound -= HandleMuralFound;
+            GameEvents.MuralLost -= HandleMuralLost;
             GameEvents.StateChanged -= HandleStateChanged;
         }
 
         void HandleMuralFound(MuralData mural) => current = mural;
+
+        // The paused message takes over when the mural is lost, so the panel steps aside.
+        void HandleMuralLost(MuralData mural) => Hide();
 
         // The panel only belongs to the experience, so close it when the app moves on.
         void HandleStateChanged(AppState state)
