@@ -416,26 +416,52 @@ MonoBehaviour:
   growElements:
   - flower_crown
   - flowers_left
+  - bloom_purple
+  - bloom_red
+  - bloom_yellow
+  - bloom_teal
+  - bloom_pink
   growScale: 1.06
   growSeconds: 1.2
   bloomMaterial: {fileID: 2100000, guid: edd44886519a441cfafab4e0e54ed548, type: 2}
   blooms:
-  - wallPoint: {x: 0.725, y: 0.761}
-    petalColour: {r: 0.62, g: 0.27, b: 0.31, a: 1}
+  - fromElement: bloom_red
+    wallPoint: {x: 0.71, y: 0.76}
+    petalColour: {r: 0.72, g: 0.37, b: 0.4, a: 1}
     centreColour: {r: 0.71, g: 0.5, b: 0.28, a: 1}
-    floatOffset: {x: -0.15, y: 0.1, z: -0.7}
-    diameter: 0.26
-  - wallPoint: {x: 0.76, y: 0.738}
-    petalColour: {r: 0.71, g: 0.5, b: 0.28, a: 1}
-    centreColour: {r: 0.62, g: 0.27, b: 0.31, a: 1}
-    floatOffset: {x: 0.25, y: 0.05, z: -0.55}
+    floatOffset: {x: -0.1, y: 0.15, z: -0.75}
     diameter: 0.22
-  - wallPoint: {x: 0.524, y: 0.283}
+  - fromElement: bloom_purple
+    wallPoint: {x: 0.76, y: 0.75}
+    petalColour: {r: 0.42, g: 0.29, b: 0.31, a: 1}
+    centreColour: {r: 0.71, g: 0.5, b: 0.28, a: 1}
+    floatOffset: {x: 0.2, y: 0.05, z: -0.6}
+    diameter: 0.16
+  - fromElement: bloom_yellow
+    wallPoint: {x: 0.66, y: 0.78}
+    petalColour: {r: 0.64, g: 0.58, b: 0.42, a: 1}
+    centreColour: {r: 0.62, g: 0.27, b: 0.31, a: 1}
+    floatOffset: {x: -0.3, y: 0.1, z: -0.55}
+    diameter: 0.24
+  - fromElement: bloom_teal
+    wallPoint: {x: 0.62, y: 0.74}
+    petalColour: {r: 0.65, g: 0.84, b: 0.79, a: 1}
+    centreColour: {r: 0.71, g: 0.5, b: 0.28, a: 1}
+    floatOffset: {x: -0.45, y: -0.05, z: -0.65}
+    diameter: 0.16
+  - fromElement: bloom_pink
+    wallPoint: {x: 0.81, y: 0.75}
+    petalColour: {r: 0.73, g: 0.44, b: 0.38, a: 1}
+    centreColour: {r: 0.71, g: 0.5, b: 0.28, a: 1}
+    floatOffset: {x: 0.4, y: 0, z: -0.7}
+    diameter: 0.18
+  - fromElement: 
+    wallPoint: {x: 0.524, y: 0.283}
     petalColour: {r: 0.42, g: 0.65, b: 0.58, a: 1}
     centreColour: {r: 0.71, g: 0.5, b: 0.28, a: 1}
     floatOffset: {x: 0.1, y: 0.25, z: -0.8}
     diameter: 0.24
-  bloomStagger: 0.7
+  bloomStagger: 0.5
 --- !u!114 &787510591342069951
 MonoBehaviour:
   m_ObjectHideFlags: 0

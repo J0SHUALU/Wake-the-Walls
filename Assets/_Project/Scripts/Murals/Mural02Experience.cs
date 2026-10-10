@@ -9,7 +9,7 @@ namespace WakeTheWalls.Murals
 {
     /// <summary>
     /// Mural 2: the flowers are the way in. After the shared fade in, the flower layers grow and open,
-    /// then a few blooms grow out of the wall and float towards the viewer in 3D, in the painting's own colours.
+    /// then a few blooms grow out of the painted flowers and float towards the viewer in 3D, in the painting's own colours.
     /// </summary>
     public class Mural02Experience : LayeredMuralExperience
     {
@@ -17,6 +17,8 @@ namespace WakeTheWalls.Murals
         [Serializable]
         public class BloomSpec
         {
+            [Tooltip("Optional painted flower it grows out of. When set, the bloom starts at that layer's pivot and Wall Point is ignored.")]
+            public string fromElement;
             [Tooltip("Spot on the wall it grows from, 0 to 1 across the mural (0,0 bottom left).")]
             public Vector2 wallPoint = new Vector2(0.5f, 0.5f);
             public Color petalColour = Color.white;
@@ -53,6 +55,8 @@ namespace WakeTheWalls.Murals
             {
                 BloomSpec spec = blooms[i];
                 var home = new Vector3((spec.wallPoint.x - 0.5f) * size.x, (spec.wallPoint.y - 0.5f) * size.y, -0.01f);
+                if (!string.IsNullOrEmpty(spec.fromElement) && Rig.TryGetLayer(spec.fromElement, out MuralLayer from))
+                    home = new Vector3(from.PivotLocal.x, from.PivotLocal.y, -from.RestDepth - 0.005f);
                 Vector3 offset = spec.floatOffset;
                 offset.z = Mathf.Clamp(offset.z, -1.5f, -0.05f);
                 var bloom = new GameObject("Bloom" + i).AddComponent<FloatingBloom>();
