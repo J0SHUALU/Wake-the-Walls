@@ -93,14 +93,15 @@ MonoBehaviour:
     width: 0.29
     height: 0.23
   elements:
-  - plants_front
+  - agave_big
+  - agave_right
   - plants_left
   - cactus
   swingDegrees: 6
   swingFrequency: 0.9
   settleSeconds: 2.5
   burstPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  burstFrom: plants_front
+  burstFrom: agave_big
   burstOffset: {x: -0.3, y: 0.12, z: -0.08}
   sound: {fileID: 0}
   interactionId: gust
@@ -212,14 +213,15 @@ MonoBehaviour:
     width: 0.39
     height: 0.34
   elements:
-  - plants_front
+  - agave_big
+  - agave_right
   - plants_left
   - cactus
   swingDegrees: 6
   swingFrequency: 0.9
   settleSeconds: 2.5
   burstPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  burstFrom: plants_front
+  burstFrom: agave_big
   burstOffset: {x: -0.3, y: 0.12, z: -0.08}
   sound: {fileID: 0}
   interactionId: gust
@@ -341,12 +343,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerMotionSet
   entries:
-  - element: plants_front
+  - element: agave_big
     swayDegrees: 1.5
     swaySpeed: 0.3
     bobMeters: 0.002
     bobSpeed: 0.25
     phase: 0
+  - element: agave_right
+    swayDegrees: 1.5
+    swaySpeed: 0.34
+    bobMeters: 0.002
+    bobSpeed: 0.25
+    phase: 0.6
   - element: plants_left
     swayDegrees: 2
     swaySpeed: 0.33
@@ -383,7 +391,8 @@ MonoBehaviour:
   requiredInteractions: 2
   sand: {fileID: 834643012120280551}
   leanElements:
-  - plants_front
+  - agave_big
+  - agave_right
   - plants_left
   peelMeters: 0.05
   leanDegrees: -3
@@ -481,14 +490,15 @@ MonoBehaviour:
     width: 0.13
     height: 0.45
   elements:
-  - plants_front
+  - agave_big
+  - agave_right
   - plants_left
   - cactus
   swingDegrees: 6
   swingFrequency: 0.9
   settleSeconds: 2.5
   burstPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  burstFrom: plants_front
+  burstFrom: agave_big
   burstOffset: {x: -0.3, y: 0.12, z: -0.08}
   sound: {fileID: 0}
   interactionId: gust
@@ -555,7 +565,8 @@ MonoBehaviour:
   manifest: {fileID: 4900000, guid: 1a08ef4e93ee7491692bedc642bf9b7e, type: 3}
   textures:
   - {fileID: 2800000, guid: 80da75bd8144e4ffa8482ca2ef69de26, type: 3}
-  - {fileID: 2800000, guid: c28ef91457a0d421e8bdfbee1652c6db, type: 3}
+  - {fileID: 2800000, guid: adfdf01cc629c4676b79addeab422bf6, type: 3}
+  - {fileID: 2800000, guid: 3827be949c28e442787cba809513eb4e, type: 3}
   - {fileID: 2800000, guid: 676142dc289fe4699acfc2a69b96738e, type: 3}
   - {fileID: 2800000, guid: ce2ef61f965d34aed8d9e655f3af29d7, type: 3}
   - {fileID: 2800000, guid: 710fb513bf7174ea595fb5e17b842276, type: 3}
