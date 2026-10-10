@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using WakeTheWalls.Core;
 
 namespace WakeTheWalls.Interaction
 {
@@ -27,6 +28,7 @@ namespace WakeTheWalls.Interaction
         {
             if (!isInteractable) return;
             tapped.Invoke();
+            GameEvents.RaiseInteractableTapped();
         }
     }
 }

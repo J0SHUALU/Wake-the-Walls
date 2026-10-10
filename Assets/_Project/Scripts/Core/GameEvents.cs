@@ -28,6 +28,9 @@ namespace WakeTheWalls.Core
         /// <summary>Raised when part of a mural is tapped to ask for its info, with a topic id from that tap.</summary>
         public static event Action<string> InfoRequested;
 
+        /// <summary>Raised whenever the user taps something tappable in AR, for example to play a tap sound.</summary>
+        public static event Action InteractableTapped;
+
         /// <summary>Announces a new app state.</summary>
         public static void RaiseStateChanged(AppState state) => StateChanged?.Invoke(state);
 
@@ -46,6 +49,9 @@ namespace WakeTheWalls.Core
         /// <summary>Asks the UI to open the info for the current mural.</summary>
         public static void RaiseInfoRequested(string topic) => InfoRequested?.Invoke(topic);
 
+        /// <summary>Announces that something in AR was tapped.</summary>
+        public static void RaiseInteractableTapped() => InteractableTapped?.Invoke();
+
         // Static events survive between play sessions when domain reload is off, so clear them on start.
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void ClearSubscribers()
@@ -56,6 +62,7 @@ namespace WakeTheWalls.Core
             MuralCompleted = null;
             ResetRequested = null;
             InfoRequested = null;
+            InteractableTapped = null;
         }
     }
 }

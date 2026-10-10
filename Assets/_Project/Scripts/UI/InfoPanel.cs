@@ -48,6 +48,7 @@ namespace WakeTheWalls.UI
         void OnEnable()
         {
             GameEvents.MuralFound += HandleMuralFound;
+            GameEvents.MuralLost += HandleMuralLost;
             GameEvents.StateChanged += HandleStateChanged;
             GameEvents.InfoRequested += HandleInfoRequested;
         }
@@ -55,6 +56,7 @@ namespace WakeTheWalls.UI
         void OnDisable()
         {
             GameEvents.MuralFound -= HandleMuralFound;
+            GameEvents.MuralLost -= HandleMuralLost;
             GameEvents.StateChanged -= HandleStateChanged;
             GameEvents.InfoRequested -= HandleInfoRequested;
         }
@@ -63,6 +65,9 @@ namespace WakeTheWalls.UI
 
         // A tap on the mural itself (for example a building) opens the same sheet as the HUD's Info button.
         void HandleInfoRequested(string topic) => Show();
+
+        // The paused message takes over when the mural is lost, so the panel steps aside.
+        void HandleMuralLost(MuralData mural) => Hide();
 
         // The panel only belongs to the experience, so close it when the app moves on.
         void HandleStateChanged(AppState state)

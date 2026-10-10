@@ -28,9 +28,20 @@ namespace WakeTheWalls.UI
             if (backdropButton != null) backdropButton.onClick.AddListener(Hide);
         }
 
-        void OnEnable() => GameEvents.StateChanged += HandleStateChanged;
+        void OnEnable()
+        {
+            GameEvents.StateChanged += HandleStateChanged;
+            GameEvents.MuralLost += HandleMuralLost;
+        }
 
-        void OnDisable() => GameEvents.StateChanged -= HandleStateChanged;
+        void OnDisable()
+        {
+            GameEvents.StateChanged -= HandleStateChanged;
+            GameEvents.MuralLost -= HandleMuralLost;
+        }
+
+        // The paused message takes over when the mural is lost, so the how-to steps aside.
+        void HandleMuralLost(Murals.MuralData mural) => Hide();
 
         // The how-to belongs to the screen it was opened from, so close it when the app moves on.
         void HandleStateChanged(AppState state) => Hide();

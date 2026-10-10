@@ -1318,6 +1318,9 @@ MonoBehaviour:
   soundButton: {fileID: 3717899514141721523}
   replayButton: {fileID: 4440399800243559313}
   helpButton: {fileID: 5305395922293793168}
+  soundIcon: {fileID: 3440940178640059826}
+  soundOnSprite: {fileID: 21300000, guid: fe667ebfaffb42c4aef2cd4dbc647f85, type: 3}
+  soundOffSprite: {fileID: 21300000, guid: 6f40bfaf4895436a8e170b929e8fa46d, type: 3}
   infoRequested:
     m_PersistentCalls:
       m_Calls: []

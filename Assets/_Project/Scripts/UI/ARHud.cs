@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using WakeTheWalls.Audio;
 using WakeTheWalls.Core;
 using WakeTheWalls.Murals;
 
@@ -28,6 +29,11 @@ namespace WakeTheWalls.UI
         [SerializeField] Button replayButton;
         [SerializeField] Button helpButton;
 
+        [Header("Sound icon")]
+        [SerializeField] Image soundIcon;
+        [SerializeField] Sprite soundOnSprite;
+        [SerializeField] Sprite soundOffSprite;
+
         [Header("Events")]
         [SerializeField] UnityEvent infoRequested = new UnityEvent();
         [SerializeField] UnityEvent soundToggled = new UnityEvent();
@@ -45,9 +51,23 @@ namespace WakeTheWalls.UI
             if (helpButton != null) helpButton.onClick.AddListener(helpRequested.Invoke);
         }
 
-        void OnEnable() => GameEvents.MuralFound += HandleMuralFound;
+        void OnEnable()
+        {
+            GameEvents.MuralFound += HandleMuralFound;
+            AudioManager.MuteChanged += UpdateSoundIcon;
+            UpdateSoundIcon(AudioManager.IsMuted);
+        }
 
-        void OnDisable() => GameEvents.MuralFound -= HandleMuralFound;
+        void OnDisable()
+        {
+            GameEvents.MuralFound -= HandleMuralFound;
+            AudioManager.MuteChanged -= UpdateSoundIcon;
+        }
+
+        void UpdateSoundIcon(bool muted)
+        {
+            if (soundIcon != null) soundIcon.sprite = muted ? soundOffSprite : soundOnSprite;
+        }
 
         protected override void OnShowing() => Refresh();
 
