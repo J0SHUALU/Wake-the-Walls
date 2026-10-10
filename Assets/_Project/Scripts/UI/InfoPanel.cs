@@ -10,7 +10,7 @@ namespace WakeTheWalls.UI
     /// <summary>
     /// Bottom sheet with the current mural's number and size, its title, where it is, and its story.
     /// Everything is read from the MuralData sent with MuralFound. Empty fields are hidden, never
-    /// shown as placeholders. The sheet fades and slides up when opened from the HUD.
+    /// shown as placeholders. The sheet fades and slides up when opened from the HUD or from a tap on the mural.
     /// </summary>
     public class InfoPanel : UIScreen
     {
@@ -49,15 +49,20 @@ namespace WakeTheWalls.UI
         {
             GameEvents.MuralFound += HandleMuralFound;
             GameEvents.StateChanged += HandleStateChanged;
+            GameEvents.InfoRequested += HandleInfoRequested;
         }
 
         void OnDisable()
         {
             GameEvents.MuralFound -= HandleMuralFound;
             GameEvents.StateChanged -= HandleStateChanged;
+            GameEvents.InfoRequested -= HandleInfoRequested;
         }
 
         void HandleMuralFound(MuralData mural) => current = mural;
+
+        // A tap on the mural itself (for example a building) opens the same sheet as the HUD's Info button.
+        void HandleInfoRequested(string topic) => Show();
 
         // The panel only belongs to the experience, so close it when the app moves on.
         void HandleStateChanged(AppState state)
