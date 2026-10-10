@@ -46,6 +46,7 @@ namespace WakeTheWalls.Murals
 
         Coroutine swing;
         AudioSource audioSource;
+        float[] baseDegrees;
 
         void Start()
         {
@@ -75,6 +76,7 @@ namespace WakeTheWalls.Murals
 
         IEnumerator Swing()
         {
+            CaptureBase();
             float time = 0f;
             while (time < settleSeconds)
             {
@@ -89,10 +91,20 @@ namespace WakeTheWalls.Murals
             swing = null;
         }
 
+        // Remember any steady lean already on the layers, so the swing adds to it instead of replacing it.
+        void CaptureBase()
+        {
+            if (swing != null && baseDegrees != null) return;
+            baseDegrees = new float[elements.Length];
+            for (int i = 0; i < elements.Length; i++)
+                if (motionSet.TryGetMotion(elements[i], out LayerMotion motion)) baseDegrees[i] = motion.ExtraDegrees;
+        }
+
         void SetExtra(float degrees)
         {
-            foreach (string element in elements)
-                if (motionSet.TryGetMotion(element, out LayerMotion motion)) motion.ExtraDegrees = degrees;
+            for (int i = 0; i < elements.Length; i++)
+                if (motionSet.TryGetMotion(elements[i], out LayerMotion motion))
+                    motion.ExtraDegrees = (baseDegrees != null ? baseDegrees[i] : 0f) + degrees;
         }
 
         void SpawnBurst()
