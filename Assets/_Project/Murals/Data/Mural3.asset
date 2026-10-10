@@ -17,7 +17,7 @@ MonoBehaviour:
   location: 
   physicalSizeMeters: {x: 3.9, y: 2.319}
   story: 
-  experiencePrefab: {fileID: 7023506433495526234, guid: db645d2b9b7043afaf93b0c295c96778, type: 3}
+  experiencePrefab: {fileID: 6472504708273481242, guid: 4438b41e2e44241138ba452425915728, type: 3}
   palette:
   - {r: 0.308, g: 0.293, b: 0.265, a: 1}
   - {r: 0.485, g: 0.419, b: 0.387, a: 1}
