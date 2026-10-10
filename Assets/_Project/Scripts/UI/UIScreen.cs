@@ -20,6 +20,7 @@ namespace WakeTheWalls.UI
 
         CanvasGroup group;
         Coroutine fade;
+        bool dimmed;
 
         /// <summary>True while the screen is shown or fading in.</summary>
         public bool IsVisible { get; private set; }
@@ -36,8 +37,9 @@ namespace WakeTheWalls.UI
         [ContextMenu("Show")]
         public void Show()
         {
-            if (IsVisible) return;
+            if (IsVisible && !dimmed) return;
             IsVisible = true;
+            dimmed = false;
             SetInteractive(true);
             OnShowing();
             FadeTo(1f);
@@ -49,9 +51,22 @@ namespace WakeTheWalls.UI
         {
             if (!IsVisible) return;
             IsVisible = false;
+            dimmed = false;
             SetInteractive(false);
             OnHiding();
             FadeTo(0f);
+        }
+
+        /// <summary>
+        /// Fades a visible screen down to <paramref name="dimAlpha"/> and stops it taking taps,
+        /// or brings it back. Used to dim the HUD while the mural is paused.
+        /// </summary>
+        public void SetDimmed(bool dim, float dimAlpha = 0f)
+        {
+            if (!IsVisible || dim == dimmed) return;
+            dimmed = dim;
+            SetInteractive(!dim);
+            FadeTo(dim ? dimAlpha : 1f);
         }
 
         /// <summary>Shows or hides the screen with no fade. Use only for the starting state.</summary>
@@ -60,6 +75,7 @@ namespace WakeTheWalls.UI
             if (fade != null) StopCoroutine(fade);
             fade = null;
             IsVisible = visible;
+            dimmed = false;
             Group.alpha = visible ? 1f : 0f;
             SetInteractive(visible);
         }
