@@ -3,6 +3,7 @@
   "canvasWidth": 2048,
   "canvasHeight": 1155,
   "background": "mural5_bg_filled",
+  "notes": "The ring_1 to ring_5 layers (L04 to L08) together replace L01 rings. Do not show L01 together with them until Donald confirms the swap; until then show either L01 alone or the ring_N layers alone.",
   "layers": [
     {
       "file": "mural5_L01_rings",
@@ -17,16 +18,176 @@
       "element": "bangles_raised",
       "depthMm": 3.5,
       "order": 2,
-      "pivotX": 0.713,
-      "pivotY": 0.274
+      "pivotX": 0.681,
+      "pivotY": 0.366
     },
     {
       "file": "mural5_L03_bangles_low",
       "element": "bangles_low",
       "depthMm": 5.0,
       "order": 3,
-      "pivotX": 0.171,
-      "pivotY": 0.095
+      "pivotX": 0.111,
+      "pivotY": 0.091
+    },
+    {
+      "file": "mural5_L04_ring_1",
+      "element": "ring_1",
+      "depthMm": 2.5,
+      "order": 4,
+      "pivotX": 0.371,
+      "pivotY": 0.55
+    },
+    {
+      "file": "mural5_L05_ring_2",
+      "element": "ring_2",
+      "depthMm": 2.5,
+      "order": 5,
+      "pivotX": 0.371,
+      "pivotY": 0.55
+    },
+    {
+      "file": "mural5_L06_ring_3",
+      "element": "ring_3",
+      "depthMm": 2.5,
+      "order": 6,
+      "pivotX": 0.371,
+      "pivotY": 0.55
+    },
+    {
+      "file": "mural5_L07_ring_4",
+      "element": "ring_4",
+      "depthMm": 2.5,
+      "order": 7,
+      "pivotX": 0.371,
+      "pivotY": 0.55
+    },
+    {
+      "file": "mural5_L08_ring_5",
+      "element": "ring_5",
+      "depthMm": 2.5,
+      "order": 8,
+      "pivotX": 0.371,
+      "pivotY": 0.55
+    },
+    {
+      "file": "mural5_L09_earring",
+      "element": "earring",
+      "depthMm": 3.0,
+      "order": 9,
+      "pivotX": 0.298,
+      "pivotY": 0.618
+    },
+    {
+      "file": "mural5_L10_face_right_eye",
+      "element": "face_right_eye",
+      "depthMm": 3.5,
+      "order": 10,
+      "pivotX": 0.82,
+      "pivotY": 0.567
+    },
+    {
+      "file": "mural5_L11_cube_1",
+      "element": "cube_1",
+      "depthMm": 3.5,
+      "order": 11,
+      "pivotX": 0.907,
+      "pivotY": 0.952
+    },
+    {
+      "file": "mural5_L12_cube_2",
+      "element": "cube_2",
+      "depthMm": 3.5,
+      "order": 12,
+      "pivotX": 0.804,
+      "pivotY": 0.744
+    },
+    {
+      "file": "mural5_L13_cube_3",
+      "element": "cube_3",
+      "depthMm": 4.0,
+      "order": 13,
+      "pivotX": 0.874,
+      "pivotY": 0.624
+    },
+    {
+      "file": "mural5_L14_cube_4",
+      "element": "cube_4",
+      "depthMm": 3.5,
+      "order": 14,
+      "pivotX": 0.952,
+      "pivotY": 0.579
+    },
+    {
+      "file": "mural5_L15_cube_5",
+      "element": "cube_5",
+      "depthMm": 3.5,
+      "order": 15,
+      "pivotX": 0.769,
+      "pivotY": 0.475
+    },
+    {
+      "file": "mural5_L16_cube_6",
+      "element": "cube_6",
+      "depthMm": 3.5,
+      "order": 16,
+      "pivotX": 0.903,
+      "pivotY": 0.498
+    },
+    {
+      "file": "mural5_L17_cube_7",
+      "element": "cube_7",
+      "depthMm": 3.5,
+      "order": 17,
+      "pivotX": 0.978,
+      "pivotY": 0.483
+    },
+    {
+      "file": "mural5_L18_flower_1",
+      "element": "flower_1",
+      "depthMm": 3.0,
+      "order": 18,
+      "pivotX": 0.976,
+      "pivotY": 0.907
+    },
+    {
+      "file": "mural5_L19_flower_2",
+      "element": "flower_2",
+      "depthMm": 3.0,
+      "order": 19,
+      "pivotX": 0.828,
+      "pivotY": 0.825
+    },
+    {
+      "file": "mural5_L20_flower_3",
+      "element": "flower_3",
+      "depthMm": 3.0,
+      "order": 20,
+      "pivotX": 0.04,
+      "pivotY": 0.611
+    },
+    {
+      "file": "mural5_L21_flower_4",
+      "element": "flower_4",
+      "depthMm": 3.0,
+      "order": 21,
+      "pivotX": 0.043,
+      "pivotY": 0.548
+    },
+    {
+      "file": "mural5_L22_flower_5",
+      "element": "flower_5",
+      "depthMm": 3.0,
+      "order": 22,
+      "pivotX": 0.076,
+      "pivotY": 0.469
+    },
+    {
+      "file": "mural5_L23_dots",
+      "element": "dots",
+      "depthMm": 4.5,
+      "order": 23,
+      "pivotX": 0.5,
+      "pivotY": 0.5
     }
   ]
 }
