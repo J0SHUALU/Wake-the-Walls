@@ -94,6 +94,7 @@ MonoBehaviour:
     height: 0.23
   elements:
   - tree_right
+  - trees_mid_right
   swingDegrees: 6
   swingFrequency: 0.7
   settleSeconds: 2.5
@@ -211,6 +212,7 @@ MonoBehaviour:
     height: 0.19
   elements:
   - tree_left
+  - tree_top_left
   swingDegrees: 7
   swingFrequency: 0.8
   settleSeconds: 2.5
@@ -329,6 +331,7 @@ MonoBehaviour:
   elements:
   - earring_left
   - earring_right
+  - nose_ring
   swingDegrees: 18
   swingFrequency: 0.9
   settleSeconds: 3
@@ -507,6 +510,42 @@ MonoBehaviour:
     bobMeters: 0.002
     bobSpeed: 0.3
     phase: 0.65
+  - element: tree_top_left
+    swayDegrees: 1.3
+    swaySpeed: 0.17
+    bobMeters: 0.003
+    bobSpeed: 0.21
+    phase: 0.25
+  - element: trees_mid_right
+    swayDegrees: 1
+    swaySpeed: 0.15
+    bobMeters: 0.003
+    bobSpeed: 0.2
+    phase: 0.7
+  - element: grass_left
+    swayDegrees: 2.5
+    swaySpeed: 0.4
+    bobMeters: 0.001
+    bobSpeed: 0.35
+    phase: 0.1
+  - element: grass_right
+    swayDegrees: 2.5
+    swaySpeed: 0.42
+    bobMeters: 0.001
+    bobSpeed: 0.35
+    phase: 0.55
+  - element: forehead_leaf
+    swayDegrees: 1
+    swaySpeed: 0.25
+    bobMeters: 0.001
+    bobSpeed: 0.3
+    phase: 0.3
+  - element: nose_ring
+    swayDegrees: 5
+    swaySpeed: 0.35
+    bobMeters: 0.001
+    bobSpeed: 0.3
+    phase: 0.4
   stagger: 0.35
 --- !u!114 &4686136062710758120
 MonoBehaviour:
@@ -528,6 +567,8 @@ MonoBehaviour:
   dustSources:
   - tree_left
   - tree_right
+  - tree_top_left
+  - trees_mid_right
   dustOffset: {x: 0, y: 0.25, z: -0.02}
   dustInterval: {x: 2.5, y: 5}
   requiredInteractions: 2
@@ -626,6 +667,7 @@ MonoBehaviour:
   elements:
   - earring_left
   - earring_right
+  - nose_ring
   swingDegrees: 18
   swingFrequency: 0.9
   settleSeconds: 3
