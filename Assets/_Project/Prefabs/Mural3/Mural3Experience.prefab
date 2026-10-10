@@ -97,6 +97,7 @@ MonoBehaviour:
   - agave_right
   - plants_left
   - cactus
+  - cactus_small
   swingDegrees: 6
   swingFrequency: 0.9
   settleSeconds: 2.5
@@ -217,6 +218,7 @@ MonoBehaviour:
   - agave_right
   - plants_left
   - cactus
+  - cactus_small
   swingDegrees: 6
   swingFrequency: 0.9
   settleSeconds: 2.5
@@ -367,6 +369,18 @@ MonoBehaviour:
     bobMeters: 0.001
     bobSpeed: 0.2
     phase: 0.7
+  - element: cactus_small
+    swayDegrees: 0.8
+    swaySpeed: 0.22
+    bobMeters: 0.001
+    bobSpeed: 0.2
+    phase: 0.3
+  - element: clouds
+    swayDegrees: 0
+    swaySpeed: 0.1
+    bobMeters: 0.002
+    bobSpeed: 0.12
+    phase: 0.5
   stagger: 0.35
 --- !u!114 &6472504708273481242
 MonoBehaviour:
@@ -396,6 +410,10 @@ MonoBehaviour:
   - plants_left
   peelMeters: 0.05
   leanDegrees: -3
+  driftElements:
+  - clouds
+  driftMeters: 0.12
+  driftSpeed: 0.03
   floor: {fileID: 5063530160395287390}
 --- !u!1 &5016926912329368167
 GameObject:
@@ -494,6 +512,7 @@ MonoBehaviour:
   - agave_right
   - plants_left
   - cactus
+  - cactus_small
   swingDegrees: 6
   swingFrequency: 0.9
   settleSeconds: 2.5
