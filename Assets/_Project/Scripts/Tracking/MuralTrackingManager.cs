@@ -12,6 +12,11 @@ namespace WakeTheWalls.Tracking
     /// this looks up the image name in the mural library, places the experience prefab on the
     /// mural and raises <see cref="GameEvents.MuralFound"/>. Tracking changes go to the loss handler.
     /// </summary>
+    /// <remarks>
+    /// A mural can have extra reference images for close-up scanning, named after the mural with a
+    /// suffix, for example "Mural1_centre". These must be centred on the mural so the experience sits
+    /// in the same place whichever image is found. All images of one mural share one experience.
+    /// </remarks>
     public class MuralTrackingManager : MonoBehaviour
     {
         // Turns AR Foundation's image plane (X and Z, normal on +Y) into ours (+X right, +Y up, -Z to the viewer).
@@ -21,7 +26,9 @@ namespace WakeTheWalls.Tracking
         [SerializeField] MuralLibrary library;
         [SerializeField] TrackingLossHandler lossHandler;
 
-        readonly Dictionary<TrackableId, MuralExperience> spawned = new Dictionary<TrackableId, MuralExperience>();
+        readonly Dictionary<TrackableId, ARTrackedImage> images = new Dictionary<TrackableId, ARTrackedImage>();
+        readonly Dictionary<TrackableId, MuralExperience> owners = new Dictionary<TrackableId, MuralExperience>();
+        readonly Dictionary<MuralData, MuralExperience> byMural = new Dictionary<MuralData, MuralExperience>();
         MuralExperience active;
 
         void OnEnable()
@@ -38,28 +45,24 @@ namespace WakeTheWalls.Tracking
 
         void OnTrackablesChanged(ARTrackablesChangedEventArgs<ARTrackedImage> args)
         {
-            foreach (var image in args.added) Spawn(image);
-
+            foreach (var image in args.added) Add(image);
             foreach (var image in args.updated)
             {
-                if (spawned.TryGetValue(image.trackableId, out var experience))
-                    lossHandler.Report(experience, image.trackingState == TrackingState.Tracking);
+                if (owners.TryGetValue(image.trackableId, out var experience)) Refresh(experience);
             }
-
-            foreach (var pair in args.removed) Despawn(pair.Key);
+            foreach (var pair in args.removed) Remove(pair.Key);
         }
 
-        void Spawn(ARTrackedImage image)
+        void Add(ARTrackedImage image)
         {
-            string imageName = image.referenceImage.name;
-            if (!library.TryGet(imageName, out var data))
+            if (!TryFindMural(image.referenceImage.name, out var data)) return;
+            images[image.trackableId] = image;
+
+            // Another image of the same mural already spawned it: share that experience.
+            if (byMural.TryGetValue(data, out var existing) && existing != null)
             {
-                Debug.LogWarning($"No mural data for reference image '{imageName}'.");
-                return;
-            }
-            if (data.ExperiencePrefab == null)
-            {
-                Debug.LogWarning($"Mural '{imageName}' has no experience prefab yet.");
+                owners[image.trackableId] = existing;
+                Refresh(existing);
                 return;
             }
 
@@ -68,19 +71,63 @@ namespace WakeTheWalls.Tracking
             experience.Initialize(data);
             experience.OnFound();
 
-            spawned[image.trackableId] = experience;
+            owners[image.trackableId] = experience;
+            byMural[data] = experience;
             active = experience;
             GameEvents.RaiseMuralFound(data);
         }
 
-        void Despawn(TrackableId id)
+        // Tracking counts as long as any image of the mural is tracked. The experience follows a tracked image.
+        void Refresh(MuralExperience experience)
         {
-            if (!spawned.TryGetValue(id, out var experience)) return;
+            ARTrackedImage best = null;
+            foreach (var pair in owners)
+            {
+                if (pair.Value != experience || !images.TryGetValue(pair.Key, out var image)) continue;
+                if (image.trackingState == TrackingState.Tracking) { best = image; break; }
+            }
+
+            if (best != null && experience.transform.parent != best.transform)
+            {
+                experience.transform.SetParent(best.transform, false);
+                experience.transform.SetLocalPositionAndRotation(Vector3.zero, ImageToMural);
+            }
+            lossHandler.Report(experience, best != null);
+        }
+
+        void Remove(TrackableId id)
+        {
+            images.Remove(id);
+            if (!owners.TryGetValue(id, out var experience)) return;
+            owners.Remove(id);
+            if (owners.ContainsValue(experience)) { Refresh(experience); return; }
 
             lossHandler.Forget(experience);
-            spawned.Remove(id);
+            if (experience != null)
+            {
+                byMural.Remove(experience.Data);
+                Destroy(experience.gameObject);
+            }
             if (active == experience) active = null;
-            if (experience != null) Destroy(experience.gameObject);
+        }
+
+        bool TryFindMural(string imageName, out MuralData data)
+        {
+            if (library.TryGet(imageName, out data) || library.TryGet(BaseName(imageName), out data))
+            {
+                if (data.ExperiencePrefab != null) return true;
+                Debug.LogWarning($"Mural '{data.ReferenceImageName}' has no experience prefab yet.");
+                return false;
+            }
+            Debug.LogWarning($"No mural data for reference image '{imageName}'.");
+            return false;
+        }
+
+        // "Mural1_centre" becomes "Mural1".
+        static string BaseName(string imageName)
+        {
+            int cut = imageName.LastIndexOf('_');
+            return cut > 0 ? imageName.Substring(0, cut) : imageName;
         }
 
         void ResetActive()
