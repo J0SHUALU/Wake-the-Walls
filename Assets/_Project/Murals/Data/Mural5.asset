@@ -13,16 +13,24 @@ MonoBehaviour:
   m_Name: Mural5
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MuralData
   referenceImageName: Mural5
-  displayName: 
-  location: 
+  displayName: Orbit
+  location: Indoor hall wall below the mezzanine balcony
   physicalSizeMeters: {x: 6.4, y: 3.609}
-  story: 
+  story: 'A bold figure stands against rays of teal, coral, black and white, with
+    gold rings circling her head like a headdress and stacked bangles on her raised
+    arms, while a second face watches from the right. The rings lift off the wall
+    and orbit her in 3D, as if her crown were a small solar system.
+
+
+    Tap the
+    rings to spin them faster, or tap the bangles to send a pulse of light along
+    the rays.'
   experiencePrefab: {fileID: 7251402845200606155, guid: 627c4f3418b734a9c80ac762fdd74bca, type: 3}
   palette:
-  - {r: 0.299, g: 0.270, b: 0.269, a: 1}
-  - {r: 0.120, g: 0.107, b: 0.108, a: 1}
+  - {r: 0.299, g: 0.27, b: 0.269, a: 1}
+  - {r: 0.12, g: 0.107, b: 0.108, a: 1}
   - {r: 0.446, g: 0.468, b: 0.478, a: 1}
   - {r: 0.562, g: 0.719, b: 0.718, a: 1}
-  - {r: 0.600, g: 0.310, b: 0.261, a: 1}
+  - {r: 0.6, g: 0.31, b: 0.261, a: 1}
   - {r: 0.788, g: 0.492, b: 0.415, a: 1}
   ambience: {fileID: 0}

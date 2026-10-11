@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: Mural1
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MuralData
   referenceImageName: Mural1
-  displayName: 
-  location: 
+  displayName: Rooted
+  location: Brick courtyard wall between two buildings, next to the Entry door
   physicalSizeMeters: {x: 5.6, y: 6.603}
-  story: 
+  story: 'A woman painted straight onto the brick, crowned with a gold leaf and wearing
+    gold hoops, stacked neck rings and a robe of patterned panels. The flat-topped
+    trees behind her frame her like a quiet savannah, so she seems rooted in the
+    land around her.
+
+
+    Tap the trees to send a gust through them, or tap her
+    earrings to catch the light.'
   experiencePrefab: {fileID: 4686136062710758120, guid: b90627c27b07347cf83f5461a92232eb, type: 3}
   palette:
   - {r: 0.534, g: 0.422, b: 0.344, a: 1}

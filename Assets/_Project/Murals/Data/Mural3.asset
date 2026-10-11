@@ -13,10 +13,18 @@ MonoBehaviour:
   m_Name: Mural3
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MuralData
   referenceImageName: Mural3
-  displayName: 
-  location: 
+  displayName: Desert Crossing
+  location: Long painted retaining wall below the fence on the outdoor walkway
   physicalSizeMeters: {x: 3.9, y: 2.319}
-  story: 
+  story: 'The domes and minarets of the Mosque of Muhammad Ali in the Cairo Citadel
+    rise over a desert of tall cacti and agave. Further along the same wall the journey
+    carries on to other places, including Great Zimbabwe. Here the wall opens up:
+    wind moves the plants, sand drifts and the desert spills out past the edge of
+    the paint.
+
+
+    Tap the plants for a gust of wind, or tap the mosque to read
+    about it.'
   experiencePrefab: {fileID: 6472504708273481242, guid: 4438b41e2e44241138ba452425915728, type: 3}
   palette:
   - {r: 0.308, g: 0.293, b: 0.265, a: 1}
