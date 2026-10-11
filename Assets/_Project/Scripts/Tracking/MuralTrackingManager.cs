@@ -113,6 +113,8 @@ namespace WakeTheWalls.Tracking
 
         bool TryFindMural(string imageName, out MuralData data)
         {
+            data = null;
+            if (string.IsNullOrEmpty(imageName)) return false;
             if (library.TryGet(imageName, out data) || library.TryGet(BaseName(imageName), out data))
             {
                 if (data.ExperiencePrefab != null) return true;

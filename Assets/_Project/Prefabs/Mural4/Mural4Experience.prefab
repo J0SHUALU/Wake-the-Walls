@@ -338,6 +338,8 @@ GameObject:
   - component: {fileID: 7913823731028150729}
   - component: {fileID: 8312437674479700697}
   - component: {fileID: 7848366319300294646}
+  - component: {fileID: 7716459544802548810}
+  - component: {fileID: 6184722665344512462}
   m_Layer: 0
   m_Name: Mural4Experience
   m_TagString: Untagged
@@ -477,6 +479,86 @@ MonoBehaviour:
   sizeLimits: {x: 0.12, y: 0.35}
   pulseAmount: 0.15
   pulseSpeed: 1
+--- !u!114 &7716459544802548810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610628319135149479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 353ee827d2abf43e992ba4b051550f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PopOutIntro
+  experience: {fileID: 7913823731028150729}
+  items:
+  - element: portrait_crown
+    distance: 0.25
+    delay: 0
+    grow: 0.1
+  - element: portrait_turban
+    distance: 0.25
+    delay: 0.6
+    grow: 0.1
+  - element: portrait_beret
+    distance: 0.25
+    delay: 1.2
+    grow: 0.1
+  - element: portrait_right
+    distance: 0.25
+    delay: 1.8
+    grow: 0.1
+  - element: portrait_cap
+    distance: 0.25
+    delay: 2.4
+    grow: 0.1
+  - element: reeds
+    distance: 0.1
+    delay: 0.3
+    grow: 0.08
+  startDelay: 1.6
+  liftDuration: 1.2
+  holdSeconds: 4
+  restSeconds: 5
+  loop: 1
+--- !u!114 &6184722665344512462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610628319135149479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f11827cea8014280a66e2216352990b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.FlyOut
+  experience: {fileID: 7913823731028150729}
+  startDelay: 2.5
+  copyElements: []
+  interval: {x: 1.2, y: 2.4}
+  maxFlying: 4
+  flightSeconds: 4
+  outDistance: 1
+  swing: 0.25
+  rise: 0.4
+  spinDegrees: 300
+  endScale: 0.6
+  sparkPath:
+  - portrait_crown
+  - portrait_turban
+  - portrait_beret
+  - portrait_right
+  - portrait_cap
+  sparkPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
+  sparkColours:
+  - {r: 1, g: 0.82, b: 0.35, a: 1}
+  - {r: 1, g: 0.95, b: 0.75, a: 1}
+  secondsPerHop: 1.2
+  sparkLift: 0.45
+  sparkSpacing: 0.07
+  trailPause: 2
 --- !u!1 &5567977968222287760
 GameObject:
   m_ObjectHideFlags: 0

@@ -335,6 +335,8 @@ GameObject:
   - component: {fileID: 5054015049802746257}
   - component: {fileID: 8822710674751077449}
   - component: {fileID: 1234819982050017411}
+  - component: {fileID: 4524895664035926595}
+  - component: {fileID: 4519079455440469952}
   m_Layer: 0
   m_Name: Mural2Experience
   m_TagString: Untagged
@@ -584,6 +586,82 @@ MonoBehaviour:
   sizeLimits: {x: 0.12, y: 0.35}
   pulseAmount: 0.15
   pulseSpeed: 1
+--- !u!114 &4524895664035926595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3730146585356417816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 353ee827d2abf43e992ba4b051550f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PopOutIntro
+  experience: {fileID: 3392714048055523538}
+  items:
+  - element: hand_left
+    distance: 0.22
+    delay: 0
+    grow: 0.08
+  - element: hand_right
+    distance: 0.22
+    delay: 0.2
+    grow: 0.08
+  - element: necklace
+    distance: 0.15
+    delay: 0.5
+    grow: 0.08
+  - element: orbs
+    distance: 0.28
+    delay: 0.8
+    grow: 0.12
+  - element: sunset_tree
+    distance: 0.1
+    delay: 1.1
+    grow: 0.08
+  startDelay: 1.6
+  liftDuration: 1.2
+  holdSeconds: 4
+  restSeconds: 5
+  loop: 1
+--- !u!114 &4519079455440469952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3730146585356417816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f11827cea8014280a66e2216352990b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.FlyOut
+  experience: {fileID: 3392714048055523538}
+  startDelay: 2.5
+  copyElements:
+  - bloom_purple
+  - bloom_red
+  - bloom_yellow
+  - bloom_teal
+  - bloom_pink
+  interval: {x: 1.2, y: 2.4}
+  maxFlying: 4
+  flightSeconds: 4
+  outDistance: 1
+  swing: 0.25
+  rise: 0.4
+  spinDegrees: 300
+  endScale: 0.6
+  sparkPath: []
+  sparkPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
+  sparkColours:
+  - {r: 1, g: 0.82, b: 0.35, a: 1}
+  - {r: 1, g: 0.95, b: 0.75, a: 1}
+  secondsPerHop: 1.2
+  sparkLift: 0.45
+  sparkSpacing: 0.07
+  trailPause: 2
 --- !u!1 &5643098369651352663
 GameObject:
   m_ObjectHideFlags: 0
