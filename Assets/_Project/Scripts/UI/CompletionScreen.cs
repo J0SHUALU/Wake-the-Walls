@@ -7,11 +7,6 @@ using WakeTheWalls.Murals;
 
 namespace WakeTheWalls.UI
 {
-    /// <summary>
-    /// Shown when a mural is finished: the big tilted wall stamp with the mural's number, a title,
-    /// how many walls are still asleep, the stamps row for this session, and the ways onward:
-    /// Find the next wall, Replay, About this mural and Home.
-    /// </summary>
     public class CompletionScreen : UIScreen
     {
         [SerializeField] MuralLibrary library;
@@ -58,7 +53,6 @@ namespace WakeTheWalls.UI
 
         void HandleCompleted(MuralData mural) => current = mural;
 
-        /// <summary>Goes back into the experience and restarts the mural.</summary>
         public void Replay()
         {
             GoTo(AppState.Experience);

@@ -5,10 +5,6 @@ using UnityEngine.XR.ARFoundation;
 
 namespace WakeTheWalls.Core
 {
-    /// <summary>
-    /// First script to run. Sets the frame rate, checks that the device supports AR,
-    /// then loads the main scene. If AR is not supported it shows the unsupported message instead.
-    /// </summary>
     public class BootLoader : MonoBehaviour
     {
         [Tooltip("Scene loaded once AR support is confirmed.")]
@@ -37,7 +33,6 @@ namespace WakeTheWalls.Core
                 yield break;
             }
 
-            // NeedsInstall is fine here: the ARSession in the main scene asks the user to install or update AR services.
             yield return SceneManager.LoadSceneAsync(mainSceneName);
         }
 

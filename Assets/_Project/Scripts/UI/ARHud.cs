@@ -8,11 +8,6 @@ using WakeTheWalls.Murals;
 
 namespace WakeTheWalls.UI
 {
-    /// <summary>
-    /// The small corner HUD shown during a mural experience: the wall label tag at the top left
-    /// (mural number and name) and four round buttons on the right. Replay restarts the mural;
-    /// Info, Sound and Help raise events so the panels that own them can be wired in the Inspector.
-    /// </summary>
     public class ARHud : UIScreen
     {
         [SerializeField] MuralLibrary library;
@@ -39,7 +34,6 @@ namespace WakeTheWalls.UI
         [SerializeField] UnityEvent soundToggled = new UnityEvent();
         [SerializeField] UnityEvent helpRequested = new UnityEvent();
 
-        /// <summary>The mural currently being experienced, or null.</summary>
         public MuralData CurrentMural { get; private set; }
 
         protected override void Awake()
@@ -96,7 +90,6 @@ namespace WakeTheWalls.UI
                 if (index >= 0) tagLabel.text = string.Format(tagFormat, index + 1);
             }
 
-            // Names come only from MuralData. An empty name hides the title instead of showing filler.
             if (tagTitle != null)
             {
                 bool hasName = !string.IsNullOrWhiteSpace(CurrentMural.DisplayName);

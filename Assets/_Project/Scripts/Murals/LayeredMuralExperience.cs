@@ -7,13 +7,6 @@ using WakeTheWalls.VFX;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Shared behaviour for murals built on the layered rig: the layers fade in over the wall, the
-    /// elements in the motion set start to sway one by one, and paint dust can drift from chosen
-    /// elements. Pauses and fades on loss, carries on when found again, and completes once enough
-    /// different interactions have been reported. Each mural's class adds its own story on top
-    /// through the <see cref="OnStarted"/>, <see cref="OnStopped"/> and <see cref="OnResetState"/> hooks.
-    /// </summary>
     public abstract class LayeredMuralExperience : MuralExperience
     {
         [SerializeField] LayeredMuralRig rig;
@@ -39,19 +32,14 @@ namespace WakeTheWalls.Murals
         Coroutine fade, dust;
         float alpha;
 
-        /// <summary>True while the mural is on screen and running.</summary>
         public bool IsRunning { get; private set; }
 
-        /// <summary>The rig, for interaction scripts on this prefab.</summary>
         public LayeredMuralRig Rig => rig;
 
-        /// <summary>The motion set, for interaction scripts on this prefab.</summary>
         public LayerMotionSet MotionSet => motionSet;
 
-        /// <summary>The dust prefab, for interaction scripts on this prefab.</summary>
         public PaintBurst DustPrefab => dustPrefab;
 
-        /// <summary>Seconds the fade in and out take.</summary>
         protected float FadeDuration => fadeDuration;
 
         protected override void OnInitialized()
@@ -62,10 +50,8 @@ namespace WakeTheWalls.Murals
             if (parallax != null) parallax.Active = false;
         }
 
-        /// <summary>Plays the intro: fade in, then the elements wake up one by one.</summary>
         public override void OnFound() => StartRunning(false);
 
-        /// <summary>Pauses the motion and fades out. Used interactions are kept.</summary>
         public override void OnLost()
         {
             IsRunning = false;
@@ -76,10 +62,8 @@ namespace WakeTheWalls.Murals
             FadeTo(0f);
         }
 
-        /// <summary>Fades back in and carries on from where it paused.</summary>
         public override void OnResume() => StartRunning(true);
 
-        /// <summary>Puts every layer back at rest, hidden, with no interactions used.</summary>
         public override void ResetExperience()
         {
             base.ResetExperience();
@@ -93,24 +77,16 @@ namespace WakeTheWalls.Murals
             OnResetState();
         }
 
-        /// <summary>
-        /// Interaction scripts call this when the user uses them. The mural completes once
-        /// <see cref="requiredInteractions"/> different ids have been reported.
-        /// </summary>
         public void ReportInteraction(string id)
         {
             usedInteractions.Add(id);
             if (usedInteractions.Count >= requiredInteractions) Complete();
         }
 
-        /// <summary>Runs after the shared intro or resume has started.</summary>
-        /// <param name="resumed">False the first time the mural is found, true when it comes back.</param>
         protected virtual void OnStarted(bool resumed) { }
 
-        /// <summary>Runs when the mural is lost. Pause the mural's own effects here.</summary>
         protected virtual void OnStopped() { }
 
-        /// <summary>Runs at the end of a reset. Put the mural's own effects back here.</summary>
         protected virtual void OnResetState() { }
 
         void StartRunning(bool resumed)

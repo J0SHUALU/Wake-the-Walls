@@ -3,11 +3,6 @@ using WakeTheWalls.Rig;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Makes chosen elements slowly swell and settle, with a slight turn, as if they were breathing,
-    /// for example a flower crown opening and closing. Works on top of any other motion on the layer.
-    /// Which elements breathe is set on the prefab, so the script holds no mural names.
-    /// </summary>
     public class BreatheLayers : MonoBehaviour
     {
         [SerializeField] LayeredMuralExperience experience;
@@ -35,7 +30,6 @@ namespace WakeTheWalls.Murals
                 float factor = 1f + swell * wave;
                 float angle = turnDegrees * Mathf.Sin(Time.time / breathSeconds * Mathf.PI * 2f + i) * wave;
 
-                // Undo last frame's breath before adding this one, so other scripts' scale and turn are kept.
                 layer.Pivot.localScale = layer.Pivot.localScale / applied[i] * factor;
                 layer.Pivot.localRotation = layer.Pivot.localRotation * Quaternion.Euler(0f, 0f, angle - turned[i]);
                 applied[i] = factor;

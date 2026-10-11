@@ -3,11 +3,6 @@ using UnityEngine;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Small white shapes drawn in code for the flying and drifting effects: wings, leaves, petals
-    /// and specks. They are tinted by the sprite renderer, so one shape serves every mural's colours.
-    /// Each shape is made once and shared.
-    /// </summary>
     public static class ShapeSprites
     {
         public enum Shape { ButterflyWing, BirdWing, Leaf, Petal, Speck }
@@ -15,7 +10,6 @@ namespace WakeTheWalls.Murals
         const int Size = 64;
         static readonly Sprite[] cache = new Sprite[5];
 
-        /// <summary>The sprite for a shape, one unit across. Wings have their pivot at the body edge.</summary>
         public static Sprite Get(Shape shape)
         {
             int i = (int)shape;
@@ -31,7 +25,6 @@ namespace WakeTheWalls.Murals
             return cache[i];
         }
 
-        // Each drawer returns the colour of one pixel, u and v from 0 to 1.
         static Sprite Draw(Func<float, float, Color> pixel, Vector2 pivot)
         {
             var tex = new Texture2D(Size, Size, TextureFormat.RGBA32, false) { wrapMode = TextureWrapMode.Clamp };
@@ -42,7 +35,6 @@ namespace WakeTheWalls.Murals
             return Sprite.Create(tex, new Rect(0, 0, Size, Size), pivot, Size);
         }
 
-        // A large upper lobe and a smaller lower lobe, with a dark edge and a pale spot.
         static Color ButterflyWing(float u, float v)
         {
             float inside = Mathf.Max(Lobe(u, v, 0.45f, 0.68f, 0.45f, 0.3f), Lobe(u, v, 0.32f, 0.3f, 0.3f, 0.22f));
@@ -52,7 +44,6 @@ namespace WakeTheWalls.Murals
             return c;
         }
 
-        // A long, swept wing that narrows to a point at the tip.
         static Color BirdWing(float u, float v)
         {
             float centre = 0.5f + 0.18f * u * u;
@@ -61,7 +52,6 @@ namespace WakeTheWalls.Murals
             return new Color(1f, 1f, 1f, Mathf.Clamp01(inside * 4f) * (u < 0.98f ? 1f : 0f));
         }
 
-        // Pointed at both ends with a pale midrib.
         static Color Leaf(float u, float v)
         {
             float x = (u - 0.5f) * 2f, y = (v - 0.5f) * 2f;
@@ -73,7 +63,6 @@ namespace WakeTheWalls.Murals
             return c;
         }
 
-        // Rounded at the top, narrowing to the base.
         static Color Petal(float u, float v)
         {
             float width = 0.42f * Mathf.Sqrt(Mathf.Clamp01(v)) * (1f - 0.5f * v * v);
@@ -83,10 +72,8 @@ namespace WakeTheWalls.Murals
             return c;
         }
 
-        // A soft round dot.
         static Color Speck(float u, float v) => new Color(1f, 1f, 1f, Mathf.Clamp01(Lobe(u, v, 0.5f, 0.5f, 0.5f, 0.5f) * 2f));
 
-        // 1 at the centre of an ellipse, falling to 0 at its edge and below 0 outside.
         static float Lobe(float u, float v, float cx, float cy, float rx, float ry)
         {
             float dx = (u - cx) / rx, dy = (v - cy) / ry;

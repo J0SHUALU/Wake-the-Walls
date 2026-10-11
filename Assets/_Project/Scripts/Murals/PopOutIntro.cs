@@ -7,12 +7,6 @@ using WakeTheWalls.Rig;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Lifts chosen elements of a layered mural off the wall towards the viewer, one after another,
-    /// grows them slightly so they read as coming out, holds them in the air and lays them back down.
-    /// Plays a little after the mural is found and repeats while it stays in view.
-    /// Which elements move is set on the prefab, so the script holds no mural names.
-    /// </summary>
     public class PopOutIntro : MonoBehaviour
     {
         [Serializable]

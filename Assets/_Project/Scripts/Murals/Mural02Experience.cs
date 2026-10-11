@@ -7,13 +7,8 @@ using WakeTheWalls.Rig;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Mural 2: the flowers are the way in. After the shared fade in, the flower layers grow and open,
-    /// then a few blooms grow out of the painted flowers and float towards the viewer in 3D, in the painting's own colours.
-    /// </summary>
     public class Mural02Experience : LayeredMuralExperience
     {
-        /// <summary>One 3D bloom: where it grows from, its colours, and where it floats to.</summary>
         [Serializable]
         public class BloomSpec
         {
@@ -44,7 +39,6 @@ namespace WakeTheWalls.Murals
         Coroutine intro;
         bool introDone;
 
-        /// <summary>The 3D blooms, for interaction scripts on this prefab.</summary>
         public IReadOnlyList<FloatingBloom> Blooms => live;
 
         protected override void OnInitialized()
@@ -100,7 +94,6 @@ namespace WakeTheWalls.Murals
             introDone = true;
         }
 
-        // Swells the flowers from their pivot and lets them settle, as if they are opening.
         IEnumerator GrowPulse(Transform pivot)
         {
             yield return Tween.Scale(pivot, Vector3.one * growScale, growSeconds, Tween.EaseOutCubic);

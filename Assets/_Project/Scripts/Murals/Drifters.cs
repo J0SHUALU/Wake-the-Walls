@@ -4,11 +4,6 @@ using WakeTheWalls.Core;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Lets small shapes drift off a part of the mural and past the viewer: leaves falling from trees,
-    /// petals from a flower crown, or sand blown in gusts. They come out steadily, in gusts, or both,
-    /// while the mural is in view. The area, shape, colours and motion are set on the prefab.
-    /// </summary>
     public class Drifters : MonoBehaviour
     {
         class Piece { public Transform transform; public SpriteRenderer sprite; public Vector3 velocity; public float age, life, spin, phase; }

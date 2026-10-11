@@ -1,15 +1,3 @@
-// Look for 3D content that leaves the wall, so it reads as paint rather than a rendered model.
-// Shading is split into a few flat colour bands with brushy edges, with a thin dark outline.
-// Properties:
-//   _BaseMap / _BaseColor  texture and tint. PaletteTint sets _BaseColor from the mural's palette.
-//   _ShadowColor     colour multiplied into the darkest band
-//   _Bands           number of colour bands (3 or 4 suits the murals)
-//   _BrushNoise      how ragged the band edges are, like dry brush strokes
-//   _BrushScale      size of the brush texture on the object
-//   _LightDir        fixed light direction in world space, so every piece is lit the same way
-//   _FollowSceneLight 0 uses _LightDir, 1 uses the scene's main light direction instead
-//   _OutlineWidth    outline thickness in metres
-//   _OutlineColor    outline colour
 Shader "WakeTheWalls/Painterly"
 {
     Properties
@@ -88,7 +76,6 @@ Shader "WakeTheWalls/Painterly"
                 return frac(p.x * p.y * p.z * (p.x + p.y + p.z));
             }
 
-            // Value noise in object space, stretched along one axis so it reads as strokes.
             float StrokeNoise(float3 p)
             {
                 p *= float3(1.0, 4.0, 1.0);
@@ -123,7 +110,6 @@ Shader "WakeTheWalls/Painterly"
                 float3 n = normalize(input.normalWS);
                 float light = saturate(dot(n, lightDir) * 0.5 + 0.5);
 
-                // Push the band edges around with stroke noise so they look painted, not computed.
                 light += (StrokeNoise(input.positionOS * _BrushScale) - 0.5) * _BrushNoise;
                 float bands = max(_Bands, 2);
                 float band = saturate(floor(saturate(light) * bands) / (bands - 1));
@@ -165,7 +151,6 @@ Shader "WakeTheWalls/Painterly"
                 Varyings output;
                 UNITY_SETUP_INSTANCE_ID(input);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
-                // Push the back faces out along the normal in world space, so the outline is in metres.
                 float3 positionWS = TransformObjectToWorld(input.positionOS.xyz);
                 float3 normalWS = normalize(TransformObjectToWorldNormal(input.normalOS));
                 output.positionCS = TransformWorldToHClip(positionWS + normalWS * _OutlineWidth);

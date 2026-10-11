@@ -7,10 +7,6 @@ using WakeTheWalls.Interaction;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// A tap area over Mural 5's rings. Tapping makes the 3D rings spin faster and spread apart,
-    /// then slow down and settle back into their orbit.
-    /// </summary>
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
     public class RingTapInteraction : MonoBehaviour
     {
@@ -48,7 +44,6 @@ namespace WakeTheWalls.Murals
             used.Invoke(interactionId);
         }
 
-        // Rings above the middle move up, rings below move down, then all drift back.
         IEnumerator SpreadAndSettle(IReadOnlyList<OrbitRing> rings)
         {
             var from = new float[rings.Count];

@@ -1,11 +1,3 @@
-// A band of light that travels across a mural, but only where a painted detail is.
-//   _MaskMap     greyscale mask on the full mural canvas: white where the light may show
-//   _GlowColor   colour of the light, alpha is its strength
-//   _Position    where the band is along the sweep direction, 0 to 1 across the canvas
-//   _Width       half width of the band, in canvas units
-//   _Angle       direction the band travels, in degrees (0 left to right, -90 top to bottom)
-//   _Alpha       overall strength, used to fade the whole effect
-// Blends additively, so the paint underneath brightens instead of being covered.
 Shader "WakeTheWalls/MaskSweep"
 {
     Properties
@@ -97,7 +89,6 @@ Shader "WakeTheWalls/MaskSweep"
                 float along = dot(centred, dir) + 0.5;
                 float across = dot(centred, float2(-dir.y, dir.x));
 
-                // Brushy edge so the band reads as light on paint, not a hard stripe.
                 float wobble = (BrushValueNoise(float2(across * 40.0, along * 4.0)) - 0.5) * _Width;
                 float band = 1.0 - smoothstep(0.0, _Width, abs(along - _Position + wobble));
 

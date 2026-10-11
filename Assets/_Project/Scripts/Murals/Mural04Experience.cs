@@ -6,12 +6,6 @@ using WakeTheWalls.VFX;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Mural 4: the gold lines carry the story. After the shared fade in, the gold lines start to glow,
-    /// then each portrait lifts off the wall in turn while light flows out from it along the lines.
-    /// Tapping a portrait lifts it again. Once every portrait has been opened, the mask's eyes light up
-    /// and the mural completes. Portraits only ever move as whole layers.
-    /// </summary>
     public class Mural04Experience : LayeredMuralExperience
     {
         [Header("Gold lines")]
@@ -39,10 +33,8 @@ namespace WakeTheWalls.Murals
         int nextPortrait;
         bool introDone, eyesAwake;
 
-        /// <summary>The gold line glow, for interaction scripts on this prefab.</summary>
         public MaskGlow GoldLines => goldLines;
 
-        /// <summary>Portrait elements on this mural, for interaction scripts on this prefab.</summary>
         public string[] Portraits => portraits;
 
         protected override void OnInitialized()
@@ -83,7 +75,6 @@ namespace WakeTheWalls.Murals
             if (maskEyes != null) maskEyes.ResetGlow();
         }
 
-        /// <summary>Lifts a portrait when it is tapped, ending the intro. Returns false if it cannot.</summary>
         public bool OpenPortrait(string element)
         {
             if (!IsRunning || !MotionSet.TryGetMotion(element, out LayerMotion motion)) return false;
@@ -94,7 +85,6 @@ namespace WakeTheWalls.Murals
             return true;
         }
 
-        /// <summary>Sends light along the gold lines from a point, 0 to 1 across the mural.</summary>
         public void FlowFrom(Vector2 pointOnMural)
         {
             if (goldLines != null && IsRunning) goldLines.Flow(pointOnMural, flowSeconds);
@@ -113,7 +103,6 @@ namespace WakeTheWalls.Murals
             intro = null;
         }
 
-        // Lifts one portrait, sends light out from it, holds, then settles it back.
         IEnumerator Hold(LayerMotion motion)
         {
             lifted = motion;

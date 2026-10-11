@@ -4,16 +4,6 @@ using WakeTheWalls.Core;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Sends a band of light across a painted detail of the mural, such as gold rings or beads.
-    /// The detail is picked out by a greyscale mask on the full mural canvas, so the light only
-    /// shows on that paint and the paint itself is never covered.
-    /// </summary>
-    /// <remarks>
-    /// Put it on the experience prefab's root, which sits at the centre of the mural. Call
-    /// <see cref="Play"/> from an interaction's Used event. Set <see cref="next"/> to chain a
-    /// second glow that starts when this one has passed, for light that travels on into another detail.
-    /// </remarks>
     public class MaskSweep : MonoBehaviour
     {
         static readonly int MaskMap = Shader.PropertyToID("_MaskMap");
@@ -61,7 +51,6 @@ namespace WakeTheWalls.Murals
             if (sweep == null) Play();
         }
 
-        /// <summary>Sends the light across the detail, then on to <see cref="next"/> if set.</summary>
         public void Play()
         {
             if (experience == null || !experience.IsRunning || mask == null || glowMaterial == null) return;
@@ -88,7 +77,6 @@ namespace WakeTheWalls.Murals
             glow.enabled = true;
             yield return Tween.Value(range.x, range.y, v =>
             {
-                // Stop early if the mural is lost, so no light floats over an empty wall.
                 material.SetFloat(Position, experience.IsRunning ? v : range.y);
             }, seconds, Tween.EaseInOutCubic);
             glow.enabled = false;
@@ -99,7 +87,6 @@ namespace WakeTheWalls.Murals
             next.Play();
         }
 
-        // Start and end of the band along the sweep direction, just outside the region so it enters and leaves cleanly.
         Vector2 SweepRange()
         {
             float angle = direction * Mathf.Deg2Rad;
@@ -114,7 +101,6 @@ namespace WakeTheWalls.Murals
             return new Vector2(min - width * 1.5f, max + width * 1.5f);
         }
 
-        // A quad the size of the whole mural, a hair in front of the wall, drawn on top of every layer.
         void CreateGlow()
         {
             material = new Material(glowMaterial) { name = "MaskSweep" };

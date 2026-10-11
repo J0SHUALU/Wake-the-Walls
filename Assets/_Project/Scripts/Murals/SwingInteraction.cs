@@ -7,15 +7,6 @@ using WakeTheWalls.VFX;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// A tap area over part of a mural that swings one or more layers hard, lets them settle back
-    /// into their idle sway, and can throw out a paint burst and play a sound. Used for gusts
-    /// through trees and swinging jewellery.
-    /// </summary>
-    /// <remarks>
-    /// The tap area is a rectangle in mural space (0 to 1, with 0,0 at the bottom left), so it
-    /// fits the mural at whatever real size the rig is built. It only reacts while the mural is visible.
-    /// </remarks>
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
     public class SwingInteraction : MonoBehaviour
     {
@@ -54,7 +45,6 @@ namespace WakeTheWalls.Murals
             PlaceCollider();
         }
 
-        /// <summary>Fits the box collider to the tap area at the rig's current size.</summary>
         public void PlaceCollider()
         {
             Vector2 size = rig.MuralSize;
@@ -81,7 +71,6 @@ namespace WakeTheWalls.Murals
             while (time < settleSeconds)
             {
                 time += Time.deltaTime;
-                // Ease in over the first fifth of a swing, then die away smoothly.
                 float rise = Mathf.Clamp01(time * swingFrequency * 5f);
                 float decay = Mathf.Exp(-3f * time / settleSeconds);
                 SetExtra(swingDegrees * rise * decay * Mathf.Sin(2f * Mathf.PI * swingFrequency * time));
@@ -91,7 +80,6 @@ namespace WakeTheWalls.Murals
             swing = null;
         }
 
-        // Remember any steady lean already on the layers, so the swing adds to it instead of replacing it.
         void CaptureBase()
         {
             if (swing != null && baseDegrees != null) return;

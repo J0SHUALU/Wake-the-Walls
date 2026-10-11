@@ -4,11 +4,6 @@ using WakeTheWalls.Rig;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Mural 3: the wall opens into the desert. After the shared fade in, sand starts blowing along the
-    /// bottom, the clouds drift slowly across the sky, the plants peel a little off the wall and lean into
-    /// the wind, and the desert floor spreads out past the bottom of the painting onto the ground in front of the viewer.
-    /// </summary>
     public class Mural03Experience : LayeredMuralExperience
     {
         [Header("Wind")]
@@ -68,7 +63,6 @@ namespace WakeTheWalls.Murals
             if (floor != null) floor.Hide();
         }
 
-        // Clouds drift only while the mural is on screen, and pick up where they left off when it comes back.
         void Update()
         {
             if (!IsRunning || driftElements.Length == 0) return;
@@ -90,7 +84,6 @@ namespace WakeTheWalls.Murals
             }
         }
 
-        // Eases the steady lean in or out on every lean element.
         IEnumerator SetLean(float target, float seconds)
         {
             float start = 0f;

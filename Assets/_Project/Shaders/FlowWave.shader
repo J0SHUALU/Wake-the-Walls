@@ -1,14 +1,3 @@
-// Mural layer whose paint gently moves: a slow rippling of the image for leaves, sky, water and fabric.
-// The edges of the cut-out stay where they are; only the paint inside them moves.
-// Properties:
-//   _BaseMap, _BaseColor, _Alpha   as in MuralLayer
-//   _FlowMask      optional greyscale mask: white moves, black stays still (default all white)
-//   _Strength      how far the paint moves, in UV units (0.002 is about 4 px on a 2048 texture)
-//   _Speed         how fast the waves travel
-//   _Frequency     how many waves fit across the canvas
-//   _Direction     direction the waves travel in (x, y)
-//   _EdgeHold      distance from the cut-out edge, in UV units, over which movement fades to zero
-//   _Dissolve ...  brush reveal settings, same as BrushDissolve, so LayerReveal works on this layer too
 Shader "WakeTheWalls/FlowWave"
 {
     Properties
@@ -108,7 +97,6 @@ Shader "WakeTheWalls/FlowWave"
                 return output;
             }
 
-            // Lowest alpha in a small cross around uv, so movement fades out near the cut-out edge.
             half EdgeWeight(float2 uv)
             {
                 if (_EdgeHold <= 0) return 1;
@@ -130,7 +118,6 @@ Shader "WakeTheWalls/FlowWave"
                 float2 dir = normalize(_Direction.xy + 1e-5);
                 float2 side = float2(-dir.y, dir.x);
 
-                // Two crossing waves travelling along dir, so the paint rolls instead of sliding.
                 float phase = dot(uv, dir) * _Frequency - t * 6.2831;
                 float crossPhase = dot(uv, side) * _Frequency * 0.63 + t * 4.1;
                 float2 offset = dir * sin(phase) + side * sin(crossPhase) * 0.6;
@@ -139,7 +126,6 @@ Shader "WakeTheWalls/FlowWave"
                 float2 movedUV = uv + offset * _Strength * weight;
 
                 half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, movedUV) * _BaseColor;
-                // Alpha always comes from the unmoved UV, so the outline of the cut-out never wobbles.
                 color.a = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv).a * _BaseColor.a;
 
                 half visible = BrushVisible(input.rawUV, _Dissolve, _EdgeSoftness, _StrokeScale.xy, _StrokeAngle, _Sweep);
