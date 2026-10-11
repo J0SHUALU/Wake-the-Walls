@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 5563649461233588613}
   - component: {fileID: 7913823731028150729}
   - component: {fileID: 8312437674479700697}
+  - component: {fileID: 7848366319300294646}
   m_Layer: 0
   m_Name: Mural4Experience
   m_TagString: Untagged
@@ -454,6 +455,28 @@ MonoBehaviour:
     bobSpeed: 0.25
     phase: 0.4
   stagger: 0.35
+--- !u!114 &7848366319300294646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610628319135149479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be30d226c3bb24e6d82d23d35ccd40a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.TapMarkers
+  experience: {fileID: 7913823731028150729}
+  ring: {fileID: 21300000, guid: 4b9c91a79aba94d0d9cacbf681024a8e, type: 3}
+  dot: {fileID: 21300000, guid: c7604838912c44be482d0d961fccd5fe, type: 3}
+  ringColour: {r: 0.9, g: 0.16, b: 0.13, a: 1}
+  dotColour: {r: 1, g: 1, b: 1, a: 1}
+  showDelay: 2
+  sizeShare: 0.3
+  sizeLimits: {x: 0.12, y: 0.35}
+  pulseAmount: 0.15
+  pulseSpeed: 1
 --- !u!1 &5567977968222287760
 GameObject:
   m_ObjectHideFlags: 0

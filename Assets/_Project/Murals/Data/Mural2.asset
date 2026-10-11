@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: Mural2
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MuralData
   referenceImageName: Mural2
-  displayName: 
-  location: 
+  displayName: Bloom
+  location: Concrete wall along the covered walkway, beside the brick pillars
   physicalSizeMeters: {x: 3.5, y: 3.312}
-  story: 
+  story: 'A woman framed by a great black circle lifts her hands to a crown of flowers
+    that covers her eyes. A map of Africa rests on her purple top below a beaded
+    collar, while pale modern buildings rise to her left. The painting is about growth:
+    the flowers open, and a few drift off the wall towards you.
+
+
+    Tap a flower
+    to open it, or tap the collar to send light into the map.'
   experiencePrefab: {fileID: 3392714048055523538, guid: 4dbee223760cc44a9984a51ac346f61a, type: 3}
   palette:
   - {r: 0.654, g: 0.603, b: 0.537, a: 1}
