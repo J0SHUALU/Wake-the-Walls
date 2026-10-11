@@ -4,9 +4,8 @@
 //   _BaseMap    the layer texture (a cut-out on the full mural canvas)
 //   _BaseColor  tint, white by default so the art is untouched
 //   _Alpha      overall opacity, used for fades (0 hidden, 1 fully visible)
-//   _Dissolve   brush reveal amount, 0 to 1. Declared here so every layer
-//               material shares the same properties. The brush effect itself
-//               is added in BrushDissolve.
+//   _Dissolve   brush reveal amount, 0 (fully painted) to 1 (hidden). Above 0
+//               the layer shows in rough horizontal brush strokes.
 Shader "WakeTheWalls/MuralLayer"
 {
     Properties
@@ -72,6 +71,19 @@ Shader "WakeTheWalls/MuralLayer"
                 UNITY_VERTEX_OUTPUT_STEREO
             };
 
+            // Brush reveal: streaky value noise across the canvas, so the paint appears in rough
+            // horizontal strokes as _Dissolve goes from 1 (hidden) to 0 (fully painted).
+            float Hash(float2 p) { return frac(sin(dot(p, float2(127.1, 311.7))) * 43758.5453); }
+
+            float Noise(float2 p)
+            {
+                float2 i = floor(p);
+                float2 f = frac(p);
+                f = f * f * (3.0 - 2.0 * f);
+                return lerp(lerp(Hash(i), Hash(i + float2(1, 0)), f.x),
+                            lerp(Hash(i + float2(0, 1)), Hash(i + float2(1, 1)), f.x), f.y);
+            }
+
             Varyings Vert(Attributes input)
             {
                 Varyings output;
@@ -91,6 +103,12 @@ Shader "WakeTheWalls/MuralLayer"
 
                 half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv) * _BaseColor;
                 color.a *= _Alpha;
+                if (_Dissolve > 0.001)
+                {
+                    float2 q = input.uv * float2(6.0, 40.0);
+                    float n = Noise(q) * 0.6 + Noise(q * 2.3 + 7.1) * 0.3 + input.uv.x * 0.1;
+                    color.a *= saturate((n + 0.15 - _Dissolve * 1.3) / 0.12);
+                }
                 return color;
             }
             ENDHLSL

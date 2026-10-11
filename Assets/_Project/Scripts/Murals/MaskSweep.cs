@@ -37,6 +37,11 @@ namespace WakeTheWalls.Murals
         [Tooltip("Distance in front of the wall, in millimetres.")]
         [SerializeField, Range(0f, 10f)] float depthMm = 0.5f;
 
+        [Header("Repeat")]
+        [Tooltip("Plays on its own every this many seconds while the mural is in view. 0 only plays when called.")]
+        [SerializeField, Min(0f)] float repeatEvery;
+        [SerializeField, Min(0f)] float firstDelay = 3f;
+
         [Header("Chain")]
         [Tooltip("Optional glow that starts once this one has passed.")]
         [SerializeField] MaskSweep next;
@@ -45,6 +50,16 @@ namespace WakeTheWalls.Murals
         MeshRenderer glow;
         Material material;
         Coroutine sweep;
+        float nextAuto;
+
+        void Update()
+        {
+            if (repeatEvery <= 0f || experience == null) return;
+            if (!experience.IsRunning) { nextAuto = Time.time + firstDelay; return; }
+            if (Time.time < nextAuto) return;
+            nextAuto = Time.time + repeatEvery;
+            if (sweep == null) Play();
+        }
 
         /// <summary>Sends the light across the detail, then on to <see cref="next"/> if set.</summary>
         public void Play()

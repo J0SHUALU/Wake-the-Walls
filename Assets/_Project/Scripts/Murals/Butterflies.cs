@@ -5,14 +5,16 @@ using WakeTheWalls.Core;
 namespace WakeTheWalls.Murals
 {
     /// <summary>
-    /// Releases small butterflies in the mural's colours from chosen elements. Each one flaps out of
-    /// the wall, wanders towards the viewer and fades away. The wing is drawn in code, so no art is needed.
+    /// Releases small butterflies, or birds, from chosen elements. Each one flaps out of the wall,
+    /// wanders towards the viewer and fades away. The wings are drawn in code, so no art is needed.
     /// Which elements they leave from is set on the prefab, so the script holds no mural names.
     /// </summary>
     public class Butterflies : MonoBehaviour
     {
         [SerializeField] LayeredMuralExperience experience;
         [SerializeField] string[] fromElements = new string[0];
+        [Tooltip("Butterfly wings, or bird wings for a small bird.")]
+        [SerializeField] ShapeSprites.Shape shape = ShapeSprites.Shape.ButterflyWing;
         [Tooltip("Wing colours. Uses the mural palette when empty.")]
         [SerializeField] Color[] colours = new Color[0];
         [SerializeField] float startDelay = 4f;
@@ -24,7 +26,6 @@ namespace WakeTheWalls.Murals
         [Tooltip("How far towards the viewer they wander, in metres.")]
         [SerializeField] float outDistance = 1.2f;
 
-        static Sprite wing;
         Transform flock;
         Coroutine loop;
 
@@ -106,48 +107,16 @@ namespace WakeTheWalls.Murals
             if (body != null) Destroy(body.gameObject);
         }
 
-        static Transform AddWing(Transform body, Color colour, float yaw)
+        Transform AddWing(Transform body, Color colour, float yaw)
         {
             var go = new GameObject("Wing");
             go.transform.SetParent(body, false);
             go.transform.localRotation = Quaternion.Euler(0f, yaw, 0f);
             var sr = go.AddComponent<SpriteRenderer>();
-            sr.sprite = Wing();
+            sr.sprite = ShapeSprites.Get(shape);
             sr.color = colour;
             sr.sortingOrder = 520;
             return go.transform;
-        }
-
-        // A wing made of a large upper lobe and a smaller lower lobe, with a dark edge and a pale spot.
-        static Sprite Wing()
-        {
-            if (wing != null) return wing;
-            const int size = 64;
-            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false) { wrapMode = TextureWrapMode.Clamp };
-            for (int y = 0; y < size; y++)
-            for (int x = 0; x < size; x++)
-            {
-                float u = x / (float)size, v = y / (float)size;
-                float upper = Lobe(u, v, 0.45f, 0.68f, 0.45f, 0.3f);
-                float lower = Lobe(u, v, 0.32f, 0.3f, 0.3f, 0.22f);
-                float inside = Mathf.Max(upper, lower);
-                float edge = Mathf.Clamp01((0.25f - inside) * 4f);
-                float spot = Lobe(u, v, 0.7f, 0.75f, 0.08f, 0.07f) > 0f ? 1f : 0f;
-                float shade = Mathf.Lerp(1f, 0.15f, edge);
-                Color c = Color.Lerp(new Color(shade, shade, shade), Color.white, spot * 0.8f);
-                c.a = Mathf.Clamp01(inside * 6f);
-                tex.SetPixel(x, y, c);
-            }
-            tex.Apply();
-            wing = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0f, 0.5f), size);
-            return wing;
-        }
-
-        // 1 at the centre of an ellipse, falling to 0 at its edge and below 0 outside.
-        static float Lobe(float u, float v, float cx, float cy, float rx, float ry)
-        {
-            float dx = (u - cx) / rx, dy = (v - cy) / ry;
-            return 1f - Mathf.Sqrt(dx * dx + dy * dy);
         }
     }
 }
