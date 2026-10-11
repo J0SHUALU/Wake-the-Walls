@@ -8,11 +8,6 @@ using WakeTheWalls.Rig;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// When a tap area is tapped, copies of the linked elements jump out of the wall at the viewer,
-    /// spin, hang in the air for a moment and fly back into their painted spot.
-    /// Which tap area throws which elements is set on the prefab, so the script holds no mural names.
-    /// </summary>
     public class TapJumpOut : MonoBehaviour
     {
         [Serializable]

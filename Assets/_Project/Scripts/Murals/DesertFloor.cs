@@ -4,15 +4,6 @@ using WakeTheWalls.Core;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// A painted floor that spreads out from the bottom edge of a mural onto the ground in front of
-    /// the viewer, brushed on with the brush dissolve so it looks like the painting is spilling out.
-    /// </summary>
-    /// <remarks>
-    /// Uses the BrushDissolve material in a flat colour. The floor lies at the mural's bottom edge,
-    /// a little wider than the mural, and reaches <see cref="depth"/> metres towards the viewer
-    /// (the shared limit is 1.5 m).
-    /// </remarks>
     public class DesertFloor : MonoBehaviour
     {
         static readonly int Dissolve = Shader.PropertyToID("_Dissolve");
@@ -30,10 +21,8 @@ namespace WakeTheWalls.Murals
         Coroutine spread;
         float dissolve = 1f;
 
-        /// <summary>True once the floor has started spreading out.</summary>
         public bool IsOut { get; private set; }
 
-        /// <summary>Builds the floor along the bottom of a mural of this size. Call once.</summary>
         public void Build(Vector2 muralSize)
         {
             material = new Material(brushMaterial) { name = "DesertFloor" };
@@ -46,7 +35,6 @@ namespace WakeTheWalls.Murals
             Destroy(quad.GetComponent<Collider>());
             quad.name = "Floor";
             quad.transform.SetParent(transform, false);
-            // Lie flat, starting at the wall's bottom edge and reaching out towards the viewer (-Z).
             quad.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
             quad.transform.localPosition = new Vector3(0f, -muralSize.y * 0.5f, -depth * 0.5f);
             quad.transform.localScale = new Vector3(muralSize.x * (1f + extraWidth), depth, 1f);
@@ -61,21 +49,18 @@ namespace WakeTheWalls.Murals
             if (material != null) Destroy(material);
         }
 
-        /// <summary>Brushes the floor out from the wall.</summary>
         public void SpreadOut()
         {
             IsOut = true;
             Animate(spreadEnd, spreadSeconds);
         }
 
-        /// <summary>Wipes the floor back into the wall.</summary>
         public void PullBack(float seconds = 0.8f)
         {
             IsOut = false;
             Animate(1f, seconds);
         }
 
-        /// <summary>Hides the floor at once. Use only while the mural is out of view.</summary>
         public void Hide()
         {
             if (spread != null) StopCoroutine(spread);

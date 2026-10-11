@@ -3,15 +3,6 @@ using UnityEngine;
 
 namespace WakeTheWalls.Rig
 {
-    /// <summary>
-    /// Builds a mural out of flat layers: the filled background flush on the wall, then one
-    /// <see cref="MuralLayer"/> per entry in the mural's layers manifest.
-    /// </summary>
-    /// <remarks>
-    /// Add it to a child of an experience prefab, assign the manifest, the textures and the
-    /// MuralLayer material, then call <see cref="Build"/> with the mural's real size.
-    /// Textures are matched to manifest entries by file name, so the list can be in any order.
-    /// </remarks>
     public class LayeredMuralRig : MonoBehaviour
     {
         [Tooltip("The mural's muralN_layers.json file.")]
@@ -26,22 +17,14 @@ namespace WakeTheWalls.Rig
         readonly Dictionary<string, MuralLayer> byElement = new Dictionary<string, MuralLayer>();
         readonly List<MuralLayer> layers = new List<MuralLayer>();
 
-        /// <summary>The filled background layer, flush with the wall.</summary>
         public MuralLayer Background { get; private set; }
 
-        /// <summary>The cut-out layers, back to front. Does not include the background.</summary>
         public IReadOnlyList<MuralLayer> Layers => layers;
 
-        /// <summary>Real size of the mural in metres the rig was last built at.</summary>
         public Vector2 MuralSize { get; private set; }
 
-        /// <summary>True once <see cref="Build"/> has run.</summary>
         public bool IsBuilt => Background != null;
 
-        /// <summary>
-        /// Builds (or rebuilds) the background and every layer at the given real size.
-        /// </summary>
-        /// <param name="muralSize">Width and height of the mural in metres, from MuralData.</param>
         public void Build(Vector2 muralSize)
         {
             Clear();
@@ -67,14 +50,11 @@ namespace WakeTheWalls.Rig
             }
         }
 
-        /// <summary>Finds a layer by its element name from the manifest, for example "tree_left".</summary>
-        /// <returns>True if the layer exists.</returns>
         public bool TryGetLayer(string element, out MuralLayer layer)
         {
             return byElement.TryGetValue(element, out layer);
         }
 
-        /// <summary>Sets the opacity of the background and every layer at once.</summary>
         public void SetAlpha(float value)
         {
             if (Background != null) Background.SetAlpha(value);

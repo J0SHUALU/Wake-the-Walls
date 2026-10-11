@@ -4,11 +4,6 @@ using WakeTheWalls.Core;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Releases small butterflies, or birds, from chosen elements. Each one flaps out of the wall,
-    /// wanders towards the viewer and fades away. The wings are drawn in code, so no art is needed.
-    /// Which elements they leave from is set on the prefab, so the script holds no mural names.
-    /// </summary>
     public class Butterflies : MonoBehaviour
     {
         [SerializeField] LayeredMuralExperience experience;

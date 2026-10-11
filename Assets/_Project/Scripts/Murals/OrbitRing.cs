@@ -5,11 +5,6 @@ using WakeTheWalls.VFX;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// One painted ring that becomes a real 3D ring. It starts flat on the wall, tilted so that from the
-    /// front it covers its painted ellipse exactly, then gains depth as it lifts off the wall and keeps
-    /// turning and gently rocking, so it reads as orbiting the figure's head.
-    /// </summary>
     public class OrbitRing : MonoBehaviour
     {
         static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
@@ -20,16 +15,10 @@ namespace WakeTheWalls.Murals
         float lift, size, spinBoost = 1f, spread;
         Coroutine liftTween, sizeTween, boostTween;
 
-        /// <summary>True while the ring turns.</summary>
         public bool IsPlaying { get; set; }
 
-        /// <summary>True once the ring has lifted off the wall.</summary>
         public bool IsOut => lift > 0.99f;
 
-        /// <summary>Builds the ring at its painted spot. It starts hidden.</summary>
-        /// <param name="centre">Centre of the painted ellipse in mural space, metres.</param>
-        /// <param name="radius">Half the painted ellipse's width, metres.</param>
-        /// <param name="heightRatio">Painted ellipse height divided by its width.</param>
         public void Build(Material material, Color colour, Vector3 centre, float radius, float thickness,
             float heightRatio, float depthRatio, float spinDegreesPerSecond, float rock, float phaseOffset)
         {
@@ -55,27 +44,21 @@ namespace WakeTheWalls.Murals
             ResetRing();
         }
 
-        /// <summary>Appears on the wall over the painted ring.</summary>
         public Coroutine Show(float seconds) => Restart(ref sizeTween, Tween.Value(size, 1f, SetSize, seconds, Tween.EaseOutCubic));
 
-        /// <summary>Shrinks away, for when the mural is lost.</summary>
         public Coroutine Hide(float seconds) => Restart(ref sizeTween, Tween.Value(size, 0f, SetSize, seconds));
 
-        /// <summary>Lifts off the wall into its orbit.</summary>
         public Coroutine LiftOut(float seconds) => Restart(ref liftTween, Tween.Value(lift, 1f, SetLift, seconds, Tween.EaseInOutCubic));
 
-        /// <summary>Turns faster for a while, then eases back to the normal speed.</summary>
         public void Boost(float factor, float seconds) =>
             Restart(ref boostTween, Tween.Value(factor, 1f, v => spinBoost = v, seconds, Tween.EaseOutCubic));
 
-        /// <summary>Moves the ring up or down from its orbit, in metres, for interactions that spread the rings.</summary>
         public float Spread
         {
             get => spread;
             set { spread = value; SetLift(lift); }
         }
 
-        /// <summary>Back flat on the wall, hidden and still.</summary>
         public void ResetRing()
         {
             StopAllCoroutines();
@@ -96,7 +79,6 @@ namespace WakeTheWalls.Murals
             tilt.localRotation = Quaternion.Euler(tiltDegrees + Mathf.Sin(t) * rock, 0f, Mathf.Cos(t) * rock * 0.5f);
         }
 
-        // 0 is flat on the wall over the painting, 1 is out in its orbit with full depth.
         void SetLift(float value)
         {
             lift = value;

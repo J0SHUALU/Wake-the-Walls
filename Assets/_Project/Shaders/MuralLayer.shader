@@ -1,11 +1,3 @@
-// Flat mural layer for the layered rig.
-// Unlit and transparent, so a layer on screen looks exactly like its PNG.
-// Properties:
-//   _BaseMap    the layer texture (a cut-out on the full mural canvas)
-//   _BaseColor  tint, white by default so the art is untouched
-//   _Alpha      overall opacity, used for fades (0 hidden, 1 fully visible)
-//   _Dissolve   brush reveal amount, 0 (fully painted) to 1 (hidden). Above 0
-//               the layer shows in rough horizontal brush strokes.
 Shader "WakeTheWalls/MuralLayer"
 {
     Properties
@@ -31,8 +23,6 @@ Shader "WakeTheWalls/MuralLayer"
             Name "MuralLayer"
             Tags { "LightMode" = "UniversalForward" }
 
-            // Standard alpha blending. Layers do not write depth, so they never
-            // hide each other by accident. Draw order decides what is on top.
             Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
             ZTest LEqual
@@ -48,7 +38,6 @@ Shader "WakeTheWalls/MuralLayer"
             TEXTURE2D(_BaseMap);
             SAMPLER(sampler_BaseMap);
 
-            // Kept in UnityPerMaterial so the SRP Batcher can batch layers together.
             CBUFFER_START(UnityPerMaterial)
                 float4 _BaseMap_ST;
                 half4 _BaseColor;
@@ -71,8 +60,6 @@ Shader "WakeTheWalls/MuralLayer"
                 UNITY_VERTEX_OUTPUT_STEREO
             };
 
-            // Brush reveal: streaky value noise across the canvas, so the paint appears in rough
-            // horizontal strokes as _Dissolve goes from 1 (hidden) to 0 (fully painted).
             float Hash(float2 p) { return frac(sin(dot(p, float2(127.1, 311.7))) * 43758.5453); }
 
             float Noise(float2 p)

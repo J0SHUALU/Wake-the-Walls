@@ -6,10 +6,6 @@ using WakeTheWalls.Murals;
 
 namespace WakeTheWalls.UI
 {
-    /// <summary>
-    /// The paused state. When the mural is lost it dims the HUD and shows the paused message
-    /// with "I'm back on it" and "Scan a different mural". It hides again when the mural is found.
-    /// </summary>
     public class TrackingLostOverlay : UIScreen
     {
         [SerializeField] MuralLibrary library;
@@ -51,14 +47,12 @@ namespace WakeTheWalls.UI
             GameEvents.StateChanged -= HandleStateChanged;
         }
 
-        /// <summary>Closes the message and brings the HUD back while the user re-aims.</summary>
         public void Resume()
         {
             Hide();
             if (hud != null) hud.SetDimmed(false);
         }
 
-        /// <summary>Leaves this mural and goes back to scanning.</summary>
         public void ScanOther()
         {
             if (stateMachine == null) stateMachine = FindAnyObjectByType<AppStateMachine>();

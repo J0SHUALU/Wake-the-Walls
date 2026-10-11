@@ -5,11 +5,6 @@ using WakeTheWalls.Interaction;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Test experience that lays a see-through copy of the mural photo over the painting at real size,
-    /// with an outline and a centre cross. Use it to check that position and scale line up before
-    /// building the real experience. Tapping the overlay logs the tap and gives a small pulse.
-    /// </summary>
     public class AlignmentTestExperience : MuralExperience
     {
         static readonly int BaseMap = Shader.PropertyToID("_BaseMap");
@@ -55,16 +50,12 @@ namespace WakeTheWalls.Murals
             CreateLine("CentreV", false, width, new[] { new Vector3(0f, -arm), new Vector3(0f, arm) });
         }
 
-        /// <summary>Fades the overlay in.</summary>
         public override void OnFound() => FadeTo(overlayAlpha);
 
-        /// <summary>Fades the overlay out while the mural is out of view.</summary>
         public override void OnLost() => FadeTo(0f);
 
-        /// <summary>Fades the overlay back in.</summary>
         public override void OnResume() => FadeTo(overlayAlpha);
 
-        /// <summary>Hides the overlay so OnFound can play again.</summary>
         public override void ResetExperience()
         {
             base.ResetExperience();
@@ -109,7 +100,6 @@ namespace WakeTheWalls.Murals
             line.widthMultiplier = width;
             line.sharedMaterial = lineMaterial;
             line.startColor = line.endColor = lineColor;
-            // Sit just in front of the overlay so the lines are not hidden by it.
             for (int i = 0; i < points.Length; i++) points[i].z = -0.002f;
             line.positionCount = points.Length;
             line.SetPositions(points);

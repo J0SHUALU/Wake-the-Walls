@@ -1,13 +1,3 @@
-// Mural layer that can appear or disappear as if painted on or wiped off with a brush.
-// Same look as MuralLayer when _Dissolve is 0: unlit, transparent, no lighting.
-// Properties:
-//   _BaseMap, _BaseColor, _Alpha   as in MuralLayer
-//   _Dissolve       0 fully visible, 1 fully gone. Animate it with LayerReveal.
-//   _EdgeSoftness   width of the soft edge between painted and bare
-//   _StrokeScale    noise size along (x) and across (y) the brush strokes
-//   _StrokeAngle    direction of the strokes and of the sweep, in degrees
-//   _Sweep          how much the reveal travels in the stroke direction (0 random, 1 a clean wipe)
-//   _EdgeColor      colour blended into the edge band, alpha is its strength
 Shader "WakeTheWalls/BrushDissolve"
 {
     Properties
@@ -88,7 +78,6 @@ Shader "WakeTheWalls/BrushDissolve"
                 return frac(p.x * p.y);
             }
 
-            // Smooth value noise in the range 0 to 1.
             float ValueNoise(float2 p)
             {
                 float2 i = floor(p);
@@ -101,7 +90,6 @@ Shader "WakeTheWalls/BrushDissolve"
                 return lerp(lerp(a, b, u.x), lerp(c, d, u.x), u.y);
             }
 
-            // Streaky noise that looks like dry brush strokes: long along the stroke, thin across it.
             float StrokeNoise(float2 p)
             {
                 float n = ValueNoise(p) * 0.55;
@@ -130,7 +118,6 @@ Shader "WakeTheWalls/BrushDissolve"
 
                 half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv) * _BaseColor;
 
-                // Rotate the canvas so x runs along the strokes.
                 float angle = radians(_StrokeAngle);
                 float2 dir = float2(cos(angle), sin(angle));
                 float2 centred = input.rawUV - 0.5;
@@ -140,12 +127,10 @@ Shader "WakeTheWalls/BrushDissolve"
                 float sweep = saturate(local.x + 0.5);
                 float mask = lerp(noise, sweep, _Sweep);
 
-                // Threshold moves from just below 0 to just above 1, so 0 and 1 are fully on and fully off.
                 float soft = max(_EdgeSoftness, 1e-4);
                 float threshold = lerp(-soft, 1.0 + soft, _Dissolve);
                 float visible = smoothstep(threshold - soft, threshold + soft, mask);
 
-                // Paint colour on the edge band only.
                 float edge = 1.0 - abs(visible * 2.0 - 1.0);
                 color.rgb = lerp(color.rgb, _EdgeColor.rgb, edge * _EdgeColor.a);
 

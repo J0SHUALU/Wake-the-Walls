@@ -6,11 +6,6 @@ using WakeTheWalls.Rig;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Sends small copies of chosen elements on a 3D loop in front of the mural, so pieces of the
-    /// painting circle towards the viewer and back while it is in view.
-    /// Which elements orbit is set on the prefab, so the script holds no mural names.
-    /// </summary>
     public class OrbitAround : MonoBehaviour
     {
         [SerializeField] LayeredMuralExperience experience;

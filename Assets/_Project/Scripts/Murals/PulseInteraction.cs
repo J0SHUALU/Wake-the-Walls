@@ -8,10 +8,6 @@ using WakeTheWalls.VFX;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// A tap area that makes one or more layers swell open from their pivot and settle back, while a
-    /// burst of paint (petals, sparks) flies out towards the viewer in chosen colours.
-    /// </summary>
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
     public class PulseInteraction : MonoBehaviour
     {

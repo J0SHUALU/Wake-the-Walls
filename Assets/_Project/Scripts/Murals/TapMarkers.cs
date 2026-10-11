@@ -6,12 +6,6 @@ using WakeTheWalls.Interaction;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Shows a gently pulsing ring on every tappable area of a mural, so the user can see where to tap.
-    /// It finds the trigger colliders with an <see cref="Interactable"/> under the experience once the
-    /// intro has played, places a marker at the centre of each, and fades the markers out while the
-    /// mural is lost. Put it on the root of a mural's experience prefab.
-    /// </summary>
     public class TapMarkers : MonoBehaviour
     {
         [SerializeField] MuralExperience experience;
@@ -104,7 +98,6 @@ namespace WakeTheWalls.Murals
             sr.sprite = sprite;
             sr.color = colour;
             sr.sortingOrder = 500 + order;
-            // Normalise the sprite to one unit wide, so the parent's scale sets the marker width in metres.
             float spriteWidth = sprite != null ? sprite.bounds.size.x : 1f;
             go.transform.localScale = Vector3.one * (scale / spriteWidth);
             return sr;

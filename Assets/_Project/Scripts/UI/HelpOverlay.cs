@@ -4,11 +4,6 @@ using WakeTheWalls.Core;
 
 namespace WakeTheWalls.UI
 {
-    /// <summary>
-    /// A short how-to opened from the HUD Help button or the start screen's How it works link:
-    /// scan the whole wall, tap the parts that move, and what the four buttons do.
-    /// The sheet fades and slides up over a soft dark backdrop; tapping the backdrop or Got it closes it.
-    /// </summary>
     public class HelpOverlay : UIScreen
     {
         [SerializeField] RectTransform sheet;
@@ -40,10 +35,8 @@ namespace WakeTheWalls.UI
             GameEvents.MuralLost -= HandleMuralLost;
         }
 
-        // The paused message takes over when the mural is lost, so the how-to steps aside.
         void HandleMuralLost(Murals.MuralData mural) => Hide();
 
-        // The how-to belongs to the screen it was opened from, so close it when the app moves on.
         void HandleStateChanged(AppState state) => Hide();
 
         protected override void OnShowing()

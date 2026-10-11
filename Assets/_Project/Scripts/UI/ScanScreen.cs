@@ -7,11 +7,6 @@ using WakeTheWalls.Murals;
 
 namespace WakeTheWalls.UI
 {
-    /// <summary>
-    /// The scanning screen: a back button, the stamps count, the gold scan frame with a softly
-    /// pulsing centre ring, and a bottom card with the instructions. If no mural is found within
-    /// a few seconds an extra hint fades in. Space for the hint is reserved so nothing jumps.
-    /// </summary>
     public class ScanScreen : UIScreen
     {
         [SerializeField] MuralLibrary library;
@@ -43,7 +38,6 @@ namespace WakeTheWalls.UI
             if (hint != null) hint.alpha = 0f;
         }
 
-        /// <summary>Returns to the start screen.</summary>
         public void GoBack()
         {
             if (stateMachine == null) stateMachine = FindAnyObjectByType<AppStateMachine>();

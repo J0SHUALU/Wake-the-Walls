@@ -6,11 +6,6 @@ using WakeTheWalls.Murals;
 
 namespace WakeTheWalls.Audio
 {
-    /// <summary>
-    /// Plays each mural's ambience. It starts on MuralFound, crossfades when a different mural is found,
-    /// fades out and pauses on MuralLost, and fades back in from the same spot when the mural is found again.
-    /// Leaving the experience for Start or Scanning fades it out. Uses two looping sources for the crossfade.
-    /// </summary>
     public partial class AudioManager : MonoBehaviour
     {
         [SerializeField, Range(0f, 1f)] float ambienceVolume = 0.7f;
@@ -21,17 +16,14 @@ namespace WakeTheWalls.Audio
 
         static bool muted;
 
-        /// <summary>True while all app sound is muted. The choice lasts for the session.</summary>
         public static bool IsMuted => muted;
 
-        /// <summary>Raised with the new state whenever sound is muted or unmuted.</summary>
         public static event Action<bool> MuteChanged;
 
         AudioSource[] sources;
         Coroutine[] fades;
         int active;
 
-        /// <summary>The ambience clip currently playing or paused, if any.</summary>
         public AudioClip CurrentAmbience => sources[active].clip;
 
         void Awake()
@@ -58,7 +50,6 @@ namespace WakeTheWalls.Audio
             GameEvents.InteractableTapped -= PlayTap;
         }
 
-        /// <summary>Mutes or unmutes every sound in the app, including the murals' own effects.</summary>
         public static void SetMuted(bool value)
         {
             muted = value;
@@ -66,10 +57,8 @@ namespace WakeTheWalls.Audio
             MuteChanged?.Invoke(muted);
         }
 
-        /// <summary>Flips mute on or off. Wired to the HUD Sound button.</summary>
         public void ToggleMute() => SetMuted(!muted);
 
-        // A fresh app launch always starts with sound on.
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void ResetMute()
         {
@@ -85,12 +74,10 @@ namespace WakeTheWalls.Audio
 
             if (clip != null && clip == current.clip)
             {
-                // Same mural found again: carry on from where it paused.
                 FadeTo(active, ambienceVolume, fadeDuration, false);
                 return;
             }
 
-            // A different mural (or none): fade the old one out and the new one in at the same time.
             FadeTo(active, 0f, crossfadeDuration, true);
             if (clip == null) return;
 
@@ -109,7 +96,6 @@ namespace WakeTheWalls.Audio
             if (state == AppState.Start || state == AppState.Scanning) FadeTo(active, 0f, fadeDuration, true);
         }
 
-        // Fades one source to a volume. At zero it pauses, or stops and forgets its clip when told to.
         void FadeTo(int index, float target, float duration, bool stopWhenSilent)
         {
             AudioSource source = sources[index];

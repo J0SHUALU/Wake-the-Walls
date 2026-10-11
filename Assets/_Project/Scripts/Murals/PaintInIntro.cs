@@ -5,11 +5,6 @@ using WakeTheWalls.Rig;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// The first time a mural is found, it paints itself in with brush strokes: the background first,
-    /// then each element in drawing order. Uses the brush reveal in the MuralLayer shader.
-    /// Coming back to a mural after losing it just fades it in as usual.
-    /// </summary>
     public class PaintInIntro : MonoBehaviour
     {
         [SerializeField] LayeredMuralExperience experience;

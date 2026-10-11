@@ -5,14 +5,6 @@ using WakeTheWalls.Core;
 
 namespace WakeTheWalls.Rig
 {
-    /// <summary>
-    /// Paints a mural layer on or wipes it off with the brush dissolve, so nothing ever pops in or out.
-    /// Add it to the same GameObject as the <see cref="MuralLayer"/>.
-    /// </summary>
-    /// <remarks>
-    /// The layer's material must use the WakeTheWalls/BrushDissolve shader (BrushDissolve.mat),
-    /// otherwise the dissolve value has no visible effect. Transitions last 0.6 to 1.5 seconds.
-    /// </remarks>
     [RequireComponent(typeof(MuralLayer))]
     public class LayerReveal : MonoBehaviour
     {
@@ -26,16 +18,12 @@ namespace WakeTheWalls.Rig
         MuralLayer layer;
         Coroutine running;
 
-        /// <summary>Raised when a reveal finishes.</summary>
         public event Action Revealed;
 
-        /// <summary>Raised when a hide finishes.</summary>
         public event Action Hidden;
 
-        /// <summary>True when the layer is fully painted on, or on its way there.</summary>
         public bool IsShown { get; private set; }
 
-        /// <summary>True while a reveal or hide is playing.</summary>
         public bool IsAnimating => running != null;
 
         MuralLayer Layer => layer != null ? layer : layer = GetComponent<MuralLayer>();
@@ -49,15 +37,10 @@ namespace WakeTheWalls.Rig
             if (startHidden && !IsShown && !IsAnimating) SetShown(false);
         }
 
-        /// <summary>Paints the layer on with a brush sweep.</summary>
-        /// <param name="seconds">Optional length, clamped to 0.6 to 1.5 s. Uses the Inspector value when left out.</param>
         public Coroutine Reveal(float seconds = -1f) => Play(true, seconds);
 
-        /// <summary>Wipes the layer off with a brush sweep.</summary>
-        /// <param name="seconds">Optional length, clamped to 0.6 to 1.5 s. Uses the Inspector value when left out.</param>
         public Coroutine Hide(float seconds = -1f) => Play(false, seconds);
 
-        /// <summary>Jumps straight to shown or hidden with no animation. Only use it while the mural is out of view.</summary>
         public void SetShown(bool shown)
         {
             Stop();

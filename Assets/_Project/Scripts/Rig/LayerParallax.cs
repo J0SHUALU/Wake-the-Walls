@@ -2,17 +2,6 @@ using UnityEngine;
 
 namespace WakeTheWalls.Rig
 {
-    /// <summary>
-    /// Makes the layers of a <see cref="LayeredMuralRig"/> separate when the viewer walks sideways,
-    /// by offsetting each layer as if it sat further from the wall than it really does.
-    /// </summary>
-    /// <remarks>
-    /// Layers are only 2 to 5 mm off the wall, so their real parallax is too small to see.
-    /// Each frame this uses the camera's angle to the mural centre to work out how far a layer
-    /// would slide if its depth were multiplied by <c>depthScale</c>, and shifts it in X and Y.
-    /// Seen straight on from the centre the shift is zero, so the layers sit exactly on the paint.
-    /// It only touches X and Y, so peeling along Z keeps working at the same time.
-    /// </remarks>
     [RequireComponent(typeof(LayeredMuralRig))]
     public class LayerParallax : MonoBehaviour
     {
@@ -30,7 +19,6 @@ namespace WakeTheWalls.Rig
 
         LayeredMuralRig rig;
 
-        /// <summary>Turns the effect on or off. Layers ease back to centre when it is off.</summary>
         public bool Active { get; set; } = true;
 
         void Awake()
@@ -44,7 +32,6 @@ namespace WakeTheWalls.Rig
             Camera cam = viewCamera != null ? viewCamera : Camera.main;
             if (cam == null) return;
 
-            // Camera position in the rig's space: the wall is the XY plane, the viewer is at -Z.
             Vector3 eye = transform.InverseTransformPoint(cam.transform.position);
             float blend = 1f - Mathf.Exp(-followSpeed * Time.deltaTime);
 
@@ -58,7 +45,6 @@ namespace WakeTheWalls.Rig
             }
         }
 
-        // Shift that makes the layer look depthScale times deeper, from the camera's angle to the mural centre.
         Vector2 OffsetFor(MuralLayer layer, Vector3 eye)
         {
             float viewerDistance = -eye.z;

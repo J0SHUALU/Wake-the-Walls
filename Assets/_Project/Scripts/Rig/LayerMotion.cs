@@ -4,16 +4,6 @@ using WakeTheWalls.Core;
 
 namespace WakeTheWalls.Rig
 {
-    /// <summary>
-    /// Gentle idle motion for one mural layer: a sway that rotates the element around its pivot,
-    /// plus a small vertical bob. Add it to the same GameObject as the <see cref="MuralLayer"/>.
-    /// </summary>
-    /// <remarks>
-    /// Motion fades in and out through <see cref="Weight"/>, so starting or stopping never snaps.
-    /// Use a different phase on each layer so they do not move in step.
-    /// <see cref="Peel"/> lifts the whole layer off the wall towards the viewer and
-    /// <see cref="Return"/> lays it back down; sway and bob keep running while it is lifted.
-    /// </remarks>
     [RequireComponent(typeof(MuralLayer))]
     public class LayerMotion : MonoBehaviour
     {
@@ -34,7 +24,6 @@ namespace WakeTheWalls.Rig
         [SerializeField, Range(0f, 1f)] float phase;
         [SerializeField] bool playOnStart;
 
-        /// <summary>Furthest a layer may peel off the wall, in metres.</summary>
         public const float MaxPeelMeters = 0.3f;
 
         const float MinTransition = 0.6f;
@@ -47,26 +36,20 @@ namespace WakeTheWalls.Rig
         bool playing;
         Vector2 extraOffset;
 
-        /// <summary>How much of the motion is applied, 0 at rest to 1 full.</summary>
         public float Weight { get; private set; }
 
-        /// <summary>Extra rotation in degrees added on top of the sway, for gusts and pushes from interactions.</summary>
         public float ExtraDegrees { get; set; }
 
-        /// <summary>Extra sideways and vertical offset in metres added on top of the bob, for drifting elements like clouds.</summary>
         public Vector2 ExtraOffset
         {
             get => extraOffset;
             set { extraOffset = value; ApplyPose(); }
         }
 
-        /// <summary>How far the layer is currently lifted off its resting depth, in metres.</summary>
         public float PeelDistance => Layer != null ? -Layer.transform.localPosition.z - Layer.RestDepth : 0f;
 
-        /// <summary>The layer this component moves.</summary>
         public MuralLayer Layer => layer != null ? layer : layer = GetComponent<MuralLayer>();
 
-        /// <summary>Sets the motion values from code, for layers the rig creates at runtime.</summary>
         public void Configure(float swayDegrees, float swaySpeed, float bobMeters, float bobSpeed, float phase)
         {
             this.swayDegrees = swayDegrees;
@@ -81,37 +64,27 @@ namespace WakeTheWalls.Rig
             if (playOnStart) Play();
         }
 
-        /// <summary>Starts or continues the motion, easing it in.</summary>
         public void Play(float duration = Tween.DefaultDuration)
         {
             playing = true;
             FadeWeight(1f, duration);
         }
 
-        /// <summary>Eases the motion out and holds the layer at rest. <see cref="Play"/> continues from here.</summary>
         public void Pause(float duration = Tween.DefaultDuration)
         {
             FadeWeight(0f, duration, () => playing = false);
         }
 
-        /// <summary>
-        /// Lifts the layer straight out of the wall towards the viewer (along -Z).
-        /// </summary>
-        /// <param name="distance">Metres in front of the resting depth, clamped to 0.3 m.</param>
-        /// <param name="duration">Seconds, clamped to the 0.6 to 1.5 s transition range.</param>
         public void Peel(float distance, float duration = Tween.DefaultDuration)
         {
             MoveToDepth(Layer.RestDepth + Mathf.Clamp(distance, 0f, MaxPeelMeters), duration, Tween.EaseOutCubic);
         }
 
-        /// <summary>Lays the layer back down at its resting depth on the wall.</summary>
-        /// <param name="duration">Seconds, clamped to the 0.6 to 1.5 s transition range.</param>
         public void Return(float duration = Tween.DefaultDuration)
         {
             MoveToDepth(Layer.RestDepth, duration, Tween.EaseInOutCubic);
         }
 
-        /// <summary>Stops at once and puts the layer back at rest on the wall. Use only when it is hidden.</summary>
         public void ResetMotion()
         {
             if (weightTween != null) StopCoroutine(weightTween);
@@ -129,7 +102,6 @@ namespace WakeTheWalls.Rig
             if (peelTween != null) StopCoroutine(peelTween);
             duration = Mathf.Clamp(duration, MinTransition, MaxTransition);
             Transform t = Layer.transform;
-            // Only Z changes, so parallax can keep offsetting X and Y while the layer peels.
             peelTween = StartCoroutine(Tween.Value(t.localPosition.z, -depth,
                 z => t.localPosition = new Vector3(t.localPosition.x, t.localPosition.y, z), duration, ease));
         }

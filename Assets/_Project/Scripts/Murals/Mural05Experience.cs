@@ -7,14 +7,8 @@ using WakeTheWalls.VFX;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Mural 5: the rings come apart and rebuild in 3D. After the shared fade in, each painted ring is
-    /// swapped for a real 3D ring that lifts off the wall and starts orbiting the figure's head, while
-    /// the rays behind her pulse gently.
-    /// </summary>
     public class Mural05Experience : LayeredMuralExperience
     {
-        /// <summary>One painted ring and where it sits on the mural.</summary>
         [Serializable]
         public class RingSpec
         {
@@ -52,10 +46,8 @@ namespace WakeTheWalls.Murals
         Coroutine intro;
         int nextRing;
 
-        /// <summary>The 3D rings, for interaction scripts on this prefab.</summary>
         public IReadOnlyList<OrbitRing> Rings => live;
 
-        /// <summary>The ray glows, for interaction scripts on this prefab.</summary>
         public IReadOnlyList<MaskGlow> Rays => rays;
 
         protected override void OnInitialized()

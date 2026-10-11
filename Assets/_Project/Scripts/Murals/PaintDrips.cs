@@ -5,11 +5,6 @@ using WakeTheWalls.VFX;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Lets wet paint drip off chosen elements of a mural and splash on the ground in front of the
-    /// wall, in the mural's own colours, while it is in view.
-    /// Which elements drip is set on the prefab, so the script holds no mural names.
-    /// </summary>
     public class PaintDrips : MonoBehaviour
     {
         [SerializeField] LayeredMuralExperience experience;

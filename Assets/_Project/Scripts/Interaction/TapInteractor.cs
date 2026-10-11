@@ -5,11 +5,6 @@ using UnityEngine.InputSystem;
 
 namespace WakeTheWalls.Interaction
 {
-    /// <summary>
-    /// Turns a tap on the screen into a ray from the AR camera. If the ray hits an
-    /// <see cref="Interactable"/>, its <see cref="Interactable.Tap"/> is called.
-    /// Taps that land on UI are left to the UI.
-    /// </summary>
     public class TapInteractor : MonoBehaviour
     {
         [Tooltip("Camera the tap ray starts from. Uses the main camera when empty.")]
