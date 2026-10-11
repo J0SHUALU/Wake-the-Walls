@@ -8,10 +8,6 @@ using WakeTheWalls.VFX;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// A tap area over a stack of bangles on Mural 5. Tapping slides the bangles down the arm with a
-    /// clink, sends a pulse of light out along the rays from them, then eases them back into place.
-    /// </summary>
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
     public class BangleTapInteraction : MonoBehaviour
     {

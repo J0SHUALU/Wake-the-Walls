@@ -8,12 +8,6 @@ using WakeTheWalls.Murals;
 
 namespace WakeTheWalls.Interaction
 {
-    /// <summary>
-    /// A tappable point in AR that pulses gently so it gets noticed, and opens a small label with a title
-    /// and text. Text comes only from the Inspector (confirmed facts from murals.md). When there is none,
-    /// the label shows the mural's DisplayName, and when that is empty too the label stays closed.
-    /// <see cref="Show(string)"/> lets InfoTapInteraction.InfoRequested open a topic directly.
-    /// </summary>
     public class InfoHotspot : Interactable
     {
         [Serializable]
@@ -45,7 +39,6 @@ namespace WakeTheWalls.Interaction
         Vector3 pulseBaseScale = Vector3.one;
         Coroutine fade;
 
-        /// <summary>True while the label is open or opening.</summary>
         public bool IsOpen { get; private set; }
 
         void Awake()
@@ -54,7 +47,6 @@ namespace WakeTheWalls.Interaction
             if (label != null) label.alpha = 0f;
         }
 
-        /// <summary>Opens or closes the label when the hotspot itself is tapped.</summary>
         public override void Tap()
         {
             if (!IsInteractable) return;
@@ -62,10 +54,8 @@ namespace WakeTheWalls.Interaction
             base.Tap();
         }
 
-        /// <summary>Opens the label with the title and text set in the Inspector.</summary>
         public void Show() => Open(title, text);
 
-        /// <summary>Opens the label for a topic id, falling back to the main title and text.</summary>
         public void Show(string topicId)
         {
             Topic topic = topics.Find(t => t != null && t.id == topicId);
@@ -73,7 +63,6 @@ namespace WakeTheWalls.Interaction
             else Show();
         }
 
-        /// <summary>Closes the label.</summary>
         public void Hide()
         {
             IsOpen = false;
@@ -86,7 +75,6 @@ namespace WakeTheWalls.Interaction
             bool hasBody = !string.IsNullOrWhiteSpace(body);
             if (!hasHeading && !hasBody)
             {
-                // No confirmed facts yet: show the mural's name only, or nothing if that is empty too.
                 var experience = GetComponentInParent<MuralExperience>();
                 heading = experience != null && experience.Data != null ? experience.Data.DisplayName : null;
                 hasHeading = !string.IsNullOrWhiteSpace(heading);
@@ -117,7 +105,6 @@ namespace WakeTheWalls.Interaction
 
         void LateUpdate()
         {
-            // Keep the label facing the phone so it can be read from any angle.
             if (label == null || label.alpha <= 0f || Camera.main == null) return;
             Transform cam = Camera.main.transform;
             label.transform.rotation = Quaternion.LookRotation(label.transform.position - cam.position, cam.up);

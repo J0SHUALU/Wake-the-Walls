@@ -2,10 +2,6 @@ using UnityEngine;
 
 namespace WakeTheWalls.UI
 {
-    /// <summary>
-    /// Fits this RectTransform to the phone's safe area, so nothing sits under the notch,
-    /// the camera cut-out or the home indicator. Put every screen inside it.
-    /// </summary>
     [RequireComponent(typeof(RectTransform))]
     public class SafeAreaFitter : MonoBehaviour
     {
@@ -21,7 +17,6 @@ namespace WakeTheWalls.UI
 
         void Update()
         {
-            // Rotation or a simulator device change moves the safe area.
             if (Screen.safeArea != lastSafeArea || Screen.width != lastScreenSize.x || Screen.height != lastScreenSize.y)
             {
                 Apply();

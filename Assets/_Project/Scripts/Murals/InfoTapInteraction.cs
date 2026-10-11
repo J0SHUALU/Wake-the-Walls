@@ -6,12 +6,6 @@ using WakeTheWalls.VFX;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// A tap area over part of a mural that asks for an info panel about it, for example a building.
-    /// It shows a small burst of light so the tap is visibly answered, then raises <see cref="InfoRequested"/>
-    /// and <see cref="GameEvents.InfoRequested"/> with a topic id, so the UI's info panel can open.
-    /// This script holds no facts itself.
-    /// </summary>
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
     public class InfoTapInteraction : MonoBehaviour
     {
@@ -32,7 +26,6 @@ namespace WakeTheWalls.Murals
         [SerializeField] UnityEvent<string> used = new UnityEvent<string>();
         [SerializeField] UnityEvent<string> infoRequested = new UnityEvent<string>();
 
-        /// <summary>Raised with the topic id when the area is tapped. Connect the info hotspot here.</summary>
         public UnityEvent<string> InfoRequested => infoRequested;
 
         void Start()

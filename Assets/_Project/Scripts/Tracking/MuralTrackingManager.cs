@@ -7,19 +7,8 @@ using WakeTheWalls.Murals;
 
 namespace WakeTheWalls.Tracking
 {
-    /// <summary>
-    /// Spawns each mural's experience on its tracked image. When AR Foundation finds an image,
-    /// this looks up the image name in the mural library, places the experience prefab on the
-    /// mural and raises <see cref="GameEvents.MuralFound"/>. Tracking changes go to the loss handler.
-    /// </summary>
-    /// <remarks>
-    /// A mural can have extra reference images for close-up scanning, named after the mural with a
-    /// suffix, for example "Mural1_centre". These must be centred on the mural so the experience sits
-    /// in the same place whichever image is found. All images of one mural share one experience.
-    /// </remarks>
     public class MuralTrackingManager : MonoBehaviour
     {
-        // Turns AR Foundation's image plane (X and Z, normal on +Y) into ours (+X right, +Y up, -Z to the viewer).
         static readonly Quaternion ImageToMural = Quaternion.Euler(90f, 0f, 0f);
 
         [SerializeField] ARTrackedImageManager imageManager;
@@ -54,7 +43,6 @@ namespace WakeTheWalls.Tracking
             if (!TryFindMural(image.referenceImage.name, out var data)) return;
             images[image.trackableId] = image;
 
-            // Another image of the same mural already spawned it: share that experience.
             if (byMural.TryGetValue(data, out var existing) && existing != null)
             {
                 owners[image.trackableId] = existing;
@@ -73,8 +61,6 @@ namespace WakeTheWalls.Tracking
             GameEvents.RaiseMuralFound(data);
         }
 
-        // Close to a wall ARKit often drops the image to Limited even though the mural fills the screen.
-        // Limited still counts while the mural is in view, so the experience keeps running up close.
         void Update()
         {
             foreach (var experience in byMural.Values)
@@ -83,7 +69,6 @@ namespace WakeTheWalls.Tracking
             }
         }
 
-        // Tracking counts as long as any image of the mural is tracked. The experience follows a tracked image.
         void Refresh(MuralExperience experience)
         {
             ARTrackedImage best = null;
@@ -133,7 +118,6 @@ namespace WakeTheWalls.Tracking
             return false;
         }
 
-        // "Mural1_centre" becomes "Mural1".
         static string BaseName(string imageName)
         {
             int cut = imageName.LastIndexOf('_');

@@ -7,12 +7,6 @@ using WakeTheWalls.VFX;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Sends pieces of a layered mural out of the wall and around the viewer while it is in view.
-    /// Copies of chosen elements leave their painted spot, spin and drift towards the user, then fade.
-    /// A trail of paint sparks can also travel between chosen elements, arcing out of the wall.
-    /// Which elements are used is set on the prefab, so the script holds no mural names.
-    /// </summary>
     public class FlyOut : MonoBehaviour
     {
         [SerializeField] LayeredMuralExperience experience;

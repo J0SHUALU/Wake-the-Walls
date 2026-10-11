@@ -4,11 +4,6 @@ using WakeTheWalls.Rig;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// Test experience that builds a mural's layered rig at real size and fades it in, with no motion.
-    /// Use it on a phone at the real wall to check that every layer sits exactly on the paint
-    /// before building the full experience on top of the rig.
-    /// </summary>
     public class RigTestExperience : MuralExperience
     {
         [SerializeField] LayeredMuralRig rig;
@@ -23,16 +18,12 @@ namespace WakeTheWalls.Murals
             SetAlpha(0f);
         }
 
-        /// <summary>Fades the layers in over the wall.</summary>
         public override void OnFound() => FadeTo(1f);
 
-        /// <summary>Fades the layers out while the mural is out of view.</summary>
         public override void OnLost() => FadeTo(0f);
 
-        /// <summary>Fades the layers back in.</summary>
         public override void OnResume() => FadeTo(1f);
 
-        /// <summary>Hides the layers so OnFound can play again.</summary>
         public override void ResetExperience()
         {
             base.ResetExperience();

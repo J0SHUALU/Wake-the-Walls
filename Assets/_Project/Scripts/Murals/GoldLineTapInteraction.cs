@@ -3,10 +3,6 @@ using WakeTheWalls.Interaction;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// A tap area over a stretch of Mural 4's gold lines. Tapping sends light flowing out along the
-    /// lines from that spot, across the portraits and towards the mask.
-    /// </summary>
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
     public class GoldLineTapInteraction : MonoBehaviour
     {

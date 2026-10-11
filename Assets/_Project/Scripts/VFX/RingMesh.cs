@@ -2,17 +2,8 @@ using UnityEngine;
 
 namespace WakeTheWalls.VFX
 {
-    /// <summary>
-    /// Builds a ring (torus) mesh lying flat in the XZ plane, centred on the origin, in metres.
-    /// Used for 3D rings that leave a mural, drawn with the Painterly material.
-    /// </summary>
     public static class RingMesh
     {
-        /// <summary>Creates a ring mesh.</summary>
-        /// <param name="radius">Distance from the centre to the middle of the band, in metres.</param>
-        /// <param name="thickness">Radius of the band itself, in metres.</param>
-        /// <param name="segments">Steps around the ring.</param>
-        /// <param name="sides">Steps around the band.</param>
         public static Mesh Build(float radius, float thickness, int segments = 64, int sides = 10)
         {
             var vertices = new Vector3[(segments + 1) * (sides + 1)];

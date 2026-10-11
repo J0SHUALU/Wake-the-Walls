@@ -5,16 +5,10 @@ using UnityEngine;
 
 namespace WakeTheWalls.EditorTools
 {
-    /// <summary>
-    /// Puts the Wake the Walls app icon (the wall stamp) into every icon slot the build uses:
-    /// the default icon, which iOS and older Android versions use, and the Android adaptive icon.
-    /// Run it once from the menu after the icon art changes; the result is saved in Project Settings.
-    /// </summary>
     public static class AppIconSetup
     {
         const string Folder = "Assets/Art/AppIcon/";
 
-        /// <summary>Applies the icon art in Assets/Art/AppIcon to the player settings.</summary>
         [MenuItem("Wake the Walls/Apply App Icon")]
         public static void Apply()
         {
@@ -28,7 +22,6 @@ namespace WakeTheWalls.EditorTools
             }
 
             PlayerSettings.SetIcons(NamedBuildTarget.Unknown, new[] { full }, IconKind.Any);
-            // Adaptive icons take the background layer first, then the foreground layer.
             SetAndroid(AndroidPlatformIconKind.Adaptive, background, foreground);
             AssetDatabase.SaveAssets();
             Debug.Log("Wake the Walls app icon applied to iOS and Android.");

@@ -2,25 +2,10 @@ using UnityEngine;
 
 namespace WakeTheWalls.VFX
 {
-    /// <summary>
-    /// Builds a simple 3D flower out of curved petals around a round centre, so blooms can leave
-    /// the wall without needing a modelled asset. Pair it with the Painterly material.
-    /// </summary>
-    /// <remarks>
-    /// The flower faces -Z (towards the viewer). Each petal sits on its own pivot, so opening and
-    /// closing is a rotation of those pivots. Size is 1 unit across when fully open.
-    /// </remarks>
     public static class BloomBuilder
     {
         static Mesh petalMesh;
 
-        /// <summary>Creates the petals and centre under <paramref name="parent"/>.</summary>
-        /// <param name="parent">The bloom's root transform.</param>
-        /// <param name="petals">Number of petals, 5 to 8 looks right.</param>
-        /// <param name="material">Usually the Painterly material.</param>
-        /// <param name="petalPivots">One pivot per petal, rotate around local X to open or close.</param>
-        /// <param name="centre">Renderer of the round centre.</param>
-        /// <returns>Renderers of the petals.</returns>
         public static Renderer[] Build(Transform parent, int petals, Material material, out Transform[] petalPivots, out Renderer centre)
         {
             petals = Mathf.Max(3, petals);
@@ -51,7 +36,6 @@ namespace WakeTheWalls.VFX
             return renderers;
         }
 
-        /// <summary>Tilts every petal: 0 lies flat and fully open, about 75 is a closed bud.</summary>
         public static void SetOpening(Transform[] petalPivots, float closedDegrees)
         {
             for (int i = 0; i < petalPivots.Length; i++)
@@ -61,7 +45,6 @@ namespace WakeTheWalls.VFX
             }
         }
 
-        // One petal along +Y from the centre: rounded, slightly cupped, with faces on both sides.
         static Mesh GetPetalMesh()
         {
             if (petalMesh != null) return petalMesh;

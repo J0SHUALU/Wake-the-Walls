@@ -6,11 +6,6 @@ using WakeTheWalls.Murals;
 
 namespace WakeTheWalls.UI
 {
-    /// <summary>
-    /// The row of wall stamps, one per mural in the library, collected like a passport.
-    /// Empty stamps are a dashed ring, woken ones are a tilted brick disc with the number.
-    /// The stamps are built at runtime from the library, so the mural count is never hard coded.
-    /// </summary>
     public class StampsRow : MonoBehaviour
     {
         [SerializeField] MuralLibrary library;
@@ -35,7 +30,6 @@ namespace WakeTheWalls.UI
 
         void Awake() => Build();
 
-        /// <summary>Fills the stamps for the murals in <paramref name="woken"/> and updates the count.</summary>
         public void Show(ICollection<MuralData> woken)
         {
             if (stamps.Count == 0) Build();

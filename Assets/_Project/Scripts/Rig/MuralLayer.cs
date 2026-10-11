@@ -2,19 +2,6 @@ using UnityEngine;
 
 namespace WakeTheWalls.Rig
 {
-    /// <summary>
-    /// One flat layer of a mural: a quad the size of the whole mural showing one cut-out element,
-    /// sitting a few millimetres in front of the wall.
-    /// </summary>
-    /// <remarks>
-    /// Hierarchy built by <see cref="Build"/>:
-    /// <code>
-    /// MuralLayer (this)  at Z = -depthMm / 1000
-    ///   Pivot            at the element's pivot point; rotate this to sway around the pivot
-    ///     Quad           offset back by the pivot so the art stays exactly on the wall
-    /// </code>
-    /// Every layer uses the full mural canvas, so all quads share the same size and centre.
-    /// </remarks>
     public class MuralLayer : MonoBehaviour
     {
         static readonly int BaseMap = Shader.PropertyToID("_BaseMap");
@@ -29,37 +16,22 @@ namespace WakeTheWalls.Rig
         float alpha = 1f;
         float dissolve;
 
-        /// <summary>The manifest entry this layer was built from.</summary>
         public LayerEntry Entry { get; private set; }
 
-        /// <summary>Short name of the element, for example "tree_left".</summary>
         public string Element => Entry != null ? Entry.element : string.Empty;
 
-        /// <summary>Transform to rotate or scale so the element moves around its pivot.</summary>
         public Transform Pivot { get; private set; }
 
-        /// <summary>Pivot position in this layer's local space, in metres from the mural centre.</summary>
         public Vector2 PivotLocal { get; private set; }
 
-        /// <summary>Resting distance in front of the wall in metres (positive is towards the viewer).</summary>
         public float RestDepth => Entry != null ? Entry.depthMm / 1000f : 0f;
 
-        /// <summary>Renderer of the layer quad, for colliders, sorting or effects.</summary>
         public Renderer Renderer => quadRenderer;
 
-        /// <summary>Current opacity, 0 to 1.</summary>
         public float Alpha => alpha;
 
-        /// <summary>Current brush dissolve amount, 0 to 1.</summary>
         public float Dissolve => dissolve;
 
-        /// <summary>
-        /// Builds the layer quad. Call once, right after adding the component.
-        /// </summary>
-        /// <param name="entry">The layer's line from the manifest.</param>
-        /// <param name="layerTexture">The cut-out texture, drawn on the full mural canvas.</param>
-        /// <param name="muralSize">Real size of the mural in metres.</param>
-        /// <param name="material">Shared material using the MuralLayer shader.</param>
         public void Build(LayerEntry entry, Texture layerTexture, Vector2 muralSize, Material material)
         {
             Entry = entry;
@@ -91,14 +63,12 @@ namespace WakeTheWalls.Rig
             Apply();
         }
 
-        /// <summary>Sets the layer's opacity, 0 hidden to 1 fully visible.</summary>
         public void SetAlpha(float value)
         {
             alpha = Mathf.Clamp01(value);
             Apply();
         }
 
-        /// <summary>Sets the brush dissolve amount used by the reveal effect.</summary>
         public void SetDissolve(float value)
         {
             dissolve = Mathf.Clamp01(value);
@@ -115,7 +85,6 @@ namespace WakeTheWalls.Rig
             quadRenderer.SetPropertyBlock(block);
         }
 
-        // A 1 by 1 quad centred on the origin, facing -Z (towards the viewer), UV 0,0 at bottom left.
         static Mesh GetQuadMesh()
         {
             if (quadMesh != null) return quadMesh;

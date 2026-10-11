@@ -3,11 +3,6 @@ using UnityEngine.UI;
 
 namespace WakeTheWalls.Audio
 {
-    /// <summary>
-    /// Short sound effects played through the AudioManager: a soft click for every UI button press,
-    /// and a tap sound whenever something tappable in a mural is tapped (GameEvents.InteractableTapped).
-    /// Muting through <see cref="AudioManager.SetMuted"/> silences these too.
-    /// </summary>
     public partial class AudioManager
     {
         [Header("Sound effects")]
@@ -19,10 +14,8 @@ namespace WakeTheWalls.Audio
 
         AudioSource effects;
 
-        /// <summary>Plays the UI button press sound.</summary>
         public void PlayButton() => PlayEffect(buttonClip);
 
-        /// <summary>Plays the sound for a tap on something in a mural.</summary>
         public void PlayTap() => PlayEffect(tapClip);
 
         void SetUpEffects()
@@ -31,7 +24,6 @@ namespace WakeTheWalls.Audio
             effects.loop = false;
             effects.volume = 1f;
 
-            // Every button in the UI gets the press sound, so screens never need wiring one by one.
             Transform canvas = transform.parent != null ? transform.parent : transform;
             foreach (Button button in canvas.GetComponentsInChildren<Button>(true))
             {

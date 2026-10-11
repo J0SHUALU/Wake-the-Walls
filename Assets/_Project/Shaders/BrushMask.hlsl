@@ -1,5 +1,3 @@
-// Brush stroke mask shared by mural shaders that support the brush reveal.
-// Expects _Dissolve, _EdgeSoftness, _StrokeScale, _StrokeAngle and _Sweep in the material's CBUFFER.
 #ifndef WAKE_THE_WALLS_BRUSH_MASK_INCLUDED
 #define WAKE_THE_WALLS_BRUSH_MASK_INCLUDED
 
@@ -10,7 +8,6 @@ float BrushHash(float2 p)
     return frac(p.x * p.y);
 }
 
-// Smooth value noise in the range 0 to 1.
 float BrushValueNoise(float2 p)
 {
     float2 i = floor(p);
@@ -23,7 +20,6 @@ float BrushValueNoise(float2 p)
     return lerp(lerp(a, b, u.x), lerp(c, d, u.x), u.y);
 }
 
-// How much of the layer is still painted at this canvas UV: 1 painted, 0 wiped off.
 float BrushVisible(float2 canvasUV, float dissolve, float softness, float2 strokeScale, float strokeAngle, float sweepAmount)
 {
     float angle = radians(strokeAngle);

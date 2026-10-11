@@ -7,11 +7,6 @@ using WakeTheWalls.Rig;
 
 namespace WakeTheWalls.Murals
 {
-    /// <summary>
-    /// A tap area that sends a band of light across one layer, like beads lighting up one after another.
-    /// It lays a copy of the layer on top with the brush dissolve, and the glowing edge of the
-    /// dissolve is the band of light. When the sweep has passed, the copy is gone and the paint is untouched.
-    /// </summary>
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
     public class GlowSweepInteraction : MonoBehaviour
     {
@@ -62,7 +57,6 @@ namespace WakeTheWalls.Murals
 
         IEnumerator Sweep()
         {
-            // The brush mask runs across the whole canvas, so only sweep the part that covers the tap area.
             Vector2 range = SweepRange();
             glowMaterial.SetFloat(Dissolve, range.x);
             glow.enabled = true;
@@ -85,7 +79,6 @@ namespace WakeTheWalls.Murals
             return new Vector2(min - glowWidth * 2f, max + glowWidth * 2f);
         }
 
-        // A copy of the layer's quad, a hair in front, drawn with a glowing brush edge.
         void CreateGlow(MuralLayer layer)
         {
             var block = new MaterialPropertyBlock();

@@ -3,11 +3,6 @@ using WakeTheWalls.Core;
 
 namespace WakeTheWalls.UI
 {
-    /// <summary>
-    /// Shows the screen that matches the current app state and hides the others.
-    /// It only listens to <see cref="GameEvents.StateChanged"/>, so it never talks to tracking directly.
-    /// Panels inside a state (info, help, paused) are handled by their own screens.
-    /// </summary>
     public class UIManager : MonoBehaviour
     {
         [Tooltip("Shown in the Start state.")]
@@ -36,7 +31,6 @@ namespace WakeTheWalls.UI
         {
             UIScreen target = ScreenFor(state);
 
-            // Hide first so two screens never take taps at the same time.
             foreach (UIScreen screen in AllScreens())
             {
                 if (screen != null && screen != target) screen.Hide();

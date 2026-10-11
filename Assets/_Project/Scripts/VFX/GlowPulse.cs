@@ -4,10 +4,6 @@ using WakeTheWalls.Murals;
 
 namespace WakeTheWalls.VFX
 {
-    /// <summary>
-    /// Keeps a <see cref="MaskGlow"/> slowly breathing while its mural is in view, for lit windows,
-    /// a glowing mask or a warm sky. Fades the glow in when the mural is found and out when it is lost.
-    /// </summary>
     public class GlowPulse : MonoBehaviour
     {
         [SerializeField] LayeredMuralExperience experience;

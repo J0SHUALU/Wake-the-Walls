@@ -7,10 +7,6 @@ using WakeTheWalls.Murals;
 
 namespace WakeTheWalls.UI
 {
-    /// <summary>
-    /// The first screen: the mural photo, the hero title, a line of intro, the empty stamps row,
-    /// Start scanning and a How it works link. Start scanning moves the app to Scanning.
-    /// </summary>
     public class StartScreen : UIScreen
     {
         [SerializeField] MuralLibrary library;
@@ -38,7 +34,6 @@ namespace WakeTheWalls.UI
             if (howItWorksButton != null) howItWorksButton.onClick.AddListener(howItWorksRequested.Invoke);
         }
 
-        /// <summary>Moves the app to the Scanning state.</summary>
         public void StartScanning()
         {
             if (stateMachine == null) stateMachine = FindAnyObjectByType<AppStateMachine>();
