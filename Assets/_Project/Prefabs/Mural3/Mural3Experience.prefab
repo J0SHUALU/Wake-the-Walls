@@ -306,6 +306,10 @@ GameObject:
   - component: {fileID: 42569130086987945}
   - component: {fileID: 3841829059782776184}
   - component: {fileID: 8894350468257578683}
+  - component: {fileID: 7283866855702841491}
+  - component: {fileID: 3893073997967019722}
+  - component: {fileID: 5377702331092902530}
+  - component: {fileID: 6430914230972810884}
   m_Layer: 0
   m_Name: Mural3Experience
   m_TagString: Untagged
@@ -897,3 +901,108 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3022913674081194828, guid: aaa14baf2e37b40e0ad90b39cfd8c0c8, type: 3}
   m_PrefabInstance: {fileID: 7116422407477849034}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7283866855702841491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709727432664459341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955f6cd205864b5695c73ea683addc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.TapJumpOut
+  experience: {fileID: 6472504708273481242}
+  links:
+  - tap: {fileID: 1121100596676148138}
+    elements:
+    - plants_left
+  - tap: {fileID: 343410724978211533}
+    elements:
+    - agave_big
+    - agave_right
+  - tap: {fileID: 181213542154254195}
+    elements:
+    - cactus
+    - cactus_small
+  outDistance: 0.9
+  rise: 0.15
+  outSeconds: 0.6
+  holdSeconds: 0.9
+  backSeconds: 0.8
+  spinDegrees: 360
+  grow: 1.3
+  stagger: 0.12
+--- !u!114 &3893073997967019722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709727432664459341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1545bc66c5b401080fe03de6df5fc27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.OrbitAround
+  experience: {fileID: 6472504708273481242}
+  elements:
+  - cactus_small
+  - agave_right
+  - clouds
+  startDelay: 3
+  scale: 0.45
+  lapSeconds: 10
+  widthShare: 0.6
+  depth: {x: 0.2, y: 1.2}
+  wave: 0.15
+  spinDegrees: 20
+--- !u!114 &5377702331092902530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709727432664459341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1545a7be3dd24b05a5ddb9f26db56001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PaintDrips
+  experience: {fileID: 6472504708273481242}
+  elements:
+  - cactus
+  - agave_big
+  - plants_left
+  dripPrefab: {fileID: 1667061050494879361, guid: 093a30e00dbb54032b1f7faa5e1c9947, type: 3}
+  splashPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
+  colours: []
+  startDelay: 3
+  interval: {x: 1.5, y: 3}
+  fallSeconds: 1.1
+  splashOut: 0.15
+--- !u!114 &6430914230972810884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709727432664459341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 758dfb73d5d84c2ba9864058d855d7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Butterflies
+  experience: {fileID: 6472504708273481242}
+  fromElements:
+  - plants_left
+  - cactus
+  - agave_right
+  colours: []
+  startDelay: 4
+  interval: {x: 1.5, y: 3.5}
+  lifeSeconds: 7
+  wingspan: 0.16
+  flapsPerSecond: 6
+  outDistance: 1.2

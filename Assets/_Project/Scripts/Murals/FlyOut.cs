@@ -15,8 +15,6 @@ namespace WakeTheWalls.Murals
     /// </summary>
     public class FlyOut : MonoBehaviour
     {
-        static readonly int BaseMap = Shader.PropertyToID("_BaseMap");
-
         [SerializeField] LayeredMuralExperience experience;
         [SerializeField] float startDelay = 2.5f;
 
@@ -97,13 +95,7 @@ namespace WakeTheWalls.Murals
 
         MuralLayer CopyOf(MuralLayer source)
         {
-            var block = new MaterialPropertyBlock();
-            source.Renderer.GetPropertyBlock(block);
-            var copy = new GameObject(source.Element + "_flying").AddComponent<MuralLayer>();
-            copy.transform.SetParent(source.transform.parent, false);
-            copy.Build(source.Entry, block.GetTexture(BaseMap), experience.Rig.MuralSize, source.Renderer.sharedMaterial);
-            copy.Renderer.sortingOrder = source.Entry.order + 50;
-            copy.SetAlpha(0f);
+            var copy = LayerCopy.Make(source, experience.Rig.MuralSize);
             flying.Add(copy);
             return copy;
         }

@@ -340,6 +340,10 @@ GameObject:
   - component: {fileID: 7848366319300294646}
   - component: {fileID: 7716459544802548810}
   - component: {fileID: 6184722665344512462}
+  - component: {fileID: 2747215377143658764}
+  - component: {fileID: 1302478785979217199}
+  - component: {fileID: 8986788037985537330}
+  - component: {fileID: 4452079815865362442}
   m_Layer: 0
   m_Name: Mural4Experience
   m_TagString: Untagged
@@ -1059,3 +1063,111 @@ MonoBehaviour:
   infoRequested:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2747215377143658764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610628319135149479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955f6cd205864b5695c73ea683addc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.TapJumpOut
+  experience: {fileID: 7913823731028150729}
+  links:
+  - tap: {fileID: 7702967247026509115}
+    elements:
+    - portrait_cap
+  - tap: {fileID: 8406591931208212341}
+    elements:
+    - portrait_crown
+  - tap: {fileID: 6515930835114528236}
+    elements:
+    - portrait_beret
+  - tap: {fileID: 6649340517079227072}
+    elements:
+    - portrait_turban
+  - tap: {fileID: 1038221127175902271}
+    elements:
+    - portrait_right
+  outDistance: 0.9
+  rise: 0.15
+  outSeconds: 0.6
+  holdSeconds: 0.9
+  backSeconds: 0.8
+  spinDegrees: 360
+  grow: 1.3
+  stagger: 0.12
+--- !u!114 &1302478785979217199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610628319135149479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1545bc66c5b401080fe03de6df5fc27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.OrbitAround
+  experience: {fileID: 7913823731028150729}
+  elements:
+  - portrait_crown
+  - portrait_beret
+  - portrait_cap
+  - portrait_turban
+  startDelay: 3
+  scale: 0.45
+  lapSeconds: 10
+  widthShare: 0.6
+  depth: {x: 0.2, y: 1.2}
+  wave: 0.15
+  spinDegrees: 20
+--- !u!114 &8986788037985537330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610628319135149479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1545a7be3dd24b05a5ddb9f26db56001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PaintDrips
+  experience: {fileID: 7913823731028150729}
+  elements:
+  - portrait_crown
+  - portrait_turban
+  - portrait_right
+  dripPrefab: {fileID: 1667061050494879361, guid: 093a30e00dbb54032b1f7faa5e1c9947, type: 3}
+  splashPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
+  colours: []
+  startDelay: 3
+  interval: {x: 1.5, y: 3}
+  fallSeconds: 1.1
+  splashOut: 0.15
+--- !u!114 &4452079815865362442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610628319135149479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 758dfb73d5d84c2ba9864058d855d7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Butterflies
+  experience: {fileID: 7913823731028150729}
+  fromElements:
+  - reeds
+  colours: []
+  startDelay: 4
+  interval: {x: 1.5, y: 3.5}
+  lifeSeconds: 7
+  wingspan: 0.16
+  flapsPerSecond: 6
+  outDistance: 1.2
