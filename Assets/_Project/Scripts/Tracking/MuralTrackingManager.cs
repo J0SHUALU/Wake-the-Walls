@@ -46,10 +46,6 @@ namespace WakeTheWalls.Tracking
         void OnTrackablesChanged(ARTrackablesChangedEventArgs<ARTrackedImage> args)
         {
             foreach (var image in args.added) Add(image);
-            foreach (var image in args.updated)
-            {
-                if (owners.TryGetValue(image.trackableId, out var experience)) Refresh(experience);
-            }
             foreach (var pair in args.removed) Remove(pair.Key);
         }
 
@@ -77,14 +73,26 @@ namespace WakeTheWalls.Tracking
             GameEvents.RaiseMuralFound(data);
         }
 
+        // Close to a wall ARKit often drops the image to Limited even though the mural fills the screen.
+        // Limited still counts while the mural is in view, so the experience keeps running up close.
+        void Update()
+        {
+            foreach (var experience in byMural.Values)
+            {
+                if (experience != null) Refresh(experience);
+            }
+        }
+
         // Tracking counts as long as any image of the mural is tracked. The experience follows a tracked image.
         void Refresh(MuralExperience experience)
         {
             ARTrackedImage best = null;
+            bool limited = false;
             foreach (var pair in owners)
             {
                 if (pair.Value != experience || !images.TryGetValue(pair.Key, out var image)) continue;
                 if (image.trackingState == TrackingState.Tracking) { best = image; break; }
+                if (image.trackingState == TrackingState.Limited) limited = true;
             }
 
             if (best != null && experience.transform.parent != best.transform)
@@ -92,7 +100,7 @@ namespace WakeTheWalls.Tracking
                 experience.transform.SetParent(best.transform, false);
                 experience.transform.SetLocalPositionAndRotation(Vector3.zero, ImageToMural);
             }
-            lossHandler.Report(experience, best != null);
+            lossHandler.Report(experience, best != null || (limited && MuralView.IsInView(experience)));
         }
 
         void Remove(TrackableId id)

@@ -103,7 +103,7 @@ namespace WakeTheWalls.Murals
             var sr = go.AddComponent<SpriteRenderer>();
             sr.sprite = sprite;
             sr.color = colour;
-            sr.sortingOrder = 100 + order;
+            sr.sortingOrder = 500 + order;
             // Normalise the sprite to one unit wide, so the parent's scale sets the marker width in metres.
             float spriteWidth = sprite != null ? sprite.bounds.size.x : 1f;
             go.transform.localScale = Vector3.one * (scale / spriteWidth);
