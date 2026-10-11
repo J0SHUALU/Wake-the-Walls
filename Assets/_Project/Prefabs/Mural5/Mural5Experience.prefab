@@ -174,6 +174,8 @@ GameObject:
   - component: {fileID: 7251402845200606155}
   - component: {fileID: 7647395867492354541}
   - component: {fileID: 7598934454073183121}
+  - component: {fileID: 8022684235846220804}
+  - component: {fileID: 2918343037944062883}
   m_Layer: 0
   m_Name: Mural5Experience
   m_TagString: Untagged
@@ -390,6 +392,113 @@ MonoBehaviour:
   sizeLimits: {x: 0.12, y: 0.35}
   pulseAmount: 0.15
   pulseSpeed: 1
+--- !u!114 &8022684235846220804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3496975869771335326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 353ee827d2abf43e992ba4b051550f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PopOutIntro
+  experience: {fileID: 7251402845200606155}
+  items:
+  - element: cube_1
+    distance: 0.3
+    delay: 0
+    grow: 0.2
+  - element: cube_2
+    distance: 0.22
+    delay: 0.2
+    grow: 0.2
+  - element: cube_3
+    distance: 0.28
+    delay: 0.4
+    grow: 0.2
+  - element: cube_4
+    distance: 0.18
+    delay: 0.6
+    grow: 0.2
+  - element: cube_5
+    distance: 0.26
+    delay: 0.8
+    grow: 0.2
+  - element: cube_6
+    distance: 0.2
+    delay: 1
+    grow: 0.2
+  - element: cube_7
+    distance: 0.3
+    delay: 1.2
+    grow: 0.2
+  - element: flower_1
+    distance: 0.15
+    delay: 0.3
+    grow: 0.08
+  - element: flower_3
+    distance: 0.15
+    delay: 0.7
+    grow: 0.08
+  - element: flower_5
+    distance: 0.15
+    delay: 1.1
+    grow: 0.08
+  - element: bangles_raised
+    distance: 0.12
+    delay: 1.4
+    grow: 0.08
+  startDelay: 1.6
+  liftDuration: 1.2
+  holdSeconds: 4
+  restSeconds: 5
+  loop: 1
+--- !u!114 &2918343037944062883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3496975869771335326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f11827cea8014280a66e2216352990b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.FlyOut
+  experience: {fileID: 7251402845200606155}
+  startDelay: 2.5
+  copyElements:
+  - cube_1
+  - cube_2
+  - cube_3
+  - cube_4
+  - cube_5
+  - cube_6
+  - cube_7
+  - flower_1
+  - flower_2
+  - flower_3
+  - flower_4
+  - flower_5
+  interval: {x: 1.2, y: 2.4}
+  maxFlying: 4
+  flightSeconds: 4
+  outDistance: 1
+  swing: 0.25
+  rise: 0.4
+  spinDegrees: 300
+  endScale: 0.6
+  sparkPath: []
+  sparkPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
+  sparkColours:
+  - {r: 1, g: 0.82, b: 0.35, a: 1}
+  - {r: 1, g: 0.95, b: 0.75, a: 1}
+  secondsPerHop: 1.2
+  sparkLift: 0.45
+  sparkSpacing: 0.07
+  trailPause: 2
 --- !u!1 &4931541848533675093
 GameObject:
   m_ObjectHideFlags: 0
