@@ -32,4 +32,4 @@ MonoBehaviour:
   - {r: 0.607, g: 0.606, b: 0.535, a: 1}
   - {r: 0.168, g: 0.165, b: 0.166, a: 1}
   - {r: 0.788, g: 0.781, b: 0.731, a: 1}
-  ambience: {fileID: 0}
+  ambience: {fileID: 8300000, guid: 0519c05ce5be4274b5a8b56762a824dd, type: 3}

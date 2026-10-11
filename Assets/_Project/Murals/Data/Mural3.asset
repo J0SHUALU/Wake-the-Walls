@@ -33,4 +33,4 @@ MonoBehaviour:
   - {r: 0.618, g: 0.774, b: 0.763, a: 1}
   - {r: 0.803, g: 0.886, b: 0.856, a: 1}
   - {r: 0.662, g: 0.591, b: 0.514, a: 1}
-  ambience: {fileID: 0}
+  ambience: {fileID: 8300000, guid: 99ff3e13fca64c8da3f0a0a699def207, type: 3}
