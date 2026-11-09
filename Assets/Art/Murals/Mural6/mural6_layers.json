@@ -1,0 +1,40 @@
+{
+  "mural": "Mural6",
+  "canvasWidth": 2048,
+  "canvasHeight": 1300,
+  "background": "mural6_bg_filled",
+  "layers": [
+    {
+      "file": "mural6_L01_caravan",
+      "element": "caravan",
+      "depthMm": 4.5,
+      "order": 5,
+      "pivotX": 0.606,
+      "pivotY": 0.711
+    },
+    {
+      "file": "mural6_L02_caravan_far",
+      "element": "caravan_far",
+      "depthMm": 3.0,
+      "order": 3,
+      "pivotX": 0.624,
+      "pivotY": 0.894
+    },
+    {
+      "file": "mural6_L03_palms",
+      "element": "palms",
+      "depthMm": 4.0,
+      "order": 4,
+      "pivotX": 0.469,
+      "pivotY": 0.662
+    },
+    {
+      "file": "mural6_L04_oasis",
+      "element": "oasis",
+      "depthMm": 2.5,
+      "order": 2,
+      "pivotX": 0.482,
+      "pivotY": 0.637
+    }
+  ]
+}
