@@ -14,6 +14,7 @@ namespace WakeTheWalls.Tracking
         [SerializeField] ARTrackedImageManager imageManager;
         [SerializeField] MuralLibrary library;
         [SerializeField] TrackingLossHandler lossHandler;
+        [SerializeField] MuralAnchors anchors;
 
         readonly Dictionary<TrackableId, ARTrackedImage> images = new Dictionary<TrackableId, ARTrackedImage>();
         readonly Dictionary<TrackableId, MuralExperience> owners = new Dictionary<TrackableId, MuralExperience>();
@@ -54,6 +55,7 @@ namespace WakeTheWalls.Tracking
             experience.transform.SetLocalPositionAndRotation(Vector3.zero, ImageToMural);
             experience.Initialize(data);
             experience.OnFound();
+            anchors.Place(experience, new Pose(image.transform.position, image.transform.rotation));
 
             owners[image.trackableId] = experience;
             byMural[data] = experience;
@@ -80,7 +82,11 @@ namespace WakeTheWalls.Tracking
                 if (image.trackingState == TrackingState.Limited) limited = true;
             }
 
-            if (best != null && experience.transform.parent != best.transform)
+            if (best != null && anchors.HasAnchor(experience))
+            {
+                anchors.Follow(experience, new Pose(best.transform.position, best.transform.rotation * ImageToMural));
+            }
+            else if (best != null && experience.transform.parent != best.transform)
             {
                 experience.transform.SetParent(best.transform, false);
                 experience.transform.SetLocalPositionAndRotation(Vector3.zero, ImageToMural);
@@ -94,8 +100,10 @@ namespace WakeTheWalls.Tracking
             if (!owners.TryGetValue(id, out var experience)) return;
             owners.Remove(id);
             if (owners.ContainsValue(experience)) { Refresh(experience); return; }
+            if (anchors.HasAnchor(experience)) return;
 
             lossHandler.Forget(experience);
+            anchors.Remove(experience);
             if (experience != null)
             {
                 byMural.Remove(experience.Data);

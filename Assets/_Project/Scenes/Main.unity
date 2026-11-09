@@ -682,6 +682,8 @@ GameObject:
   - component: {fileID: 1575097929}
   - component: {fileID: 1575097935}
   - component: {fileID: 1575097934}
+  - component: {fileID: 1981875572}
+  - component: {fileID: 1340176574}
   m_Layer: 0
   m_Name: XR Origin (Mobile AR)
   m_TagString: Untagged
@@ -755,6 +757,34 @@ MonoBehaviour:
   imageManager: {fileID: 1575097929}
   library: {fileID: 11400000, guid: c6fbeab177b3144b3adeb423d3353c46, type: 2}
   lossHandler: {fileID: 1575097935}
+  anchors: {fileID: 1340176574}
+--- !u!114 &1981875572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575097928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.ARFoundation::UnityEngine.XR.ARFoundation.ARAnchorManager
+  m_AnchorPrefab: {fileID: 0}
+--- !u!114 &1340176574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575097928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1f2d52a5d645919f529c1bf106eba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Tracking.MuralAnchors
+  anchorManager: {fileID: 1981875572}
+  followSpeed: 8
 --- !u!114 &1575097935
 MonoBehaviour:
   m_ObjectHideFlags: 0
