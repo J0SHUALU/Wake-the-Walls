@@ -128,10 +128,9 @@ namespace WakeTheWalls.EditorTools
         static GameObject BuildPrefab(NarratorLines lines)
         {
             System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(PrefabPath));
-            var root = new GameObject("Pearl Narrator");
+            var root = new GameObject("Pearl");
             root.AddComponent<AudioSource>();
             var narrator = root.AddComponent<WakeTheWalls.Narrator.Narrator>();
-            root.AddComponent<NarratorTap>();
 
             var so = new SerializedObject(narrator);
             so.FindProperty("lines").objectReferenceValue = lines;
@@ -147,10 +146,6 @@ namespace WakeTheWalls.EditorTools
             Set(so, "mouth", "mouth");
             Set(so, "shine", "shine");
             so.ApplyModifiedPropertiesWithoutUndo();
-
-            var tap = new SerializedObject(root.GetComponent<NarratorTap>());
-            tap.FindProperty("narrator").objectReferenceValue = narrator;
-            tap.ApplyModifiedPropertiesWithoutUndo();
 
             GameObject prefab = PrefabUtility.SaveAsPrefabAsset(root, PrefabPath);
             Object.DestroyImmediate(root);
