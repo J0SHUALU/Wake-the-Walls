@@ -84,7 +84,7 @@ namespace WakeTheWalls.Audio
             active = 1 - active;
             AudioSource next = sources[active];
             next.clip = clip;
-            next.volume = 0f;
+            SetLevel(active, 0f);
             next.time = 0f;
             FadeTo(active, ambienceVolume, crossfadeDuration, false);
         }
@@ -109,7 +109,7 @@ namespace WakeTheWalls.Audio
         IEnumerator Fade(int index, float target, float duration, bool stopWhenSilent)
         {
             AudioSource source = sources[index];
-            yield return Tween.Value(source.volume, target, v => source.volume = v, duration, Tween.EaseInOutCubic);
+            yield return Tween.Value(levels[index], target, v => SetLevel(index, v), duration, Tween.EaseInOutCubic);
             if (target <= 0f)
             {
                 if (stopWhenSilent)
