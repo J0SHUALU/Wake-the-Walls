@@ -5,6 +5,9 @@ namespace WakeTheWalls.Tracking
 {
     public static class MuralView
     {
+        const int Grid = 5;
+        const float MinShareOnScreen = 0.2f;
+
         public static bool IsInView(MuralExperience experience)
         {
             var cam = Camera.main;
@@ -17,16 +20,20 @@ namespace WakeTheWalls.Tracking
             if (wall.Raycast(look, out float hit))
             {
                 Vector3 local = mural.InverseTransformPoint(look.GetPoint(hit));
-                if (Mathf.Abs(local.x) <= half.x * 1.2f && Mathf.Abs(local.y) <= half.y * 1.2f) return true;
+                if (Mathf.Abs(local.x) <= half.x && Mathf.Abs(local.y) <= half.y) return true;
             }
 
-            for (int i = 0; i < 5; i++)
+            int onScreen = 0;
+            for (int ix = 0; ix < Grid; ix++)
             {
-                Vector3 point = i == 4 ? Vector3.zero : new Vector3(i % 2 == 0 ? -half.x : half.x, i < 2 ? -half.y : half.y, 0f);
-                Vector3 view = cam.WorldToViewportPoint(mural.TransformPoint(point));
-                if (view.z > 0f && view.x > -0.05f && view.x < 1.05f && view.y > -0.05f && view.y < 1.05f) return true;
+                for (int iy = 0; iy < Grid; iy++)
+                {
+                    var point = new Vector3(Mathf.Lerp(-half.x, half.x, ix / (Grid - 1f)), Mathf.Lerp(-half.y, half.y, iy / (Grid - 1f)), 0f);
+                    Vector3 view = cam.WorldToViewportPoint(mural.TransformPoint(point));
+                    if (view.z > 0f && view.x >= 0f && view.x <= 1f && view.y >= 0f && view.y <= 1f) onScreen++;
+                }
             }
-            return false;
+            return onScreen >= MinShareOnScreen * Grid * Grid;
         }
     }
 }
