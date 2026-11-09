@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using WakeTheWalls.Audio;
 using WakeTheWalls.Core;
 using WakeTheWalls.Murals;
+using WakeTheWalls.UI;
 
 namespace WakeTheWalls.Narrator
 {
@@ -12,11 +14,10 @@ namespace WakeTheWalls.Narrator
     {
         const float CanvasWidth = 600f;
         const float CanvasHeight = 780f;
-        const float CanvasCentreY = 390f;
 
         [SerializeField] NarratorLines lines;
 
-        [Header("Parts (600 x 780 canvas, centre pivot, 780 pixels per unit)")]
+        [Header("Parts (600 x 780 canvas, centre pivot)")]
         [SerializeField] Sprite glow;
         [SerializeField] Sprite finLeft;
         [SerializeField] Sprite finRight;
@@ -29,38 +30,50 @@ namespace WakeTheWalls.Narrator
         [SerializeField] Sprite mouth;
         [SerializeField] Sprite shine;
 
-        [Header("Placement")]
-        [Tooltip("Pearl's height as a share of the mural height.")]
-        [SerializeField] float heightShare = 0.18f;
-        [SerializeField] float minHeight = 0.35f;
-        [SerializeField] float maxHeight = 0.9f;
-        [Tooltip("How far in front of the wall she floats, in metres.")]
-        [SerializeField] float forward = 0.25f;
-        [SerializeField] float followSpeed = 8f;
+        [Header("Layout")]
+        [Tooltip("Name of the HUD button Pearl's button sits under.")]
+        [SerializeField] string anchorButton = "HelpButton";
+        [SerializeField] float spacing = 180f;
+        [Tooltip("Pearl's height on screen, in canvas units.")]
+        [SerializeField] float pearlHeight = 520f;
+        [Tooltip("Gap between the bottom of the screen and Pearl.")]
+        [SerializeField] float bottomMargin = 140f;
+        [Tooltip("Seconds Pearl waits after her last line before she floats away.")]
+        [SerializeField] float idleBeforeHide = 4f;
 
         [Header("Voice")]
         [SerializeField] float gapBetweenLines = 0.35f;
         [SerializeField] float mouthGain = 9f;
 
         AudioSource voice;
-        Transform visual;
-        Transform finL, finR, mouthPivot;
-        GameObject eyesOpen, eyesClosed;
+        RectTransform button;
+        Image buttonRing;
+        Rig icon;
+        Rig pearl;
+        RectTransform pearlRoot;
 
-        MuralExperience target;
         MuralData current;
         readonly Queue<AudioClip> queue = new Queue<AudioClip>();
         readonly HashSet<MuralData> introduced = new HashSet<MuralData>();
         readonly float[] samples = new float[256];
         bool greeted;
+        bool active;
         bool shown;
+        bool hasNews;
         int tapIndex;
         float level;
         float nextLineAt;
-        float nextBlinkAt;
-        float blinkUntil;
-        float height = 0.5f;
+        float quietSince;
         Coroutine popping;
+
+        class Rig
+        {
+            public RectTransform root, mouth, finL, finR;
+            public GameObject eyesOpen, eyesClosed;
+            public float nextBlinkAt, blinkUntil;
+        }
+
+        public bool IsSpeaking => voice != null && voice.isPlaying;
 
         void Awake()
         {
@@ -68,9 +81,9 @@ namespace WakeTheWalls.Narrator
             voice.playOnAwake = false;
             voice.loop = false;
             voice.spatialBlend = 0f;
-            BuildVisual();
-            visual.gameObject.SetActive(false);
         }
+
+        void Start() => Build();
 
         void OnEnable()
         {
@@ -91,49 +104,59 @@ namespace WakeTheWalls.Narrator
             AudioManager.SetDucked(false);
         }
 
-        public bool IsSpeaking => voice != null && voice.isPlaying;
-
-        public void Tap()
+        void ButtonPressed()
         {
-            if (!shown || lines == null) return;
+            if (!active || lines == null) return;
+            if (shown)
+            {
+                Silence();
+                Hide();
+                return;
+            }
+
+            Show();
+            hasNews = false;
+            var mural = lines.For(current);
+            if (mural == null) return;
+
+            if (!introduced.Contains(current))
+            {
+                introduced.Add(current);
+                tapIndex = 0;
+                queue.Clear();
+                if (!greeted && lines.Hello != null) queue.Enqueue(lines.Hello);
+                greeted = true;
+                Enqueue(mural.intro);
+                Enqueue(mural.about);
+                Enqueue(mural.tryThis);
+                nextLineAt = Time.time + 0.5f;
+            }
+            else
+            {
+                Say(tapIndex % 2 == 0 ? mural.about : mural.tryThis);
+                tapIndex++;
+            }
+        }
+
+        void PearlPressed()
+        {
             if (IsSpeaking)
             {
                 voice.Stop();
                 nextLineAt = Time.time;
                 return;
             }
-
-            var mural = lines.For(current);
+            var mural = lines != null ? lines.For(current) : null;
             if (mural == null) return;
-            AudioClip next = tapIndex % 2 == 0 ? mural.about : mural.tryThis;
+            Say(tapIndex % 2 == 0 ? mural.about : mural.tryThis);
             tapIndex++;
-            Say(next);
         }
 
         void HandleFound(MuralData data)
         {
             current = data;
-            target = FindExperience(data);
-            if (target == null) return;
-
-            if (data != null) height = Mathf.Clamp(data.PhysicalSizeMeters.y * heightShare, minHeight, maxHeight);
-            transform.position = TargetPosition();
-            Show();
-
-            if (lines == null || introduced.Contains(data)) return;
-            introduced.Add(data);
-            tapIndex = 0;
-
-            queue.Clear();
-            if (!greeted && lines.Hello != null) queue.Enqueue(lines.Hello);
-            greeted = true;
-
-            var mural = lines.For(data);
-            if (mural == null) return;
-            Enqueue(mural.intro);
-            Enqueue(mural.about);
-            Enqueue(mural.tryThis);
-            nextLineAt = Time.time + 0.6f;
+            active = true;
+            hasNews = data != null && !introduced.Contains(data);
         }
 
         void HandleLost(MuralData data)
@@ -147,7 +170,7 @@ namespace WakeTheWalls.Narrator
         {
             var mural = lines != null ? lines.For(data) : null;
             if (mural == null || mural.done == null) return;
-            Silence();
+            Show();
             Say(mural.done);
         }
 
@@ -155,6 +178,7 @@ namespace WakeTheWalls.Narrator
         {
             if (state == AppState.Start || state == AppState.Scanning)
             {
+                active = false;
                 Silence();
                 Hide();
             }
@@ -164,6 +188,8 @@ namespace WakeTheWalls.Narrator
         {
             introduced.Clear();
             Silence();
+            Hide();
+            hasNews = active;
         }
 
         void Say(AudioClip clip)
@@ -184,43 +210,24 @@ namespace WakeTheWalls.Narrator
         {
             queue.Clear();
             if (voice != null) voice.Stop();
+            AudioManager.SetDucked(false);
         }
 
         void Update()
         {
-            if (!shown) return;
-
-            if (!voice.isPlaying && queue.Count > 0 && Time.time >= nextLineAt)
+            if (shown && !voice.isPlaying && queue.Count > 0 && Time.time >= nextLineAt)
             {
                 voice.clip = queue.Dequeue();
                 voice.Play();
             }
+
+            bool talking = voice.isPlaying || queue.Count > 0;
             if (voice.isPlaying) nextLineAt = Time.time + gapBetweenLines;
+            if (talking) quietSince = Time.time;
+            if (shown) AudioManager.SetDucked(talking);
+            if (shown && !talking && Time.time - quietSince > idleBeforeHide) Hide();
 
-            AudioManager.SetDucked(voice.isPlaying || queue.Count > 0);
             Animate();
-        }
-
-        void LateUpdate()
-        {
-            if (!shown) return;
-            if (target != null)
-            {
-                transform.position = Vector3.Lerp(transform.position, TargetPosition(), 1f - Mathf.Exp(-followSpeed * Time.deltaTime));
-            }
-
-            var cam = Camera.main;
-            if (cam == null) return;
-            Vector3 away = transform.position - cam.transform.position;
-            away.y = 0f;
-            if (away.sqrMagnitude > 0.0001f) transform.rotation = Quaternion.LookRotation(away, Vector3.up);
-        }
-
-        Vector3 TargetPosition()
-        {
-            Vector2 size = current != null ? current.PhysicalSizeMeters : Vector2.one;
-            var local = new Vector3(-size.x * 0.5f + height * 0.4f, -size.y * 0.5f + height * 0.6f, -forward);
-            return target.transform.TransformPoint(local);
         }
 
         void Animate()
@@ -236,139 +243,243 @@ namespace WakeTheWalls.Narrator
             float goal = Mathf.Clamp01(rms * mouthGain);
             level = Mathf.Lerp(level, goal, goal > level ? 0.6f : 0.2f);
 
-            visual.localPosition = new Vector3(0f, Mathf.Sin(t * 1.6f) * 0.03f, 0f);
-            mouthPivot.localScale = new Vector3(1f + level * 0.25f, 0.35f + level * 1.4f, 1f);
-
-            float flap = (IsSpeaking ? 10f + level * 14f : 5f) * Mathf.Sin(t * (IsSpeaking ? 6f : 2f));
-            finL.localRotation = Quaternion.Euler(0f, 0f, -flap);
-            finR.localRotation = Quaternion.Euler(0f, 0f, flap);
-
-            if (t >= nextBlinkAt)
+            if (pearl != null)
             {
-                blinkUntil = t + 0.12f;
-                nextBlinkAt = t + Random.Range(2.5f, 5.5f);
+                AnimateRig(pearl, t, level);
+                pearl.root.anchoredPosition = new Vector2(0f, Mathf.Sin(t * 1.6f) * 12f);
+                float flap = (IsSpeaking ? 10f + level * 14f : 5f) * Mathf.Sin(t * (IsSpeaking ? 6f : 2f));
+                if (pearl.finL != null) pearl.finL.localRotation = Quaternion.Euler(0f, 0f, -flap);
+                if (pearl.finR != null) pearl.finR.localRotation = Quaternion.Euler(0f, 0f, flap);
             }
-            bool blinking = t < blinkUntil;
-            eyesOpen.SetActive(!blinking);
-            eyesClosed.SetActive(blinking);
+
+            if (icon != null)
+            {
+                AnimateRig(icon, t + 1.3f, 0f);
+                float pulse = hasNews ? 1f + Mathf.Abs(Mathf.Sin(t * 3f)) * 0.08f : 1f;
+                button.localScale = Vector3.one * pulse;
+                if (buttonRing != null)
+                {
+                    var c = buttonRing.color;
+                    c.a = hasNews ? 0.5f + Mathf.Abs(Mathf.Sin(t * 3f)) * 0.5f : 0f;
+                    buttonRing.color = c;
+                }
+            }
+        }
+
+        static void AnimateRig(Rig rig, float t, float mouthLevel)
+        {
+            if (rig.mouth != null) rig.mouth.localScale = new Vector3(1f + mouthLevel * 0.25f, 0.35f + mouthLevel * 1.4f, 1f);
+            if (t >= rig.nextBlinkAt)
+            {
+                rig.blinkUntil = t + 0.12f;
+                rig.nextBlinkAt = t + Random.Range(2.5f, 5.5f);
+            }
+            bool blinking = t < rig.blinkUntil;
+            rig.eyesOpen.SetActive(!blinking);
+            rig.eyesClosed.SetActive(blinking);
         }
 
         void Show()
         {
-            if (shown) return;
+            if (pearlRoot == null || shown) return;
             shown = true;
-            visual.gameObject.SetActive(true);
-            Pop(Vector3.one * height);
+            quietSince = Time.time;
+            pearlRoot.gameObject.SetActive(true);
+            Pop(true);
         }
 
         void Hide()
         {
-            if (!shown) return;
+            if (pearlRoot == null || !shown) return;
             shown = false;
             AudioManager.SetDucked(false);
-            Pop(Vector3.zero);
+            Pop(false);
         }
 
-        void Pop(Vector3 to)
+        void Pop(bool open)
         {
             if (popping != null) StopCoroutine(popping);
-            popping = StartCoroutine(PopRoutine(to));
+            popping = StartCoroutine(PopRoutine(open));
         }
 
-        IEnumerator PopRoutine(Vector3 to)
+        IEnumerator PopRoutine(bool open)
         {
-            Transform root = visual.parent;
-            bool hiding = to == Vector3.zero;
-            yield return Tween.Scale(root, to, hiding ? 0.25f : 0.5f, hiding ? Tween.EaseInOutCubic : Tween.EaseOutBack);
-            if (hiding) visual.gameObject.SetActive(false);
+            Vector3 from = pearlRoot.localScale;
+            Vector3 to = open ? Vector3.one : Vector3.zero;
+            float duration = open ? 0.45f : 0.25f;
+            yield return Tween.Run(duration, k => pearlRoot.localScale = Vector3.LerpUnclamped(from, to, k),
+                open ? Tween.EaseOutBack : Tween.EaseInOutCubic);
+            if (!open) pearlRoot.gameObject.SetActive(false);
             popping = null;
         }
 
-        MuralExperience FindExperience(MuralData data)
+        void Build()
         {
-            foreach (var experience in FindObjectsByType<MuralExperience>(FindObjectsSortMode.None))
+            var hud = FindAnyObjectByType<ARHud>(FindObjectsInactive.Include);
+            Transform template = hud != null ? FindDeep(hud.transform, anchorButton) : null;
+            if (template == null)
             {
-                if (experience.Data == data) return experience;
+                Debug.LogWarning("Narrator: couldn't find the HUD button to sit under.", this);
+                return;
             }
-            return null;
+
+            BuildButton(template);
+            BuildPearl(hud.transform);
         }
 
-        void BuildVisual()
+        void BuildButton(Transform template)
         {
-            var scaler = new GameObject("Scaler").transform;
-            scaler.SetParent(transform, false);
-            scaler.localScale = Vector3.zero;
+            var copy = Instantiate(template.gameObject, template.parent);
+            copy.name = "NarratorButton";
+            button = (RectTransform)copy.transform;
+            button.anchoredPosition = ((RectTransform)template).anchoredPosition - new Vector2(0f, spacing);
+            for (int i = button.childCount - 1; i >= 0; i--) Destroy(button.GetChild(i).gameObject);
 
-            visual = new GameObject("Pearl").transform;
-            visual.SetParent(scaler, false);
+            var ui = copy.GetComponent<Button>();
+            ui.onClick.RemoveAllListeners();
+            ui.onClick.AddListener(ButtonPressed);
+            var audio = FindAnyObjectByType<AudioManager>(FindObjectsInactive.Include);
+            if (audio != null) ui.onClick.AddListener(audio.PlayButton);
 
-            Part(glow, visual, 0);
-            finL = Pivot("Fin L", 170f, 425f);
-            Part(finLeft, finL, 1);
-            finR = Pivot("Fin R", 430f, 425f);
-            Part(finRight, finR, 1);
-            Part(body, visual, 2);
-            Part(sockets, visual, 3);
+            var ringGo = new GameObject("Ring", typeof(RectTransform), typeof(Image));
+            var ringRect = ringGo.GetComponent<RectTransform>();
+            ringRect.SetParent(button.parent, false);
+            ringRect.SetSiblingIndex(button.GetSiblingIndex());
+            ringRect.anchorMin = button.anchorMin;
+            ringRect.anchorMax = button.anchorMax;
+            ringRect.pivot = button.pivot;
+            ringRect.sizeDelta = button.sizeDelta + new Vector2(16f, 16f);
+            ringRect.anchoredPosition = button.anchoredPosition + new Vector2(8f, 8f);
+            buttonRing = ringGo.GetComponent<Image>();
+            var circle = copy.GetComponent<Image>();
+            buttonRing.sprite = circle != null ? circle.sprite : null;
+            buttonRing.color = new Color(0.37f, 0.83f, 0.78f, 0f);
+            buttonRing.raycastTarget = false;
 
-            eyesOpen = new GameObject("Eyes Open");
-            eyesOpen.transform.SetParent(visual, false);
-            Part(eyeLeft, eyesOpen.transform, 4);
-            Part(eyeRight, eyesOpen.transform, 4);
-            Part(lashes, eyesOpen.transform, 5);
+            var maskHolder = new GameObject("Mask", typeof(RectTransform), typeof(Image), typeof(Mask));
+            var maskRect = maskHolder.GetComponent<RectTransform>();
+            maskRect.SetParent(button, false);
+            Stretch(maskRect);
+            var maskImage = maskHolder.GetComponent<Image>();
+            maskImage.sprite = buttonRing.sprite;
+            maskImage.raycastTarget = false;
+            maskHolder.GetComponent<Mask>().showMaskGraphic = false;
 
-            eyesClosed = new GameObject("Eyes Closed");
-            eyesClosed.transform.SetParent(visual, false);
-            Part(eyesBlink, eyesClosed.transform, 4);
-            eyesClosed.SetActive(false);
-
-            mouthPivot = Pivot("Mouth", 300f, 388f);
-            Part(mouth, mouthPivot, 6);
-            Part(shine, visual, 7);
-
-            var box = gameObject.GetComponent<BoxCollider>();
-            if (box == null) box = gameObject.AddComponent<BoxCollider>();
-            box.isTrigger = true;
-            box.center = Vector3.zero;
-            box.size = new Vector3(0.6f, 0.75f, 0.2f);
-            box.enabled = true;
-            StartCoroutine(SyncCollider(box, scaler));
+            float h = button.sizeDelta.y * 2.1f;
+            var holder = NewRect("Face", maskRect, new Vector2(h * CanvasWidth / CanvasHeight, h));
+            holder.anchoredPosition = new Vector2(0f, -(390f - 355f) / CanvasHeight * h);
+            icon = BuildRig(holder, false);
         }
 
-        IEnumerator SyncCollider(BoxCollider box, Transform scaler)
+        void BuildPearl(Transform hud)
         {
-            while (true)
+            pearlRoot = NewRect("Pearl", hud, new Vector2(pearlHeight * CanvasWidth / CanvasHeight, pearlHeight));
+            pearlRoot.anchorMin = pearlRoot.anchorMax = new Vector2(0.5f, 0f);
+            pearlRoot.pivot = new Vector2(0.5f, 0f);
+            pearlRoot.anchoredPosition = new Vector2(0f, bottomMargin);
+
+            var bob = NewRect("Bob", pearlRoot, pearlRoot.sizeDelta);
+            pearl = BuildRig(bob, true);
+
+            var hit = bob.gameObject.AddComponent<Image>();
+            hit.color = Color.clear;
+            hit.raycastTarget = true;
+            bob.gameObject.AddComponent<Button>().onClick.AddListener(PearlPressed);
+
+            pearlRoot.localScale = Vector3.zero;
+            pearlRoot.gameObject.SetActive(false);
+        }
+
+        Rig BuildRig(RectTransform holder, bool full)
+        {
+            var rig = new Rig { root = holder };
+            if (full)
             {
-                float s = scaler.localScale.y;
-                box.size = new Vector3(0.6f * s, 0.75f * s, 0.2f * Mathf.Max(s, 0.01f));
-                box.center = new Vector3(0f, 0.03f * s, 0f);
-                box.enabled = s > 0.05f;
-                yield return null;
+                Part(glow, holder);
+                rig.finL = Pivot("Fin L", holder, 170f, 425f);
+                Part(finLeft, rig.finL, holder);
+                rig.finR = Pivot("Fin R", holder, 430f, 425f);
+                Part(finRight, rig.finR, holder);
             }
+            Part(body, holder);
+            Part(sockets, holder);
+
+            rig.eyesOpen = Group("Eyes Open", holder);
+            Part(eyeLeft, rig.eyesOpen.transform);
+            Part(eyeRight, rig.eyesOpen.transform);
+            Part(lashes, rig.eyesOpen.transform);
+            rig.eyesClosed = Group("Eyes Closed", holder);
+            Part(eyesBlink, rig.eyesClosed.transform);
+            rig.eyesClosed.SetActive(false);
+
+            rig.mouth = Part(mouth, holder);
+            if (rig.mouth != null) rig.mouth.pivot = new Vector2(0.5f, 1f - 388f / CanvasHeight);
+            if (full) Part(shine, holder);
+            return rig;
         }
 
-        Transform Pivot(string pivotName, float x, float y)
+        RectTransform Pivot(string pivotName, RectTransform holder, float x, float y)
         {
-            var pivot = new GameObject(pivotName).transform;
-            pivot.SetParent(visual, false);
-            pivot.localPosition = CanvasToLocal(x, y);
+            var pivot = NewRect(pivotName, holder, Vector2.zero);
+            Vector2 size = holder.sizeDelta;
+            pivot.anchoredPosition = new Vector2((x - CanvasWidth * 0.5f) / CanvasWidth * size.x, (CanvasHeight * 0.5f - y) / CanvasHeight * size.y);
             return pivot;
         }
 
-        void Part(Sprite sprite, Transform parent, int order)
+        GameObject Group(string groupName, RectTransform holder)
         {
-            if (sprite == null) return;
-            var go = new GameObject(sprite.name);
-            go.transform.SetParent(parent, false);
-            Vector3 offset = parent == visual ? Vector3.zero : -parent.localPosition;
-            go.transform.localPosition = offset + new Vector3(0f, 0f, -0.002f * order);
-            var renderer = go.AddComponent<SpriteRenderer>();
-            renderer.sprite = sprite;
-            renderer.sortingOrder = 100 + order;
-            renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            renderer.receiveShadows = false;
+            var rect = NewRect(groupName, holder, Vector2.zero);
+            Stretch(rect);
+            return rect.gameObject;
         }
 
-        static Vector3 CanvasToLocal(float x, float y) =>
-            new Vector3((x - CanvasWidth * 0.5f) / CanvasHeight, (CanvasCentreY - y) / CanvasHeight, 0f);
+        RectTransform Part(Sprite sprite, Transform parent, RectTransform sizeFrom = null)
+        {
+            if (sprite == null) return null;
+            var go = new GameObject(sprite.name, typeof(RectTransform), typeof(Image));
+            var rect = go.GetComponent<RectTransform>();
+            rect.SetParent(parent, false);
+            if (sizeFrom != null)
+            {
+                rect.sizeDelta = sizeFrom.sizeDelta;
+                rect.anchoredPosition = -((RectTransform)parent).anchoredPosition;
+            }
+            else
+            {
+                Stretch(rect);
+            }
+            var image = go.GetComponent<Image>();
+            image.sprite = sprite;
+            image.preserveAspect = true;
+            image.raycastTarget = false;
+            return rect;
+        }
+
+        static RectTransform NewRect(string rectName, Transform parent, Vector2 size)
+        {
+            var rect = new GameObject(rectName, typeof(RectTransform)).GetComponent<RectTransform>();
+            rect.SetParent(parent, false);
+            rect.sizeDelta = size;
+            return rect;
+        }
+
+        static void Stretch(RectTransform rect)
+        {
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
+        }
+
+        static Transform FindDeep(Transform root, string childName)
+        {
+            if (root.name == childName) return root;
+            foreach (Transform child in root)
+            {
+                var found = FindDeep(child, childName);
+                if (found != null) return found;
+            }
+            return null;
+        }
     }
 }
