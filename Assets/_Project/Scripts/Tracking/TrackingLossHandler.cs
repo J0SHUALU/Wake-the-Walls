@@ -8,8 +8,10 @@ namespace WakeTheWalls.Tracking
 {
     public class TrackingLossHandler : MonoBehaviour
     {
-        [Tooltip("Seconds tracking must stay down before the mural counts as lost.")]
-        [SerializeField] float gracePeriod = 0.75f;
+        [Tooltip("Seconds the mural must be out of sight before it pauses. Covers people walking past and quick glances away.")]
+        [SerializeField, Min(0f)] float gracePeriod = 2f;
+        [Tooltip("Keeps an anchored mural playing while the camera still faces it, even when the painting is blocked.")]
+        [SerializeField] MuralAnchors anchors;
 
         readonly Dictionary<MuralExperience, Coroutine> pending = new Dictionary<MuralExperience, Coroutine>();
         readonly HashSet<MuralExperience> lost = new HashSet<MuralExperience>();
@@ -18,7 +20,7 @@ namespace WakeTheWalls.Tracking
         {
             if (experience == null) return;
 
-            if (isTracking)
+            if (isTracking || FacesAnchoredMural(experience))
             {
                 CancelPending(experience);
                 if (lost.Remove(experience))
@@ -32,6 +34,9 @@ namespace WakeTheWalls.Tracking
                 pending[experience] = StartCoroutine(LoseAfterGrace(experience));
             }
         }
+
+        bool FacesAnchoredMural(MuralExperience experience) =>
+            anchors != null && anchors.IsTracking(experience) && MuralView.IsInView(experience);
 
         public void Forget(MuralExperience experience)
         {
