@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5500644b423454e941a073a1ae60c3, type: 3}
+  m_Name: NarratorLines
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Narrator.NarratorLines
+  hello: {fileID: 8300000, guid: ffe8eb0d6b71f4fb8a912e2188ee204a, type: 3}
+  tapMe: {fileID: 8300000, guid: 4e1112650c3b240e2bb84b756ac3c3ab, type: 3}
+  murals:
+  - referenceImageName: Mural1
+    intro: {fileID: 8300000, guid: 298376da7ac62414baecb5e785615eca, type: 3}
+    about: {fileID: 8300000, guid: 7fc1b9712a23e4c9c8003053ed91b135, type: 3}
+    tryThis: {fileID: 8300000, guid: e47f8be22557046fbb132f8263653669, type: 3}
+    done: {fileID: 8300000, guid: cd8437cb130e440b8a0e1ac56fefa645, type: 3}
+  - referenceImageName: Mural2
+    intro: {fileID: 8300000, guid: 6a0861f77b4bd42a081ce8a3677d5e98, type: 3}
+    about: {fileID: 8300000, guid: cde653a68fc6c47dd8ba62ac6adbbf6e, type: 3}
+    tryThis: {fileID: 8300000, guid: 691be298fa40f456999a4dd35f53a39c, type: 3}
+    done: {fileID: 8300000, guid: 9033069f506db4556929e06f6ce0c16d, type: 3}
+  - referenceImageName: Mural3
+    intro: {fileID: 8300000, guid: a2fd931f675954c849cd323b995e22bd, type: 3}
+    about: {fileID: 8300000, guid: a8fed45894ae7492a9ece04133f34a78, type: 3}
+    tryThis: {fileID: 8300000, guid: f778eff95c50f4a9e840a8336d32c4d5, type: 3}
+    done: {fileID: 8300000, guid: e838631501d39459a91fa667c153fbf8, type: 3}
+  - referenceImageName: Mural4
+    intro: {fileID: 8300000, guid: 7289e95ff57df490db9dbba2d26a8209, type: 3}
+    about: {fileID: 8300000, guid: 89fff9400c5a64a3189fb590bb3de21a, type: 3}
+    tryThis: {fileID: 8300000, guid: f11513cb4aae944468399542b4b90738, type: 3}
+    done: {fileID: 8300000, guid: c0e430b7f01f448478575bc906db7e2f, type: 3}
+  - referenceImageName: Mural5
+    intro: {fileID: 8300000, guid: 260c5c0c5c76a4d7089c7a83c4899ea6, type: 3}
+    about: {fileID: 8300000, guid: 0049657b8b2484df69b478ef153e7ea1, type: 3}
+    tryThis: {fileID: 8300000, guid: 4f1a8ba706b2a42ae9b102049fbeadf9, type: 3}
+    done: {fileID: 8300000, guid: 4686e2b81e9174316940d39b15e80a27, type: 3}
