@@ -91,7 +91,7 @@ namespace WakeTheWalls.Tracking
                 experience.transform.SetParent(best.transform, false);
                 experience.transform.SetLocalPositionAndRotation(Vector3.zero, ImageToMural);
             }
-            lossHandler.Report(experience, best != null || (limited && MuralView.IsInView(experience)));
+            lossHandler.Report(experience, best != null, limited);
         }
 
         void Remove(TrackableId id)
