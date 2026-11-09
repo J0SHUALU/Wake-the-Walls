@@ -15,6 +15,8 @@ Measure the painted area with a tape measure, to the centimetre.
 | 3 | Desert Crossing *(working title)* | Long painted retaining wall below the fence on the outdoor walkway | 3.9* | 2.32* | Expansion | Donald |
 | 4 | Faces of the Continent *(working title)* | Covered brick alcove facing the paved court | 5.4* | 3.51* | Storytelling | Fawziyyah |
 | 5 | Orbit *(working title)* | Indoor hall wall below the mezzanine balcony | 6.4* | 3.61* | Reconstruction | Fawziyyah |
+| 6 | Caravan | | 3.65* | 2.32* | Journey | Remy |
+| 7 | Great Enclosure | | 2.83* | 2.32* | Gathering | Remy |
 
 \* Estimated from the photos (bricks, paving and wall sockets used for scale). Replace with tape measure values when someone can measure on site.
 
@@ -75,3 +77,24 @@ Use a different transformation for each mural: emergence, animation, reconstruct
 - **Extra interactions (draft):** Tap the rings when they are lined up to stack them back into the painting.
 - **Audio mood (draft):** Upbeat electronic rhythm with metallic percussion that matches the bangle taps.
 - **Elements to cut out:** done (rings, bangles raised, bangles low)
+
+## Mural 6
+
+- **Story (from guest relations):**
+- **What it shows:** A tall mud-brick tower studded with wooden beams beside a city of flat-roofed earth buildings. Behind them, camel caravans cross sand dunes past a blue oasis with palm trees under a pale sun.
+- **Size:** estimated from the photo at the same height as Mural 3. Measure on site to confirm.
+- **Concept (draft):** The journey starts moving. The caravans walk slowly across the dunes, the sun glows and its beams sweep the sky, the palms sway and sand drifts across the wall.
+- **Interaction 1 (draft):** Tap the caravan. It steps out of the dunes towards the user and settles back.
+- **Interaction 2 (draft):** Tap the oasis. A gust bends the palms and the water ripples with a splash of blue paint.
+- **Elements to cut out:** done (caravan, caravan far, palms, oasis; masks for sun and beams)
+
+## Mural 7
+
+- **Story (from guest relations):**
+- **What it shows:** A ring of thatched round huts inside a curved dry-stone wall, with a conical stone tower on the right.
+- **Size:** estimated from the photo at the same height as Mural 3. Measure on site to confirm.
+- **Concept (draft):** The enclosure comes to life. Smoke curls up from the huts, birds circle the tower, the doorways glow warm and light runs along the stone wall.
+- **Interaction 1 (draft):** Tap a hut. It lifts off the ground and settles back with a puff of smoke.
+- **Interaction 2 (draft):** Tap the tower. Light runs around the enclosure wall.
+- **Elements to cut out:** done (hut front, hut right, huts left, tower; masks for doors and wall)
+

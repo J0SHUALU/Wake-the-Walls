@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d120ec87984dd08ab49e9d51a59edd, type: 3}
+  m_Name: Mural6
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MuralData
+  referenceImageName: Mural6
+  displayName: Caravan
+  location: 
+  physicalSizeMeters: {x: 3.65, y: 2.32}
+  story: 
+  experiencePrefab: {fileID: 7023506433495526234, guid: 2d921a2e6400485290d44a457775dd91, type: 3}
+  palette:
+  - {r: 0.212, g: 0.196, b: 0.208, a: 1}
+  - {r: 0.51, g: 0.451, b: 0.439, a: 1}
+  - {r: 0.686, g: 0.624, b: 0.588, a: 1}
+  - {r: 0.82, g: 0.698, b: 0.608, a: 1}
+  - {r: 0.945, g: 0.859, b: 0.686, a: 1}
+  - {r: 0.859, g: 0.784, b: 0.686, a: 1}
+  ambience: {fileID: 0}
