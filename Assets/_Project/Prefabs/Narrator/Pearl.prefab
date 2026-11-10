@@ -155,7 +155,7 @@ MonoBehaviour:
   mouth: {fileID: 21300000, guid: cb2a01e1cc7b246c2b20c6cdeba5e12b, type: 3}
   shine: {fileID: 21300000, guid: 3806b4bf573534bcd9935a8a17ebb75b, type: 3}
   anchorButton: HelpButton
-  spacing: 180
+  spacing: 144
   pearlHeight: 520
   bottomMargin: 140
   idleBeforeHide: 4

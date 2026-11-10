@@ -20,9 +20,9 @@ namespace WakeTheWalls.UI
         [SerializeField] TMP_Text stampNumber;
         [SerializeField] TMP_Text title;
         [Tooltip("{0} is the mural's name. Used when the mural has a name.")]
-        [SerializeField] string titleWithName = "YOU WOKE {0}";
+        [SerializeField] string titleWithName = "You woke {0}";
         [Tooltip("{0} is the mural's number. Used when the name is still empty.")]
-        [SerializeField] string titleWithoutName = "WALL {0:00} IS AWAKE";
+        [SerializeField] string titleWithoutName = "Wall {0:00} is awake";
         [SerializeField] TMP_Text remaining;
         [SerializeField] StampsRow stamps;
 
@@ -78,7 +78,7 @@ namespace WakeTheWalls.UI
                 string name = current != null ? current.DisplayName : null;
                 title.text = string.IsNullOrWhiteSpace(name)
                     ? string.Format(titleWithoutName, number)
-                    : string.Format(titleWithName, name.Trim().ToUpperInvariant());
+                    : string.Format(titleWithName, name.Trim());
             }
 
             if (remaining != null) remaining.text = RemainingText(Mathf.Max(0, total - SessionProgress.Count));

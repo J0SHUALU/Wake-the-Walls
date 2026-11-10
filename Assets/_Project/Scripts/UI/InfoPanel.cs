@@ -90,7 +90,7 @@ namespace WakeTheWalls.UI
                     size.x.ToString("0.#", CultureInfo.InvariantCulture), size.y.ToString("0.#", CultureInfo.InvariantCulture));
             }
 
-            SetText(title, current.DisplayName?.ToUpperInvariant());
+            SetText(title, current.DisplayName);
             bool hasWhere = SetText(whereValue, current.Location);
             if (whereGroup != null) whereGroup.SetActive(hasWhere);
             bool hasStory = SetText(story, current.Story);

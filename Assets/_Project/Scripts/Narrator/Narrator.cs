@@ -33,7 +33,7 @@ namespace WakeTheWalls.Narrator
         [Header("Layout")]
         [Tooltip("Name of the HUD button Pearl's button sits under.")]
         [SerializeField] string anchorButton = "HelpButton";
-        [SerializeField] float spacing = 180f;
+        [SerializeField] float spacing = 144f;
         [Tooltip("Pearl's height on screen, in canvas units.")]
         [SerializeField] float pearlHeight = 520f;
         [Tooltip("Gap between the bottom of the screen and Pearl.")]
@@ -333,7 +333,13 @@ namespace WakeTheWalls.Narrator
             copy.name = "NarratorButton";
             button = (RectTransform)copy.transform;
             button.anchoredPosition = ((RectTransform)template).anchoredPosition - new Vector2(0f, spacing);
-            for (int i = button.childCount - 1; i >= 0; i--) Destroy(button.GetChild(i).gameObject);
+            Transform border = null;
+            for (int i = button.childCount - 1; i >= 0; i--)
+            {
+                var child = button.GetChild(i);
+                if (child.name == "Border") border = child;
+                else Destroy(child.gameObject);
+            }
 
             var ui = copy.GetComponent<Button>();
             ui.onClick.RemoveAllListeners();
@@ -353,7 +359,7 @@ namespace WakeTheWalls.Narrator
             buttonRing = ringGo.GetComponent<Image>();
             var circle = copy.GetComponent<Image>();
             buttonRing.sprite = circle != null ? circle.sprite : null;
-            buttonRing.color = new Color(0.37f, 0.83f, 0.78f, 0f);
+            buttonRing.color = new Color(0.82f, 0.05f, 0.18f, 0f);
             buttonRing.raycastTarget = false;
 
             var maskHolder = new GameObject("Mask", typeof(RectTransform), typeof(Image), typeof(Mask));
@@ -369,6 +375,7 @@ namespace WakeTheWalls.Narrator
             var holder = NewRect("Face", maskRect, new Vector2(h * CanvasWidth / CanvasHeight, h));
             holder.anchoredPosition = new Vector2(0f, -(390f - 355f) / CanvasHeight * h);
             icon = BuildRig(holder, false);
+            if (border != null) border.SetAsLastSibling();
         }
 
         void BuildPearl(Transform hud)
