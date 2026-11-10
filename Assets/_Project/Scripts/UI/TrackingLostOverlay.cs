@@ -96,7 +96,7 @@ namespace WakeTheWalls.UI
             {
                 bool hasName = !string.IsNullOrWhiteSpace(current.DisplayName);
                 tagTitle.gameObject.SetActive(hasName);
-                if (hasName) tagTitle.text = current.DisplayName.ToUpperInvariant();
+                if (hasName) tagTitle.text = current.DisplayName.Trim();
             }
         }
     }
