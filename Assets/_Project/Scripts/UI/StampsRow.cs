@@ -17,8 +17,9 @@ namespace WakeTheWalls.UI
         [SerializeField] float stampSize = 90f;
         [SerializeField] float numberSize = 48f;
         [SerializeField] float filledTilt = -6f;
-        [SerializeField] Color emptyColor = new Color32(0x5E, 0x55, 0x4B, 0xFF);
-        [SerializeField] Color filledColor = new Color32(0xA9, 0x48, 0x1F, 0xFF);
+        [SerializeField] Color emptyColor = Color.white;
+        [SerializeField] Color emptyNumberColor = new Color32(0x7D, 0x7D, 0x7D, 0xFF);
+        [SerializeField] Color filledColor = new Color32(0xD0, 0x0D, 0x2D, 0xFF);
         [SerializeField] Color filledNumberColor = Color.white;
 
         [Header("Count")]
@@ -41,7 +42,7 @@ namespace WakeTheWalls.UI
                 if (isWoken) count++;
                 stamp.ring.sprite = isWoken ? filledSprite : emptySprite;
                 stamp.ring.color = isWoken ? filledColor : emptyColor;
-                stamp.number.color = isWoken ? filledNumberColor : emptyColor;
+                stamp.number.color = isWoken ? filledNumberColor : emptyNumberColor;
                 stamp.ring.rectTransform.localRotation = Quaternion.Euler(0f, 0f, isWoken ? filledTilt : 0f);
             }
 
