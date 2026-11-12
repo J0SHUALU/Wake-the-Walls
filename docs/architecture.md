@@ -13,6 +13,7 @@ Assets/
       Interaction/  Interactable, TapInteractor, InfoHotspot
       UI/           UIManager, UIScreen, StartScreen, ScanScreen, ARHud, InfoPanel, CompletionScreen
       Audio/        AudioManager
+      Recording/    ScreenRecorder, ReplayKitRecorder, RecordButton, RecordingFocus
     Shaders/        MuralLayer, BrushDissolve, FlowWave, Painterly
     VFX/            PaintDust, PaintDrip
     Timelines/      one intro timeline per mural
