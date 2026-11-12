@@ -16,6 +16,6 @@ Mural photos, cut-outs and UI art: Joshua Moses. The murals themselves belong to
 
 ## Music
 
-The five mural soundtracks in `Assets/_Project/Audio/Music/` are original pieces made by the team in code with `Tools/MusicGen/` (no samples or downloaded audio). To remake them, run `python3 tracks.py` inside `Tools/MusicGen/` (needs numpy, scipy and ffmpeg).
+The mural soundtracks in `Assets/_Project/Audio/Music/` are original pieces made by the team in code with `Tools/MusicGen/` (no samples or downloaded audio). To remake them, run `python3 tracks.py` inside `Tools/MusicGen/` (needs numpy, scipy and ffmpeg).
 
 Add every downloaded asset (models, sounds, textures) to this file with its author, source and license.
