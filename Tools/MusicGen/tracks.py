@@ -80,6 +80,29 @@ def orbit():  # bright orbiting arpeggio, light beat, E lydian, 112 bpm
         if bar%2==0: T.add(pad(ch[1:4],T.beat*8.2,2000),b,0,0.25)
     return T.render(0.3,2.0)
 
-for name,fn in [('rooted',rooted),('bloom',bloom),('desert',desert),('faces',faces),('orbit',orbit)]:
+def caravan():  # slow walking pulse, plucked ngoni-like lines, G minor pentatonic, 76 bpm
+    T=Track(76,16); G=55; pent=[0,3,5,7,10,12,15,17]
+    T.add(drone(31,T.N+SR),0,0,0.06); T.add(drone(43,T.N+SR),0,-0.2,0.03)
+    riffs=[[0,2,3,2,4,3,2,0],[0,3,4,3,5,4,3,2],[2,4,5,4,6,5,4,3],[4,3,2,3,2,0,1,0]]
+    calls=[[4,5,4],[6,5,4],[5,4,2],[4,2,0]]
+    for bar in range(16):
+        b=bar*4
+        T.add(drum(0.7,62,0.28,0.1),b,0,0.6); T.add(drum(0.7,62,0.28,0.1),b+2,0,0.5)
+        T.add(drum(0.3,220,0.07,0.5),b+1.5,0.25,0.25); T.add(drum(0.3,220,0.07,0.5),b+3.5,-0.25,0.25)
+        for i in range(8): T.add(shaker(amp=0.5 if i%2==0 else 0.2),b+i*0.5,-0.5,0.16)
+        T.add(pluck(G-12,T.beat*3.5,0.3,0.996),b,0,0.5)
+        riff=riffs[(bar//2)%4]
+        for i,step in enumerate(riff):
+            if bar%4==3 and i>5: continue
+            T.add(pluck(G+pent[step],1.1,0.7,0.996),b+i*0.5,-0.3+0.1*(i%3),0.42)
+        if bar%2==1:
+            for i,step in enumerate(calls[(bar//2)%4]):
+                T.add(kalimba(G+12+pent[step],1.2),b+2+i*0.5,0.5,0.22)
+        if bar%4==2:
+            T.add(flute(G+12+pent[4],T.beat*2.5),b+0.5,0.45,0.13); T.add(flute(G+12+pent[3],T.beat*1.5),b+3,0.45,0.11)
+        if bar%4==0: T.add(pad([G,G+7,G+12],T.beat*8.2,1000),b,0,0.22)
+    return T.render(0.35,3.0)
+
+for name,fn in [('rooted',rooted),('bloom',bloom),('desert',desert),('faces',faces),('orbit',orbit),('caravan',caravan)]:
     if len(sys.argv)>1 and name not in sys.argv: continue
     y=fn(); save(name,y); print(name, y.shape[1]/SR)
