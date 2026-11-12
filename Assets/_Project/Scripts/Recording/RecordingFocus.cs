@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using WakeTheWalls.Core;
 
@@ -14,6 +15,10 @@ namespace WakeTheWalls.Recording
         [Tooltip("Seconds a fade takes. Keep it between 0.6 and 1.5.")]
         [SerializeField] float fadeDuration = 0.6f;
 
+        [Tooltip("Name of a control created at runtime that fades out with the others.")]
+        [SerializeField] string runtimeControl = "NarratorButton";
+
+        readonly List<CanvasGroup> targets = new List<CanvasGroup>();
         Coroutine fade;
 
         void OnEnable()
@@ -45,7 +50,8 @@ namespace WakeTheWalls.Recording
         void FadeTo(float target)
         {
             if (fade != null) StopCoroutine(fade);
-            float from = hiddenWhileRecording.Length > 0 && hiddenWhileRecording[0] != null ? hiddenWhileRecording[0].alpha : 1f;
+            CollectTargets();
+            float from = targets.Count > 0 && targets[0] != null ? targets[0].alpha : 1f;
             SetInteractive(target > 0f);
             fade = StartCoroutine(Fade(from, target));
         }
@@ -56,9 +62,20 @@ namespace WakeTheWalls.Recording
             fade = null;
         }
 
+        void CollectTargets()
+        {
+            targets.Clear();
+            targets.AddRange(hiddenWhileRecording);
+            Transform extra = transform.parent != null ? transform.parent.Find(runtimeControl) : null;
+            if (extra == null) return;
+            CanvasGroup group = extra.GetComponent<CanvasGroup>();
+            if (group == null) group = extra.gameObject.AddComponent<CanvasGroup>();
+            targets.Add(group);
+        }
+
         void Apply(float alpha)
         {
-            foreach (CanvasGroup group in hiddenWhileRecording)
+            foreach (CanvasGroup group in targets)
             {
                 if (group != null) group.alpha = alpha;
             }
@@ -66,7 +83,7 @@ namespace WakeTheWalls.Recording
 
         void SetInteractive(bool on)
         {
-            foreach (CanvasGroup group in hiddenWhileRecording)
+            foreach (CanvasGroup group in targets)
             {
                 if (group == null) continue;
                 group.interactable = on;

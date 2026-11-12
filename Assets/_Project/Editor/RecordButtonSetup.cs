@@ -11,7 +11,7 @@ namespace WakeTheWalls.EditorTools
         const string PrefabPath = "Assets/_Project/Prefabs/UI/ARHud.prefab";
         const string ShapeDir = "Assets/Art/UI/Shapes/";
         const string FontDir = "Assets/Art/UI/Fonts/";
-        const int Slot = 4;
+        const int Slot = 5;
 
         static readonly Color NavyDeep = new Color(0f, 0.1333f, 0.3098f, 1f);
         static readonly Color Red = new Color(0.8157f, 0.051f, 0.1765f, 1f);
