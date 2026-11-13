@@ -9,8 +9,6 @@ namespace WakeTheWalls.Tracking
 {
     // Keeps people in front of the murals. It shares the phone's person outline and camera image
     // with the PeopleCut full screen pass, which paints the camera image back over anyone in view.
-    // Depth is switched off on purpose: the layers sit millimetres off the wall, far closer than
-    // the phone's depth guess is accurate, and that made people flicker in and out.
     public class PeopleOcclusion : MonoBehaviour
     {
         static readonly int Stencil = Shader.PropertyToID("_WtwHumanStencil");
@@ -20,6 +18,11 @@ namespace WakeTheWalls.Tracking
         static readonly int Cut = Shader.PropertyToID("_WtwPeopleCut");
         static readonly int Flip = Shader.PropertyToID("_WtwFlip");
         static readonly int Rim = Shader.PropertyToID("_WtwRim");
+        static readonly int ArkitDepth = Shader.PropertyToID("_HumanDepth");
+        static readonly int Depth = Shader.PropertyToID("_WtwHumanDepth");
+        static readonly int WallPlane = Shader.PropertyToID("_WtwWallPlane");
+        static readonly int HasWall = Shader.PropertyToID("_WtwHasWall");
+        static readonly int WallGap = Shader.PropertyToID("_WtwWallGap");
 
         [SerializeField] AROcclusionManager occlusion;
         [SerializeField] ARCameraManager cameraManager;
@@ -28,9 +31,13 @@ namespace WakeTheWalls.Tracking
         [SerializeField] bool flipVertical;
         [Tooltip("Seconds for the gold edge to fade in and out with the mural.")]
         [SerializeField, Range(0.1f, 2f)] float rimFade = 0.6f;
+        [Tooltip("A person only cuts through the mural when they stand at least this many metres in front of the wall, so painted figures on the wall are left alone.")]
+        [SerializeField, Range(0f, 1f)] float minDistanceFromWall = 0.25f;
 
         bool haveVideo;
         Texture outline;
+        Texture depth;
+        Transform wall;
         float outlineSeenAt = -10f;
         float rim, rimTarget;
 
@@ -70,6 +77,7 @@ namespace WakeTheWalls.Tracking
             if (occlusion != null) occlusion.frameReceived -= OnOcclusionFrame;
             GameEvents.MuralFound -= OnFound;
             GameEvents.MuralLost -= OnLost;
+            GameEvents.MuralFocused -= OnFocused;
             Shader.SetGlobalFloat(Cut, 0f);
             Shader.SetGlobalFloat(Rim, 0f);
         }
@@ -89,6 +97,17 @@ namespace WakeTheWalls.Tracking
             GameEvents.MuralFound += OnFound;
             GameEvents.MuralLost -= OnLost;
             GameEvents.MuralLost += OnLost;
+            GameEvents.MuralFocused -= OnFocused;
+            GameEvents.MuralFocused += OnFocused;
+        }
+
+        void OnFocused(MuralData mural)
+        {
+            wall = null;
+            foreach (MuralExperience experience in FindObjectsByType<MuralExperience>(FindObjectsSortMode.None))
+            {
+                if (experience.Data == mural) wall = experience.transform;
+            }
         }
 
         void OnFound(MuralData mural) => rimTarget = 1f;
@@ -110,7 +129,9 @@ namespace WakeTheWalls.Tracking
         {
             foreach (ARExternalTexture texture in args.externalTextures)
             {
-                if (texture.propertyId != ArkitStencil || texture.texture == null) continue;
+                if (texture.texture == null) continue;
+                if (texture.propertyId == ArkitDepth) depth = texture.texture;
+                if (texture.propertyId != ArkitStencil) continue;
                 outline = texture.texture;
                 outlineSeenAt = Time.time;
             }
@@ -126,6 +147,16 @@ namespace WakeTheWalls.Tracking
             }
             Shader.SetGlobalFloat(Cut, on ? 1f : 0f);
             Shader.SetGlobalFloat(Flip, flipVertical ? 1f : 0f);
+
+            bool hasWall = on && depth != null && wall != null;
+            if (hasWall)
+            {
+                Vector3 normal = wall.forward;
+                Shader.SetGlobalTexture(Depth, depth);
+                Shader.SetGlobalVector(WallPlane, new Vector4(normal.x, normal.y, normal.z, -Vector3.Dot(normal, wall.position)));
+                Shader.SetGlobalFloat(WallGap, minDistanceFromWall);
+            }
+            Shader.SetGlobalFloat(HasWall, hasWall ? 1f : 0f);
 
             rim = Mathf.MoveTowards(rim, rimTarget, Time.deltaTime / rimFade);
             Shader.SetGlobalFloat(Rim, rim);

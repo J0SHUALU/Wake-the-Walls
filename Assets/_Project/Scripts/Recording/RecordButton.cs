@@ -24,6 +24,8 @@ namespace WakeTheWalls.Recording
         [SerializeField] Color recordingIcon = Color.white;
 
         [Header("Timer")]
+        [Tooltip("Shows a running timer while recording. Off by default because the timer ends up in the video.")]
+        [SerializeField] bool showTimer;
         [SerializeField] CanvasGroup timerGroup;
         [SerializeField] TMP_Text timerLabel;
         [Tooltip("{0} is minutes and {1} is seconds.")]
@@ -34,6 +36,8 @@ namespace WakeTheWalls.Recording
         [SerializeField] TMP_Text messageLabel;
         [SerializeField] string declinedMessage = "Recording did not start. Allow screen recording to save a video.";
         [SerializeField] string missingMessage = "No video was saved.";
+        [SerializeField] string savedMessage = "Video saved to Photos.";
+        [SerializeField] string photosMessage = "Allow Wake the Walls to add to Photos in Settings to save your videos.";
         [SerializeField] float messageSeconds = 4f;
 
         [Tooltip("Seconds a fade takes. Keep it between 0.6 and 1.5.")]
@@ -98,7 +102,7 @@ namespace WakeTheWalls.Recording
         {
             button.interactable = true;
             SetLook(true);
-            ShowTimer(true);
+            ShowTimer(showTimer);
         }
 
         void HandleStopped(bool hasVideo)
@@ -106,8 +110,9 @@ namespace WakeTheWalls.Recording
             button.interactable = true;
             SetLook(false);
             ShowTimer(false);
-            if (hasVideo) recorder.Show();
-            else ShowMessage(missingMessage);
+            if (!hasVideo) ShowMessage(missingMessage);
+            else if (recorder.SavesToPhotos) ShowMessage(savedMessage);
+            else recorder.Show();
         }
 
         void HandleFailed(string reason)
@@ -115,7 +120,7 @@ namespace WakeTheWalls.Recording
             button.interactable = true;
             SetLook(false);
             ShowTimer(false);
-            ShowMessage(declinedMessage);
+            ShowMessage(reason == ScreenRecorder.PhotosDenied ? photosMessage : declinedMessage);
         }
 
         void SetLook(bool recording)

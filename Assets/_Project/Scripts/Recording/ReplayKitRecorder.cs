@@ -9,8 +9,8 @@ namespace WakeTheWalls.Recording
         [Tooltip("Seconds of running time to wait for recording to begin before treating the request as declined.")]
         [SerializeField] float startTimeout = 8f;
 
-        [Tooltip("Seconds of running time to wait for the finished video after stopping.")]
-        [SerializeField] float stopTimeout = 6f;
+        [Tooltip("Seconds of running time to wait for the video to be written and saved to Photos.")]
+        [SerializeField] float saveTimeout = 30f;
 
         const float MaxFrameStep = 0.1f;
 
@@ -25,11 +25,14 @@ namespace WakeTheWalls.Recording
 
         public override bool IsBusy => starting != null || finishing != null;
 
+        public override bool SavesToPhotos => true;
+
         public override void Begin()
         {
             if (!IsAvailable || IsBusy || IsRecording) return;
             try
             {
+                ReplayKitBridge.Reset();
                 ReplayKitBridge.Start();
             }
             catch (Exception)
@@ -46,29 +49,24 @@ namespace WakeTheWalls.Recording
             if (!active || finishing != null) return;
             try
             {
-                if (IsRecording) ReplayKitBridge.Stop();
+                ReplayKitBridge.Stop();
             }
             catch (Exception)
             {
+                active = false;
+                RaiseStopped(false);
+                return;
             }
-            finishing = StartCoroutine(WaitForVideo());
+            finishing = StartCoroutine(WaitForSave());
         }
 
         public override void Show()
         {
-            try
-            {
-                if (ReplayKitBridge.HasRecording) ReplayKitBridge.Preview();
-            }
-            catch (Exception)
-            {
-                RaiseStopped(false);
-            }
         }
 
         void Update()
         {
-            if (active || IsBusy || !IsRecording) return;
+            if (active || IsBusy || ReplayKitBridge.State != RecorderState.Recording) return;
             active = true;
             RaiseStarted();
         }
@@ -77,42 +75,43 @@ namespace WakeTheWalls.Recording
         {
             if (paused) return;
             startWaited = 0f;
-            if (active && finishing == null && !IsRecording) finishing = StartCoroutine(WaitForVideo());
+            if (active && finishing == null && !IsRecording) End();
         }
 
         IEnumerator WaitForStart()
         {
-            while (!IsRecording && startWaited < startTimeout)
+            while (ReplayKitBridge.State == RecorderState.Starting && startWaited < startTimeout)
             {
                 startWaited += Mathf.Min(Time.unscaledDeltaTime, MaxFrameStep);
                 yield return null;
             }
 
             starting = null;
-            if (IsRecording)
+            if (ReplayKitBridge.State == RecorderState.Recording)
             {
                 active = true;
                 RaiseStarted();
             }
             else
             {
-                RaiseFailed(ReplayKitBridge.LastError);
+                RaiseFailed(string.Empty);
             }
         }
 
-        IEnumerator WaitForVideo()
+        IEnumerator WaitForSave()
         {
             float waited = 0f;
-            while ((IsRecording || !ReplayKitBridge.HasRecording) && waited < stopTimeout)
+            while (ReplayKitBridge.State == RecorderState.Saving && waited < saveTimeout)
             {
                 waited += Mathf.Min(Time.unscaledDeltaTime, MaxFrameStep);
                 yield return null;
             }
 
-            bool hasVideo = !IsRecording && ReplayKitBridge.HasRecording;
+            RecorderState result = ReplayKitBridge.State;
             active = false;
             finishing = null;
-            RaiseStopped(hasVideo);
+            if (result == RecorderState.PhotosDenied) RaiseFailed(PhotosDenied);
+            else RaiseStopped(result == RecorderState.Saved);
         }
     }
 }

@@ -5,6 +5,8 @@ namespace WakeTheWalls.Recording
 {
     public abstract class ScreenRecorder : MonoBehaviour
     {
+        public const string PhotosDenied = "photos";
+
         public event Action Started;
 
         public event Action<bool> Stopped;
@@ -16,6 +18,8 @@ namespace WakeTheWalls.Recording
         public abstract bool IsRecording { get; }
 
         public abstract bool IsBusy { get; }
+
+        public virtual bool SavesToPhotos => false;
 
         public abstract void Begin();
 
