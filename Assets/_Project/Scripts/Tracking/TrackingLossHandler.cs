@@ -12,8 +12,8 @@ namespace WakeTheWalls.Tracking
         [SerializeField, Min(0f)] float gracePeriod = 2f;
         [Tooltip("Keeps an anchored mural playing while the camera still faces it, even when the painting is blocked.")]
         [SerializeField] MuralAnchors anchors;
-        [Tooltip("How long a mural keeps playing without the painting itself being seen, while the camera still faces it.")]
-        [SerializeField, Min(0f)] float anchorTrustSeconds = 20f;
+        [Tooltip("A mural that is not seen keeps playing while the camera stays within this many metres of where it last saw the painting and still faces the wall, so people can stand in front of it for photos.")]
+        [SerializeField, Min(0.1f)] float maxDriftMetres = 2f;
         [Tooltip("A mural that is not seen only keeps playing while the camera is within this many mural widths of the wall.")]
         [SerializeField, Min(1f)] float maxDistanceInWidths = 2f;
         [Tooltip("The smallest such distance in metres, for narrow murals.")]
@@ -21,12 +21,13 @@ namespace WakeTheWalls.Tracking
 
         readonly Dictionary<MuralExperience, Coroutine> pending = new Dictionary<MuralExperience, Coroutine>();
         readonly HashSet<MuralExperience> lost = new HashSet<MuralExperience>();
-        readonly Dictionary<MuralExperience, float> lastSeen = new Dictionary<MuralExperience, float>();
+        readonly Dictionary<MuralExperience, Vector3> lastSeen = new Dictionary<MuralExperience, Vector3>();
 
         public void Report(MuralExperience experience, bool isTracking, bool isLimited = false)
         {
             if (experience == null) return;
-            if (isTracking) lastSeen[experience] = Time.time;
+            var cam = Camera.main;
+            if (isTracking && cam != null) lastSeen[experience] = cam.transform.position;
 
             if (isTracking || StillFacesMural(experience, isLimited))
             {
@@ -47,7 +48,9 @@ namespace WakeTheWalls.Tracking
         {
             bool held = isLimited || (anchors != null && anchors.IsTracking(experience));
             if (!held) return false;
-            if (!lastSeen.TryGetValue(experience, out float seen) || Time.time - seen > anchorTrustSeconds) return false;
+            var cam = Camera.main;
+            if (cam == null || !lastSeen.TryGetValue(experience, out Vector3 seenFrom)) return false;
+            if (Vector3.Distance(cam.transform.position, seenFrom) > maxDriftMetres) return false;
             return IsNear(experience) && MuralView.IsInView(experience);
         }
 
