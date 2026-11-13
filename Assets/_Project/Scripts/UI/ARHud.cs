@@ -47,14 +47,14 @@ namespace WakeTheWalls.UI
 
         void OnEnable()
         {
-            GameEvents.MuralFound += HandleMuralFound;
+            GameEvents.MuralFocused += HandleMuralFound;
             AudioManager.MuteChanged += UpdateSoundIcon;
             UpdateSoundIcon(AudioManager.IsMuted);
         }
 
         void OnDisable()
         {
-            GameEvents.MuralFound -= HandleMuralFound;
+            GameEvents.MuralFocused -= HandleMuralFound;
             AudioManager.MuteChanged -= UpdateSoundIcon;
         }
 
