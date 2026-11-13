@@ -3,6 +3,8 @@ using WakeTheWalls.Rig;
 
 namespace WakeTheWalls.Murals
 {
+    // Moves the iris layers like eyeballs: they follow the viewer and glance around now and then.
+    // A socket layer drawn above the irises hides them outside the eye opening.
     public class EyesFollow : MonoBehaviour
     {
         [SerializeField] LayeredMuralExperience experience;
@@ -13,9 +15,20 @@ namespace WakeTheWalls.Murals
         [Tooltip("Higher is snappier.")]
         [SerializeField] float followSpeed = 4f;
 
+        [Header("Glances")]
+        [Tooltip("Seconds between glances away from the viewer, picked at random in this range. 0,0 turns glances off.")]
+        [SerializeField] Vector2 glanceEvery = new Vector2(2.5f, 5f);
+        [Tooltip("How long a glance is held, in seconds.")]
+        [SerializeField] Vector2 glanceHold = new Vector2(0.5f, 1.2f);
+        [Tooltip("How far up and down a glance goes compared with side to side.")]
+        [SerializeField, Range(0f, 1f)] float glanceVertical = 0.35f;
+        [SerializeField] float glanceSpeed = 14f;
+
         Transform[] quads;
         Vector3[] rest;
-        Vector2 offset;
+        Vector2 offset, glance;
+        float nextGlance, glanceEnds;
+        bool glancing;
 
         void Update()
         {
@@ -25,11 +38,35 @@ namespace WakeTheWalls.Murals
             Vector3 viewer = experience.transform.InverseTransformPoint(Camera.main.transform.position);
             float distance = Mathf.Max(0.5f, -viewer.z);
             Vector2 target = Vector2.ClampMagnitude(new Vector2(viewer.x, viewer.y) / distance, 1f) * maxOffset;
-            offset = Vector2.Lerp(offset, target, 1f - Mathf.Exp(-followSpeed * Time.deltaTime));
+
+            UpdateGlance();
+            if (glancing) target = glance;
+
+            float speed = glancing ? glanceSpeed : followSpeed;
+            offset = Vector2.Lerp(offset, target, 1f - Mathf.Exp(-speed * Time.deltaTime));
 
             for (int i = 0; i < quads.Length; i++)
             {
                 if (quads[i] != null) quads[i].localPosition = rest[i] + (Vector3)offset;
+            }
+        }
+
+        void UpdateGlance()
+        {
+            if (glanceEvery.y <= 0f) return;
+            if (nextGlance <= 0f) nextGlance = Time.time + Random.Range(glanceEvery.x, glanceEvery.y);
+
+            if (!glancing && Time.time >= nextGlance)
+            {
+                glancing = true;
+                glanceEnds = Time.time + Random.Range(glanceHold.x, glanceHold.y);
+                float side = Random.value < 0.5f ? -1f : 1f;
+                glance = new Vector2(side * Random.Range(0.6f, 1f), Random.Range(-1f, 1f) * glanceVertical) * maxOffset;
+            }
+            else if (glancing && Time.time >= glanceEnds)
+            {
+                glancing = false;
+                nextGlance = Time.time + Random.Range(glanceEvery.x, glanceEvery.y);
             }
         }
 

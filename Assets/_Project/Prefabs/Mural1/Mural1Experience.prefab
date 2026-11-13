@@ -430,6 +430,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: e72a50d26a5ce43faa46f3c452f6119d, type: 3}
   - {fileID: 2800000, guid: 0ac41c59d570c4f9c8391b11f609ee99, type: 3}
   - {fileID: 2800000, guid: 92a68c9833d23451e8b3b45216697e01, type: 3}
+  - {fileID: 2800000, guid: 1ca044e57d3d5454b9f2671c08939a1d, type: 3}
   layerMaterial: {fileID: 2100000, guid: 8454737f7a4334f73a9f500fb604920c, type: 2}
 --- !u!114 &5991014757022255182
 MonoBehaviour:
@@ -461,7 +462,6 @@ GameObject:
   - component: {fileID: 7846288500644080684}
   - component: {fileID: 8157436026292187703}
   - component: {fileID: 2811212872656989982}
-  - component: {fileID: 7798537495024977847}
   - component: {fileID: 1837639026148415101}
   - component: {fileID: 5195936349746484481}
   - component: {fileID: 2333936807879050571}
@@ -469,6 +469,7 @@ GameObject:
   - component: {fileID: 6362165067126327373}
   - component: {fileID: 3610833576623207994}
   - component: {fileID: 6852358561629048825}
+  - component: {fileID: 2221248398327287507}
   m_Layer: 0
   m_Name: Mural1Experience
   m_TagString: Untagged
@@ -522,14 +523,14 @@ MonoBehaviour:
     bobSpeed: 0.2
     phase: 0.4
   - element: earring_left
-    swayDegrees: 4
-    swaySpeed: 0.35
+    swayDegrees: 7
+    swaySpeed: 0.38
     bobMeters: 0.002
     bobSpeed: 0.3
     phase: 0.15
   - element: earring_right
-    swayDegrees: 4
-    swaySpeed: 0.35
+    swayDegrees: 7
+    swaySpeed: 0.38
     bobMeters: 0.002
     bobSpeed: 0.3
     phase: 0.65
@@ -642,7 +643,7 @@ MonoBehaviour:
     height: 0.155
   seconds: 1.2
   depthMm: 0.5
-  repeatEvery: 6
+  repeatEvery: 4
   firstDelay: 4
   next: {fileID: 0}
   nextDelay: 0
@@ -668,53 +669,6 @@ MonoBehaviour:
   sizeLimits: {x: 0.12, y: 0.35}
   pulseAmount: 0.15
   pulseSpeed: 1
---- !u!114 &7798537495024977847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7756243726687083150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 353ee827d2abf43e992ba4b051550f2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PopOutIntro
-  experience: {fileID: 4686136062710758120}
-  items:
-  - element: earring_left
-    distance: 0.2
-    delay: 0
-    grow: 0.08
-  - element: earring_right
-    distance: 0.2
-    delay: 0.15
-    grow: 0.08
-  - element: forehead_leaf
-    distance: 0.28
-    delay: 0.5
-    grow: 0.15
-  - element: nose_ring
-    distance: 0.15
-    delay: 0.7
-    grow: 0.08
-  - element: robe_rosette
-    distance: 0.25
-    delay: 1
-    grow: 0.12
-  - element: tree_left
-    distance: 0.12
-    delay: 1.3
-    grow: 0.08
-  - element: tree_right
-    distance: 0.12
-    delay: 1.4
-    grow: 0.08
-  startDelay: 1.6
-  liftDuration: 1.2
-  holdSeconds: 4
-  restSeconds: 5
-  loop: 1
 --- !u!114 &1837639026148415101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,6 +704,184 @@ MonoBehaviour:
   sparkLift: 0.45
   sparkSpacing: 0.07
   trailPause: 2
+--- !u!114 &5195936349746484481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756243726687083150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1545a7be3dd24b05a5ddb9f26db56001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PaintDrips
+  experience: {fileID: 4686136062710758120}
+  elements:
+  - tree_right
+  - tree_left
+  - trees_mid_right
+  dripPrefab: {fileID: 1667061050494879361, guid: 093a30e00dbb54032b1f7faa5e1c9947, type: 3}
+  splashPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
+  colours: []
+  startDelay: 3
+  interval: {x: 1.5, y: 3}
+  fallSeconds: 1.1
+  splashOut: 0.15
+--- !u!114 &2333936807879050571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756243726687083150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 758dfb73d5d84c2ba9864058d855d7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Butterflies
+  experience: {fileID: 4686136062710758120}
+  fromElements:
+  - tree_right
+  - tree_top_left
+  - trees_mid_right
+  shape: 1
+  colours:
+  - {r: 0.12, g: 0.1, b: 0.1, a: 1}
+  - {r: 0.22, g: 0.18, b: 0.15, a: 1}
+  startDelay: 4
+  interval: {x: 5, y: 9}
+  lifeSeconds: 5
+  wingspan: 0.32
+  flapsPerSecond: 3.5
+  outDistance: 2.2
+--- !u!114 &6207750385823661214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756243726687083150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035d273e4ae247cebb449925329fb0d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.EyesFollow
+  experience: {fileID: 4686136062710758120}
+  irises:
+  - eye_left
+  - eye_right
+  maxOffset: 0.06
+  followSpeed: 5
+  glanceEvery: {x: 2.5, y: 5}
+  glanceHold: {x: 0.5, y: 1.2}
+  glanceVertical: 0.35
+  glanceSpeed: 14
+--- !u!114 &6362165067126327373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756243726687083150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7793bbdf1864f52a638085a7f0fa0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Drifters
+  experience: {fileID: 4686136062710758120}
+  shape: 2
+  colours:
+  - {r: 0.36, g: 0.55, b: 0.25, a: 1}
+  - {r: 0.5, g: 0.62, b: 0.3, a: 1}
+  - {r: 0.62, g: 0.68, b: 0.35, a: 1}
+  - {r: 0.75, g: 0.62, b: 0.25, a: 1}
+  area:
+    serializedVersion: 2
+    x: 0
+    y: 0.68
+    width: 0.3
+    height: 0.27
+  size: {x: 0.05, y: 0.09}
+  startDelay: 3
+  perSecond: 0.5
+  gustEvery: {x: 0, y: 0}
+  piecesPerGust: 0
+  maxPieces: 30
+  velocity: {x: 0.1, y: -0.22, z: -0.18}
+  velocityRandom: {x: 0.08, y: 0.06, z: 0.1}
+  sway: 0.08
+  spinDegrees: 120
+  lifeSeconds: {x: 5, y: 7}
+--- !u!114 &3610833576623207994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756243726687083150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7793bbdf1864f52a638085a7f0fa0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Drifters
+  experience: {fileID: 4686136062710758120}
+  shape: 2
+  colours:
+  - {r: 0.36, g: 0.55, b: 0.25, a: 1}
+  - {r: 0.5, g: 0.62, b: 0.3, a: 1}
+  - {r: 0.62, g: 0.68, b: 0.35, a: 1}
+  - {r: 0.75, g: 0.62, b: 0.25, a: 1}
+  area:
+    serializedVersion: 2
+    x: 0.65
+    y: 0.62
+    width: 0.35
+    height: 0.33
+  size: {x: 0.05, y: 0.09}
+  startDelay: 4
+  perSecond: 0.5
+  gustEvery: {x: 0, y: 0}
+  piecesPerGust: 0
+  maxPieces: 30
+  velocity: {x: -0.08, y: -0.22, z: -0.18}
+  velocityRandom: {x: 0.08, y: 0.06, z: 0.1}
+  sway: 0.08
+  spinDegrees: 120
+  lifeSeconds: {x: 5, y: 7}
+--- !u!114 &6852358561629048825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756243726687083150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19cb62d3d65747948e4fe6e504cdd732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PaintInIntro
+  experience: {fileID: 4686136062710758120}
+  backgroundSeconds: 1.6
+  layerSeconds: 0.8
+  stagger: 0.08
+--- !u!114 &2221248398327287507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756243726687083150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f4992a5f47f466a84d46ae8fbec638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.LayerSpin
+  experience: {fileID: 4686136062710758120}
+  items:
+  - element: robe_rosette
+    speed: 22
+  easeIn: 1.2
 --- !u!1 &7969410916150858986
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,160 +1013,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5195936349746484481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7756243726687083150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1545a7be3dd24b05a5ddb9f26db56001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PaintDrips
-  experience: {fileID: 4686136062710758120}
-  elements:
-  - tree_right
-  - tree_left
-  - trees_mid_right
-  dripPrefab: {fileID: 1667061050494879361, guid: 093a30e00dbb54032b1f7faa5e1c9947, type: 3}
-  splashPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  colours: []
-  startDelay: 3
-  interval: {x: 1.5, y: 3}
-  fallSeconds: 1.1
-  splashOut: 0.15
---- !u!114 &2333936807879050571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7756243726687083150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 758dfb73d5d84c2ba9864058d855d7a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Butterflies
-  experience: {fileID: 4686136062710758120}
-  shape: 1
-  fromElements:
-  - tree_right
-  - tree_top_left
-  - trees_mid_right
-  colours:
-  - {r: 0.12, g: 0.1, b: 0.1, a: 1}
-  - {r: 0.22, g: 0.18, b: 0.15, a: 1}
-  startDelay: 4
-  interval: {x: 5, y: 9}
-  lifeSeconds: 5
-  wingspan: 0.32
-  flapsPerSecond: 3.5
-  outDistance: 2.2
---- !u!114 &6207750385823661214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7756243726687083150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035d273e4ae247cebb449925329fb0d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.EyesFollow
-  experience: {fileID: 4686136062710758120}
-  irises:
-  - eye_left
-  - eye_right
-  maxOffset: 0.035
-  followSpeed: 4
---- !u!114 &6362165067126327373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7756243726687083150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7793bbdf1864f52a638085a7f0fa0b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Drifters
-  experience: {fileID: 4686136062710758120}
-  shape: 2
-  colours:
-  - {r: 0.36, g: 0.55, b: 0.25, a: 1}
-  - {r: 0.5, g: 0.62, b: 0.3, a: 1}
-  - {r: 0.62, g: 0.68, b: 0.35, a: 1}
-  - {r: 0.75, g: 0.62, b: 0.25, a: 1}
-  area:
-    serializedVersion: 2
-    x: 0.0
-    y: 0.68
-    width: 0.3
-    height: 0.27
-  size: {x: 0.05, y: 0.09}
-  startDelay: 3
-  perSecond: 0.5
-  gustEvery: {x: 0, y: 0}
-  piecesPerGust: 0
-  maxPieces: 30
-  velocity: {x: 0.1, y: -0.22, z: -0.18}
-  velocityRandom: {x: 0.08, y: 0.06, z: 0.1}
-  sway: 0.08
-  spinDegrees: 120
-  lifeSeconds: {x: 5, y: 7}
---- !u!114 &3610833576623207994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7756243726687083150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7793bbdf1864f52a638085a7f0fa0b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Drifters
-  experience: {fileID: 4686136062710758120}
-  shape: 2
-  colours:
-  - {r: 0.36, g: 0.55, b: 0.25, a: 1}
-  - {r: 0.5, g: 0.62, b: 0.3, a: 1}
-  - {r: 0.62, g: 0.68, b: 0.35, a: 1}
-  - {r: 0.75, g: 0.62, b: 0.25, a: 1}
-  area:
-    serializedVersion: 2
-    x: 0.65
-    y: 0.62
-    width: 0.35
-    height: 0.33
-  size: {x: 0.05, y: 0.09}
-  startDelay: 4
-  perSecond: 0.5
-  gustEvery: {x: 0, y: 0}
-  piecesPerGust: 0
-  maxPieces: 30
-  velocity: {x: -0.08, y: -0.22, z: -0.18}
-  velocityRandom: {x: 0.08, y: 0.06, z: 0.1}
-  sway: 0.08
-  spinDegrees: 120
-  lifeSeconds: {x: 5, y: 7}
---- !u!114 &6852358561629048825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7756243726687083150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19cb62d3d65747948e4fe6e504cdd732, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PaintInIntro
-  experience: {fileID: 4686136062710758120}
-  backgroundSeconds: 1.6
-  layerSeconds: 0.8
-  stagger: 0.08

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d120ec87984dd08ab49e9d51a59edd, type: 3}
+  m_Name: Mural7
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MuralData
+  referenceImageName: Mural7
+  displayName: Great Enclosure
+  location: 
+  physicalSizeMeters: {x: 2.83, y: 2.32}
+  story: 
+  experiencePrefab: {fileID: 1483598784964876320, guid: 0a82733a57e9e4d78b892d7e3b94b5df, type: 3}
+  palette:
+  - {r: 0.176, g: 0.176, b: 0.184, a: 1}
+  - {r: 0.631, g: 0.604, b: 0.565, a: 1}
+  - {r: 0.467, g: 0.424, b: 0.408, a: 1}
+  - {r: 0.835, g: 0.8, b: 0.655, a: 1}
+  - {r: 0.322, g: 0.333, b: 0.341, a: 1}
+  - {r: 0.859, g: 0.878, b: 0.757, a: 1}
+  ambience: {fileID: 0}
