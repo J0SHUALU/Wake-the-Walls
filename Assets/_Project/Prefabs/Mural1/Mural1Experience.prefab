@@ -439,13 +439,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4476261759526488710}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad44fc52f31e434c85c9b8bc1d2687a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerParallax
   depthScale: 12
-  maxOffset: 0.04
+  maxOffset: 0
   followSpeed: 8
   viewCamera: {fileID: 0}
 --- !u!1 &7756243726687083150
@@ -701,7 +701,7 @@ MonoBehaviour:
   - {r: 1, g: 0.82, b: 0.35, a: 1}
   - {r: 1, g: 0.95, b: 0.75, a: 1}
   secondsPerHop: 1.2
-  sparkLift: 0.45
+  sparkLift: 0
   sparkSpacing: 0.07
   trailPause: 2
 --- !u!114 &5195936349746484481

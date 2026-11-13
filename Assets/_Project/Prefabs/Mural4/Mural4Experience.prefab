@@ -47,7 +47,7 @@ MonoBehaviour:
   mask: {fileID: 2800000, guid: 6ace4c00d457424dbd1c5c7d33ea6788, type: 3}
   glowMaterial: {fileID: 2100000, guid: 81eead677b99241efb5ee092068847a4, type: 2}
   colour: {r: 1, g: 0.82, b: 0.4, a: 1}
-  depthMm: 1.5
+  depthMm: 1
   sortingOrder: 0
 --- !u!1 &1390470172925566715
 GameObject:
@@ -407,7 +407,7 @@ MonoBehaviour:
   - portrait_beret
   - portrait_right
   - portrait_cap
-  peelDistance: 0.12
+  peelDistance: 0
   holdSeconds: 1.4
   gapSeconds: 0.4
   maskEyes: {fileID: 5576148616342031460}
@@ -518,7 +518,7 @@ MonoBehaviour:
   - {r: 1, g: 0.82, b: 0.35, a: 1}
   - {r: 1, g: 0.95, b: 0.75, a: 1}
   secondsPerHop: 1.2
-  sparkLift: 0.45
+  sparkLift: 0
   sparkSpacing: 0.07
   trailPause: 2
 --- !u!114 &1515723395332671995
@@ -536,7 +536,7 @@ MonoBehaviour:
   mask: {fileID: 2800000, guid: a29bd029befd45978777baf1d355022e, type: 3}
   glowMaterial: {fileID: 2100000, guid: 81eead677b99241efb5ee092068847a4, type: 2}
   colour: {r: 1, g: 0.82, b: 0.4, a: 1}
-  depthMm: 1.7
+  depthMm: 1
   sortingOrder: 0
 --- !u!114 &7959837625990251132
 MonoBehaviour:
@@ -804,7 +804,7 @@ MonoBehaviour:
   mask: {fileID: 2800000, guid: a29bd029befd45978777baf1d355022e, type: 3}
   glowMaterial: {fileID: 2100000, guid: 81eead677b99241efb5ee092068847a4, type: 2}
   colour: {r: 1, g: 0.9, b: 0.6, a: 1}
-  depthMm: 1.6
+  depthMm: 1
   sortingOrder: 0
 --- !u!1 &6850224252404874001
 GameObject:
@@ -963,13 +963,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7290194206691968876}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad44fc52f31e434c85c9b8bc1d2687a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerParallax
   depthScale: 12
-  maxOffset: 0.04
+  maxOffset: 0
   followSpeed: 8
   viewCamera: {fileID: 0}
 --- !u!1 &8257269012784427131

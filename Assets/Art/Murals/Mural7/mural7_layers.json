@@ -7,7 +7,7 @@
     {
       "file": "mural7_L01_hut_front",
       "element": "hut_front",
-      "depthMm": 4.5,
+      "depthMm": 0.0,
       "order": 6,
       "pivotX": 0.417,
       "pivotY": 0.334
@@ -15,7 +15,7 @@
     {
       "file": "mural7_L02_hut_right",
       "element": "hut_right",
-      "depthMm": 4.0,
+      "depthMm": 0.0,
       "order": 5,
       "pivotX": 0.62,
       "pivotY": 0.384
@@ -23,7 +23,7 @@
     {
       "file": "mural7_L03_huts_left",
       "element": "huts_left",
-      "depthMm": 4.0,
+      "depthMm": 0.0,
       "order": 4,
       "pivotX": 0.196,
       "pivotY": 0.288
@@ -31,7 +31,7 @@
     {
       "file": "mural7_L04_tower",
       "element": "tower",
-      "depthMm": 3.5,
+      "depthMm": 0.0,
       "order": 3,
       "pivotX": 0.851,
       "pivotY": 0.341
@@ -47,7 +47,7 @@
     {
       "file": "mural7_L05_wall",
       "element": "wall",
-      "depthMm": 0.5,
+      "depthMm": 0.0,
       "order": 2,
       "pivotX": 0.5,
       "pivotY": 0.25

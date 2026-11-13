@@ -311,13 +311,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2931189858888588151}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad44fc52f31e434c85c9b8bc1d2687a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerParallax
   depthScale: 12
-  maxOffset: 0.04
+  maxOffset: 0
   followSpeed: 8
   viewCamera: {fileID: 0}
 --- !u!1 &3730146585356417816
@@ -666,7 +666,7 @@ MonoBehaviour:
   - {r: 1, g: 0.82, b: 0.35, a: 1}
   - {r: 1, g: 0.95, b: 0.75, a: 1}
   secondsPerHop: 1.2
-  sparkLift: 0.45
+  sparkLift: 0
   sparkSpacing: 0.07
   trailPause: 2
 --- !u!114 &3065626821057581658
@@ -686,9 +686,6 @@ MonoBehaviour:
   - tap: {fileID: 639170206505895949}
     elements:
     - flowers_left
-  - tap: {fileID: 7484047502382038691}
-    elements:
-    - necklace
   - tap: {fileID: 574964754737915730}
     elements:
     - flower_crown
@@ -885,7 +882,7 @@ MonoBehaviour:
   mask: {fileID: 2800000, guid: a6889caaa726049b8be31a8eaf73697c, type: 3}
   glowMaterial: {fileID: 2100000, guid: 81eead677b99241efb5ee092068847a4, type: 2}
   colour: {r: 1, g: 0.6, b: 0.3, a: 1}
-  depthMm: 1.4
+  depthMm: 1
   sortingOrder: 0
 --- !u!114 &4467435980553905118
 MonoBehaviour:
@@ -1147,7 +1144,7 @@ MonoBehaviour:
   mask: {fileID: 2800000, guid: d1be8742262b24fc98dd6f4fe7b5b5c1, type: 3}
   glowMaterial: {fileID: 2100000, guid: 81eead677b99241efb5ee092068847a4, type: 2}
   colour: {r: 1, g: 0.72, b: 0.35, a: 1}
-  depthMm: 1.4
+  depthMm: 1
   sortingOrder: 0
 --- !u!114 &4072624750582222823
 MonoBehaviour:

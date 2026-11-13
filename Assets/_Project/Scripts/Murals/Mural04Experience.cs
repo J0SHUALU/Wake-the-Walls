@@ -18,7 +18,7 @@ namespace WakeTheWalls.Murals
         [Tooltip("Portrait elements, in the order they lift during the intro.")]
         [SerializeField] string[] portraits = new string[0];
         [Tooltip("How far a portrait lifts off the wall, in metres.")]
-        [SerializeField, Range(0.02f, LayerMotion.MaxPeelMeters)] float peelDistance = 0.12f;
+        [SerializeField, Range(0f, LayerMotion.MaxPeelMeters)] float peelDistance = 0.12f;
         [SerializeField, Min(0.2f)] float holdSeconds = 1.4f;
         [SerializeField, Min(0f)] float gapSeconds = 0.4f;
 

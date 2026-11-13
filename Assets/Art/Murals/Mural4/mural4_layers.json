@@ -7,7 +7,7 @@
     {
       "file": "mural4_L01_portrait_crown",
       "element": "portrait_crown",
-      "depthMm": 2.0,
+      "depthMm": 0.0,
       "order": 1,
       "pivotX": 0.627,
       "pivotY": 0.777
@@ -15,7 +15,7 @@
     {
       "file": "mural4_L02_portrait_turban",
       "element": "portrait_turban",
-      "depthMm": 2.8,
+      "depthMm": 0.0,
       "order": 2,
       "pivotX": 0.802,
       "pivotY": 0.713
@@ -23,7 +23,7 @@
     {
       "file": "mural4_L03_portrait_beret",
       "element": "portrait_beret",
-      "depthMm": 3.5,
+      "depthMm": 0.0,
       "order": 3,
       "pivotX": 0.777,
       "pivotY": 0.497
@@ -31,7 +31,7 @@
     {
       "file": "mural4_L04_portrait_right",
       "element": "portrait_right",
-      "depthMm": 4.2,
+      "depthMm": 0.0,
       "order": 4,
       "pivotX": 0.894,
       "pivotY": 0.51
@@ -39,7 +39,7 @@
     {
       "file": "mural4_L05_portrait_cap",
       "element": "portrait_cap",
-      "depthMm": 5.0,
+      "depthMm": 0.0,
       "order": 5,
       "pivotX": 0.818,
       "pivotY": 0.242
@@ -47,7 +47,7 @@
     {
       "file": "mural4_L06_reeds",
       "element": "reeds",
-      "depthMm": 3.0,
+      "depthMm": 0.0,
       "order": 6,
       "pivotX": 0.664,
       "pivotY": 0.053
