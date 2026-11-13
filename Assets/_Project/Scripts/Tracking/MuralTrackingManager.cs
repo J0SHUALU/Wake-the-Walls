@@ -20,6 +20,7 @@ namespace WakeTheWalls.Tracking
         readonly Dictionary<TrackableId, MuralExperience> owners = new Dictionary<TrackableId, MuralExperience>();
         readonly Dictionary<MuralData, MuralExperience> byMural = new Dictionary<MuralData, MuralExperience>();
         MuralExperience active;
+        MuralExperience focused;
 
         void OnEnable()
         {
@@ -47,7 +48,7 @@ namespace WakeTheWalls.Tracking
             if (byMural.TryGetValue(data, out var existing) && existing != null)
             {
                 owners[image.trackableId] = existing;
-                Refresh(existing);
+                if (Refresh(existing)) Focus(existing);
                 return;
             }
 
@@ -61,17 +62,44 @@ namespace WakeTheWalls.Tracking
             byMural[data] = experience;
             active = experience;
             GameEvents.RaiseMuralFound(data);
+            Focus(experience);
         }
 
         void Update()
         {
+            MuralExperience centred = null;
+            float closest = float.MaxValue;
             foreach (var experience in byMural.Values)
             {
-                if (experience != null) Refresh(experience);
+                if (experience == null || !Refresh(experience)) continue;
+                float distance = DistanceFromCentre(experience);
+                if (distance < closest)
+                {
+                    closest = distance;
+                    centred = experience;
+                }
             }
+            if (centred != null) Focus(centred);
         }
 
-        void Refresh(MuralExperience experience)
+        void Focus(MuralExperience experience)
+        {
+            if (experience == focused) return;
+            focused = experience;
+            active = experience;
+            GameEvents.RaiseMuralFocused(experience.Data);
+        }
+
+        static float DistanceFromCentre(MuralExperience experience)
+        {
+            var cam = Camera.main;
+            if (cam == null) return float.MaxValue;
+            Vector3 view = cam.WorldToViewportPoint(experience.transform.position);
+            if (view.z <= 0f) return float.MaxValue;
+            return ((Vector2)view - new Vector2(0.5f, 0.5f)).sqrMagnitude;
+        }
+
+        bool Refresh(MuralExperience experience)
         {
             ARTrackedImage best = null;
             bool limited = false;
@@ -92,6 +120,7 @@ namespace WakeTheWalls.Tracking
                 experience.transform.SetLocalPositionAndRotation(Vector3.zero, ImageToMural);
             }
             lossHandler.Report(experience, best != null, limited);
+            return best != null;
         }
 
         void Remove(TrackableId id)
@@ -110,6 +139,7 @@ namespace WakeTheWalls.Tracking
                 Destroy(experience.gameObject);
             }
             if (active == experience) active = null;
+            if (focused == experience) focused = null;
         }
 
         bool TryFindMural(string imageName, out MuralData data)

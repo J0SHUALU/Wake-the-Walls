@@ -12,6 +12,8 @@ namespace WakeTheWalls.Core
 
         public static event Action<MuralData> MuralLost;
 
+        public static event Action<MuralData> MuralFocused;
+
         public static event Action<MuralData> MuralCompleted;
 
         public static event Action ResetRequested;
@@ -25,6 +27,8 @@ namespace WakeTheWalls.Core
         public static void RaiseMuralFound(MuralData mural) => MuralFound?.Invoke(mural);
 
         public static void RaiseMuralLost(MuralData mural) => MuralLost?.Invoke(mural);
+
+        public static void RaiseMuralFocused(MuralData mural) => MuralFocused?.Invoke(mural);
 
         public static void RaiseMuralCompleted(MuralData mural) => MuralCompleted?.Invoke(mural);
 
@@ -40,6 +44,7 @@ namespace WakeTheWalls.Core
             StateChanged = null;
             MuralFound = null;
             MuralLost = null;
+            MuralFocused = null;
             MuralCompleted = null;
             ResetRequested = null;
             InfoRequested = null;
