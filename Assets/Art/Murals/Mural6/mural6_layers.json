@@ -35,6 +35,14 @@
       "order": 2,
       "pivotX": 0.482,
       "pivotY": 0.637
+    },
+    {
+      "file": "mural6_L05_riders",
+      "element": "riders",
+      "depthMm": 4.0,
+      "order": 6,
+      "pivotX": 0.7104,
+      "pivotY": 0.5631
     }
   ]
 }

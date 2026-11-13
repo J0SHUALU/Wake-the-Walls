@@ -35,6 +35,22 @@
       "order": 3,
       "pivotX": 0.851,
       "pivotY": 0.341
+    },
+    {
+      "file": "mural7_L06_wall_base",
+      "element": "wall_base",
+      "depthMm": 0.0,
+      "order": 1,
+      "pivotX": 0.5,
+      "pivotY": 0.25
+    },
+    {
+      "file": "mural7_L05_wall",
+      "element": "wall",
+      "depthMm": 0.5,
+      "order": 2,
+      "pivotX": 0.5,
+      "pivotY": 0.25
     }
   ]
 }
