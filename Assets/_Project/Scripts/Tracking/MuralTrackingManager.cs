@@ -16,6 +16,8 @@ namespace WakeTheWalls.Tracking
         [SerializeField] TrackingLossHandler lossHandler;
         [Tooltip("Seconds after the app comes back from the background before a mural can show again, so it is placed from a fresh sighting of the wall.")]
         [SerializeField, Min(0f)] float resumeHoldSeconds = 0.75f;
+        [Tooltip("When the phone loses sight of a painting that is mostly on screen, something is blocking it, so the mural hides. When less than this share of the mural is on screen, the painting is just too big for the view, so the mural stays.")]
+        [SerializeField, Range(0f, 1f)] float blockedShare = 0.85f;
 
         readonly Dictionary<TrackableId, ARTrackedImage> images = new Dictionary<TrackableId, ARTrackedImage>();
         readonly Dictionary<TrackableId, MuralExperience> owners = new Dictionary<TrackableId, MuralExperience>();
@@ -103,11 +105,17 @@ namespace WakeTheWalls.Tracking
         bool Refresh(MuralExperience experience)
         {
             ARTrackedImage best = null;
+            ARTrackedImage held = null;
             foreach (var pair in owners)
             {
                 if (pair.Value != experience || !images.TryGetValue(pair.Key, out var image)) continue;
                 if (image.trackingState == TrackingState.Tracking) { best = image; break; }
+                if (image.trackingState == TrackingState.Limited) held = image;
             }
+
+            if (best == null && held != null && experience.transform.parent == held.transform
+                && MuralView.IsInView(experience) && MuralView.ShareOnScreen(experience) < blockedShare)
+                best = held;
 
             if (Time.unscaledTime < holdUntil) best = null;
 

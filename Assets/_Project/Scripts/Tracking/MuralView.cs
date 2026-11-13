@@ -23,6 +23,16 @@ namespace WakeTheWalls.Tracking
                 if (Mathf.Abs(local.x) <= half.x && Mathf.Abs(local.y) <= half.y) return true;
             }
 
+            return ShareOnScreen(experience) >= MinShareOnScreen;
+        }
+
+        public static float ShareOnScreen(MuralExperience experience)
+        {
+            var cam = Camera.main;
+            if (cam == null || experience == null || experience.Data == null) return 0f;
+            Transform mural = experience.transform;
+            Vector2 half = experience.Data.PhysicalSizeMeters * 0.5f;
+
             int onScreen = 0;
             for (int ix = 0; ix < Grid; ix++)
             {
@@ -33,7 +43,7 @@ namespace WakeTheWalls.Tracking
                     if (view.z > 0f && view.x >= 0f && view.x <= 1f && view.y >= 0f && view.y <= 1f) onScreen++;
                 }
             }
-            return onScreen >= MinShareOnScreen * Grid * Grid;
+            return onScreen / (float)(Grid * Grid);
         }
     }
 }
