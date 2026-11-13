@@ -91,6 +91,7 @@ namespace WakeTheWalls.UI
             }
 
             SetText(title, current.DisplayName);
+            if (closeButton != null) TitleFit.FitBefore(title, (RectTransform)closeButton.transform);
             bool hasWhere = SetText(whereValue, current.Location);
             if (whereGroup != null) whereGroup.SetActive(hasWhere);
             bool hasStory = SetText(story, current.Story);

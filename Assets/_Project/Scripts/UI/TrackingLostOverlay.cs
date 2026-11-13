@@ -61,6 +61,8 @@ namespace WakeTheWalls.UI
 
         void HandleMuralLost(MuralData mural)
         {
+            if (stateMachine == null) stateMachine = FindAnyObjectByType<AppStateMachine>();
+            if (stateMachine != null && stateMachine.Current != AppState.Experience) return;
             current = mural;
             if (hud != null) hud.SetDimmed(true);
             Show();
@@ -97,6 +99,7 @@ namespace WakeTheWalls.UI
                 bool hasName = !string.IsNullOrWhiteSpace(current.DisplayName);
                 tagTitle.gameObject.SetActive(hasName);
                 if (hasName) tagTitle.text = current.DisplayName.Trim();
+                TitleFit.Wrap(tagTitle);
             }
         }
     }

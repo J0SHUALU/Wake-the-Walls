@@ -75,6 +75,7 @@ namespace WakeTheWalls.UI
 
             if (title != null)
             {
+                TitleFit.Wrap(title);
                 string name = current != null ? current.DisplayName : null;
                 title.text = string.IsNullOrWhiteSpace(name)
                     ? string.Format(titleWithoutName, number)

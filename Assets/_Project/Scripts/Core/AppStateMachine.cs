@@ -32,7 +32,10 @@ namespace WakeTheWalls.Core
             GameEvents.RaiseStateChanged(Current);
         }
 
-        void HandleMuralFound(MuralData mural) => GoTo(AppState.Experience);
+        void HandleMuralFound(MuralData mural)
+        {
+            if (Current != AppState.Completion) GoTo(AppState.Experience);
+        }
 
         void HandleMuralCompleted(MuralData mural) => GoTo(AppState.Completion);
     }
