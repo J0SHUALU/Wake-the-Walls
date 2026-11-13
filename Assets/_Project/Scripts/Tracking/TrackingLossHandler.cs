@@ -8,28 +8,17 @@ namespace WakeTheWalls.Tracking
 {
     public class TrackingLossHandler : MonoBehaviour
     {
-        [Tooltip("Seconds the mural must be out of sight before it pauses. Covers people walking past and quick glances away.")]
-        [SerializeField, Min(0f)] float gracePeriod = 2f;
-        [Tooltip("Keeps an anchored mural playing while the camera still faces it, even when the painting is blocked.")]
-        [SerializeField] MuralAnchors anchors;
-        [Tooltip("A mural that is not seen keeps playing while the camera stays within this many metres of where it last saw the painting and still faces the wall, so people can stand in front of it for photos.")]
-        [SerializeField, Min(0.1f)] float maxDriftMetres = 2f;
-        [Tooltip("A mural that is not seen only keeps playing while the camera is within this many mural widths of the wall.")]
-        [SerializeField, Min(1f)] float maxDistanceInWidths = 2f;
-        [Tooltip("The smallest such distance in metres, for narrow murals.")]
-        [SerializeField, Min(1f)] float minDistanceMetres = 5f;
+        [Tooltip("Seconds the painting must be out of sight or blocked before the mural hides and the rescan page shows.")]
+        [SerializeField, Min(0f)] float gracePeriod = 0.5f;
 
         readonly Dictionary<MuralExperience, Coroutine> pending = new Dictionary<MuralExperience, Coroutine>();
         readonly HashSet<MuralExperience> lost = new HashSet<MuralExperience>();
-        readonly Dictionary<MuralExperience, Vector3> lastSeen = new Dictionary<MuralExperience, Vector3>();
 
-        public void Report(MuralExperience experience, bool isTracking, bool isLimited = false)
+        public void Report(MuralExperience experience, bool isTracking)
         {
             if (experience == null) return;
-            var cam = Camera.main;
-            if (isTracking && cam != null) lastSeen[experience] = cam.transform.position;
 
-            if (isTracking || StillFacesMural(experience, isLimited))
+            if (isTracking)
             {
                 CancelPending(experience);
                 if (lost.Remove(experience))
@@ -44,31 +33,10 @@ namespace WakeTheWalls.Tracking
             }
         }
 
-        bool StillFacesMural(MuralExperience experience, bool isLimited)
-        {
-            bool held = isLimited || (anchors != null && anchors.IsTracking(experience));
-            if (!held) return false;
-            var cam = Camera.main;
-            if (cam == null || !lastSeen.TryGetValue(experience, out Vector3 seenFrom)) return false;
-            if (Vector3.Distance(cam.transform.position, seenFrom) > maxDriftMetres) return false;
-            return IsNear(experience) && MuralView.IsInView(experience);
-        }
-
-        bool IsNear(MuralExperience experience)
-        {
-            var cam = Camera.main;
-            if (cam == null || experience.Data == null) return false;
-            Vector3 local = experience.transform.InverseTransformPoint(cam.transform.position);
-            if (local.z >= 0f) return false;
-            float limit = Mathf.Max(minDistanceMetres, experience.Data.PhysicalSizeMeters.x * maxDistanceInWidths);
-            return local.magnitude <= limit;
-        }
-
         public void Forget(MuralExperience experience)
         {
             CancelPending(experience);
             lost.Remove(experience);
-            lastSeen.Remove(experience);
         }
 
         IEnumerator LoseAfterGrace(MuralExperience experience)
