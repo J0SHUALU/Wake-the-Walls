@@ -14,6 +14,7 @@ namespace WakeTheWalls.Tracking
     public class PeopleOcclusion : MonoBehaviour
     {
         static readonly int Stencil = Shader.PropertyToID("_WtwHumanStencil");
+        static readonly int ArkitStencil = Shader.PropertyToID("_HumanStencil");
         static readonly int StencilTexel = Shader.PropertyToID("_WtwStencilTexel");
         static readonly int Display = Shader.PropertyToID("_WtwDisplayTransform");
         static readonly int Cut = Shader.PropertyToID("_WtwPeopleCut");
@@ -29,6 +30,8 @@ namespace WakeTheWalls.Tracking
         [SerializeField, Range(0.1f, 2f)] float rimFade = 0.6f;
 
         bool haveVideo;
+        Texture outline;
+        float outlineSeenAt = -10f;
         float rim, rimTarget;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -64,6 +67,7 @@ namespace WakeTheWalls.Tracking
         void OnDisable()
         {
             if (cameraManager != null) cameraManager.frameReceived -= OnFrame;
+            if (occlusion != null) occlusion.frameReceived -= OnOcclusionFrame;
             GameEvents.MuralFound -= OnFound;
             GameEvents.MuralLost -= OnLost;
             Shader.SetGlobalFloat(Cut, 0f);
@@ -79,6 +83,8 @@ namespace WakeTheWalls.Tracking
 
             cameraManager.frameReceived -= OnFrame;
             cameraManager.frameReceived += OnFrame;
+            occlusion.frameReceived -= OnOcclusionFrame;
+            occlusion.frameReceived += OnOcclusionFrame;
             GameEvents.MuralFound -= OnFound;
             GameEvents.MuralFound += OnFound;
             GameEvents.MuralLost -= OnLost;
@@ -98,10 +104,21 @@ namespace WakeTheWalls.Tracking
             haveVideo = args.textures.Count >= 2;
         }
 
+        // Reading the outline from the frame event instead of AROcclusionManager.humanStencilTexture,
+        // which logged every frame on device and the app ran out of memory.
+        void OnOcclusionFrame(AROcclusionFrameEventArgs args)
+        {
+            foreach (ARExternalTexture texture in args.externalTextures)
+            {
+                if (texture.propertyId != ArkitStencil || texture.texture == null) continue;
+                outline = texture.texture;
+                outlineSeenAt = Time.time;
+            }
+        }
+
         void Update()
         {
-            Texture2D outline = occlusion != null ? occlusion.humanStencilTexture : null;
-            bool on = outline != null && haveVideo;
+            bool on = outline != null && haveVideo && Time.time - outlineSeenAt < 0.5f;
             if (on)
             {
                 Shader.SetGlobalTexture(Stencil, outline);
