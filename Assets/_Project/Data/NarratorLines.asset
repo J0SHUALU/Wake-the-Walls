@@ -40,3 +40,13 @@ MonoBehaviour:
     about: {fileID: 8300000, guid: 0049657b8b2484df69b478ef153e7ea1, type: 3}
     tryThis: {fileID: 8300000, guid: 4f1a8ba706b2a42ae9b102049fbeadf9, type: 3}
     done: {fileID: 8300000, guid: 4686e2b81e9174316940d39b15e80a27, type: 3}
+  - referenceImageName: Mural6
+    intro: {fileID: 8300000, guid: 36f9faee327c4d228b1d642f2150173f, type: 3}
+    about: {fileID: 8300000, guid: 2bc1198bb2a74deda958a9ca87fd610f, type: 3}
+    tryThis: {fileID: 8300000, guid: 997c5133d7c74fb7925ceee74bc38b0f, type: 3}
+    done: {fileID: 8300000, guid: 1a14fc21258548b3a9973ac3539c0f6f, type: 3}
+  - referenceImageName: Mural7
+    intro: {fileID: 8300000, guid: 57f19b5f7d6b4e4c9a74a0d9b3b78287, type: 3}
+    about: {fileID: 8300000, guid: ee4bf5b3c8804c77849b89d880a8ca8f, type: 3}
+    tryThis: {fileID: 8300000, guid: 7bbfbf3f451d4211a16ca65bd9153912, type: 3}
+    done: {fileID: 8300000, guid: 888fb9ae1f2e4f59bb563f33ccf10548, type: 3}

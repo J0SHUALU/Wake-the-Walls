@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Great Enclosure
   location: 
   physicalSizeMeters: {x: 2.83, y: 2.32}
-  story: 
+  story: "Part of African Infrastructure Civilization: From Ancient Ingenuity to Afro-Futurism, by Mashakiro Bienvenue and Masha Art Studio from Rwanda.\n\nThe stone walls, tower and huts of Great Zimbabwe, one of the ancient builders' achievements the mural celebrates. From there the story moves through today's cities to an Afro-futurist Africa where innovation and bold ideas redefine what's possible.\n\nTap the wall to rebuild it brick by brick, or tap the tower and the huts."
   experiencePrefab: {fileID: 1483598784964876320, guid: 0a82733a57e9e4d78b892d7e3b94b5df, type: 3}
   palette:
   - {r: 0.176, g: 0.176, b: 0.184, a: 1}

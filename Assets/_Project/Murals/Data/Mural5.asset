@@ -16,15 +16,7 @@ MonoBehaviour:
   displayName: Orbit
   location: Indoor hall wall below the mezzanine balcony
   physicalSizeMeters: {x: 6.4, y: 3.609}
-  story: 'A bold figure stands against rays of teal, coral, black and white, with
-    gold rings circling her head like a headdress and stacked bangles on her raised
-    arms, while a second face watches from the right. The rings lift off the wall
-    and orbit her in 3D, as if her crown were a small solar system.
-
-
-    Tap the
-    rings to spin them faster, or tap the bangles to send a pulse of light along
-    the rays.'
+  story: "The Resurgence, by Lakaz D'art from Mauritius. Lakaz D'art developed the concept and Masha Studio painted it.\n\nA bold figure stands against rays of teal, coral, black and white, with gold rings circling her head and stacked bangles on her raised arms, while a second face watches from the right. The mural explores the culture of a visionary Africa, celebrating past, present and future together. It's Afrofuturism: imagining a different future to change the present, rooted in African leadership and the sharing of new ideas.\n\nTap the rings to spin them faster, or tap the bangles to send a pulse of light along the rays."
   experiencePrefab: {fileID: 7251402845200606155, guid: 627c4f3418b734a9c80ac762fdd74bca, type: 3}
   palette:
   - {r: 0.299, g: 0.27, b: 0.269, a: 1}

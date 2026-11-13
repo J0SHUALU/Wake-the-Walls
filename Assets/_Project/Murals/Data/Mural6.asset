@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Caravan
   location: 
   physicalSizeMeters: {x: 3.65, y: 2.32}
-  story: 
+  story: "Part of African Infrastructure Civilization: From Ancient Ingenuity to Afro-Futurism, by Mashakiro Bienvenue and Masha Art Studio from Rwanda.\n\nA caravan of camels and riders in bright colours crosses the desert. The full mural follows Africa's achievements in infrastructure, engineering and architecture, from the ingenuity of ancient civilizations to modern cities and an Afro-futurist vision of what's possible.\n\nTap the caravan to set it moving, or tap the water."
   experiencePrefab: {fileID: 193979942736365454, guid: 3958271ba89ec41cfa1f91c747d70e37, type: 3}
   palette:
   - {r: 0.212, g: 0.196, b: 0.208, a: 1}
