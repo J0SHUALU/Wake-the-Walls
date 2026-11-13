@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mural7
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MuralData
   referenceImageName: Mural7
-  displayName: Great Enclosure
+  displayName: African Infrastructure Civilization
   location: 
   physicalSizeMeters: {x: 2.83, y: 2.32}
   story: "Part of African Infrastructure Civilization: From Ancient Ingenuity to Afro-Futurism, by Mashakiro Bienvenue and Masha Art Studio from Rwanda.\n\nThe stone walls, tower and huts of Great Zimbabwe, one of the ancient builders' achievements the mural celebrates. From there the story moves through today's cities to an Afro-futurist Africa where innovation and bold ideas redefine what's possible.\n\nTap the wall to rebuild it brick by brick, or tap the tower and the huts."
