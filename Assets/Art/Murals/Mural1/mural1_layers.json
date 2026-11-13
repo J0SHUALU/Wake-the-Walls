@@ -93,10 +93,18 @@
       "pivotY": 0.614
     },
     {
+      "file": "mural1_L16_eye_sockets",
+      "element": "eye_sockets",
+      "depthMm": 0.0,
+      "order": 12,
+      "pivotX": 0.5,
+      "pivotY": 0.5
+    },
+    {
       "file": "mural1_L07_lid_left",
       "element": "lid_left",
       "depthMm": 5.0,
-      "order": 12,
+      "order": 13,
       "pivotX": 0.4281,
       "pivotY": 0.6358
     },
@@ -104,7 +112,7 @@
       "file": "mural1_L08_lid_right",
       "element": "lid_right",
       "depthMm": 5.0,
-      "order": 13,
+      "order": 14,
       "pivotX": 0.5877,
       "pivotY": 0.6351
     },
@@ -112,7 +120,7 @@
       "file": "mural1_L09_forehead_leaf",
       "element": "forehead_leaf",
       "depthMm": 5.0,
-      "order": 14,
+      "order": 15,
       "pivotX": 0.5008,
       "pivotY": 0.703
     },
@@ -120,7 +128,7 @@
       "file": "mural1_L10_nose_ring",
       "element": "nose_ring",
       "depthMm": 5.0,
-      "order": 15,
+      "order": 16,
       "pivotX": 0.502,
       "pivotY": 0.5381
     }

@@ -1,0 +1,762 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1446101492004171541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3899214361708323927}
+  - component: {fileID: 909155209858128857}
+  - component: {fileID: 7012357094008438462}
+  - component: {fileID: 6435710953696096547}
+  m_Layer: 0
+  m_Name: TapTower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3899214361708323927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446101492004171541}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5206825690310752916}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &909155209858128857
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446101492004171541}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7012357094008438462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446101492004171541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd18f2ddf6ef426d879fa3bf1f29b8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Interaction.Interactable
+  isInteractable: 1
+  tapped:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6435710953696096547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446101492004171541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e96dcc66f23c45f88a2be1078ec5ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PulseInteraction
+  experience: {fileID: 1483598784964876320}
+  area:
+    serializedVersion: 2
+    x: 0.76
+    y: 0.2
+    width: 0.2
+    height: 0.3
+  elements:
+  - tower
+  openScale: 1.12
+  openSeconds: 0.6
+  settleSeconds: 1.2
+  burstPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
+  burstColours: []
+  burstOffset: {x: 0, y: 0, z: -0.25}
+  sound: {fileID: 0}
+  interactionId: tower
+  used:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1483598784964876320}
+        m_TargetAssemblyTypeName: WakeTheWalls.Murals.LayeredMuralExperience, Assembly-CSharp
+        m_MethodName: ReportInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &2234363443907354330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 155817622851612909}
+  - component: {fileID: 7255351347074460766}
+  - component: {fileID: 6736020034054845010}
+  m_Layer: 0
+  m_Name: Rig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &155817622851612909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2234363443907354330}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5206825690310752916}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7255351347074460766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2234363443907354330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05652e801061146a593fac0a33de738c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayeredMuralRig
+  manifest: {fileID: 4900000, guid: 3623c6bc88e87497b88ff0e4d44a1f51, type: 3}
+  textures:
+  - {fileID: 2800000, guid: 3038971d7577c4d0ea47be4dd01bdfd7, type: 3}
+  - {fileID: 2800000, guid: 257440aac1b7a47d5a5680f6fd8480aa, type: 3}
+  - {fileID: 2800000, guid: 958f0a808cf0847d2a03668f4f64c74b, type: 3}
+  - {fileID: 2800000, guid: b039ed23efc66462793c7b66e5b8c28f, type: 3}
+  - {fileID: 2800000, guid: 4503a169b602b4955a2018e39b0f5030, type: 3}
+  - {fileID: 2800000, guid: 78c4a5ae3284a4a1ca971ff63a3e6ead, type: 3}
+  - {fileID: 2800000, guid: 925b3f983bcce468bb2aa5cdc4f5a26f, type: 3}
+  layerMaterial: {fileID: 2100000, guid: 8454737f7a4334f73a9f500fb604920c, type: 2}
+--- !u!114 &6736020034054845010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2234363443907354330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad44fc52f31e434c85c9b8bc1d2687a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerParallax
+  depthScale: 12
+  maxOffset: 0.04
+  followSpeed: 8
+  viewCamera: {fileID: 0}
+--- !u!1 &4634730921461921547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4051419925212075234}
+  - component: {fileID: 2941492071220724874}
+  - component: {fileID: 5383795523480587185}
+  - component: {fileID: 3653831272171081702}
+  m_Layer: 0
+  m_Name: TapWall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4051419925212075234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4634730921461921547}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5206825690310752916}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2941492071220724874
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4634730921461921547}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5383795523480587185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4634730921461921547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd18f2ddf6ef426d879fa3bf1f29b8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Interaction.Interactable
+  isInteractable: 1
+  tapped:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9109915765861579981}
+        m_TargetAssemblyTypeName: WakeTheWalls.Murals.BrickBuild, Assembly-CSharp
+        m_MethodName: Rebuild
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3653831272171081702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4634730921461921547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e96dcc66f23c45f88a2be1078ec5ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PulseInteraction
+  experience: {fileID: 1483598784964876320}
+  area:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 0.3
+  elements: []
+  openScale: 1.12
+  openSeconds: 0.6
+  settleSeconds: 1.2
+  burstPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
+  burstColours: []
+  burstOffset: {x: 0, y: 0, z: -0.25}
+  sound: {fileID: 0}
+  interactionId: wall
+  used:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1483598784964876320}
+        m_TargetAssemblyTypeName: WakeTheWalls.Murals.LayeredMuralExperience, Assembly-CSharp
+        m_MethodName: ReportInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &6118693397049709926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8135227288171187249}
+  - component: {fileID: 6722040154146689805}
+  - component: {fileID: 64308102250434633}
+  m_Layer: 0
+  m_Name: Glow mural7_M01_doors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8135227288171187249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6118693397049709926}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5206825690310752916}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6722040154146689805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6118693397049709926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c078ffae41254ac6851d17c6870095e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.VFX.MaskGlow
+  mask: {fileID: 2800000, guid: 9310e96ca532b45b68f4dc46130c62a4, type: 3}
+  glowMaterial: {fileID: 2100000, guid: 81eead677b99241efb5ee092068847a4, type: 2}
+  colour: {r: 1, g: 0.6, b: 0.25, a: 1}
+  depthMm: 1.4
+  sortingOrder: 0
+--- !u!114 &64308102250434633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6118693397049709926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d333a296e9b04550900360efc44a7b8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.VFX.GlowPulse
+  experience: {fileID: 1483598784964876320}
+  glow: {fileID: 6722040154146689805}
+  startDelay: 2
+  low: 0.25
+  high: 0.85
+  breathSeconds: 0.7
+--- !u!1 &6791155172197381906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4395854740676605042}
+  - component: {fileID: 584003674266346249}
+  - component: {fileID: 6100807813614706657}
+  - component: {fileID: 6002121033056879436}
+  m_Layer: 0
+  m_Name: TapHuts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4395854740676605042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6791155172197381906}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5206825690310752916}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &584003674266346249
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6791155172197381906}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6100807813614706657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6791155172197381906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd18f2ddf6ef426d879fa3bf1f29b8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Interaction.Interactable
+  isInteractable: 1
+  tapped:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6002121033056879436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6791155172197381906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e96dcc66f23c45f88a2be1078ec5ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PulseInteraction
+  experience: {fileID: 1483598784964876320}
+  area:
+    serializedVersion: 2
+    x: 0.1
+    y: 0.3
+    width: 0.6
+    height: 0.4
+  elements:
+  - hut_front
+  - hut_right
+  - huts_left
+  openScale: 1.12
+  openSeconds: 0.6
+  settleSeconds: 1.2
+  burstPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
+  burstColours: []
+  burstOffset: {x: 0, y: 0, z: -0.25}
+  sound: {fileID: 0}
+  interactionId: huts
+  used:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1483598784964876320}
+        m_TargetAssemblyTypeName: WakeTheWalls.Murals.LayeredMuralExperience, Assembly-CSharp
+        m_MethodName: ReportInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &7180420406425568416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5206825690310752916}
+  - component: {fileID: 1324810862383147485}
+  - component: {fileID: 1483598784964876320}
+  - component: {fileID: 40072457851908029}
+  - component: {fileID: 421079271236925599}
+  - component: {fileID: 3659982809365997786}
+  - component: {fileID: 9109915765861579981}
+  - component: {fileID: 122120141309210187}
+  - component: {fileID: 266544794780462907}
+  - component: {fileID: 3349593680222376838}
+  m_Layer: 0
+  m_Name: Mural7Experience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5206825690310752916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180420406425568416}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 155817622851612909}
+  - {fileID: 8135227288171187249}
+  - {fileID: 4051419925212075234}
+  - {fileID: 3899214361708323927}
+  - {fileID: 4395854740676605042}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1324810862383147485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180420406425568416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f932080a99cd47ac81373a24742dc51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerMotionSet
+  entries:
+  - element: tower
+    swayDegrees: 0
+    swaySpeed: 0.1
+    bobMeters: 0.0015
+    bobSpeed: 0.3
+    phase: 0.1
+  - element: hut_front
+    swayDegrees: 0
+    swaySpeed: 0.1
+    bobMeters: 0.0015
+    bobSpeed: 0.3
+    phase: 0.4
+  - element: hut_right
+    swayDegrees: 0
+    swaySpeed: 0.1
+    bobMeters: 0.0015
+    bobSpeed: 0.3
+    phase: 0.7
+  - element: huts_left
+    swayDegrees: 0
+    swaySpeed: 0.1
+    bobMeters: 0.0015
+    bobSpeed: 0.3
+    phase: 0.2
+  stagger: 0.35
+--- !u!114 &1483598784964876320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180420406425568416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c878722169784536aad083bba6c5bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Mural07Experience
+  rig: {fileID: 7255351347074460766}
+  motionSet: {fileID: 1324810862383147485}
+  parallax: {fileID: 6736020034054845010}
+  fadeDuration: 1.2
+  dustPrefab: {fileID: 0}
+  dustSources: []
+  dustOffset: {x: 0, y: 0.25, z: -0.02}
+  dustInterval: {x: 2.5, y: 5}
+  requiredInteractions: 2
+  wall: {fileID: 9109915765861579981}
+--- !u!114 &40072457851908029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180420406425568416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be30d226c3bb24e6d82d23d35ccd40a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.TapMarkers
+  experience: {fileID: 1483598784964876320}
+  ring: {fileID: 21300000, guid: 4b9c91a79aba94d0d9cacbf681024a8e, type: 3}
+  dot: {fileID: 21300000, guid: c7604838912c44be482d0d961fccd5fe, type: 3}
+  ringColour: {r: 0.9, g: 0.16, b: 0.13, a: 1}
+  dotColour: {r: 1, g: 1, b: 1, a: 1}
+  showDelay: 2
+  sizeShare: 0.3
+  sizeLimits: {x: 0.12, y: 0.35}
+  pulseAmount: 0.15
+  pulseSpeed: 1
+--- !u!114 &421079271236925599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180420406425568416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19cb62d3d65747948e4fe6e504cdd732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PaintInIntro
+  experience: {fileID: 1483598784964876320}
+  backgroundSeconds: 1.6
+  layerSeconds: 0.8
+  stagger: 0.08
+--- !u!114 &3659982809365997786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180420406425568416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d140b732c574f6989978b6f4bf1e5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MaskSweep
+  experience: {fileID: 1483598784964876320}
+  mask: {fileID: 2800000, guid: 2401073324e5b4899a6558c48caa47bb, type: 3}
+  glowMaterial: {fileID: 2100000, guid: cc2621d167f64a04a570c682f4eabccd, type: 2}
+  colour: {r: 1.35, g: 1.2, b: 0.95, a: 1}
+  width: 0.06
+  direction: 0
+  region:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  seconds: 2.4
+  depthMm: 0.5
+  repeatEvery: 9
+  firstDelay: 9
+  next: {fileID: 0}
+  nextDelay: 0
+--- !u!114 &9109915765861579981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180420406425568416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a915011ca6784c87ae5a900d0040f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.BrickBuild
+  experience: {fileID: 1483598784964876320}
+  element: wall
+  brickMaterial: {fileID: 2100000, guid: 0b9259975f55644ca9cc032fe60af757, type: 2}
+  startDelay: 1.5
+  buildSeconds: 6
+  afterBuild: {fileID: 3659982809365997786}
+--- !u!114 &122120141309210187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180420406425568416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fef99a4193f146ccb47f69899403f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.SmokePlume
+  experience: {fileID: 1483598784964876320}
+  sources:
+  - {x: 0.417, y: 0.62}
+  - {x: 0.615, y: 0.69}
+  - {x: 0.185, y: 0.62}
+  colour: {r: 0.93, g: 0.91, b: 0.88, a: 1}
+  opacity: 0.3
+  puffsPerSecond: 2.5
+  size: {x: 0.05, y: 0.22}
+  riseSpeed: 0.1
+  wind: 0.025
+  lifeSeconds: {x: 3.5, y: 5}
+  startDelay: 2
+--- !u!114 &266544794780462907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180420406425568416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcfb7fb60e30481aa816faf92e05816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.DuskCycle
+  experience: {fileID: 1483598784964876320}
+  cycleSeconds: 36
+  firstDusk: 10
+  duskTint: {r: 0.86, g: 0.66, b: 0.55, a: 1}
+  embers: 1
+  emberArea:
+    serializedVersion: 2
+    x: 0.1
+    y: 0.25
+    width: 0.8
+    height: 0.4
+  embersPerSecond: 6
+  emberColour: {r: 1, g: 0.62, b: 0.2, a: 1}
+  emberSize: 0.012
+--- !u!114 &3349593680222376838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180420406425568416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4f7db94bbc2440cb23bbc908cc63a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.CirclingBirds
+  experience: {fileID: 1483598784964876320}
+  centre: {x: 0.852, y: 0.58}
+  radius: {x: 0.08, y: 0.025}
+  count: 5
+  speed: 0.14
+  wingspan: 0.07
+  flapsPerSecond: 2.2
+  colour: {r: 0.12, g: 0.12, b: 0.14, a: 1}
+  startDelay: 2.5
