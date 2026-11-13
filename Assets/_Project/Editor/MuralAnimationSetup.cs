@@ -227,7 +227,7 @@ namespace WakeTheWalls.EditorTools
             var smoke = root.AddComponent<SmokePlume>();
             Set(smoke, "experience", experience);
             var smokeSo = new SerializedObject(smoke);
-            Vector2[] roofs = { new Vector2(0.417f, 0.62f), new Vector2(0.615f, 0.69f), new Vector2(0.185f, 0.62f), new Vector2(0.473f, 0.9f), new Vector2(0.595f, 0.89f) };
+            Vector2[] roofs = { new Vector2(0.417f, 0.62f), new Vector2(0.615f, 0.69f), new Vector2(0.185f, 0.62f) };
             SerializedProperty sources = smokeSo.FindProperty("sources");
             sources.arraySize = roofs.Length;
             for (int i = 0; i < roofs.Length; i++) sources.GetArrayElementAtIndex(i).vector2Value = roofs[i];

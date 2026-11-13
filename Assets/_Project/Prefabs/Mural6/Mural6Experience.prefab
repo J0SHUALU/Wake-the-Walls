@@ -52,6 +52,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: e0447c4278957407e98451bdf57c39a8, type: 3}
   - {fileID: 2800000, guid: c0adcf2e99b26483ba44d3403a591c5e, type: 3}
   - {fileID: 2800000, guid: 30e9ea5a5e8b746f8af88769f3957b4a, type: 3}
+  - {fileID: 2800000, guid: 603db82c656c2477bbaa8256a8be1ad9, type: 3}
   layerMaterial: {fileID: 2100000, guid: 8454737f7a4334f73a9f500fb604920c, type: 2}
 --- !u!114 &5710550366695162864
 MonoBehaviour:
@@ -365,13 +366,13 @@ GameObject:
   - component: {fileID: 193979942736365454}
   - component: {fileID: 2667224683497728021}
   - component: {fileID: 6849493281300304833}
-  - component: {fileID: 6446924061249163772}
   - component: {fileID: 7620381051718370451}
   - component: {fileID: 3580714574299546644}
   - component: {fileID: 8237442999165102598}
   - component: {fileID: 3841065845582190416}
   - component: {fileID: 7299939028032391267}
-  - component: {fileID: 6688103096629913682}
+  - component: {fileID: 3161652821061354002}
+  - component: {fileID: 2669458434809902844}
   m_Layer: 0
   m_Name: Mural6Experience
   m_TagString: Untagged
@@ -411,7 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerMotionSet
   entries:
   - element: palms
-    swayDegrees: 2.2
+    swayDegrees: 2.5
     swaySpeed: 0.3
     bobMeters: 0.002
     bobSpeed: 0.25
@@ -434,6 +435,12 @@ MonoBehaviour:
     bobMeters: 0.0015
     bobSpeed: 0.2
     phase: 0.7
+  - element: riders
+    swayDegrees: 1.2
+    swaySpeed: 0.4
+    bobMeters: 0.006
+    bobSpeed: 0.3
+    phase: 0.3
   stagger: 0.35
 --- !u!114 &193979942736365454
 MonoBehaviour:
@@ -459,10 +466,12 @@ MonoBehaviour:
   walkElements:
   - caravan
   - caravan_far
-  walkMeters: 0.08
-  walkSpeed: 0.04
-  stepMeters: 0.004
-  stepsPerSecond: 1.6
+  walkMeters: 0.3
+  walkSpeed: 0.05
+  stepMeters: 0.005
+  stepsPerSecond: 1.8
+  walkOneWay: 1
+  walkFade: 0.15
 --- !u!114 &2667224683497728021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,41 +510,6 @@ MonoBehaviour:
   backgroundSeconds: 1.6
   layerSeconds: 0.8
   stagger: 0.08
---- !u!114 &6446924061249163772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6662728907778811776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 353ee827d2abf43e992ba4b051550f2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.PopOutIntro
-  experience: {fileID: 193979942736365454}
-  items:
-  - element: caravan
-    distance: 0.25
-    delay: 0
-    grow: 0.12
-  - element: palms
-    distance: 0.2
-    delay: 0.4
-    grow: 0.1
-  - element: oasis
-    distance: 0.1
-    delay: 0.7
-    grow: 0.08
-  - element: caravan_far
-    distance: 0.15
-    delay: 1
-    grow: 0.12
-  startDelay: 1.6
-  liftDuration: 1.2
-  holdSeconds: 4
-  restSeconds: 5
-  loop: 1
 --- !u!114 &7620381051718370451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,7 +562,7 @@ MonoBehaviour:
   glowMaterial: {fileID: 2100000, guid: cc2621d167f64a04a570c682f4eabccd, type: 2}
   colour: {r: 1.4, g: 1.15, b: 0.55, a: 40}
   width: 0.08
-  direction: 0
+  direction: 90
   region:
     serializedVersion: 2
     x: 0
@@ -597,7 +571,7 @@ MonoBehaviour:
     height: 0.58
   seconds: 2.5
   depthMm: 0.5
-  repeatEvery: 9
+  repeatEvery: 5
   firstDelay: 4
   next: {fileID: 0}
   nextDelay: 0
@@ -657,7 +631,7 @@ MonoBehaviour:
   outDistance: 1
   swing: 0.25
   rise: 0.4
-  spinDegrees: 300
+  spinDegrees: 0
   endScale: 0.6
   sparkPath:
   - palms
@@ -673,7 +647,7 @@ MonoBehaviour:
   sparkLift: 0.45
   sparkSpacing: 0.07
   trailPause: 2
---- !u!114 &6688103096629913682
+--- !u!114 &3161652821061354002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -682,20 +656,50 @@ MonoBehaviour:
   m_GameObject: {fileID: 6662728907778811776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 955f6cd205864b5695c73ea683addc2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7dcfb7fb60e30481aa816faf92e05816, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.TapJumpOut
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.DuskCycle
   experience: {fileID: 193979942736365454}
-  links:
-  - tap: {fileID: 1308236472270352541}
-    elements:
-    - caravan
-    - caravan_far
-  outDistance: 0.9
-  rise: 0.15
-  outSeconds: 0.6
-  holdSeconds: 0.9
-  backSeconds: 0.8
-  spinDegrees: 360
-  grow: 1.3
-  stagger: 0.12
+  cycleSeconds: 36
+  firstDusk: 10
+  duskTint: {r: 0.86, g: 0.66, b: 0.55, a: 1}
+  embers: 0
+  emberArea:
+    serializedVersion: 2
+    x: 0.1
+    y: 0.25
+    width: 0.8
+    height: 0.4
+  embersPerSecond: 6
+  emberColour: {r: 1, g: 0.62, b: 0.2, a: 1}
+  emberSize: 0.012
+--- !u!114 &2669458434809902844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662728907778811776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d140b732c574f6989978b6f4bf1e5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MaskSweep
+  experience: {fileID: 193979942736365454}
+  mask: {fileID: 2800000, guid: 850979075d43848c0bff96d0e3dc408c, type: 3}
+  glowMaterial: {fileID: 2100000, guid: cc2621d167f64a04a570c682f4eabccd, type: 2}
+  colour: {r: 1.2, g: 1.3, b: 1.4, a: 0.9}
+  width: 0.04
+  direction: 0
+  region:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  seconds: 1.8
+  depthMm: 0.5
+  repeatEvery: 3
+  firstDelay: 2
+  next: {fileID: 0}
+  nextDelay: 0
