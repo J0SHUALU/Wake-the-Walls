@@ -85,8 +85,7 @@ namespace WakeTheWalls.Tracking
         void Subscribe()
         {
             if (occlusion == null || cameraManager == null) return;
-            occlusion.requestedHumanDepthMode = HumanSegmentationDepthMode.Fastest;
-            occlusion.requestedOcclusionPreferenceMode = OcclusionPreferenceMode.NoOcclusion;
+            occlusion.requestedHumanDepthMode = HumanSegmentationDepthMode.Disabled;
             occlusion.requestedEnvironmentDepthMode = EnvironmentDepthMode.Disabled;
             occlusion.requestedHumanStencilMode = quality;
 
