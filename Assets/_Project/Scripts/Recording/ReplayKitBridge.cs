@@ -1,44 +1,58 @@
-#pragma warning disable CS0618
 #if UNITY_IOS && !UNITY_EDITOR
-using UnityEngine.Apple.ReplayKit;
+using System.Runtime.InteropServices;
+#endif
 
 namespace WakeTheWalls.Recording
 {
-    static class ReplayKitBridge
+    enum RecorderState
     {
-        public static bool Available => ReplayKit.APIAvailable;
-
-        public static bool IsRecording => ReplayKit.isRecording;
-
-        public static bool HasRecording => ReplayKit.recordingAvailable;
-
-        public static string LastError => ReplayKit.lastError;
-
-        public static void Start() => ReplayKit.StartRecording(false, false);
-
-        public static void Stop() => ReplayKit.StopRecording();
-
-        public static void Preview() => ReplayKit.Preview();
+        Idle,
+        Starting,
+        Recording,
+        Saving,
+        Saved,
+        PhotosDenied,
+        Failed
     }
-}
-#else
-namespace WakeTheWalls.Recording
-{
+
     static class ReplayKitBridge
     {
+#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")] static extern int WtwRecorderIsAvailable();
+
+        [DllImport("__Internal")] static extern int WtwRecorderIsRecording();
+
+        [DllImport("__Internal")] static extern int WtwRecorderState();
+
+        [DllImport("__Internal")] static extern void WtwRecorderStart();
+
+        [DllImport("__Internal")] static extern void WtwRecorderStop();
+
+        [DllImport("__Internal")] static extern void WtwRecorderReset();
+
+        public static bool Available => WtwRecorderIsAvailable() != 0;
+
+        public static bool IsRecording => WtwRecorderIsRecording() != 0;
+
+        public static RecorderState State => (RecorderState)WtwRecorderState();
+
+        public static void Start() => WtwRecorderStart();
+
+        public static void Stop() => WtwRecorderStop();
+
+        public static void Reset() => WtwRecorderReset();
+#else
         public static bool Available => false;
 
         public static bool IsRecording => false;
 
-        public static bool HasRecording => false;
-
-        public static string LastError => string.Empty;
+        public static RecorderState State => RecorderState.Idle;
 
         public static void Start() { }
 
         public static void Stop() { }
 
-        public static void Preview() { }
+        public static void Reset() { }
+#endif
     }
 }
-#endif
