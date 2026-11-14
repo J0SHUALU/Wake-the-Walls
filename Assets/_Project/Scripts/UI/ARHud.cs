@@ -17,6 +17,8 @@ namespace WakeTheWalls.UI
         [Tooltip("{0} is the mural's number in the library.")]
         [SerializeField] string tagFormat = "MURAL {0:00} / AWAKE";
         [SerializeField] TMP_Text tagTitle;
+        [Tooltip("Widest the title can get before it wraps onto a second line.")]
+        [SerializeField] float titleMaxWidth = 620f;
 
         [Header("Buttons")]
         [SerializeField] Button infoButton;
@@ -94,7 +96,7 @@ namespace WakeTheWalls.UI
             {
                 bool hasName = !string.IsNullOrWhiteSpace(CurrentMural.DisplayName);
                 tagTitle.gameObject.SetActive(hasName);
-                if (hasName) tagTitle.text = CurrentMural.DisplayName.Trim();
+                if (hasName) TitleFit.Set(tagTitle, CurrentMural.DisplayName.Trim(), titleMaxWidth);
             }
         }
     }

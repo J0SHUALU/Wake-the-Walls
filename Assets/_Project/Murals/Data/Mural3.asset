@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mural3
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MuralData
   referenceImageName: Mural3
-  displayName: Desert Crossing
+  displayName: African Infrastructure Civilization
   location: Long painted retaining wall below the fence on the outdoor walkway
   physicalSizeMeters: {x: 3.9, y: 2.319}
   story: "Part of African Infrastructure Civilization: From Ancient Ingenuity to Afro-Futurism, by Mashakiro Bienvenue and Masha Art Studio from Rwanda.\n\nThe domes and minarets of the Mosque of Muhammad Ali in the Cairo Citadel rise over a desert of tall cacti and agave. Further along the same wall the journey carries on to other places, including Great Zimbabwe. The mural is a reminder to every ALU student that the future has no limits.\n\nTap the plants for a gust of wind, or tap the mosque to read about it."
