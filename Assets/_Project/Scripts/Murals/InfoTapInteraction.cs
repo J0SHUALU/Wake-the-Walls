@@ -7,7 +7,7 @@ using WakeTheWalls.VFX;
 namespace WakeTheWalls.Murals
 {
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
-    public class InfoTapInteraction : MonoBehaviour
+    public class InfoTapInteraction : MonoBehaviour, ITapEffect
     {
         [SerializeField] LayeredMuralExperience experience;
         [Tooltip("Tap area, 0 to 1 across the mural (0,0 bottom left).")]
@@ -27,6 +27,8 @@ namespace WakeTheWalls.Murals
         [SerializeField] UnityEvent<string> infoRequested = new UnityEvent<string>();
 
         public UnityEvent<string> InfoRequested => infoRequested;
+
+        public bool HasEffect => !string.IsNullOrEmpty(topic) || sparklePrefab != null;
 
         void Start()
         {

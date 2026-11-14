@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using WakeTheWalls.Core;
@@ -14,8 +13,10 @@ namespace WakeTheWalls.Murals
         [SerializeField] Color ringColour = new Color(0.9f, 0.16f, 0.13f);
         [SerializeField] Color dotColour = Color.white;
 
-        [Tooltip("Seconds after the mural is found before the markers appear, so the intro plays first.")]
+        [Tooltip("Seconds after the mural is first found before the markers appear, so the intro plays first. Only the first sighting waits.")]
         [SerializeField] float showDelay = 2f;
+        [Tooltip("Seconds the markers take to fade in when the mural shows and out when it hides.")]
+        [SerializeField] float fadeSeconds = 0.8f;
         [Tooltip("Marker width as a share of the smaller side of the tap area, kept between the limits below.")]
         [SerializeField, Range(0.1f, 0.6f)] float sizeShare = 0.3f;
         [SerializeField] Vector2 sizeLimits = new Vector2(0.12f, 0.35f);
@@ -24,7 +25,9 @@ namespace WakeTheWalls.Murals
 
         readonly List<Transform> markers = new List<Transform>();
         readonly List<SpriteRenderer> renderers = new List<SpriteRenderer>();
-        Coroutine routine;
+        float buildAt = -1f;
+        bool built;
+        bool showing;
         float alpha;
 
         void OnEnable()
@@ -42,31 +45,41 @@ namespace WakeTheWalls.Murals
         void HandleFound(MuralData mural)
         {
             if (!IsMine(mural)) return;
-            if (routine != null) StopCoroutine(routine);
-            routine = StartCoroutine(ShowAfterDelay(markers.Count == 0 ? showDelay : 0.3f));
+            if (buildAt < 0f) buildAt = Time.time + showDelay;
+            showing = true;
         }
 
         void HandleLost(MuralData mural)
         {
             if (!IsMine(mural)) return;
-            if (routine != null) StopCoroutine(routine);
-            routine = StartCoroutine(Tween.Value(alpha, 0f, SetAlpha, 0.6f));
+            showing = false;
         }
 
         bool IsMine(MuralData mural) => experience != null && experience.Data == mural;
 
-        IEnumerator ShowAfterDelay(float delay)
+        void LateUpdate()
         {
-            yield return new WaitForSeconds(delay);
-            if (markers.Count == 0) Build();
-            yield return Tween.Value(alpha, 1f, SetAlpha, 0.8f);
+            if (buildAt < 0f) return;
+            if (!built && Time.time >= buildAt) Build();
+
+            float target = built && showing ? 1f : 0f;
+            if (!Mathf.Approximately(alpha, target))
+                SetAlpha(Mathf.MoveTowards(alpha, target, Time.deltaTime / Mathf.Max(0.05f, fadeSeconds)));
+
+            if (alpha <= 0f || markers.Count == 0) return;
+            float pulse = 1f + pulseAmount * (0.5f + 0.5f * Mathf.Sin(Time.time * pulseSpeed * Mathf.PI * 2f));
+            float ringWidth = Mathf.Max(0.0001f, ring != null ? ring.bounds.size.x : 1f);
+            foreach (Transform marker in markers)
+                if (marker != null) marker.GetChild(0).localScale = Vector3.one * (pulse / ringWidth);
         }
 
         void Build()
         {
-            foreach (var box in experience.GetComponentsInChildren<BoxCollider>(true))
+            built = true;
+            foreach (BoxCollider box in experience.GetComponentsInChildren<BoxCollider>(true))
             {
-                if (!box.isTrigger || box.GetComponent<Interactable>() == null) continue;
+                var interactable = box.GetComponent<Interactable>();
+                if (interactable == null || !DoesSomething(interactable)) continue;
 
                 float side = Mathf.Min(box.size.x * box.transform.lossyScale.x, box.size.y * box.transform.lossyScale.y);
                 float width = Mathf.Clamp(side * sizeShare, sizeLimits.x, sizeLimits.y);
@@ -81,7 +94,15 @@ namespace WakeTheWalls.Murals
                 renderers.Add(AddSprite(marker, dot, dotColour, 1, 0.35f));
                 markers.Add(marker);
             }
-            SetAlpha(alpha);
+            SetAlpha(0f);
+        }
+
+        static bool DoesSomething(Interactable interactable)
+        {
+            if (!interactable.IsInteractable) return false;
+            foreach (ITapEffect effect in interactable.GetComponents<ITapEffect>())
+                if (effect.HasEffect) return true;
+            return false;
         }
 
         static void SetWorldWidth(Transform marker, float width)
@@ -103,16 +124,6 @@ namespace WakeTheWalls.Murals
             return sr;
         }
 
-        void Update()
-        {
-            if (alpha <= 0f || markers.Count == 0) return;
-            float pulse = 1f + pulseAmount * (0.5f + 0.5f * Mathf.Sin(Time.time * pulseSpeed * Mathf.PI * 2f));
-            foreach (var marker in markers)
-            {
-                if (marker != null) marker.GetChild(0).localScale = Vector3.one * (pulse / Mathf.Max(0.0001f, ring != null ? ring.bounds.size.x : 1f));
-            }
-        }
-
         void SetAlpha(float value)
         {
             alpha = value;
@@ -122,6 +133,7 @@ namespace WakeTheWalls.Murals
                 Color c = renderers[i].color;
                 c.a = value * (i % 2 == 0 ? 0.9f : 1f);
                 renderers[i].color = c;
+                renderers[i].enabled = value > 0.002f;
             }
         }
     }

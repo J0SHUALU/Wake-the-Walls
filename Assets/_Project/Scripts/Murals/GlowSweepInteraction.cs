@@ -8,7 +8,7 @@ using WakeTheWalls.Rig;
 namespace WakeTheWalls.Murals
 {
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
-    public class GlowSweepInteraction : MonoBehaviour
+    public class GlowSweepInteraction : MonoBehaviour, ITapEffect
     {
         static readonly int BaseMap = Shader.PropertyToID("_BaseMap");
         static readonly int Dissolve = Shader.PropertyToID("_Dissolve");
@@ -33,6 +33,8 @@ namespace WakeTheWalls.Murals
         MeshRenderer glow;
         Material glowMaterial;
         Coroutine sweep;
+
+        public bool HasEffect => brushMaterial != null && experience != null && experience.Rig.TryGetLayer(element, out MuralLayer _);
 
         void Start()
         {

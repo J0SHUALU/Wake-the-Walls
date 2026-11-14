@@ -4,13 +4,15 @@ using WakeTheWalls.Interaction;
 namespace WakeTheWalls.Murals
 {
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
-    public class GoldLineTapInteraction : MonoBehaviour
+    public class GoldLineTapInteraction : MonoBehaviour, ITapEffect
     {
         [SerializeField] Mural04Experience experience;
         [Tooltip("Tap area, 0 to 1 across the mural (0,0 bottom left).")]
         [SerializeField] Rect area = new Rect(0.5f, 0.1f, 0.06f, 0.8f);
         [Tooltip("Where the light starts, 0 to 1 across the mural. Uses the centre of the area when left at 0,0.")]
         [SerializeField] Vector2 flowPoint;
+
+        public bool HasEffect => experience != null && experience.GoldLines != null;
 
         void Start()
         {

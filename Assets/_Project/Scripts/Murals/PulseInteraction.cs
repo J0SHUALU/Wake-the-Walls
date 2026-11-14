@@ -9,7 +9,7 @@ using WakeTheWalls.VFX;
 namespace WakeTheWalls.Murals
 {
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
-    public class PulseInteraction : MonoBehaviour
+    public class PulseInteraction : MonoBehaviour, ITapEffect
     {
         [SerializeField] LayeredMuralExperience experience;
         [Tooltip("Tap area, 0 to 1 across the mural (0,0 bottom left).")]
@@ -32,6 +32,8 @@ namespace WakeTheWalls.Murals
 
         Coroutine pulse;
         AudioSource audioSource;
+
+        public bool HasEffect => elements.Length > 0;
 
         void Start()
         {
