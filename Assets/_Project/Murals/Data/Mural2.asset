@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mural2
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MuralData
   referenceImageName: Mural2
-  displayName: Bloom
+  displayName: African Infrastructure Civilization
   location: Concrete wall along the covered walkway, beside the brick pillars
   physicalSizeMeters: {x: 3.5, y: 3.312}
   story: "Part of African Infrastructure Civilization: From Ancient Ingenuity to Afro-Futurism, by Mashakiro Bienvenue and Masha Art Studio from Rwanda.\n\nThe full mural tells the story of what African leaders, builders, inventors and communities have made, from ancient civilizations to today's growing cities and on to an Afro-futurist Africa. In this part, a woman framed by a great black circle lifts her hands to a crown of flowers that covers her eyes. A map of Africa rests on her purple top below a beaded collar, while pale modern buildings rise to her left.\n\nTap a flower to open it, or tap the collar to send light into the map."
