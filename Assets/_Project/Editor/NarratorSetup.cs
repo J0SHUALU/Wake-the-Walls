@@ -14,6 +14,7 @@ namespace WakeTheWalls.EditorTools
         const string LinesPath = "Assets/_Project/Data/NarratorLines.asset";
         const string PrefabPath = "Assets/_Project/Prefabs/Narrator/Pearl.prefab";
         const string ScenePath = "Assets/_Project/Scenes/Main.unity";
+        const int MuralCount = 7;
 
         static readonly string[] Parts =
             { "glow", "fin_l", "fin_r", "body", "sockets", "eye_l", "eye_r", "eyes_blink", "lashes", "mouth", "shine" };
@@ -46,6 +47,14 @@ namespace WakeTheWalls.EditorTools
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
             Debug.Log("Narrator set up: Pearl and the menu music are in Main.");
+        }
+
+        [MenuItem("Wake the Walls/Update Narrator Lines")]
+        public static void UpdateLines()
+        {
+            foreach (string guid in AssetDatabase.FindAssets("t:AudioClip", new[] { VoiceFolder })) ImportVoice(AssetDatabase.GUIDToAssetPath(guid));
+            BuildLines();
+            Debug.Log($"Narrator lines updated for {MuralCount} murals.");
         }
 
         static void SceneManager_Move(GameObject go, UnityEngine.SceneManagement.Scene scene) =>
@@ -108,7 +117,7 @@ namespace WakeTheWalls.EditorTools
             }
 
             var murals = new List<NarratorLines.MuralLines>();
-            for (int i = 1; i <= 5; i++)
+            for (int i = 1; i <= MuralCount; i++)
             {
                 murals.Add(new NarratorLines.MuralLines
                 {

@@ -234,7 +234,7 @@ namespace WakeTheWalls.EditorTools
             Label(bottom, 27, small, 18, 0, TextAlignmentOptions.Center);
             Title(Text(root, "Content/Stamp/Number"), null, 204, White, -1.5f, 0, TextAlignmentOptions.Center, titleBold);
 
-            Title(Text(root, "Content/Title"), "You woke Orbit", 114, White, -2f, -10f, TextAlignmentOptions.Top);
+            Title(Text(root, "Content/Title"), "You woke the wall", 114, White, -2f, -10f, TextAlignmentOptions.Top);
             Paragraph(Text(root, "Content/Remaining"), 45, Soft, 22, null, TextAlignmentOptions.Top);
             Stamps(root, "Content/Stamps", Count);
 
