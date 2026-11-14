@@ -16,6 +16,8 @@ namespace WakeTheWalls.UI
         [Tooltip("{0} is the mural number, {1} and {2} are its width and height in metres.")]
         [SerializeField] string labelFormat = "MURAL {0:00} / {1} × {2} M";
         [SerializeField] TMP_Text title;
+        [Tooltip("Widest the title can get before it wraps onto a second line.")]
+        [SerializeField] float titleMaxWidth = 760f;
         [SerializeField] GameObject whereGroup;
         [SerializeField] TMP_Text whereValue;
         [SerializeField] TMP_Text story;
@@ -90,8 +92,7 @@ namespace WakeTheWalls.UI
                     size.x.ToString("0.#", CultureInfo.InvariantCulture), size.y.ToString("0.#", CultureInfo.InvariantCulture));
             }
 
-            SetText(title, current.DisplayName);
-            if (closeButton != null) TitleFit.FitBefore(title, (RectTransform)closeButton.transform);
+            if (SetText(title, current.DisplayName)) TitleFit.Set(title, current.DisplayName.Trim(), titleMaxWidth);
             bool hasWhere = SetText(whereValue, current.Location);
             if (whereGroup != null) whereGroup.SetActive(hasWhere);
             bool hasStory = SetText(story, current.Story);

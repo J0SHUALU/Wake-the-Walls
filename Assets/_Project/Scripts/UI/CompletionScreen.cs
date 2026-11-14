@@ -19,6 +19,8 @@ namespace WakeTheWalls.UI
         [SerializeField] string labelFormat = "MURAL {0:00} / COMPLETE";
         [SerializeField] TMP_Text stampNumber;
         [SerializeField] TMP_Text title;
+        [Tooltip("Widest the title can get before it wraps onto a second line.")]
+        [SerializeField] float titleMaxWidth = 820f;
         [Tooltip("{0} is the mural's name. Used when the mural has a name.")]
         [SerializeField] string titleWithName = "You woke {0}";
         [Tooltip("{0} is the mural's number. Used when the name is still empty.")]
@@ -75,11 +77,10 @@ namespace WakeTheWalls.UI
 
             if (title != null)
             {
-                TitleFit.Wrap(title);
                 string name = current != null ? current.DisplayName : null;
-                title.text = string.IsNullOrWhiteSpace(name)
+                TitleFit.Set(title, string.IsNullOrWhiteSpace(name)
                     ? string.Format(titleWithoutName, number)
-                    : string.Format(titleWithName, name.Trim());
+                    : string.Format(titleWithName, name.Trim()), titleMaxWidth);
             }
 
             if (remaining != null) remaining.text = RemainingText(Mathf.Max(0, total - SessionProgress.Count));
