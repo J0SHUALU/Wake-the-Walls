@@ -25,6 +25,7 @@ namespace WakeTheWalls.UI
         [SerializeField] Button scanOtherButton;
 
         MuralData current;
+        MuralData onScreen;
 
         protected override void Awake()
         {
@@ -37,6 +38,7 @@ namespace WakeTheWalls.UI
         {
             GameEvents.MuralLost += HandleMuralLost;
             GameEvents.MuralFound += HandleMuralFound;
+            GameEvents.MuralFocused += HandleMuralFocused;
             GameEvents.StateChanged += HandleStateChanged;
         }
 
@@ -44,6 +46,7 @@ namespace WakeTheWalls.UI
         {
             GameEvents.MuralLost -= HandleMuralLost;
             GameEvents.MuralFound -= HandleMuralFound;
+            GameEvents.MuralFocused -= HandleMuralFocused;
             GameEvents.StateChanged -= HandleStateChanged;
         }
 
@@ -63,12 +66,19 @@ namespace WakeTheWalls.UI
         {
             if (stateMachine == null) stateMachine = FindAnyObjectByType<AppStateMachine>();
             if (stateMachine != null && stateMachine.Current != AppState.Experience) return;
+            if (onScreen != null && mural != onScreen) return;
             current = mural;
             if (hud != null) hud.SetDimmed(true);
             Show();
         }
 
-        void HandleMuralFound(MuralData mural) => Resume();
+        void HandleMuralFound(MuralData mural)
+        {
+            onScreen = mural;
+            Resume();
+        }
+
+        void HandleMuralFocused(MuralData mural) => onScreen = mural;
 
         void HandleStateChanged(AppState state)
         {

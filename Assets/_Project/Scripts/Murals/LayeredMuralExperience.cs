@@ -133,6 +133,7 @@ namespace WakeTheWalls.Murals
         {
             alpha = value;
             rig.SetAlpha(value);
+            rig.SetVisible(value > 0.002f);
         }
     }
 }

@@ -18,10 +18,13 @@ namespace WakeTheWalls.Tracking
         [SerializeField, Min(0f)] float resumeHoldSeconds = 0.75f;
         [Tooltip("When the phone loses sight of a painting that is mostly on screen, something is blocking it, so the mural hides. When less than this share of the mural is on screen, the painting is just too big for the view, so the mural stays.")]
         [SerializeField, Range(0f, 1f)] float blockedShare = 0.85f;
+        [Tooltip("Seconds a mural may keep playing on the phone's last guess at where the painting is, before it hides. Keeps a mural steady when you step right up to it, without ever showing a mural you have walked away from.")]
+        [SerializeField, Range(0f, 3f)] float lastGuessSeconds = 1f;
 
         readonly Dictionary<TrackableId, ARTrackedImage> images = new Dictionary<TrackableId, ARTrackedImage>();
         readonly Dictionary<TrackableId, MuralExperience> owners = new Dictionary<TrackableId, MuralExperience>();
         readonly Dictionary<MuralData, MuralExperience> byMural = new Dictionary<MuralData, MuralExperience>();
+        readonly Dictionary<MuralExperience, float> lastSeenAt = new Dictionary<MuralExperience, float>();
         MuralExperience active;
         MuralExperience focused;
         float holdUntil;
@@ -113,7 +116,10 @@ namespace WakeTheWalls.Tracking
                 if (image.trackingState == TrackingState.Limited) held = image;
             }
 
+            if (best != null) lastSeenAt[experience] = Time.time;
+
             if (best == null && held != null && experience.transform.parent == held.transform
+                && lastSeenAt.TryGetValue(experience, out float seenAt) && Time.time - seenAt <= lastGuessSeconds
                 && MuralView.IsInView(experience) && MuralView.ShareOnScreen(experience) < blockedShare)
                 best = held;
 
@@ -136,6 +142,7 @@ namespace WakeTheWalls.Tracking
             if (owners.ContainsValue(experience)) { Refresh(experience); return; }
 
             lossHandler.Forget(experience);
+            lastSeenAt.Remove(experience);
             if (experience != null)
             {
                 byMural.Remove(experience.Data);
