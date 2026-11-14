@@ -10,6 +10,7 @@ namespace WakeTheWalls.Tracking
     public class MuralTrackingManager : MonoBehaviour
     {
         static readonly Quaternion ImageToMural = Quaternion.Euler(90f, 0f, 0f);
+        const float FocusMargin = 0.02f;
 
         [SerializeField] ARTrackedImageManager imageManager;
         [SerializeField] MuralLibrary library;
@@ -85,7 +86,7 @@ namespace WakeTheWalls.Tracking
                     centred = experience;
                 }
             }
-            if (centred != null) Focus(centred);
+            if (centred != null && (focused == null || centred == focused || closest < DistanceFromCentre(focused) - FocusMargin)) Focus(centred);
         }
 
         void Focus(MuralExperience experience)
