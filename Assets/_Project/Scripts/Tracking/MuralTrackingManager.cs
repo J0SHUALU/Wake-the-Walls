@@ -131,7 +131,9 @@ namespace WakeTheWalls.Tracking
                 experience.transform.SetParent(best.transform, false);
                 experience.transform.SetLocalPositionAndRotation(Vector3.zero, ImageToMural);
             }
-            lossHandler.Report(experience, best != null);
+            bool blocked = best == null && held != null && MuralView.IsInView(experience)
+                && MuralView.ShareOnScreen(experience) >= blockedShare;
+            lossHandler.Report(experience, best != null, blocked);
             return best != null;
         }
 

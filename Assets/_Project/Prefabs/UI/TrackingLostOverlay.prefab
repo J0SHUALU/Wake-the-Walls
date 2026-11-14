@@ -1594,6 +1594,18 @@ MonoBehaviour:
   tagLabel: {fileID: 6867326248035820559}
   tagFormat: MURAL {0:00} / PAUSED
   tagTitle: {fileID: 2949563246291933}
+  headline: {fileID: 3121630653419095850}
+  body: {fileID: 8895739468093063973}
+  lostTag: MURAL {0:00} / PAUSED
+  lostHeadline: 'The wall slipped
+
+    out of view'
+  lostBody: Point back at the mural. It picks up right where you left it.
+  blockedTag: MURAL {0:00} / BLOCKED
+  blockedHeadline: 'Something is
+
+    in the way'
+  blockedBody: Wait for a clear view of the mural, or move so you can see all of it.
   backOnItButton: {fileID: 3321960436632769588}
   scanOtherButton: {fileID: 6985920829182521470}
 --- !u!1 &7885802123370513130

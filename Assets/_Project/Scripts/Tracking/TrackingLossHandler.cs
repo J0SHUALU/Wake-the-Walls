@@ -13,10 +13,12 @@ namespace WakeTheWalls.Tracking
 
         readonly Dictionary<MuralExperience, Coroutine> pending = new Dictionary<MuralExperience, Coroutine>();
         readonly HashSet<MuralExperience> lost = new HashSet<MuralExperience>();
+        bool wasBlocked;
 
-        public void Report(MuralExperience experience, bool isTracking)
+        public void Report(MuralExperience experience, bool isTracking, bool blocked = false)
         {
             if (experience == null) return;
+            if (!isTracking) wasBlocked = blocked;
 
             if (isTracking)
             {
@@ -47,6 +49,7 @@ namespace WakeTheWalls.Tracking
 
             lost.Add(experience);
             experience.OnLost();
+            GameEvents.ViewBlocked = wasBlocked;
             GameEvents.RaiseMuralLost(experience.Data);
         }
 

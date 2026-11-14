@@ -19,6 +19,18 @@ namespace WakeTheWalls.UI
         [Tooltip("{0} is the mural's number in the library.")]
         [SerializeField] string tagFormat = "MURAL {0:00} / PAUSED";
         [SerializeField] TMP_Text tagTitle;
+
+        [Header("Message")]
+        [Tooltip("The big line on the overlay.")]
+        [SerializeField] TMP_Text headline;
+        [Tooltip("The smaller line under it.")]
+        [SerializeField] TMP_Text body;
+        [SerializeField] string lostTag = "MURAL {0:00} / PAUSED";
+        [SerializeField] string lostHeadline = "The wall slipped\nout of view";
+        [SerializeField] string lostBody = "Point back at the mural. It picks up right where you left it.";
+        [SerializeField] string blockedTag = "MURAL {0:00} / BLOCKED";
+        [SerializeField] string blockedHeadline = "Something is\nin the way";
+        [SerializeField] string blockedBody = "Wait for a clear view of the mural, or move so you can see all of it.";
         [Tooltip("Widest the title can get before it wraps onto a second line.")]
         [SerializeField] float titleMaxWidth = 640f;
 
@@ -100,10 +112,16 @@ namespace WakeTheWalls.UI
                 }
             }
 
+            bool blocked = GameEvents.ViewBlocked;
+            if (headline != null) headline.text = blocked ? blockedHeadline : lostHeadline;
+            if (body != null) body.text = blocked ? blockedBody : lostBody;
+
             if (tagLabel != null)
             {
                 tagLabel.gameObject.SetActive(index >= 0);
-                if (index >= 0) tagLabel.text = string.Format(tagFormat, index + 1);
+                string format = blocked ? blockedTag : lostTag;
+                if (string.IsNullOrEmpty(format)) format = tagFormat;
+                if (index >= 0) tagLabel.text = string.Format(format, index + 1);
             }
 
             if (tagTitle != null)
