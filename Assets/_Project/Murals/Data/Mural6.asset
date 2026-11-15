@@ -16,7 +16,19 @@ MonoBehaviour:
   displayName: African Infrastructure Civilization
   location: 
   physicalSizeMeters: {x: 3.65, y: 2.32}
-  story: "Part of African Infrastructure Civilization: From Ancient Ingenuity to Afro-Futurism, by Mashakiro Bienvenue and Masha Art Studio from Rwanda.\n\nA caravan of camels and riders in bright colours crosses the desert. The full mural follows Africa's achievements in infrastructure, engineering and architecture, from the ingenuity of ancient civilizations to modern cities and an Afro-futurist vision of what's possible.\n\nTap the caravan to set it moving, or tap the water."
+  story: 'Part of African Infrastructure Civilization: From Ancient Ingenuity to
+    Afro-Futurism, by Mashakiro Bienvenue and Masha Art Studio from Rwanda.
+
+
+    A
+    caravan of camels and riders in bright colours crosses the desert. The full mural
+    follows Africa''s achievements in infrastructure, engineering and architecture,
+    from the ingenuity of ancient civilizations to modern cities and an Afro-futurist
+    vision of what''s possible.
+
+
+    Tap the caravan to set it moving, or tap the
+    water.'
   experiencePrefab: {fileID: 193979942736365454, guid: 3958271ba89ec41cfa1f91c747d70e37, type: 3}
   palette:
   - {r: 0.212, g: 0.196, b: 0.208, a: 1}
@@ -26,3 +38,5 @@ MonoBehaviour:
   - {r: 0.945, g: 0.859, b: 0.686, a: 1}
   - {r: 0.859, g: 0.784, b: 0.686, a: 1}
   ambience: {fileID: 8300000, guid: 3c360c73d4c044998bab2c28d7581bdb, type: 3}
+  checkImage: {fileID: 2800000, guid: dc2321f2cdc684f0aa40ce2e6225adc9, type: 3}
+  spots: []
