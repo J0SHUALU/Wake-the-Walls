@@ -22,10 +22,43 @@ namespace WakeTheWalls.Tracking
         readonly Dictionary<MuralExperience, Coroutine> pending = new Dictionary<MuralExperience, Coroutine>();
         readonly HashSet<MuralExperience> lost = new HashSet<MuralExperience>();
         readonly Dictionary<MuralExperience, Vector3> lastSeen = new Dictionary<MuralExperience, Vector3>();
+        readonly HashSet<MuralExperience> blockedLost = new HashSet<MuralExperience>();
+        bool wasBlocked;
+
+        // A hand or a person in front of the camera pauses the mural straight away, and it carries on once they move.
+        void Update()
+        {
+            bool blocked = ObstructionWatch.Blocked;
+            if (blocked == wasBlocked) return;
+            wasBlocked = blocked;
+            if (blocked)
+            {
+                foreach (MuralExperience experience in new List<MuralExperience>(lastSeen.Keys))
+                {
+                    if (experience == null || lost.Contains(experience)) continue;
+                    CancelPending(experience);
+                    lost.Add(experience);
+                    blockedLost.Add(experience);
+                    experience.OnLost();
+                    GameEvents.RaiseMuralLost(experience.Data);
+                }
+            }
+            else
+            {
+                foreach (MuralExperience experience in blockedLost)
+                {
+                    if (experience == null || !lost.Remove(experience)) continue;
+                    experience.OnResume();
+                    GameEvents.RaiseMuralFound(experience.Data);
+                }
+                blockedLost.Clear();
+            }
+        }
 
         public void Report(MuralExperience experience, bool isTracking, bool isLimited = false)
         {
             if (experience == null) return;
+            if (ObstructionWatch.Blocked) return;
             var cam = Camera.main;
             if (isTracking && cam != null) lastSeen[experience] = cam.transform.position;
 
@@ -69,6 +102,7 @@ namespace WakeTheWalls.Tracking
             CancelPending(experience);
             lost.Remove(experience);
             lastSeen.Remove(experience);
+            blockedLost.Remove(experience);
         }
 
         IEnumerator LoseAfterGrace(MuralExperience experience)
