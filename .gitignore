@@ -115,3 +115,11 @@ InitTestScene*.unity*
 
 # macOS
 .DS_Store
+
+# Windows / OneDrive
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# JetBrains Rider
+.idea/
