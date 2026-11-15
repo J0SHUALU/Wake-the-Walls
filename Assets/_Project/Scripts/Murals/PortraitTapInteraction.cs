@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using WakeTheWalls.Core;
 using WakeTheWalls.Interaction;
 
 namespace WakeTheWalls.Murals
@@ -27,7 +28,11 @@ namespace WakeTheWalls.Murals
         void OnTapped()
         {
             if (!experience.OpenPortrait(element)) return;
-            infoRequested.Invoke(string.IsNullOrEmpty(topic) ? element : topic);
+            string about = string.IsNullOrEmpty(topic) ? element : topic;
+            infoRequested.Invoke(about);
+            GameEvents.RaiseInfoRequested(about);
+            MuralData.Spot spot = experience.Data != null ? experience.Data.FindSpot(about) : null;
+            if (spot != null && spot.voice != null) GameEvents.RaiseNarrationRequested(spot.voice);
         }
     }
 }

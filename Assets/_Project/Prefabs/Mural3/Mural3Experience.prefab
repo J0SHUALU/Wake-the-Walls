@@ -304,8 +304,6 @@ GameObject:
   - component: {fileID: 5019603291741339809}
   - component: {fileID: 6472504708273481242}
   - component: {fileID: 42569130086987945}
-  - component: {fileID: 8894350468257578683}
-  - component: {fileID: 6430914230972810884}
   - component: {fileID: 2599028397147504117}
   - component: {fileID: 8525676530766598962}
   - component: {fileID: 7382571275439474203}
@@ -446,69 +444,6 @@ MonoBehaviour:
   sizeLimits: {x: 0.12, y: 0.35}
   pulseAmount: 0.15
   pulseSpeed: 1
---- !u!114 &8894350468257578683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3709727432664459341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f11827cea8014280a66e2216352990b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.FlyOut
-  experience: {fileID: 6472504708273481242}
-  startDelay: 2.5
-  copyElements: []
-  interval: {x: 1.2, y: 2.4}
-  maxFlying: 4
-  flightSeconds: 4
-  outDistance: 1
-  swing: 0.25
-  rise: 0.4
-  spinDegrees: 300
-  endScale: 0.6
-  sparkPath:
-  - plants_left
-  - agave_big
-  - cactus
-  - agave_right
-  sparkPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  sparkColours:
-  - {r: 0.93, g: 0.78, b: 0.55, a: 1}
-  - {r: 0.85, g: 0.65, b: 0.42, a: 1}
-  - {r: 1, g: 0.9, b: 0.72, a: 1}
-  secondsPerHop: 1.2
-  sparkLift: 0.45
-  sparkSpacing: 0.07
-  trailPause: 2
---- !u!114 &6430914230972810884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3709727432664459341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 758dfb73d5d84c2ba9864058d855d7a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Butterflies
-  experience: {fileID: 6472504708273481242}
-  fromElements:
-  - plants_left
-  - agave_big
-  shape: 0
-  colours:
-  - {r: 0.98, g: 0.95, b: 0.85, a: 1}
-  - {r: 0.95, g: 0.8, b: 0.35, a: 1}
-  startDelay: 4
-  interval: {x: 1.5, y: 3.5}
-  lifeSeconds: 7
-  wingspan: 0.16
-  flapsPerSecond: 6
-  outDistance: 1.2
 --- !u!114 &2599028397147504117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,7 +762,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5458025786589550230}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad44fc52f31e434c85c9b8bc1d2687a, type: 3}
   m_Name: 

@@ -311,7 +311,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2931189858888588151}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad44fc52f31e434c85c9b8bc1d2687a, type: 3}
   m_Name: 
@@ -335,11 +335,7 @@ GameObject:
   - component: {fileID: 5054015049802746257}
   - component: {fileID: 8822710674751077449}
   - component: {fileID: 1234819982050017411}
-  - component: {fileID: 4519079455440469952}
-  - component: {fileID: 3065626821057581658}
-  - component: {fileID: 5667126668897913571}
   - component: {fileID: 4377186887922728632}
-  - component: {fileID: 5504140626157730658}
   - component: {fileID: 8817049802328404889}
   - component: {fileID: 5157369109387875541}
   - component: {fileID: 1562085267619501866}
@@ -632,100 +628,6 @@ MonoBehaviour:
   sizeLimits: {x: 0.12, y: 0.35}
   pulseAmount: 0.15
   pulseSpeed: 1
---- !u!114 &4519079455440469952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3730146585356417816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f11827cea8014280a66e2216352990b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.FlyOut
-  experience: {fileID: 3392714048055523538}
-  startDelay: 2.5
-  copyElements:
-  - bloom_purple
-  - bloom_red
-  - bloom_yellow
-  - bloom_teal
-  - bloom_pink
-  interval: {x: 1.2, y: 2.4}
-  maxFlying: 4
-  flightSeconds: 4
-  outDistance: 1
-  swing: 0.25
-  rise: 0.4
-  spinDegrees: 0
-  endScale: 0.6
-  sparkPath: []
-  sparkPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  sparkColours:
-  - {r: 1, g: 0.82, b: 0.35, a: 1}
-  - {r: 1, g: 0.95, b: 0.75, a: 1}
-  secondsPerHop: 1.2
-  sparkLift: 0.45
-  sparkSpacing: 0.07
-  trailPause: 2
---- !u!114 &3065626821057581658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3730146585356417816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 955f6cd205864b5695c73ea683addc2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.TapJumpOut
-  experience: {fileID: 3392714048055523538}
-  links:
-  - tap: {fileID: 639170206505895949}
-    elements:
-    - flowers_left
-  - tap: {fileID: 7484047502382038691}
-    elements:
-    - necklace
-  - tap: {fileID: 574964754737915730}
-    elements:
-    - flower_crown
-  outDistance: 0.9
-  rise: 0.15
-  outSeconds: 0.6
-  holdSeconds: 0.9
-  backSeconds: 0.8
-  spinDegrees: 0
-  grow: 1.3
-  stagger: 0.12
---- !u!114 &5667126668897913571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3730146585356417816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1545bc66c5b401080fe03de6df5fc27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.OrbitAround
-  experience: {fileID: 3392714048055523538}
-  elements:
-  - bloom_purple
-  - bloom_red
-  - bloom_yellow
-  - bloom_teal
-  - bloom_pink
-  startDelay: 3
-  scale: 0.45
-  lapSeconds: 10
-  widthShare: 0.6
-  depth: {x: 0.2, y: 1.2}
-  wave: 0.15
-  spinDegrees: 20
 --- !u!114 &4377186887922728632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,37 +651,6 @@ MonoBehaviour:
   interval: {x: 1.5, y: 3}
   fallSeconds: 1.1
   splashOut: 0.15
---- !u!114 &5504140626157730658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3730146585356417816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 758dfb73d5d84c2ba9864058d855d7a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Butterflies
-  experience: {fileID: 3392714048055523538}
-  fromElements:
-  - bloom_purple
-  - bloom_yellow
-  - flowers_left
-  - sunset_tree
-  shape: 0
-  colours:
-  - {r: 0.95, g: 0.45, b: 0.6, a: 1}
-  - {r: 0.9, g: 0.25, b: 0.3, a: 1}
-  - {r: 0.98, g: 0.8, b: 0.3, a: 1}
-  - {r: 0.3, g: 0.75, b: 0.75, a: 1}
-  - {r: 0.6, g: 0.4, b: 0.8, a: 1}
-  startDelay: 4
-  interval: {x: 1.5, y: 3.5}
-  lifeSeconds: 7
-  wingspan: 0.16
-  flapsPerSecond: 6
-  outDistance: 1.2
 --- !u!114 &8817049802328404889
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -174,8 +174,6 @@ GameObject:
   - component: {fileID: 7251402845200606155}
   - component: {fileID: 7647395867492354541}
   - component: {fileID: 7598934454073183121}
-  - component: {fileID: 2918343037944062883}
-  - component: {fileID: 5140613883363685433}
   - component: {fileID: 1041971811265103577}
   - component: {fileID: 278758977246246085}
   m_Layer: 0
@@ -394,66 +392,6 @@ MonoBehaviour:
   sizeLimits: {x: 0.12, y: 0.35}
   pulseAmount: 0.15
   pulseSpeed: 1
---- !u!114 &2918343037944062883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3496975869771335326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f11827cea8014280a66e2216352990b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.FlyOut
-  experience: {fileID: 7251402845200606155}
-  startDelay: 2.5
-  copyElements: []
-  interval: {x: 1.2, y: 2.4}
-  maxFlying: 4
-  flightSeconds: 4
-  outDistance: 1
-  swing: 0.25
-  rise: 0.4
-  spinDegrees: 300
-  endScale: 0.6
-  sparkPath: []
-  sparkPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  sparkColours:
-  - {r: 1, g: 0.82, b: 0.35, a: 1}
-  - {r: 1, g: 0.95, b: 0.75, a: 1}
-  secondsPerHop: 1.2
-  sparkLift: 0.45
-  sparkSpacing: 0.07
-  trailPause: 2
---- !u!114 &5140613883363685433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3496975869771335326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 758dfb73d5d84c2ba9864058d855d7a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Butterflies
-  experience: {fileID: 7251402845200606155}
-  fromElements:
-  - flower_1
-  - flower_3
-  - flower_5
-  shape: 0
-  colours:
-  - {r: 0.3, g: 0.75, b: 0.72, a: 1}
-  - {r: 0.92, g: 0.45, b: 0.38, a: 1}
-  - {r: 0.98, g: 0.8, b: 0.3, a: 1}
-  startDelay: 4
-  interval: {x: 1.5, y: 3.5}
-  lifeSeconds: 7
-  wingspan: 0.16
-  flapsPerSecond: 6
-  outDistance: 1.2
 --- !u!114 &1041971811265103577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,7 +785,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8050319985022743384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad44fc52f31e434c85c9b8bc1d2687a, type: 3}
   m_Name: 

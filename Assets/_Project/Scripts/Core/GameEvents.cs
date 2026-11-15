@@ -22,6 +22,8 @@ namespace WakeTheWalls.Core
 
         public static event Action InteractableTapped;
 
+        public static event Action<AudioClip> NarrationRequested;
+
         public static void RaiseStateChanged(AppState state) => StateChanged?.Invoke(state);
 
         public static void RaiseMuralFound(MuralData mural) => MuralFound?.Invoke(mural);
@@ -38,6 +40,8 @@ namespace WakeTheWalls.Core
 
         public static void RaiseInteractableTapped() => InteractableTapped?.Invoke();
 
+        public static void RaiseNarrationRequested(AudioClip clip) => NarrationRequested?.Invoke(clip);
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void ClearSubscribers()
         {
@@ -49,6 +53,7 @@ namespace WakeTheWalls.Core
             ResetRequested = null;
             InfoRequested = null;
             InteractableTapped = null;
+            NarrationRequested = null;
         }
     }
 }
