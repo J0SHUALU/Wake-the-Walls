@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using WakeTheWalls.Core;
 using WakeTheWalls.Interaction;
 
 namespace WakeTheWalls.Murals
@@ -13,10 +12,12 @@ namespace WakeTheWalls.Murals
         [SerializeField] Color ringColour = new Color(0.9f, 0.16f, 0.13f);
         [SerializeField] Color dotColour = Color.white;
 
-        [Tooltip("Seconds after the mural is first found before the markers appear, so the intro plays first. Only the first sighting waits.")]
+        [Tooltip("Seconds after the mural first starts playing before the markers appear, so the intro plays first. Later sightings show them straight away.")]
         [SerializeField] float showDelay = 2f;
         [Tooltip("Seconds the markers take to fade in when the mural shows and out when it hides.")]
         [SerializeField] float fadeSeconds = 0.8f;
+        [Tooltip("Seconds between attempts to find the tappable parts, until at least one is found.")]
+        [SerializeField] float retrySeconds = 0.5f;
         [Tooltip("Marker width as a share of the smaller side of the tap area, kept between the limits below.")]
         [SerializeField, Range(0.1f, 0.6f)] float sizeShare = 0.3f;
         [SerializeField] Vector2 sizeLimits = new Vector2(0.12f, 0.35f);
@@ -25,44 +26,31 @@ namespace WakeTheWalls.Murals
 
         readonly List<Transform> markers = new List<Transform>();
         readonly List<SpriteRenderer> renderers = new List<SpriteRenderer>();
-        float buildAt = -1f;
-        bool built;
-        bool showing;
+        float readyAt = -1f;
+        float nextTry;
+        bool shownBefore;
         float alpha;
-
-        void OnEnable()
-        {
-            GameEvents.MuralFound += HandleFound;
-            GameEvents.MuralLost += HandleLost;
-        }
-
-        void OnDisable()
-        {
-            GameEvents.MuralFound -= HandleFound;
-            GameEvents.MuralLost -= HandleLost;
-        }
-
-        void HandleFound(MuralData mural)
-        {
-            if (!IsMine(mural)) return;
-            if (buildAt < 0f) buildAt = Time.time + showDelay;
-            showing = true;
-        }
-
-        void HandleLost(MuralData mural)
-        {
-            if (!IsMine(mural)) return;
-            showing = false;
-        }
-
-        bool IsMine(MuralData mural) => experience != null && experience.Data == mural;
 
         void LateUpdate()
         {
-            if (buildAt < 0f) return;
-            if (!built && Time.time >= buildAt) Build();
+            if (experience == null) return;
 
-            float target = built && showing ? 1f : 0f;
+            bool showing = experience.IsShowing;
+            if (!showing) readyAt = -1f;
+            else if (readyAt < 0f)
+            {
+                readyAt = Time.time + (shownBefore ? 0f : showDelay);
+                shownBefore = true;
+            }
+
+            bool ready = showing && Time.time >= readyAt;
+            if (ready && markers.Count == 0 && Time.time >= nextTry)
+            {
+                nextTry = Time.time + retrySeconds;
+                Build();
+            }
+
+            float target = ready && markers.Count > 0 ? 1f : 0f;
             if (!Mathf.Approximately(alpha, target))
                 SetAlpha(Mathf.MoveTowards(alpha, target, Time.deltaTime / Mathf.Max(0.05f, fadeSeconds)));
 
@@ -75,7 +63,6 @@ namespace WakeTheWalls.Murals
 
         void Build()
         {
-            built = true;
             foreach (BoxCollider box in experience.GetComponentsInChildren<BoxCollider>(true))
             {
                 var interactable = box.GetComponent<Interactable>();

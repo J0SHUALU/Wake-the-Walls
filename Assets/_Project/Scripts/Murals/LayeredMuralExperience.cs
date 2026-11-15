@@ -34,6 +34,8 @@ namespace WakeTheWalls.Murals
 
         public bool IsRunning { get; private set; }
 
+        public override bool IsShowing => IsRunning;
+
         public LayeredMuralRig Rig => rig;
 
         public LayerMotionSet MotionSet => motionSet;
