@@ -59,7 +59,10 @@ namespace WakeTheWalls.Tracking
             if (FindAnyObjectByType<ObstructionWatch>() != null) return;
             var bg = FindAnyObjectByType<ARCameraBackground>();
             if (bg == null) return;
-            bg.gameObject.AddComponent<ObstructionWatch>().background = bg;
+            var watch = bg.gameObject.AddComponent<ObstructionWatch>();
+            watch.background = bg;
+            // Added from code, so the inspector toggle never applies: only log in development builds.
+            watch.logChecks = Debug.isDebugBuild;
         }
 
         void OnEnable()
