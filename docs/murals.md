@@ -4,19 +4,19 @@ Fill this in from guest relations and our own measurements. Code and UI copy onl
 
 - **Story** stays empty until guest relations confirm it.
 - **What it shows** is what is visible in our photos.
-- Names marked *(working title)* and everything marked *(draft)* is our own proposal. Change it freely, and replace working titles once we know the real names.
+- Names are the official titles from ALU. Everything marked *(draft)* is our own proposal.
 
 Measure the painted area with a tape measure, to the centimetre.
 
 | # | Name | Campus location | Width (m) | Height (m) | Transformation | Experience owner |
 |---|---|---|---|---|---|---|
-| 1 | Rooted *(working title)* | Brick courtyard wall between two buildings, next to the Entry door | 5.6* | 6.6* | Animation | Donald |
-| 2 | Bloom *(working title)* | Concrete wall along the covered walkway, beside the brick pillars | 3.5* | 3.31* | Emergence | Donald |
-| 3 | Desert Crossing *(working title)* | Long painted retaining wall below the fence on the outdoor walkway | 3.9* | 2.32* | Expansion | Donald |
-| 4 | Faces of the Continent *(working title)* | Covered brick alcove facing the paved court | 5.4* | 3.51* | Storytelling | Fawziyyah |
-| 5 | Orbit *(working title)* | Indoor hall wall below the mezzanine balcony | 6.4* | 3.61* | Reconstruction | Fawziyyah |
-| 6 | Caravan | | 3.65* | 2.32* | Journey | Remy |
-| 7 | Great Enclosure | | 2.83* | 2.32* | Gathering | Remy |
+| 1 | Heritage of the Time to Come | Brick courtyard wall between two buildings, next to the Entry door | 5.6* | 6.6* | Animation | Donald |
+| 2 | African Infrastructure Civilization (flowers) | Concrete wall along the covered walkway, beside the brick pillars | 3.5* | 3.31* | Emergence | Donald |
+| 3 | African Infrastructure Civilization (desert mosque) | Long painted retaining wall below the fence on the outdoor walkway | 3.9* | 2.32* | Expansion | Donald |
+| 4 | The Spirit of African Leadership | Covered brick alcove facing the paved court | 5.4* | 3.51* | Storytelling | Fawziyyah |
+| 5 | The Resurgence | Indoor hall wall below the mezzanine balcony | 6.4* | 3.61* | Reconstruction | Fawziyyah |
+| 6 | African Infrastructure Civilization (caravan) | | 3.65* | 2.32* | Journey | Remy |
+| 7 | African Infrastructure Civilization (Great Zimbabwe) | | 2.83* | 2.32* | Gathering | Remy |
 
 \* Estimated from the photos (bricks, paving and wall sockets used for scale). Replace with tape measure values when someone can measure on site.
 
