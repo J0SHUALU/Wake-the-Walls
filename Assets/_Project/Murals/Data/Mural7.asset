@@ -15,8 +15,20 @@ MonoBehaviour:
   referenceImageName: Mural7
   displayName: African Infrastructure Civilization
   location: 
-  physicalSizeMeters: {x: 2.83, y: 2.32}
-  story: "Part of African Infrastructure Civilization: From Ancient Ingenuity to Afro-Futurism, by Mashakiro Bienvenue and Masha Art Studio from Rwanda.\n\nThe stone walls, tower and huts of Great Zimbabwe, one of the ancient builders' achievements the mural celebrates. From there the story moves through today's cities to an Afro-futurist Africa where innovation and bold ideas redefine what's possible.\n\nTap the wall to rebuild it brick by brick, or tap the tower and the huts."
+  physicalSizeMeters: {x: 3.21, y: 3.39}
+  story: 'Part of African Infrastructure Civilization: From Ancient Ingenuity to
+    Afro-Futurism, by Mashakiro Bienvenue and Masha Art Studio from Rwanda.
+
+
+    The
+    stone walls, tower and huts of Great Zimbabwe, one of the ancient builders''
+    achievements the mural celebrates. From there the story moves through today''s
+    cities to an Afro-futurist Africa where innovation and bold ideas redefine what''s
+    possible.
+
+
+    Tap the wall to rebuild it brick by brick, or tap the tower and
+    the huts.'
   experiencePrefab: {fileID: 1483598784964876320, guid: 0a82733a57e9e4d78b892d7e3b94b5df, type: 3}
   palette:
   - {r: 0.176, g: 0.176, b: 0.184, a: 1}
@@ -25,4 +37,5 @@ MonoBehaviour:
   - {r: 0.835, g: 0.8, b: 0.655, a: 1}
   - {r: 0.322, g: 0.333, b: 0.341, a: 1}
   - {r: 0.859, g: 0.878, b: 0.757, a: 1}
-  ambience: {fileID: 0}
+  ambience: {fileID: 8300000, guid: dad41c919ad864364bfbd424330fcdd8, type: 3}
+  spots: []

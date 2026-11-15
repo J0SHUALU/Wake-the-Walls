@@ -24,6 +24,8 @@ namespace WakeTheWalls.Murals
 
         readonly List<Transform> markers = new List<Transform>();
         readonly List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+        readonly List<float> shown = new List<float>();
+        readonly List<float> grow = new List<float>();
         Coroutine routine;
         float alpha;
 
@@ -80,6 +82,10 @@ namespace WakeTheWalls.Murals
                 renderers.Add(AddSprite(marker, ring, ringColour, 0));
                 renderers.Add(AddSprite(marker, dot, dotColour, 1, 0.35f));
                 markers.Add(marker);
+                shown.Add(1f);
+                grow.Add(0f);
+                int index = markers.Count - 1;
+                box.GetComponent<Interactable>().Tapped.AddListener(() => StartCoroutine(Burst(index)));
             }
             SetAlpha(alpha);
         }
@@ -109,8 +115,20 @@ namespace WakeTheWalls.Murals
             float pulse = 1f + pulseAmount * (0.5f + 0.5f * Mathf.Sin(Time.time * pulseSpeed * Mathf.PI * 2f));
             foreach (var marker in markers)
             {
-                if (marker != null) marker.GetChild(0).localScale = Vector3.one * (pulse / Mathf.Max(0.0001f, ring != null ? ring.bounds.size.x : 1f));
+                if (marker == null) continue;
+                int i = markers.IndexOf(marker);
+                float s = pulse * (1f + grow[i]);
+                marker.GetChild(0).localScale = Vector3.one * (s / Mathf.Max(0.0001f, ring != null ? ring.bounds.size.x : 1f));
             }
+        }
+
+        // A tapped dot rings out and fades, then comes back once the effect has played.
+        IEnumerator Burst(int index)
+        {
+            yield return Tween.Run(0.5f, t => { grow[index] = t * 1.2f; shown[index] = 1f - t; SetAlpha(alpha); });
+            grow[index] = 0f;
+            yield return new WaitForSeconds(2.5f);
+            yield return Tween.Run(0.6f, t => { shown[index] = t; SetAlpha(alpha); });
         }
 
         void SetAlpha(float value)
@@ -120,7 +138,7 @@ namespace WakeTheWalls.Murals
             {
                 if (renderers[i] == null) continue;
                 Color c = renderers[i].color;
-                c.a = value * (i % 2 == 0 ? 0.9f : 1f);
+                c.a = value * shown[i / 2] * (i % 2 == 0 ? 0.9f : 1f);
                 renderers[i].color = c;
             }
         }

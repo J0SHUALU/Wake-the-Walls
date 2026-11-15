@@ -11,8 +11,8 @@ namespace WakeTheWalls.EditorTools
     // Applies the animation update to the mural prefabs. Safe to run more than once.
     public static class MuralAnimationSetup
     {
-        const string PrefabDir = "Assets/_Project/Prefabs/";
-        const string ArtDir = "Assets/Art/Murals/";
+        internal const string PrefabDir = "Assets/_Project/Prefabs/";
+        internal const string ArtDir = "Assets/Art/Murals/";
 
         [MenuItem("Wake the Walls/Apply Animation Update")]
         public static void Run()
@@ -33,7 +33,7 @@ namespace WakeTheWalls.EditorTools
             Debug.Log("Animation update applied.");
         }
 
-        static void Mural1(GameObject root)
+        internal static void Mural1(GameObject root)
         {
             AddTexture(root, "Mural1/mural1_L16_eye_sockets", "Mural1/mural1_L05_eye_left");
             Remove<PopOutIntro>(root);
@@ -52,7 +52,7 @@ namespace WakeTheWalls.EditorTools
         }
 
         // Flowers that come out stay, but they no longer flip as they fly.
-        static void Mural2(GameObject root)
+        internal static void Mural2(GameObject root)
         {
             Remove<PopOutIntro>(root);
             foreach (FlyOut fly in root.GetComponentsInChildren<FlyOut>(true)) Set(fly, "spinDegrees", 0f);
@@ -70,9 +70,9 @@ namespace WakeTheWalls.EditorTools
             Glow(root, "Mural2/mural2_M06_windows", new Color(1f, 0.72f, 0.35f, 1f), 0.1f, 0.75f, 4f);
         }
 
-        static readonly string[] Blooms = { "bloom_purple", "bloom_red", "bloom_yellow", "bloom_teal", "bloom_pink" };
+        internal static readonly string[] Blooms = { "bloom_purple", "bloom_red", "bloom_yellow", "bloom_teal", "bloom_pink" };
 
-        static void Mural3(GameObject root)
+        internal static void Mural3(GameObject root)
         {
             Remove<PopOutIntro>(root);
             Remove<TapJumpOut>(root);
@@ -88,7 +88,7 @@ namespace WakeTheWalls.EditorTools
                 colour: new Color(1.3f, 1.25f, 1.1f, 1f));
         }
 
-        static void Mural4(GameObject root)
+        internal static void Mural4(GameObject root)
         {
             Remove<PopOutIntro>(root);
             foreach (MaskSweep sweep in root.GetComponentsInChildren<MaskSweep>(true)) Set(sweep, "repeatEvery", 5f);
@@ -99,7 +99,7 @@ namespace WakeTheWalls.EditorTools
         }
 
         // The rings keep lifting out. Cubes and flowers now move in place instead of popping or flying off.
-        static void Mural5(GameObject root)
+        internal static void Mural5(GameObject root)
         {
             Remove<PopOutIntro>(root);
             Remove<TapJumpOut>(root);
@@ -119,7 +119,7 @@ namespace WakeTheWalls.EditorTools
 
         // The caravans walk one way to the right and fade out at the end of each trip, the riders bob along,
         // the oasis shimmers and light climbs the tower beams. No pop-outs or flips.
-        static void Mural6(GameObject root)
+        internal static void Mural6(GameObject root)
         {
             AddTexture(root, "Mural6/mural6_L05_riders", "Mural6/mural6_L01_caravan");
             Remove<PopOutIntro>(root);
@@ -150,7 +150,7 @@ namespace WakeTheWalls.EditorTools
 
         // Mural 7 had no experience yet, so this builds one: the wall rebuilds brick by brick and light runs along it,
         // smoke curls up from the huts, the doorways flicker with firelight and birds circle the tower.
-        static void BuildMural7()
+        internal static void BuildMural7()
         {
             const string path = PrefabDir + "Mural7/Mural7Experience.prefab";
             if (!AssetDatabase.IsValidFolder(PrefabDir + "Mural7")) AssetDatabase.CreateFolder("Assets/_Project/Prefabs", "Mural7");
@@ -161,7 +161,7 @@ namespace WakeTheWalls.EditorTools
                 brickMat = new Material(Shader.Find("WakeTheWalls/BrickBuild")) { name = "BrickBuild" };
                 AssetDatabase.CreateAsset(brickMat, "Assets/_Project/Shaders/BrickBuild.mat");
             }
-            foreach (string t in new[] { "mural7_L05_wall", "mural7_L06_wall_base" }) AddTexture(null, "Mural7/" + t, "Mural7/mural7_L01_hut_front");
+            foreach (string t in new[] { "mural7_L05_wall", "mural7_L06_wall_base", "mural7_L07_floor_patch" }) AddTexture(null, "Mural7/" + t, "Mural7/mural7_L01_hut_front");
 
             var six = PrefabUtility.LoadPrefabContents(PrefabDir + "Mural6/Mural6Experience.prefab");
             var sixRig = six.GetComponentInChildren<LayeredMuralRig>(true);
@@ -191,6 +191,7 @@ namespace WakeTheWalls.EditorTools
             for (int i = 0; i < textures.Count; i++) list.GetArrayElementAtIndex(i).objectReferenceValue = textures[i];
             rigSo.ApplyModifiedPropertiesWithoutUndo();
             var parallax = rigGo.AddComponent<LayerParallax>();
+            parallax.enabled = false;
 
             var motion = root.AddComponent<LayerMotionSet>();
             var experience = root.AddComponent<Mural07Experience>();
@@ -227,7 +228,7 @@ namespace WakeTheWalls.EditorTools
             var smoke = root.AddComponent<SmokePlume>();
             Set(smoke, "experience", experience);
             var smokeSo = new SerializedObject(smoke);
-            Vector2[] roofs = { new Vector2(0.417f, 0.62f), new Vector2(0.615f, 0.69f), new Vector2(0.185f, 0.62f) };
+            Vector2[] roofs = { new Vector2(0.38f, 0.589f), new Vector2(0.551f, 0.637f), new Vector2(0.176f, 0.589f) };
             SerializedProperty sources = smokeSo.FindProperty("sources");
             sources.arraySize = roofs.Length;
             for (int i = 0; i < roofs.Length; i++) sources.GetArrayElementAtIndex(i).vector2Value = roofs[i];
@@ -237,11 +238,20 @@ namespace WakeTheWalls.EditorTools
 
             var birds = root.AddComponent<CirclingBirds>();
             Set(birds, "experience", experience);
-            Set(birds, "centre", new Vector2(0.852f, 0.58f));
+            Set(birds, "centre", new Vector2(0.752f, 0.562f));
 
-            Tap(root, experience, burst, "TapWall", new Rect(0f, 0f, 1f, 0.3f), new string[0], "wall", build);
-            Tap(root, experience, burst, "TapTower", new Rect(0.76f, 0.2f, 0.2f, 0.3f), new[] { "tower" }, "tower", null);
-            Tap(root, experience, burst, "TapHuts", new Rect(0.1f, 0.3f, 0.6f, 0.4f), new[] { "hut_front", "hut_right", "huts_left" }, "huts", null);
+            var huts = root.AddComponent<HutRise>();
+            Set(huts, "experience", experience);
+            var hutList = new SerializedObject(huts);
+            SerializedProperty hutNames = hutList.FindProperty("huts");
+            string[] hutOrder = { "huts_left", "hut_front", "hut_right" };
+            hutNames.arraySize = hutOrder.Length;
+            for (int i = 0; i < hutOrder.Length; i++) hutNames.GetArrayElementAtIndex(i).stringValue = hutOrder[i];
+            hutList.ApplyModifiedPropertiesWithoutUndo();
+
+            Tap(root, experience, burst, "TapWall", new Rect(0.03f, 0.17f, 0.84f, 0.21f), new string[0], "wall", build);
+            Tap(root, experience, burst, "TapTower", new Rect(0.674f, 0.31f, 0.168f, 0.2f), new[] { "tower" }, "tower", null);
+            Tap(root, experience, burst, "TapHuts", new Rect(0.108f, 0.37f, 0.515f, 0.274f), new[] { "hut_front", "hut_right", "huts_left" }, "huts", null);
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
             Object.DestroyImmediate(root);
@@ -250,7 +260,7 @@ namespace WakeTheWalls.EditorTools
             if (data != null) Set(data, "experiencePrefab", AssetDatabase.LoadAssetAtPath<GameObject>(path).GetComponent<MuralExperience>());
         }
 
-        static void Dusk(GameObject root, bool embers)
+        internal static void Dusk(GameObject root, bool embers)
         {
             var dusk = root.GetComponent<DuskCycle>();
             if (dusk == null) dusk = root.AddComponent<DuskCycle>();
@@ -258,7 +268,7 @@ namespace WakeTheWalls.EditorTools
             Set(dusk, "embers", embers);
         }
 
-        static void Tap(GameObject root, LayeredMuralExperience experience, Object burst, string name, Rect area, string[] elements, string id, BrickBuild rebuild)
+        internal static void Tap(GameObject root, LayeredMuralExperience experience, Object burst, string name, Rect area, string[] elements, string id, BrickBuild rebuild)
         {
             var go = new GameObject(name, typeof(BoxCollider), typeof(Interactable), typeof(PulseInteraction));
             go.transform.SetParent(root.transform, false);
@@ -281,7 +291,7 @@ namespace WakeTheWalls.EditorTools
 
         // ---------- helpers ----------
 
-        static void Sweep(GameObject root, string mask, float width = 0.04f, float direction = -90f, float seconds = 1.4f,
+        internal static void Sweep(GameObject root, string mask, float width = 0.04f, float direction = -90f, float seconds = 1.4f,
             float repeat = 6f, float firstDelay = 3f, Color? colour = null)
         {
             var tex = AssetDatabase.LoadAssetAtPath<Texture>(ArtDir + mask + ".png");
@@ -306,7 +316,7 @@ namespace WakeTheWalls.EditorTools
             Set(sweep, "firstDelay", firstDelay);
         }
 
-        static void Glow(GameObject root, string mask, Color colour, float low, float high, float seconds)
+        internal static void Glow(GameObject root, string mask, Color colour, float low, float high, float seconds)
         {
             var tex = AssetDatabase.LoadAssetAtPath<Texture>(ArtDir + mask + ".png");
             string name = "Glow " + System.IO.Path.GetFileName(mask);
@@ -332,7 +342,7 @@ namespace WakeTheWalls.EditorTools
             Set(pulse, "breathSeconds", seconds);
         }
 
-        static void Drift(GameObject root, string element, float distance, float seconds)
+        internal static void Drift(GameObject root, string element, float distance, float seconds)
         {
             LayerDrift drift = null;
             foreach (LayerDrift existing in root.GetComponents<LayerDrift>())
@@ -346,7 +356,7 @@ namespace WakeTheWalls.EditorTools
 
         // ---------- plumbing ----------
 
-        static void Edit(string prefab, System.Action<GameObject> change)
+        internal static void Edit(string prefab, System.Action<GameObject> change)
         {
             string path = PrefabDir + prefab + ".prefab";
             GameObject root = PrefabUtility.LoadPrefabContents(path);
@@ -365,7 +375,7 @@ namespace WakeTheWalls.EditorTools
             }
         }
 
-        static void AddTexture(GameObject root, string texture, string copySettingsFrom)
+        internal static void AddTexture(GameObject root, string texture, string copySettingsFrom)
         {
             string path = ArtDir + texture + ".png";
             var importer = (TextureImporter)AssetImporter.GetAtPath(path);
@@ -388,12 +398,12 @@ namespace WakeTheWalls.EditorTools
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
-        static void Remove<T>(GameObject root) where T : Component
+        internal static void Remove<T>(GameObject root) where T : Component
         {
             foreach (T c in root.GetComponentsInChildren<T>(true)) Object.DestroyImmediate(c, true);
         }
 
-        static void Motion(GameObject root, string element, float swayDegrees, float swaySpeed, float bobMeters = -1f, float phase = -1f)
+        internal static void Motion(GameObject root, string element, float swayDegrees, float swaySpeed, float bobMeters = -1f, float phase = -1f)
         {
             var set = root.GetComponentInChildren<LayerMotionSet>(true);
             var so = new SerializedObject(set);
@@ -418,7 +428,7 @@ namespace WakeTheWalls.EditorTools
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
-        static void Spin(GameObject root, params (string element, float speed)[] items)
+        internal static void Spin(GameObject root, params (string element, float speed)[] items)
         {
             var experience = root.GetComponent<LayeredMuralExperience>();
             var spin = root.GetComponent<LayerSpin>();
@@ -435,7 +445,7 @@ namespace WakeTheWalls.EditorTools
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
-        static void Set(Object target, string field, object value)
+        internal static void Set(Object target, string field, object value)
         {
             if (target == null) return;
             var so = new SerializedObject(target);

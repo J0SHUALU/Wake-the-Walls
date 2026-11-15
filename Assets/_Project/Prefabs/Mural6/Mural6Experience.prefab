@@ -61,7 +61,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860867973279992229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad44fc52f31e434c85c9b8bc1d2687a, type: 3}
   m_Name: 
@@ -353,6 +353,115 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &4741485969118130049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1087135769289767461}
+  - component: {fileID: 5720729635038644161}
+  - component: {fileID: 2733011393486880747}
+  - component: {fileID: 3747187964163870615}
+  m_Layer: 0
+  m_Name: TapTower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1087135769289767461
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741485969118130049}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8579932186930519367}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5720729635038644161
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741485969118130049}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2733011393486880747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741485969118130049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd18f2ddf6ef426d879fa3bf1f29b8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Interaction.Interactable
+  isInteractable: 1
+  tapped:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3747187964163870615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741485969118130049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c28403f5f1964d6b93b91472d03029d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.SweepTapInteraction
+  experience: {fileID: 193979942736365454}
+  area:
+    serializedVersion: 2
+    x: 0.04
+    y: 0.12
+    width: 0.3
+    height: 0.7
+  sweeps:
+  - {fileID: 100139413906601665}
+  - {fileID: 8237442999165102598}
+  interactionId: tower
+  used:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 193979942736365454}
+        m_TargetAssemblyTypeName: WakeTheWalls.Murals.LayeredMuralExperience, Assembly-CSharp
+        m_MethodName: ReportInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6662728907778811776
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,9 +479,9 @@ GameObject:
   - component: {fileID: 3580714574299546644}
   - component: {fileID: 8237442999165102598}
   - component: {fileID: 3841065845582190416}
-  - component: {fileID: 7299939028032391267}
   - component: {fileID: 3161652821061354002}
   - component: {fileID: 2669458434809902844}
+  - component: {fileID: 100139413906601665}
   m_Layer: 0
   m_Name: Mural6Experience
   m_TagString: Untagged
@@ -396,6 +505,7 @@ Transform:
   - {fileID: 757884022438129914}
   - {fileID: 3087747848080665830}
   - {fileID: 3736468405617518643}
+  - {fileID: 1087135769289767461}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8959551756846665015
@@ -610,43 +720,6 @@ MonoBehaviour:
   sway: 0.03
   spinDegrees: 60
   lifeSeconds: {x: 3, y: 5}
---- !u!114 &7299939028032391267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6662728907778811776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f11827cea8014280a66e2216352990b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.FlyOut
-  experience: {fileID: 193979942736365454}
-  startDelay: 2.5
-  copyElements: []
-  interval: {x: 1.2, y: 2.4}
-  maxFlying: 4
-  flightSeconds: 4
-  outDistance: 1
-  swing: 0.25
-  rise: 0.4
-  spinDegrees: 0
-  endScale: 0.6
-  sparkPath:
-  - palms
-  - oasis
-  - caravan
-  - caravan_far
-  sparkPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  sparkColours:
-  - {r: 0.945, g: 0.859, b: 0.686, a: 1}
-  - {r: 0.82, g: 0.698, b: 0.608, a: 1}
-  - {r: 0.859, g: 0.784, b: 0.686, a: 1}
-  secondsPerHop: 1.2
-  sparkLift: 0.45
-  sparkSpacing: 0.07
-  trailPause: 2
 --- !u!114 &3161652821061354002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,5 +774,35 @@ MonoBehaviour:
   depthMm: 0.5
   repeatEvery: 3
   firstDelay: 2
+  next: {fileID: 0}
+  nextDelay: 0
+--- !u!114 &100139413906601665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662728907778811776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d140b732c574f6989978b6f4bf1e5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MaskSweep
+  experience: {fileID: 193979942736365454}
+  mask: {fileID: 2800000, guid: 70c058a08d35042cdb06a259d909e031, type: 3}
+  glowMaterial: {fileID: 2100000, guid: cc2621d167f64a04a570c682f4eabccd, type: 2}
+  colour: {r: 1.35, g: 1.05, b: 0.65, a: 1}
+  width: 0.12
+  direction: 90
+  region:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  seconds: 1.8
+  depthMm: 0.5
+  repeatEvery: 0
+  firstDelay: 0
   next: {fileID: 0}
   nextDelay: 0

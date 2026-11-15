@@ -338,13 +338,13 @@ GameObject:
   - component: {fileID: 7913823731028150729}
   - component: {fileID: 8312437674479700697}
   - component: {fileID: 7848366319300294646}
-  - component: {fileID: 6184722665344512462}
   - component: {fileID: 1515723395332671995}
   - component: {fileID: 7959837625990251132}
   - component: {fileID: 3610219391473326198}
   - component: {fileID: 4048821043786525408}
   - component: {fileID: 5569482555918596903}
   - component: {fileID: 5542003532320018672}
+  - component: {fileID: 1314224884366934545}
   m_Layer: 0
   m_Name: Mural4Experience
   m_TagString: Untagged
@@ -401,15 +401,22 @@ MonoBehaviour:
   goldLines: {fileID: 7886820535215457122}
   restingGlow: 0.25
   flowSeconds: 2
+  flowCentre: {x: 0.705, y: 0.51}
+  flowEvery: 3
   portraits:
   - portrait_crown
   - portrait_turban
   - portrait_beret
   - portrait_right
   - portrait_cap
-  peelDistance: 0.12
-  holdSeconds: 1.4
-  gapSeconds: 0.4
+  rings:
+  - {x: 0.62, y: 0.788, z: 0.096}
+  - {x: 0.802, y: 0.708, z: 0.1}
+  - {x: 0.781, y: 0.498, z: 0.066}
+  - {x: 0.894, y: 0.511, z: 0.07}
+  - {x: 0.818, y: 0.234, z: 0.092}
+  ringColour: {r: 1, g: 0.84, b: 0.47, a: 1}
+  ringWidth: 0.012
   maskEyes: {fileID: 5576148616342031460}
   eyesSeconds: 2
 --- !u!114 &8312437674479700697
@@ -484,43 +491,6 @@ MonoBehaviour:
   sizeLimits: {x: 0.12, y: 0.35}
   pulseAmount: 0.15
   pulseSpeed: 1
---- !u!114 &6184722665344512462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2610628319135149479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f11827cea8014280a66e2216352990b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.FlyOut
-  experience: {fileID: 7913823731028150729}
-  startDelay: 2.5
-  copyElements: []
-  interval: {x: 1.2, y: 2.4}
-  maxFlying: 4
-  flightSeconds: 4
-  outDistance: 1
-  swing: 0.25
-  rise: 0.4
-  spinDegrees: 300
-  endScale: 0.6
-  sparkPath:
-  - portrait_crown
-  - portrait_turban
-  - portrait_beret
-  - portrait_right
-  - portrait_cap
-  sparkPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  sparkColours:
-  - {r: 1, g: 0.82, b: 0.35, a: 1}
-  - {r: 1, g: 0.95, b: 0.75, a: 1}
-  secondsPerHop: 1.2
-  sparkLift: 0.45
-  sparkSpacing: 0.07
-  trailPause: 2
 --- !u!114 &1515723395332671995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,6 +630,36 @@ MonoBehaviour:
   depthMm: 0.5
   repeatEvery: 2.5
   firstDelay: 1
+  next: {fileID: 0}
+  nextDelay: 0
+--- !u!114 &1314224884366934545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610628319135149479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d140b732c574f6989978b6f4bf1e5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.MaskSweep
+  experience: {fileID: 7913823731028150729}
+  mask: {fileID: 2800000, guid: 6ade9788fd6a3465c9d0fddd924c0b17, type: 3}
+  glowMaterial: {fileID: 2100000, guid: cc2621d167f64a04a570c682f4eabccd, type: 2}
+  colour: {r: 1.25, g: 0.85, b: 0.5, a: 1}
+  width: 0.14
+  direction: 0
+  region:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  seconds: 3
+  depthMm: 0.5
+  repeatEvery: 6
+  firstDelay: 2
   next: {fileID: 0}
   nextDelay: 0
 --- !u!1 &5567977968222287760
@@ -963,7 +963,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7290194206691968876}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad44fc52f31e434c85c9b8bc1d2687a, type: 3}
   m_Name: 
