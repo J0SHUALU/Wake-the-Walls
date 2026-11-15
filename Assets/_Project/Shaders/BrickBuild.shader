@@ -9,6 +9,7 @@ Shader "WakeTheWalls/BrickBuild"
         _Progress ("Progress", Range(0, 1)) = 1
         _BrickSize ("Brick Size (UV)", Vector) = (0.042, 0.033, 0, 0)
         _WallTop ("Top Of Wall (UV)", Range(0.1, 1)) = 0.63
+        _Contrast ("Contrast", Range(0.5, 2)) = 1
     }
 
     SubShader
@@ -48,6 +49,7 @@ Shader "WakeTheWalls/BrickBuild"
                 half _Progress;
                 float4 _BrickSize;
                 half _WallTop;
+                half _Contrast;
             CBUFFER_END
 
             struct Attributes
@@ -100,7 +102,10 @@ Shader "WakeTheWalls/BrickBuild"
                 float2 from = float2(uv.x, uv.y - drop);
                 if (floor(from.y / size.y) != row) return half4(0, 0, 0, 0);
 
-                half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, from) * _BaseColor;
+                half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, from);
+                // Stretch the colours around mid grey so the bricks don't wash out against the camera feed.
+                color.rgb = saturate((color.rgb - 0.5) * _Contrast + 0.5);
+                color *= _BaseColor;
                 color.rgb += laid * (1.0 - laid) * 0.6;
                 color.a *= _Alpha * smoothstep(0.0, 0.35, laid);
                 return color;
