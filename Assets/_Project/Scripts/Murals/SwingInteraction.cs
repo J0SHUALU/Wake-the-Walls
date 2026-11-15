@@ -8,7 +8,7 @@ using WakeTheWalls.VFX;
 namespace WakeTheWalls.Murals
 {
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
-    public class SwingInteraction : MonoBehaviour
+    public class SwingInteraction : MonoBehaviour, ITapEffect
     {
         [SerializeField] MuralExperience experience;
         [SerializeField] LayeredMuralRig rig;
@@ -38,6 +38,8 @@ namespace WakeTheWalls.Murals
         Coroutine swing;
         AudioSource audioSource;
         float[] baseDegrees;
+
+        public bool HasEffect => elements.Length > 0;
 
         void Start()
         {

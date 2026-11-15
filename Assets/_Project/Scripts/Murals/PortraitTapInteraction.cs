@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using WakeTheWalls.Core;
 using WakeTheWalls.Interaction;
+using WakeTheWalls.Rig;
 
 namespace WakeTheWalls.Murals
 {
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
-    public class PortraitTapInteraction : MonoBehaviour
+    public class PortraitTapInteraction : MonoBehaviour, ITapEffect
     {
         [SerializeField] Mural04Experience experience;
         [Tooltip("Portrait element from the layer manifest.")]
@@ -18,6 +19,8 @@ namespace WakeTheWalls.Murals
         [SerializeField] UnityEvent<string> infoRequested = new UnityEvent<string>();
 
         public UnityEvent<string> InfoRequested => infoRequested;
+
+        public bool HasEffect => experience != null && experience.MotionSet != null && experience.MotionSet.TryGetMotion(element, out LayerMotion _);
 
         void Start()
         {

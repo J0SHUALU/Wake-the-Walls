@@ -19,12 +19,18 @@ namespace WakeTheWalls.UI
         [SerializeField] string labelFormat = "MURAL {0:00} / COMPLETE";
         [SerializeField] TMP_Text stampNumber;
         [SerializeField] TMP_Text title;
+        [Tooltip("Widest the title can get before it wraps onto a second line.")]
+        [SerializeField] float titleMaxWidth = 820f;
         [Tooltip("{0} is the mural's name. Used when the mural has a name.")]
         [SerializeField] string titleWithName = "You woke {0}";
         [Tooltip("{0} is the mural's number. Used when the name is still empty.")]
         [SerializeField] string titleWithoutName = "Wall {0:00} is awake";
         [SerializeField] TMP_Text remaining;
         [SerializeField] StampsRow stamps;
+        [Tooltip("Gap under the title before the line about the walls still asleep.")]
+        [SerializeField] float remainingGap = 25f;
+        [Tooltip("Gap under that line before the row of stamps.")]
+        [SerializeField] float stampsGap = 35f;
 
         [Header("Buttons")]
         [SerializeField] Button nextButton;
@@ -37,10 +43,12 @@ namespace WakeTheWalls.UI
         static readonly string[] Words = { "No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
 
         MuralData current;
+        float titleHeight = -1f;
 
         protected override void Awake()
         {
             base.Awake();
+            if (title != null) titleHeight = title.rectTransform.sizeDelta.y;
             if (nextButton != null) nextButton.onClick.AddListener(() => GoTo(AppState.Scanning));
             if (homeButton != null) homeButton.onClick.AddListener(() => GoTo(AppState.Start));
             if (replayButton != null) replayButton.onClick.AddListener(Replay);
@@ -76,13 +84,41 @@ namespace WakeTheWalls.UI
             if (title != null)
             {
                 string name = current != null ? current.DisplayName : null;
-                title.text = string.IsNullOrWhiteSpace(name)
+                TitleFit.Set(title, string.IsNullOrWhiteSpace(name)
                     ? string.Format(titleWithoutName, number)
-                    : string.Format(titleWithName, name.Trim());
+                    : string.Format(titleWithName, name.Trim()), titleMaxWidth);
             }
 
             if (remaining != null) remaining.text = RemainingText(Mathf.Max(0, total - SessionProgress.Count));
             if (stamps != null) stamps.Show(SessionProgress.Woken);
+
+            Reflow();
+        }
+
+        void Reflow()
+        {
+            if (title == null || titleHeight < 0f) return;
+
+            RectTransform titleRect = title.rectTransform;
+            float width = titleRect.rect.width;
+            if (width <= 1f) width = titleMaxWidth;
+            float height = Mathf.Max(titleHeight, title.GetPreferredValues(title.text, width, 0f).y);
+            titleRect.sizeDelta = new Vector2(titleRect.sizeDelta.x, height);
+
+            float y = titleRect.anchoredPosition.y - height;
+            if (remaining != null)
+            {
+                RectTransform rect = remaining.rectTransform;
+                y -= remainingGap;
+                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, y);
+                y -= rect.rect.height;
+            }
+            if (stamps != null)
+            {
+                var rect = (RectTransform)stamps.transform;
+                y -= stampsGap;
+                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, y);
+            }
         }
 
         static string RemainingText(int left)

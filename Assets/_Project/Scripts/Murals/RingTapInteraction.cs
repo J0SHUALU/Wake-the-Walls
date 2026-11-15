@@ -8,7 +8,7 @@ using WakeTheWalls.Interaction;
 namespace WakeTheWalls.Murals
 {
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
-    public class RingTapInteraction : MonoBehaviour
+    public class RingTapInteraction : MonoBehaviour, ITapEffect
     {
         [SerializeField] Mural05Experience experience;
         [Tooltip("Tap area, 0 to 1 across the mural (0,0 bottom left).")]
@@ -24,6 +24,8 @@ namespace WakeTheWalls.Murals
         [SerializeField] UnityEvent<string> used = new UnityEvent<string>();
 
         Coroutine spread;
+
+        public bool HasEffect => experience != null && experience.Rings.Count > 0;
 
         void Start()
         {

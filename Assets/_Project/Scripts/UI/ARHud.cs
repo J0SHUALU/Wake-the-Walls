@@ -69,6 +69,7 @@ namespace WakeTheWalls.UI
 
         void HandleMuralFound(MuralData mural)
         {
+            if (mural == CurrentMural) return;
             CurrentMural = mural;
             Refresh();
         }

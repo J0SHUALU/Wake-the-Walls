@@ -473,7 +473,6 @@ GameObject:
   - component: {fileID: 1419562547}
   - component: {fileID: 1419562546}
   - component: {fileID: 1419562545}
-  - component: {fileID: 1664605691}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -829,7 +828,6 @@ MonoBehaviour:
   imageManager: {fileID: 1575097929}
   library: {fileID: 11400000, guid: c6fbeab177b3144b3adeb423d3353c46, type: 2}
   lossHandler: {fileID: 1575097935}
-  anchors: {fileID: 1340176574}
 --- !u!114 &1575097935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,28 +840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6fb57aa2749b4cb1b2eb03280f282a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Tracking.TrackingLossHandler
-  gracePeriod: 2
-  anchors: {fileID: 1340176574}
-  anchorTrustSeconds: 20
-  maxDistanceInWidths: 2
-  minDistanceMetres: 5
---- !u!114 &1664605691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1419562543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b15f82cc229284894964d2d30806969d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.XR.ARFoundation::UnityEngine.XR.ARFoundation.AROcclusionManager
-  m_HumanSegmentationStencilMode: 3
-  m_HumanSegmentationDepthMode: 2
-  m_EnvironmentDepthMode: 0
-  m_EnvironmentDepthTemporalSmoothing: 1
-  m_OcclusionPreferenceMode: 1
+  gracePeriod: 0.5
 --- !u!1001 &1798644901
 PrefabInstance:
   m_ObjectHideFlags: 0

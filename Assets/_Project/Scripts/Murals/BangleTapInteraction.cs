@@ -9,7 +9,7 @@ using WakeTheWalls.VFX;
 namespace WakeTheWalls.Murals
 {
     [RequireComponent(typeof(BoxCollider), typeof(Interactable))]
-    public class BangleTapInteraction : MonoBehaviour
+    public class BangleTapInteraction : MonoBehaviour, ITapEffect
     {
         [SerializeField] Mural05Experience experience;
         [Tooltip("Bangles element from the layer manifest.")]
@@ -28,6 +28,8 @@ namespace WakeTheWalls.Murals
         [SerializeField] UnityEvent<string> used = new UnityEvent<string>();
 
         Coroutine sliding;
+
+        public bool HasEffect => experience != null && experience.Rig.TryGetLayer(element, out MuralLayer _);
 
         void Start()
         {

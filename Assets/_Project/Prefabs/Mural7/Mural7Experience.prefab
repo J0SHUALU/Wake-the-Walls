@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerParallax
   depthScale: 12
-  maxOffset: 0.04
+  maxOffset: 0
   followSpeed: 8
   viewCamera: {fileID: 0}
 --- !u!1 &4634730921461921547
@@ -361,7 +361,7 @@ MonoBehaviour:
   mask: {fileID: 2800000, guid: 9310e96ca532b45b68f4dc46130c62a4, type: 3}
   glowMaterial: {fileID: 2100000, guid: 81eead677b99241efb5ee092068847a4, type: 2}
   colour: {r: 1, g: 0.6, b: 0.25, a: 1}
-  depthMm: 1.4
+  depthMm: 1
   sortingOrder: 0
 --- !u!114 &64308102250434633
 MonoBehaviour:

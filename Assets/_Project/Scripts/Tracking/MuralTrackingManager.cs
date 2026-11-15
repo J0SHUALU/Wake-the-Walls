@@ -10,17 +10,25 @@ namespace WakeTheWalls.Tracking
     public class MuralTrackingManager : MonoBehaviour
     {
         static readonly Quaternion ImageToMural = Quaternion.Euler(90f, 0f, 0f);
+        const float FocusMargin = 0.02f;
 
         [SerializeField] ARTrackedImageManager imageManager;
         [SerializeField] MuralLibrary library;
         [SerializeField] TrackingLossHandler lossHandler;
-        [SerializeField] MuralAnchors anchors;
+        [Tooltip("Seconds after the app comes back from the background before a mural can show again, so it is placed from a fresh sighting of the wall.")]
+        [SerializeField, Min(0f)] float resumeHoldSeconds = 0.75f;
+        [Tooltip("When the phone loses sight of a painting that is mostly on screen, something is blocking it, so the mural hides. When less than this share of the mural is on screen, the painting is just too big for the view, so the mural stays.")]
+        [SerializeField, Range(0f, 1f)] float blockedShare = 0.85f;
+        [Tooltip("Seconds a mural may keep playing on the phone's last guess at where the painting is, before it hides. Keeps a mural steady when you step right up to it, without ever showing a mural you have walked away from.")]
+        [SerializeField, Range(0f, 3f)] float lastGuessSeconds = 1f;
 
         readonly Dictionary<TrackableId, ARTrackedImage> images = new Dictionary<TrackableId, ARTrackedImage>();
         readonly Dictionary<TrackableId, MuralExperience> owners = new Dictionary<TrackableId, MuralExperience>();
         readonly Dictionary<MuralData, MuralExperience> byMural = new Dictionary<MuralData, MuralExperience>();
+        readonly Dictionary<MuralExperience, float> lastSeenAt = new Dictionary<MuralExperience, float>();
         MuralExperience active;
         MuralExperience focused;
+        float holdUntil;
 
         void OnEnable()
         {
@@ -56,7 +64,6 @@ namespace WakeTheWalls.Tracking
             experience.transform.SetLocalPositionAndRotation(Vector3.zero, ImageToMural);
             experience.Initialize(data);
             experience.OnFound();
-            anchors.Place(experience, new Pose(image.transform.position, image.transform.rotation));
 
             owners[image.trackableId] = experience;
             byMural[data] = experience;
@@ -79,7 +86,7 @@ namespace WakeTheWalls.Tracking
                     centred = experience;
                 }
             }
-            if (centred != null) Focus(centred);
+            if (centred != null && (focused == null || centred == focused || closest < DistanceFromCentre(focused) - FocusMargin)) Focus(centred);
         }
 
         void Focus(MuralExperience experience)
@@ -102,24 +109,29 @@ namespace WakeTheWalls.Tracking
         bool Refresh(MuralExperience experience)
         {
             ARTrackedImage best = null;
-            bool limited = false;
+            ARTrackedImage held = null;
             foreach (var pair in owners)
             {
                 if (pair.Value != experience || !images.TryGetValue(pair.Key, out var image)) continue;
                 if (image.trackingState == TrackingState.Tracking) { best = image; break; }
-                if (image.trackingState == TrackingState.Limited) limited = true;
+                if (image.trackingState == TrackingState.Limited) held = image;
             }
 
-            if (best != null && anchors.HasAnchor(experience))
-            {
-                anchors.Follow(experience, new Pose(best.transform.position, best.transform.rotation * ImageToMural));
-            }
-            else if (best != null && experience.transform.parent != best.transform)
+            if (best != null) lastSeenAt[experience] = Time.time;
+
+            if (best == null && held != null && experience.transform.parent == held.transform
+                && lastSeenAt.TryGetValue(experience, out float seenAt) && Time.time - seenAt <= lastGuessSeconds
+                && MuralView.IsInView(experience) && MuralView.ShareOnScreen(experience) < blockedShare)
+                best = held;
+
+            if (Time.unscaledTime < holdUntil) best = null;
+
+            if (best != null && experience.transform.parent != best.transform)
             {
                 experience.transform.SetParent(best.transform, false);
                 experience.transform.SetLocalPositionAndRotation(Vector3.zero, ImageToMural);
             }
-            lossHandler.Report(experience, best != null, limited);
+            lossHandler.Report(experience, best != null, held != null);
             return best != null;
         }
 
@@ -129,10 +141,9 @@ namespace WakeTheWalls.Tracking
             if (!owners.TryGetValue(id, out var experience)) return;
             owners.Remove(id);
             if (owners.ContainsValue(experience)) { Refresh(experience); return; }
-            if (anchors.HasAnchor(experience)) return;
 
             lossHandler.Forget(experience);
-            anchors.Remove(experience);
+            lastSeenAt.Remove(experience);
             if (experience != null)
             {
                 byMural.Remove(experience.Data);
@@ -160,6 +171,16 @@ namespace WakeTheWalls.Tracking
         {
             int cut = imageName.LastIndexOf('_');
             return cut > 0 ? imageName.Substring(0, cut) : imageName;
+        }
+
+        void OnApplicationPause(bool paused)
+        {
+            if (!paused) holdUntil = Time.unscaledTime + resumeHoldSeconds;
+        }
+
+        void OnApplicationFocus(bool focus)
+        {
+            if (focus) holdUntil = Time.unscaledTime + resumeHoldSeconds;
         }
 
         void ResetActive()

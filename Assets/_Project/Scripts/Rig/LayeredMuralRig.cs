@@ -61,6 +61,13 @@ namespace WakeTheWalls.Rig
             foreach (MuralLayer layer in layers) layer.SetAlpha(value);
         }
 
+        public void SetVisible(bool value)
+        {
+            if (Background != null && Background.Renderer != null) Background.Renderer.enabled = value;
+            foreach (MuralLayer layer in layers)
+                if (layer.Renderer != null) layer.Renderer.enabled = value;
+        }
+
         MuralLayer CreateLayer(LayerEntry entry, Vector2 muralSize)
         {
             Texture texture = FindTexture(entry.file);

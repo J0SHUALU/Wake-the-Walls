@@ -7,7 +7,7 @@
     {
       "file": "mural6_L01_caravan",
       "element": "caravan",
-      "depthMm": 4.5,
+      "depthMm": 0.0,
       "order": 5,
       "pivotX": 0.606,
       "pivotY": 0.711
@@ -15,7 +15,7 @@
     {
       "file": "mural6_L02_caravan_far",
       "element": "caravan_far",
-      "depthMm": 3.0,
+      "depthMm": 0.0,
       "order": 3,
       "pivotX": 0.624,
       "pivotY": 0.894
@@ -23,7 +23,7 @@
     {
       "file": "mural6_L03_palms",
       "element": "palms",
-      "depthMm": 4.0,
+      "depthMm": 0.0,
       "order": 4,
       "pivotX": 0.469,
       "pivotY": 0.662
@@ -31,7 +31,7 @@
     {
       "file": "mural6_L04_oasis",
       "element": "oasis",
-      "depthMm": 2.5,
+      "depthMm": 0.0,
       "order": 2,
       "pivotX": 0.482,
       "pivotY": 0.637
@@ -39,7 +39,7 @@
     {
       "file": "mural6_L05_riders",
       "element": "riders",
-      "depthMm": 4.0,
+      "depthMm": 0.0,
       "order": 6,
       "pivotX": 0.7104,
       "pivotY": 0.5631
