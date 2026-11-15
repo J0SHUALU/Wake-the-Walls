@@ -1,25 +1,32 @@
 # Wake the Walls
 
-An AR app that finds five murals on the ALU campus with image tracking and brings each painting to life. Parts of the mural lift off the wall, move, grow into 3D and tell the mural's story, and the user can tap into each one to explore it.
+![Wake the Walls: point your phone at a campus mural and watch it come alive](docs/media/poster.png)
+
+An AR app that finds seven murals on the ALU campus with image tracking and brings each painting to life. The murals stay flat on the wall and come alive in place: parts move, glow, breathe and drift, and Pearl, the app's guide, tells the story of each artwork and its artists. Tap the marked parts of a mural to explore it, collect a stamp for every mural you wake, and record a video of it to save to your phone.
 
 ## Team
 
 | Member | Focus |
 |---|---|
-| Fawziyyah (group leader) | UI flow, interaction, audio, Murals 4 and 5 |
-| Joshua | Art, mural layer cut-outs, UI design, design document |
-| Remy | Project setup, tracking, app flow, builds |
-| Donald | Layered mural rig, shaders, VFX, Murals 1 to 3 |
+| Fawziyyah Oke (group leader) | UI flow, interaction, audio, Murals 4 and 5 |
+| Joshua Moses | Art and mural layer cut-outs, mural animations, Pearl the narrator, Summit UI design, app icon, obstruction pause, design document |
+| Remy Intwali | Project setup, tracking and world anchoring, app flow, Murals 6 and 7, iOS and Android builds |
+| Donald Duru | Layered mural rig, shaders, VFX, record button, Murals 1 to 3 |
+| Thierry Gusenga | Animation, device testing, documentation |
 
 ## The murals
 
-| # | Mural | What happens |
-|---|---|---|
-| 1 | Rooted | Paints itself in, her eyes follow you and blink, leaves fall, birds fly out, gold shines down her neck rings. Tap the trees or earrings |
-| 2 | Bloom | The flower crown breathes and drops petals, blooms orbit and float out, butterflies leave the flowers, a sunset glow moves down the sky. Tap a flower or the collar |
-| 3 | Desert Crossing | Sand gusts across the wall, the mosque windows glow, plants jump out in the wind. Tap the plants or the mosque |
-| 4 | Faces of the Continent | The big mask glows and breathes, light runs along the gold lines, portraits lift forward in turn. Tap a portrait or a gold line |
-| 5 | Orbit | The rings become 3D rings orbiting her head, cubes and flowers circle the mural. Tap the rings or bangles |
+Titles and artists are the official ones from ALU.
+
+| # | Mural | Artists | What happens |
+|---|---|---|---|
+| 1 | Heritage of the Time to Come | Lakaz D'art (Mauritius), painted by Masha Studio | Paints itself in, her eyes follow you and blink, leaves drift down, gold light sweeps her neck rings. Tap the trees or earrings |
+| 2 | African Infrastructure Civilization (flowers) | Mashakiro Bienvenue and Masha Art Studio (Rwanda) | The flower crown breathes, blooms float out, a glow sweeps the sky. Tap a flower or the collar |
+| 3 | African Infrastructure Civilization (desert mosque) | Mashakiro Bienvenue and Masha Art Studio | Sand blows across the desert floor, the mosque windows glow, the plants sway. Tap the plants or the mosque |
+| 4 | The Spirit of African Leadership | Samuel Daddy Ishimwe and Masha Studio (Rwanda) | The mask glows, light runs along the gold lines to each leader: Queen Nzinga, Mansa Musa, Thomas Sankara, Kwame Nkrumah, Winnie Madikizela-Mandela. Tap a face to hear their story |
+| 5 | The Resurgence | Lakaz D'art (Mauritius), painted by Masha Studio | The gold rings spin around her head and the rays glow. Tap the rings or bangles |
+| 6 | African Infrastructure Civilization (caravan) | Mashakiro Bienvenue and Masha Art Studio | The camel caravan walks across the dunes, the sun's beams sweep and dusk falls. Tap the caravan or the oasis |
+| 7 | African Infrastructure Civilization (Great Zimbabwe) | Mashakiro Bienvenue and Masha Art Studio | Smoke rises from the huts, birds circle the tower and the doorways glow at dusk. Tap a hut or the tower |
 
 Every mural has its own soundtrack, pulsing red dots on the parts you can tap, and an info panel with its name, location and story.
 
