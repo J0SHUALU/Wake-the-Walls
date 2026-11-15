@@ -4,6 +4,12 @@
 
 An AR app that finds seven murals on the ALU campus with image tracking and brings each painting to life. The murals stay flat on the wall and come alive in place: parts move, glow, breathe and drift, and Pearl, the app's guide, tells the story of each artwork and its artists. Tap the marked parts of a mural to explore it, collect a stamp for every mural you wake, and record a video of it to save to your phone.
 
+## Links
+
+- **Playable build (Android APK):** _itch.io link_
+- **Video walkthrough:** _YouTube / Drive link_
+- **DevLog:** _link_
+
 ## Team
 
 | Member | Focus |
@@ -28,7 +34,17 @@ Titles and artists are the official ones from ALU.
 | 6 | African Infrastructure Civilization (caravan) | Mashakiro Bienvenue and Masha Art Studio | The camel caravan walks across the dunes, the sun's beams sweep and dusk falls. Tap the caravan or the oasis |
 | 7 | African Infrastructure Civilization (Great Zimbabwe) | Mashakiro Bienvenue and Masha Art Studio | Smoke rises from the huts, birds circle the tower and the doorways glow at dusk. Tap a hut or the tower |
 
-Every mural has its own soundtrack, pulsing red dots on the parts you can tap, and an info panel with its name, location and story.
+## Features
+
+- **Seven murals** tracked with AR image tracking and anchored in the world, so they stay put when the camera moves.
+- **Pearl the narrator** introduces each mural and its artists, with the music ducking while she talks.
+- **Tap markers** pulse on the parts of a mural you can tap; each mural has an info panel with its name, location and story.
+- **Obstruction pause:** if a person or object stands in front of the mural, it pauses and asks for a clearer view.
+- **Record button** saves a video of the AR view straight to Photos.
+- **Stamps and completion screen** for every mural you wake.
+- **Original soundtrack** for each mural plus menu music.
+
+People occlusion (cutting people out in front of the murals) was tried and removed on 13 November 2026 because it pushed murals off the wall and ran phones out of memory. The work is kept on `feature/remy-people-occlusion`.
 
 ## Tech
 
@@ -45,7 +61,7 @@ Every mural has its own soundtrack, pulsing red dots on the parts you can tap, a
 ## Building
 
 - **iOS:** needs a Mac with Xcode. File > Build Profiles > iOS > Build, open the Xcode project, pick your team under Signing and run on an iPhone.
-- **Android:** File > Build Profiles > Android > Build And Run with an ARCore supported phone.
+- **Android:** File > Build Profiles > Android > Build, and save the APK to `Builds/Android/`. Needs an ARCore supported phone on Android 11 or later.
 
 ## Docs
 
