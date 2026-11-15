@@ -31,8 +31,8 @@ namespace WakeTheWalls.EditorTools
             if (prefab == null) return;
 
             var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
-            foreach (var old in Object.FindObjectsByType<WakeTheWalls.Narrator.Narrator>(FindObjectsSortMode.None)) Object.DestroyImmediate(old.gameObject);
-            foreach (var old in Object.FindObjectsByType<MenuMusic>(FindObjectsSortMode.None)) Object.DestroyImmediate(old.gameObject);
+            foreach (var old in Object.FindObjectsByType<WakeTheWalls.Narrator.Narrator>()) Object.DestroyImmediate(old.gameObject);
+            foreach (var old in Object.FindObjectsByType<MenuMusic>()) Object.DestroyImmediate(old.gameObject);
 
             PrefabUtility.InstantiatePrefab(prefab, scene);
 
