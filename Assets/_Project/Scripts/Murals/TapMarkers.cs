@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WakeTheWalls.Core;
 using WakeTheWalls.Interaction;
 
 namespace WakeTheWalls.Murals
@@ -12,12 +14,8 @@ namespace WakeTheWalls.Murals
         [SerializeField] Color ringColour = new Color(0.9f, 0.16f, 0.13f);
         [SerializeField] Color dotColour = Color.white;
 
-        [Tooltip("Seconds after the mural first starts playing before the markers appear, so the intro plays first. Later sightings show them straight away.")]
+        [Tooltip("Seconds after the mural is found before the markers appear, so the intro plays first.")]
         [SerializeField] float showDelay = 2f;
-        [Tooltip("Seconds the markers take to fade in when the mural shows and out when it hides.")]
-        [SerializeField] float fadeSeconds = 0.8f;
-        [Tooltip("Seconds between attempts to find the tappable parts, until at least one is found.")]
-        [SerializeField] float retrySeconds = 0.5f;
         [Tooltip("Marker width as a share of the smaller side of the tap area, kept between the limits below.")]
         [SerializeField, Range(0.1f, 0.6f)] float sizeShare = 0.3f;
         [SerializeField] Vector2 sizeLimits = new Vector2(0.12f, 0.35f);
@@ -26,47 +24,51 @@ namespace WakeTheWalls.Murals
 
         readonly List<Transform> markers = new List<Transform>();
         readonly List<SpriteRenderer> renderers = new List<SpriteRenderer>();
-        float readyAt = -1f;
-        float nextTry;
-        bool shownBefore;
+        readonly List<float> shown = new List<float>();
+        readonly List<float> grow = new List<float>();
+        Coroutine routine;
         float alpha;
 
-        void LateUpdate()
+        void OnEnable()
         {
-            if (experience == null) return;
+            GameEvents.MuralFound += HandleFound;
+            GameEvents.MuralLost += HandleLost;
+        }
 
-            bool showing = experience.IsShowing;
-            if (!showing) readyAt = -1f;
-            else if (readyAt < 0f)
-            {
-                readyAt = Time.time + (shownBefore ? 0f : showDelay);
-                shownBefore = true;
-            }
+        void OnDisable()
+        {
+            GameEvents.MuralFound -= HandleFound;
+            GameEvents.MuralLost -= HandleLost;
+        }
 
-            bool ready = showing && Time.time >= readyAt;
-            if (ready && markers.Count == 0 && Time.time >= nextTry)
-            {
-                nextTry = Time.time + retrySeconds;
-                Build();
-            }
+        void HandleFound(MuralData mural)
+        {
+            if (!IsMine(mural)) return;
+            if (routine != null) StopCoroutine(routine);
+            routine = StartCoroutine(ShowAfterDelay(markers.Count == 0 ? showDelay : 0.3f));
+        }
 
-            float target = ready && markers.Count > 0 ? 1f : 0f;
-            if (!Mathf.Approximately(alpha, target))
-                SetAlpha(Mathf.MoveTowards(alpha, target, Time.deltaTime / Mathf.Max(0.05f, fadeSeconds)));
+        void HandleLost(MuralData mural)
+        {
+            if (!IsMine(mural)) return;
+            if (routine != null) StopCoroutine(routine);
+            routine = StartCoroutine(Tween.Value(alpha, 0f, SetAlpha, 0.6f));
+        }
 
-            if (alpha <= 0f || markers.Count == 0) return;
-            float pulse = 1f + pulseAmount * (0.5f + 0.5f * Mathf.Sin(Time.time * pulseSpeed * Mathf.PI * 2f));
-            float ringWidth = Mathf.Max(0.0001f, ring != null ? ring.bounds.size.x : 1f);
-            foreach (Transform marker in markers)
-                if (marker != null) marker.GetChild(0).localScale = Vector3.one * (pulse / ringWidth);
+        bool IsMine(MuralData mural) => experience != null && experience.Data == mural;
+
+        IEnumerator ShowAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            if (markers.Count == 0) Build();
+            yield return Tween.Value(alpha, 1f, SetAlpha, 0.8f);
         }
 
         void Build()
         {
-            foreach (BoxCollider box in experience.GetComponentsInChildren<BoxCollider>(true))
+            foreach (var box in experience.GetComponentsInChildren<BoxCollider>(true))
             {
-                var interactable = box.GetComponent<Interactable>();
-                if (interactable == null || !DoesSomething(interactable)) continue;
+                if (!box.isTrigger || box.GetComponent<Interactable>() == null) continue;
 
                 float side = Mathf.Min(box.size.x * box.transform.lossyScale.x, box.size.y * box.transform.lossyScale.y);
                 float width = Mathf.Clamp(side * sizeShare, sizeLimits.x, sizeLimits.y);
@@ -80,16 +82,12 @@ namespace WakeTheWalls.Murals
                 renderers.Add(AddSprite(marker, ring, ringColour, 0));
                 renderers.Add(AddSprite(marker, dot, dotColour, 1, 0.35f));
                 markers.Add(marker);
+                shown.Add(1f);
+                grow.Add(0f);
+                int index = markers.Count - 1;
+                box.GetComponent<Interactable>().Tapped.AddListener(() => StartCoroutine(Burst(index)));
             }
-            SetAlpha(0f);
-        }
-
-        static bool DoesSomething(Interactable interactable)
-        {
-            if (!interactable.IsInteractable) return false;
-            foreach (ITapEffect effect in interactable.GetComponents<ITapEffect>())
-                if (effect.HasEffect) return true;
-            return false;
+            SetAlpha(alpha);
         }
 
         static void SetWorldWidth(Transform marker, float width)
@@ -111,6 +109,28 @@ namespace WakeTheWalls.Murals
             return sr;
         }
 
+        void Update()
+        {
+            if (alpha <= 0f || markers.Count == 0) return;
+            float pulse = 1f + pulseAmount * (0.5f + 0.5f * Mathf.Sin(Time.time * pulseSpeed * Mathf.PI * 2f));
+            foreach (var marker in markers)
+            {
+                if (marker == null) continue;
+                int i = markers.IndexOf(marker);
+                float s = pulse * (1f + grow[i]);
+                marker.GetChild(0).localScale = Vector3.one * (s / Mathf.Max(0.0001f, ring != null ? ring.bounds.size.x : 1f));
+            }
+        }
+
+        // A tapped dot rings out and fades, then comes back once the effect has played.
+        IEnumerator Burst(int index)
+        {
+            yield return Tween.Run(0.5f, t => { grow[index] = t * 1.2f; shown[index] = 1f - t; SetAlpha(alpha); });
+            grow[index] = 0f;
+            yield return new WaitForSeconds(2.5f);
+            yield return Tween.Run(0.6f, t => { shown[index] = t; SetAlpha(alpha); });
+        }
+
         void SetAlpha(float value)
         {
             alpha = value;
@@ -118,9 +138,8 @@ namespace WakeTheWalls.Murals
             {
                 if (renderers[i] == null) continue;
                 Color c = renderers[i].color;
-                c.a = value * (i % 2 == 0 ? 0.9f : 1f);
+                c.a = value * shown[i / 2] * (i % 2 == 0 ? 0.9f : 1f);
                 renderers[i].color = c;
-                renderers[i].enabled = value > 0.002f;
             }
         }
     }

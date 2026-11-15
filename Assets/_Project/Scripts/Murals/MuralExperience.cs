@@ -9,8 +9,6 @@ namespace WakeTheWalls.Murals
 
         public bool IsComplete { get; private set; }
 
-        public virtual bool IsShowing => isActiveAndEnabled;
-
         public void Initialize(MuralData data)
         {
             Data = data;

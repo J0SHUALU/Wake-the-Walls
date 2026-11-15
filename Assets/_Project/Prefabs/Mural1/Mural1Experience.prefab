@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Rig.LayerParallax
   depthScale: 12
-  maxOffset: 0
+  maxOffset: 0.04
   followSpeed: 8
   viewCamera: {fileID: 0}
 --- !u!1 &7756243726687083150
@@ -462,9 +462,7 @@ GameObject:
   - component: {fileID: 7846288500644080684}
   - component: {fileID: 8157436026292187703}
   - component: {fileID: 2811212872656989982}
-  - component: {fileID: 1837639026148415101}
   - component: {fileID: 5195936349746484481}
-  - component: {fileID: 2333936807879050571}
   - component: {fileID: 6207750385823661214}
   - component: {fileID: 6362165067126327373}
   - component: {fileID: 3610833576623207994}
@@ -669,41 +667,6 @@ MonoBehaviour:
   sizeLimits: {x: 0.12, y: 0.35}
   pulseAmount: 0.15
   pulseSpeed: 1
---- !u!114 &1837639026148415101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7756243726687083150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f11827cea8014280a66e2216352990b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.FlyOut
-  experience: {fileID: 4686136062710758120}
-  startDelay: 2.5
-  copyElements: []
-  interval: {x: 1.2, y: 2.4}
-  maxFlying: 4
-  flightSeconds: 4
-  outDistance: 1
-  swing: 0.25
-  rise: 0.4
-  spinDegrees: 300
-  endScale: 0.6
-  sparkPath:
-  - earring_left
-  - nose_ring
-  - earring_right
-  sparkPrefab: {fileID: 4843809776342139903, guid: 6c8f4b47bb97c43bc8ce34894d3bbe28, type: 3}
-  sparkColours:
-  - {r: 1, g: 0.82, b: 0.35, a: 1}
-  - {r: 1, g: 0.95, b: 0.75, a: 1}
-  secondsPerHop: 1.2
-  sparkLift: 0
-  sparkSpacing: 0.07
-  trailPause: 2
 --- !u!114 &5195936349746484481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,33 +691,6 @@ MonoBehaviour:
   interval: {x: 1.5, y: 3}
   fallSeconds: 1.1
   splashOut: 0.15
---- !u!114 &2333936807879050571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7756243726687083150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 758dfb73d5d84c2ba9864058d855d7a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WakeTheWalls.Murals.Butterflies
-  experience: {fileID: 4686136062710758120}
-  fromElements:
-  - tree_right
-  - tree_top_left
-  - trees_mid_right
-  shape: 1
-  colours:
-  - {r: 0.12, g: 0.1, b: 0.1, a: 1}
-  - {r: 0.22, g: 0.18, b: 0.15, a: 1}
-  startDelay: 4
-  interval: {x: 5, y: 9}
-  lifeSeconds: 5
-  wingspan: 0.32
-  flapsPerSecond: 3.5
-  outDistance: 2.2
 --- !u!114 &6207750385823661214
 MonoBehaviour:
   m_ObjectHideFlags: 0

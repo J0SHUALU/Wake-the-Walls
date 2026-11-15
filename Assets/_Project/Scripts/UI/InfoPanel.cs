@@ -16,8 +16,6 @@ namespace WakeTheWalls.UI
         [Tooltip("{0} is the mural number, {1} and {2} are its width and height in metres.")]
         [SerializeField] string labelFormat = "MURAL {0:00} / {1} × {2} M";
         [SerializeField] TMP_Text title;
-        [Tooltip("Widest the title can get before it wraps onto a second line.")]
-        [SerializeField] float titleMaxWidth = 760f;
         [SerializeField] GameObject whereGroup;
         [SerializeField] TMP_Text whereValue;
         [SerializeField] TMP_Text story;
@@ -31,6 +29,7 @@ namespace WakeTheWalls.UI
         [SerializeField] Button backButton;
 
         MuralData current;
+        string topic;
         Vector2 sheetRestPosition;
         Coroutine slide;
 
@@ -60,13 +59,24 @@ namespace WakeTheWalls.UI
 
         void HandleMuralFound(MuralData mural) => current = mural;
 
-        void HandleInfoRequested(string topic) => Show();
+        void HandleInfoRequested(string requested)
+        {
+            topic = requested;
+            if (IsVisible) Fill();
+            Show();
+        }
 
         void HandleMuralLost(MuralData mural) => Hide();
 
         void HandleStateChanged(AppState state)
         {
             if (state != AppState.Experience) Hide();
+        }
+
+        protected override void OnHiding()
+        {
+            base.OnHiding();
+            topic = null;
         }
 
         protected override void OnShowing()
@@ -92,10 +102,11 @@ namespace WakeTheWalls.UI
                     size.x.ToString("0.#", CultureInfo.InvariantCulture), size.y.ToString("0.#", CultureInfo.InvariantCulture));
             }
 
-            if (SetText(title, current.DisplayName)) TitleFit.Set(title, current.DisplayName.Trim(), titleMaxWidth);
-            bool hasWhere = SetText(whereValue, current.Location);
+            MuralData.Spot spot = current.FindSpot(topic);
+            SetText(title, spot != null ? spot.title : current.DisplayName);
+            bool hasWhere = spot == null && SetText(whereValue, current.Location);
             if (whereGroup != null) whereGroup.SetActive(hasWhere);
-            bool hasStory = SetText(story, current.Story);
+            bool hasStory = SetText(story, spot != null ? spot.text : current.Story);
 
             if (dividerAfterTitle != null) dividerAfterTitle.SetActive(hasWhere || hasStory);
             if (dividerAfterFacts != null) dividerAfterFacts.SetActive(hasWhere && hasStory);

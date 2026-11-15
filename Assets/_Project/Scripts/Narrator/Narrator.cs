@@ -92,6 +92,7 @@ namespace WakeTheWalls.Narrator
             GameEvents.MuralCompleted += HandleCompleted;
             GameEvents.StateChanged += HandleState;
             GameEvents.ResetRequested += HandleReset;
+            GameEvents.NarrationRequested += Say;
         }
 
         void OnDisable()
@@ -101,6 +102,7 @@ namespace WakeTheWalls.Narrator
             GameEvents.MuralCompleted -= HandleCompleted;
             GameEvents.StateChanged -= HandleState;
             GameEvents.ResetRequested -= HandleReset;
+            GameEvents.NarrationRequested -= Say;
             AudioManager.SetDucked(false);
         }
 

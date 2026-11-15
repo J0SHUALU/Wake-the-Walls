@@ -1,56 +1,64 @@
 {
   "mural": "Mural7",
   "canvasWidth": 2048,
-  "canvasHeight": 1681,
+  "canvasHeight": 2162,
   "background": "mural7_bg_filled",
   "layers": [
     {
-      "file": "mural7_L01_hut_front",
-      "element": "hut_front",
-      "depthMm": 0.0,
-      "order": 6,
-      "pivotX": 0.417,
-      "pivotY": 0.334
-    },
-    {
-      "file": "mural7_L02_hut_right",
-      "element": "hut_right",
-      "depthMm": 0.0,
-      "order": 5,
-      "pivotX": 0.62,
-      "pivotY": 0.384
-    },
-    {
-      "file": "mural7_L03_huts_left",
-      "element": "huts_left",
-      "depthMm": 0.0,
-      "order": 4,
-      "pivotX": 0.196,
-      "pivotY": 0.288
-    },
-    {
-      "file": "mural7_L04_tower",
-      "element": "tower",
-      "depthMm": 0.0,
-      "order": 3,
-      "pivotX": 0.851,
-      "pivotY": 0.341
-    },
-    {
       "file": "mural7_L06_wall_base",
       "element": "wall_base",
-      "depthMm": 0.0,
+      "depthMm": 0.3,
       "order": 1,
-      "pivotX": 0.5,
-      "pivotY": 0.25
+      "pivotX": 0.4448,
+      "pivotY": 0.3823
     },
     {
       "file": "mural7_L05_wall",
       "element": "wall",
-      "depthMm": 0.0,
+      "depthMm": 0.6,
       "order": 2,
-      "pivotX": 0.5,
-      "pivotY": 0.25
+      "pivotX": 0.4448,
+      "pivotY": 0.3825
+    },
+    {
+      "file": "mural7_L07_floor_patch",
+      "element": "floor_patch",
+      "depthMm": 0.9,
+      "order": 3,
+      "pivotX": 0.364,
+      "pivotY": 0.5
+    },
+    {
+      "file": "mural7_L04_tower",
+      "element": "tower",
+      "depthMm": 1.2,
+      "order": 4,
+      "pivotX": 0.7505,
+      "pivotY": 0.3987
+    },
+    {
+      "file": "mural7_L03_huts_left",
+      "element": "huts_left",
+      "depthMm": 1.5,
+      "order": 5,
+      "pivotX": 0.1768,
+      "pivotY": 0.3594
+    },
+    {
+      "file": "mural7_L02_hut_right",
+      "element": "hut_right",
+      "depthMm": 1.8,
+      "order": 6,
+      "pivotX": 0.5515,
+      "pivotY": 0.4278
+    },
+    {
+      "file": "mural7_L01_hut_front",
+      "element": "hut_front",
+      "depthMm": 2.1,
+      "order": 7,
+      "pivotX": 0.3821,
+      "pivotY": 0.3922
     }
   ]
 }
