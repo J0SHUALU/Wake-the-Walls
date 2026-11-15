@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WakeTheWalls.Core;
 using WakeTheWalls.Murals;
+using WakeTheWalls.Tracking;
 
 namespace WakeTheWalls.UI
 {
@@ -112,7 +113,7 @@ namespace WakeTheWalls.UI
                 }
             }
 
-            bool blocked = GameEvents.ViewBlocked;
+            bool blocked = ObstructionWatch.Blocked;
             if (headline != null) headline.text = blocked ? blockedHeadline : lostHeadline;
             if (body != null) body.text = blocked ? blockedBody : lostBody;
 

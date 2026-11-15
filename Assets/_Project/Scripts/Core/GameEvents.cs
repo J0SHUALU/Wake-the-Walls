@@ -12,8 +12,6 @@ namespace WakeTheWalls.Core
 
         public static event Action<MuralData> MuralLost;
 
-        public static bool ViewBlocked { get; set; }
-
         public static event Action<MuralData> MuralFocused;
 
         public static event Action<MuralData> MuralCompleted;
