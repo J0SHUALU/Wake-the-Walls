@@ -25,6 +25,9 @@ namespace WakeTheWalls.Murals
 
         [SerializeField] AudioClip ambience;
 
+        [Tooltip("Small readable copy of the painting, used to notice when something is in front of it.")]
+        [SerializeField] Texture2D checkImage;
+
         [Serializable]
         public class Spot
         {
@@ -54,6 +57,8 @@ namespace WakeTheWalls.Murals
         public Color[] Palette => palette;
 
         public AudioClip Ambience => ambience;
+
+        public Texture2D CheckImage => checkImage;
 
         public Spot FindSpot(string topic)
         {
