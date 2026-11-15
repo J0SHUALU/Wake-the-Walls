@@ -22,13 +22,16 @@ namespace WakeTheWalls.Tracking
         [SerializeField, Range(2f, 20f)] float checksPerSecond = 7f;
         [Tooltip("How far a spot can differ from the painting, in standard deviations, before it counts as covered.")]
         [SerializeField, Range(0.5f, 3f)] float spotTolerance = 1.3f;
-        [Tooltip("How much more of the mural has to look different, on top of the usual small mismatch, before it pauses.")]
-        [SerializeField, Range(0.02f, 0.6f)] float blockShare = 0.12f;
-        [SerializeField, Range(0.01f, 0.5f)] float clearShare = 0.05f;
+        [Tooltip("How much more of the mural has to look different than when the view was clearest, before it pauses.")]
+        [SerializeField, Range(0.02f, 0.6f)] float blockShare = 0.07f;
+        [SerializeField, Range(0.01f, 0.5f)] float clearShare = 0.035f;
         [SerializeField, Min(0f)] float blockAfter = 0.2f;
         [SerializeField, Min(0f)] float clearAfter = 0.4f;
-        [Tooltip("Seconds the usual mismatch takes to follow the view while nothing is in the way.")]
-        [SerializeField, Range(0.3f, 6f)] float settleSeconds = 1.5f;
+        [Tooltip("The clearest view seen so far is the reference. It only creeps up this much per second, for changes in light.")]
+        [SerializeField, Range(0f, 0.05f)] float baselineDrift = 0.004f;
+        [Tooltip("Writes what the check sees to the log every couple of seconds.")]
+        [SerializeField] bool logChecks = true;
+        float nextLog;
 
         static readonly Dictionary<MuralData, float[]> pictures = new Dictionary<MuralData, float[]>();
         static readonly Dictionary<MuralData, Vector2Int> pictureSizes = new Dictionary<MuralData, Vector2Int>();
@@ -37,6 +40,9 @@ namespace WakeTheWalls.Tracking
         RenderTexture shot;
         MuralExperience focused;
         bool waiting, flipped, flipKnown;
+        [Tooltip("Typical share of a clear view that looks different from the painting, from light and small tracking offsets.")]
+        [SerializeField, Range(0f, 0.5f)] float typicalClear = 0.12f;
+
         float nextCheck, baseline = -1f, lastCheck, overSince = -1f, underSince = -1f;
         readonly List<Vector2> pairs = new List<Vector2>();
 
@@ -98,7 +104,12 @@ namespace WakeTheWalls.Tracking
 
         void Update()
         {
-            if (waiting || Time.time < nextCheck || focused == null || background == null || background.material == null) return;
+            if (waiting || Time.time < nextCheck || focused == null) return;
+            if (background == null || background.material == null)
+            {
+                if (logChecks && Time.time >= nextLog) { nextLog = Time.time + 2f; Debug.Log("[Obstruction] no camera background material yet"); }
+                return;
+            }
             if (focused.Data == null || focused.Data.CheckImage == null) return;
             if (view == null) view = background.GetComponent<Camera>();
             if (view == null) return;
@@ -131,6 +142,7 @@ namespace WakeTheWalls.Tracking
             }
             float share = flipped ? Mismatch(pixels, w, h, true) : straight;
             if (share >= 0f) Judge(share);
+            else if (logChecks && Time.time >= nextLog) { nextLog = Time.time + 2f; Debug.Log("[Obstruction] too little of the mural on screen to check"); }
         }
 
         // Share of the visible mural that does not look like the painting, or -1 when too little of it is on screen.
@@ -174,13 +186,18 @@ namespace WakeTheWalls.Tracking
             float now = Time.time;
             float dt = lastCheck > 0f ? now - lastCheck : 0f;
             lastCheck = now;
-            if (baseline < 0f) baseline = share;
-            if (!Blocked)
-            {
-                if (share < baseline) baseline = share;
-                else baseline = Mathf.MoveTowards(baseline, share, (share - baseline) * Mathf.Clamp01(dt / settleSeconds));
-            }
+            // The clearest view of the mural so far is what "nothing in the way" looks like. Someone already standing
+            // in front when the mural is found still counts, because a clearer view sets the reference as soon as they move,
+            // and the starting reference is the typical mismatch of a clear view rather than whatever was seen first.
+            if (baseline < 0f) baseline = Mathf.Min(share, typicalClear);
+            if (share < baseline) baseline = share;
+            else if (!Blocked) baseline = Mathf.Min(share, baseline + baselineDrift * dt);
             float extra = share - baseline;
+            if (logChecks && now >= nextLog)
+            {
+                nextLog = now + 2f;
+                Debug.Log($"[Obstruction] share {share:0.00} clear {baseline:0.00} blocked {Blocked} flipped {flipped}");
+            }
             if (!Blocked)
             {
                 overSince = extra >= blockShare ? (overSince < 0f ? now : overSince) : -1f;
