@@ -16,7 +16,21 @@ MonoBehaviour:
   displayName: The Spirit of African Leadership
   location: Covered brick alcove facing the paved court
   physicalSizeMeters: {x: 5.4, y: 3.509}
-  story: "The Spirit of African Leadership, by Samuel Daddy Ishimwe and Masha Studio from Rwanda, painted in 2020.\n\nA large mask of curved, interlocking shapes in gold, blue and black watches over five portraits set into dark landscapes and divided by lines of gold. Mixing modern portraits with traditional mask symbolism, the mural links ancestral wisdom to the hopes of future generations, and celebrates African leadership, innovation and cultural identity. It asks you to think about the part leadership, creativity and community play in shaping Africa's future.\n\nTap a portrait to light it up, or tap the gold lines to let the light connect them."
+  story: 'The Spirit of African Leadership, by Samuel Daddy Ishimwe and Masha Studio
+    from Rwanda, painted in 2020.
+
+
+    A large mask of curved, interlocking shapes
+    in gold, blue and black watches over five leaders painted into dark landscapes
+    and divided by lines of gold: Queen Nzinga, Mansa Musa, Thomas Sankara, Kwame
+    Nkrumah and Winnie Madikizela-Mandela. Mixing modern portraits with traditional
+    mask symbolism, the mural links ancestral wisdom to the hopes of future generations,
+    and celebrates African leadership, innovation and cultural identity.
+
+
+    Tap
+    a face to light it up and hear who it is, or tap the gold lines to let the light
+    connect them.'
   experiencePrefab: {fileID: 7913823731028150729, guid: 91c717cef988741e689d4515a3a1990f, type: 3}
   palette:
   - {r: 0.356, g: 0.337, b: 0.304, a: 1}
@@ -26,3 +40,31 @@ MonoBehaviour:
   - {r: 0.492, g: 0.529, b: 0.519, a: 1}
   - {r: 0.855, g: 0.758, b: 0.582, a: 1}
   ambience: {fileID: 8300000, guid: 63d6717184514e668e36c33215db9eab, type: 3}
+  spots:
+  - topic: portrait_crown
+    title: Queen Nzinga
+    text: She ruled the Ndongo and Matamba kingdoms in the 17th century, in what
+      is now Angola. She is painted in royal regalia with a crown and necklace, after
+      her best-known historical portrait.
+    voice: {fileID: 8300000, guid: b63ab0f29f0a645a3a021d5aa38c503c, type: 3}
+  - topic: portrait_turban
+    title: Mansa Musa
+    text: Emperor of the Mali Empire in the 14th century, often called one of the
+      wealthiest people in history. He is painted in white robes and a headdress,
+      holding a golden staff.
+    voice: {fileID: 8300000, guid: dde1de3e40faf4a6589460db9210dcf0, type: 3}
+  - topic: portrait_beret
+    title: Thomas Sankara
+    text: Former President of Burkina Faso and a Pan-Africanist revolutionary, painted
+      in his signature red beret and military uniform.
+    voice: {fileID: 8300000, guid: e6e6406cefceb470d84b5ebee1bbe379, type: 3}
+  - topic: portrait_right
+    title: Kwame Nkrumah
+    text: The first Prime Minister and President of Ghana, and a leading figure in
+      the Pan-African movement. He sits next to Sankara.
+    voice: {fileID: 8300000, guid: 4300f02e0c385465fa54d9626c36911d, type: 3}
+  - topic: portrait_cap
+    title: Winnie Madikizela-Mandela
+    text: South African anti-apartheid activist and politician, painted smiling in
+      glasses, a headwrap and beaded jewellery.
+    voice: {fileID: 8300000, guid: f4fe22880daf0434b92bc2ffbdeb4d4c, type: 3}

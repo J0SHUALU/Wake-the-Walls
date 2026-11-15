@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace WakeTheWalls.Murals
@@ -23,6 +25,20 @@ namespace WakeTheWalls.Murals
 
         [SerializeField] AudioClip ambience;
 
+        [Serializable]
+        public class Spot
+        {
+            [Tooltip("Matches the topic or element a tap asks about.")]
+            public string topic;
+            public string title;
+            [TextArea(2, 6)] public string text;
+            [Tooltip("Optional line Pearl says when this spot is tapped.")]
+            public AudioClip voice;
+        }
+
+        [Tooltip("Extra info for parts of the mural people can tap, such as the faces on Mural 4.")]
+        [SerializeField] List<Spot> spots = new List<Spot>();
+
         public string ReferenceImageName => referenceImageName;
 
         public string DisplayName => displayName;
@@ -38,5 +54,12 @@ namespace WakeTheWalls.Murals
         public Color[] Palette => palette;
 
         public AudioClip Ambience => ambience;
+
+        public Spot FindSpot(string topic)
+        {
+            if (string.IsNullOrEmpty(topic)) return null;
+            foreach (Spot spot in spots) if (spot.topic == topic) return spot;
+            return null;
+        }
     }
 }
